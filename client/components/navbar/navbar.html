@@ -1,0 +1,48 @@
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar-inner" ng-controller="NavbarCtrl">
+        <div class="container-fluid" ng-cloak>
+            <button class="navbar-toggle btn btn-navbar" type="button" ng-click="isCollapsed = !isCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="glyphicon glyphicon-bar icon-bar"></span>
+                <span class="glyphicon glyphicon-bar icon-bar"></span>
+                <span class="glyphicon glyphicon-bar icon-bar"></span>
+            </button>
+            <div class="pull-left">
+                <a class="navbar-brandpluslogo brandpluslogo" href="/">
+                    <a href="/" class="navbar-brand brand">ggc</a>
+                </a>
+            </div>
+            <div class="visible-lg visible-desktop pull-right col-md-1 span1"></div>
+            <global-search class="global-search"></global-search>
+            <div collapse="isCollapsed" class="navbar-collapse nav-collapse collapse" id="navbar-main">
+                <ul class="nav navbar-nav">
+                    <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
+                        <a ng-href="{{item.link}}">{{item.title}}</a>
+                    </li>
+                    <li dropdown class="dropdown"><a dropdown-toggle class="dropdown-toggle">Cards</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-option" href="data/Card/new">New</a></li>
+							<li><a class="dropdown-option" href="#/Card/new">HashNew</a></li>
+                            <li><a class="dropdown-option" href="data/Card">Listing</a></li>
+                            <li><a class="dropdown-option" href="data/analyse/Card">Basic Report</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li ng-show="items.length > 0" dropdown class="dropdown">
+                        <a dropdown-toggle class="dropdown-toggle">
+                            {{contextMenu}}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li ng-repeat="choice in items">
+                                <a class="dropdown-option" ng-hide="isHidden($index)" ng-disabled="isDisabled($index)" ng-href="{{choice.url}}" ng-click="doClick($index)">{{choice.text}}</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
