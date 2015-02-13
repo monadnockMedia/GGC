@@ -16,30 +16,24 @@
             <global-search class="global-search"></global-search>
             <div collapse="isCollapsed" class="navbar-collapse nav-collapse collapse" id="navbar-main">
                 <ul class="nav navbar-nav">
+					<li>
+						<a class="navbar-brand brand "><span class="text-danger">Modes:</span></a>
+					</li>
                     <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
                         <a ng-href="{{item.link}}">{{item.title}}</a>
                     </li>
-					<li dropdown class="dropdown"><a dropdown-toggle class="dropdown-toggle">Applicants[example]</a>
+					<li>
+						<a class="navbar-brand brand "><span class="text-danger">Models:</span></a>
+					</li>
+					<li dropdown class="dropdown" ng-repeat="item in models"><a dropdown-toggle class="dropdown-toggle">{{item}}</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-option" href="data/Applicant/new">New</a></li>
-                            <li><a class="dropdown-option" href="data/Applicant">Listing</a></li>
-                            <li><a class="dropdown-option" href="data/analyse/Applicant">Basic Report</a></li>
+                            <li><a class="dropdown-option" href="data/{{item}}/new">New</a></li>
+                            <li><a class="dropdown-option" href="data/{{item}}">Listing</a></li>
+                            <li><a class="dropdown-option" href="data/analyse/{{item}}">Basic Report</a></li>
                         </ul>
                     </li>
-                    <li dropdown class="dropdown"><a dropdown-toggle class="dropdown-toggle">Cards</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-option" href="data/Card/new">New</a></li>
-                            <li><a class="dropdown-option" href="data/Card">Listing</a></li>
-                            <li><a class="dropdown-option" href="data/analyse/Card">Basic Report</a></li>
-                        </ul>
-                    </li>
-					<li dropdown class="dropdown"><a dropdown-toggle class="dropdown-toggle">Script</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-option" href="data/Script/new">New</a></li>
-                            <li><a class="dropdown-option" href="data/Script">Listing</a></li>
-                            <li><a class="dropdown-option" href="data/analyse/Script">Basic Report</a></li>
-                        </ul>
-                    </li>
+
+					
                     
                     <li ng-show="items.length > 0" dropdown class="dropdown">
                         <a dropdown-toggle class="dropdown-toggle">

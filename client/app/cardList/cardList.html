@@ -1,7 +1,7 @@
-<div class="col-lg-12">
+
   <h1 class="page-header">Cards:</h1>
 	<!-- Example of ng-repeat -->
-	<div ng-repeat="card in cards">	
+	<div class = "col-md-6 well" ng-repeat="card in cards">	
   		<ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" >
 			<a href="{{getEditURL(card._id)}}"><h1>{{card.topic}}</h1></a>
     		<li><a href="#" tooltip="{{card.team}}">{{card.team}}</a></li>
@@ -10,6 +10,5 @@
   		</ul>
 		<div class="icon" ng-bind-html=card.icon ></div>
 		<!-- call a method on controller to pretty-print json as text-->
-		<pre>{{printObject(card.effects)}}</pre>
+		<div><pre>{{printObject(card.effects)}}</pre></div>
 	</div>
-</div>

@@ -8,7 +8,12 @@ angular.module('ggcApp')
     },{
       'title': 'Edit',
       'link': '/edit'
+    },{
+      'title': 'Preview',
+      'link': '/preview'
     }];
+
+	$scope.models =["Card", "Icon", "Script", "Test"];
 
     $scope.isCollapsed = true;
 
