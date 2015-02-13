@@ -56,12 +56,15 @@ module.exports = function(grunt) {
 		less: {
 				development: {
 				        options: {
+						sourceMap: true,/* sourceMapFilename: '<%= yeoman.client %>/bower_components/bootstrap/dist/css/bootstrap.css.map', */
+						sourceMapFileInline: true,
 				          compress: false,
 				          yuicompress: false,
 				          optimization: 2
 				        },
 				        files: {
-				          '<%= yeoman.client %>/bower_components/bootstrap/dist/css/bootstrap.css': '<%= yeoman.client %>/bower_components/bootstrap/less/bootstrap.less' // destination file and source file
+				          '<%= yeoman.client %>/bower_components/bootstrap/dist/css/bootstrap.css': '<%= yeoman.client %>/bower_components/bootstrap/less/bootstrap.less', // destination file and source file
+							'<%= yeoman.client %>/app/main/main.css':'<%= yeoman.client %>/app/main/main.less'
 				        }
 				      }
 		
@@ -71,15 +74,15 @@ module.exports = function(grunt) {
 				files: ['<%= yeoman.client %>/{app,components}/**/*.js', '!<%= yeoman.client %>/{app,components}/**/*.spec.js', '!<%= yeoman.client %>/{app,components}/**/*.mock.js', '!<%= yeoman.client %>/app/app.js'],
 				tasks: ['injector:scripts']
 			},
-			styles: {
-				files: ['<%= yeoman.client %>/bower_components/bootstrap/less/*.less'],
+			buildStyles: {
+				files: ['<%= yeoman.client %>/bower_components/bootstrap/less/*.less','<%= yeoman.client %>/{app,components}/**/*.less'],
 				tasks: ['less'],
 				options:{
 					nospawn: true
 				}
 			},
 			injectCss: {
-				files: ['<%= yeoman.client %>/{app,components}/**/*.css','<%= yeoman.client %>/bower_components/bootstrap/less/*.less'],
+				files: ['<%= yeoman.client %>/{app,components}/**/{*.css,*.less}','<%= yeoman.client %>/bower_components/bootstrap/less/*.less'],
 				tasks: ['injector:css']
 			},
 			mochaTest: {
@@ -94,7 +97,7 @@ module.exports = function(grunt) {
 				files: ['Gruntfile.js']
 			},
 			livereload: {
-				files: ['{.tmp,<%= yeoman.client %>}/{app,components}/**/*.css','<%= yeoman.client %>/bower_components/**/*.less', '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.html', '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js', '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js', '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js', '<%= yeoman.client %>/assets/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}'],
+				files: ['{.tmp,<%= yeoman.client %>}/{app,components}/**/{*.css,*.less}','<%= yeoman.client %>/bower_components/**/*.less', '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.html', '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js', '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js', '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js', '<%= yeoman.client %>/assets/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}'],
 				options: {
 					livereload: true
 				}

@@ -13,8 +13,7 @@ console.log(Icon);
 
 var CardSchema = new Schema({
 	team: {type: String, index:true, default:'Pending', enum:['environment','economy','energy'], form: {type:"radio",tab:"Player" }},
-	topic: {type:String, index:true, list:true, form:{tab:"Player"}},
-	icon: {type: String, form: {type: 'textarea', tab:"Player", rows:20, help: "Copy and pase contents of .svg file here."}},
+	action: {type:String, index:true, list:true, form:{tab:"Player"}},
 	mainText: {type: String, form: {type: 'textarea', editor: 'ckEditor', rows:"1", tab:"Player"}},
 	icons : { type: Schema.Types.ObjectId,  ref: 'Icon', form: { tab:"Icon"} },
 	effects:{

@@ -1,16 +1,19 @@
 'use strict';
 
 angular.module('ggcApp')
-  .controller('PreviewCtrl', function ($scope,$http,hotkeys,$sce) {
+  .controller('PreviewCtrl', function ($scope,$http,hotkeys,$sce,ggcUtil) {
 	
     $scope.currentCard = 0;
 	$scope.printObject = function(o){
 		return JSON.stringify(o, null, 3);
 	};
-	$http.get('/api/Card').success(function(_cards) {
-		console.log("CARDS",_cards);
-		$scope.cards = _cards;
+	
+	ggcUtil.getCards().then(function(res){
+	
+		$scope.cards = res.data;
 	});
+	
+
 	$scope.changeCard = function(n){
 		console.log("ChangeCard", n);
 		$scope.currentCard += n;
