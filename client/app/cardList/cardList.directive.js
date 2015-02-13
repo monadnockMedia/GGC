@@ -7,6 +7,7 @@ angular.module('ggcApp')
 
       restrict: 'EA',
       link: function (scope, element, attrs) {
+		
       }
     };
   });

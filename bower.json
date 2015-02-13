@@ -17,7 +17,8 @@
     "fng-reports": "*",
     "ng-ckeditor": "0.2.1",
     "ckeditor": "*",
-    "fng-select2": "*"
+    "fng-select2": "*",
+    "angular-hotkeys": "chieffancypants/angular-hotkeys#~1.4.5"
   },
   "devDependencies": {
     "angular-mocks": "^1.3"

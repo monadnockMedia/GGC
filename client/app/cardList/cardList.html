@@ -5,10 +5,10 @@
   		<ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" >
 			<a href="{{getEditURL(card._id)}}"><h1>{{card.topic}}</h1></a>
     		<li><a href="#" tooltip="{{card.team}}">{{card.team}}</a></li>
-			<li>{{card.mainText}}</li>
 			<!-- use ng-bind-html to sanitize html -->
 			<li><a href="#" tooltip="{{card.mainText}}" ng-bind-html=card.mainText></a></li>
   		</ul>
+		<div class="icon" ng-bind-html=card.icon ></div>
 		<!-- call a method on controller to pretty-print json as text-->
 		<pre>{{printObject(card.effects)}}</pre>
 	</div>

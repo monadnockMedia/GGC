@@ -10,7 +10,8 @@ angular.module('ggcApp', [
   'ngGrid',
   'ngCkeditor',
   'ui.select2',
-  'uploadModule'
+  'uploadModule',
+  'cfp.hotkeys'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider

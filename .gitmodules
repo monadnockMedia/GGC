@@ -1,0 +1,6 @@
+[submodule "data/GGC-data"]
+	path = data/GGC-data
+	url = https://github.com/monadnockMedia/GGC-data.git
+[submodule "GGC-data"]
+	path = GGC-data
+	url = https://github.com/monadnockMedia/GGC-data.git

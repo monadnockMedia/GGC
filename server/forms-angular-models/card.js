@@ -3,12 +3,17 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var uploadSchema = new mongoose.Schema({
+  filename: String,
+  size: Number
+});
 
 
 
 var CardSchema = new Schema({
-	team: {type: String, default:'Pending', enum:['environment','economy','energy'], form: {type:"radio",tab:"Player" }},
-	topic: {type:String, list:true, form:{tab:"Player"}},
+	team: {type: String, index:true, default:'Pending', enum:['environment','economy','energy'], form: {type:"radio",tab:"Player" }},
+	topic: {type:String, index:true, list:true, form:{tab:"Player"}},
+	icon: {type: String, form: {type: 'textarea', tab:"Player", rows:20, help: "Copy and pase <svg>...</svg> contents of .svg file here."}},
 	mainText: {type: String, form: {type: 'textarea', editor: 'ckEditor', rows:"1", tab:"Player"}},
 	
 	effects:{

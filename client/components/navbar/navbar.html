@@ -19,12 +19,25 @@
                     <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
                         <a ng-href="{{item.link}}">{{item.title}}</a>
                     </li>
+					<li dropdown class="dropdown"><a dropdown-toggle class="dropdown-toggle">Applicants[example]</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-option" href="data/Applicant/new">New</a></li>
+                            <li><a class="dropdown-option" href="data/Applicant">Listing</a></li>
+                            <li><a class="dropdown-option" href="data/analyse/Applicant">Basic Report</a></li>
+                        </ul>
+                    </li>
                     <li dropdown class="dropdown"><a dropdown-toggle class="dropdown-toggle">Cards</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-option" href="data/Card/new">New</a></li>
-							<li><a class="dropdown-option" href="#/Card/new">HashNew</a></li>
                             <li><a class="dropdown-option" href="data/Card">Listing</a></li>
                             <li><a class="dropdown-option" href="data/analyse/Card">Basic Report</a></li>
+                        </ul>
+                    </li>
+					<li dropdown class="dropdown"><a dropdown-toggle class="dropdown-toggle">Script</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-option" href="data/Script/new">New</a></li>
+                            <li><a class="dropdown-option" href="data/Script">Listing</a></li>
+                            <li><a class="dropdown-option" href="data/analyse/Script">Basic Report</a></li>
                         </ul>
                     </li>
                     
