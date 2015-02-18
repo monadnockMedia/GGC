@@ -6,7 +6,7 @@ Great Gulf Challenge
 * install mongodb with homebrew: `brew install mongodb`
 
 ## Running
-* start mongodb in daemon mode ```bash mongod --fork --logpath ./GGC-data/mongo.log --dbpath ./GGC-data/db```
+* start mongodb in daemon mode ` mongod --fork --logpath ./GGC-data/mongo.log --dbpath ./GGC-data/db`
 * run `grunt serve` to view the application
 
 ## Running the easy way (n00bs)
