@@ -1,0 +1,11 @@
+2015-02-03T16:51:24.669-0500 [initandlisten] MongoDB starting : pid=24582 port=27017 dbpath=/Volumes/Pylos/Projects/GGC/./GGC-data/db 64-bit host=pylos.local
+2015-02-03T16:51:24.670-0500 [initandlisten] db version v2.6.4
+2015-02-03T16:51:24.671-0500 [initandlisten] git version: nogitversion
+2015-02-03T16:51:24.671-0500 [initandlisten] build info: Darwin minimavericks.local 13.3.0 Darwin Kernel Version 13.3.0: Tue Jun  3 21:27:35 PDT 2014; root:xnu-2422.110.17~1/RELEASE_X86_64 x86_64 BOOST_LIB_VERSION=1_49
+2015-02-03T16:51:24.672-0500 [initandlisten] allocator: tcmalloc
+2015-02-03T16:51:24.673-0500 [initandlisten] options: { processManagement: { fork: true }, storage: { dbPath: "./GGC-data/db" }, systemLog: { destination: "file", path: "./GGC-data/mongo.log" } }
+2015-02-03T16:51:24.676-0500 [initandlisten] journal dir=/Volumes/Pylos/Projects/GGC/./GGC-data/db/journal
+2015-02-03T16:51:24.677-0500 [initandlisten] recover : no journal files present, no recovery needed
+2015-02-03T16:51:24.772-0500 [initandlisten] waiting for connections on port 27017
+2015-02-03T16:51:30.826-0500 [initandlisten] connection accepted from 127.0.0.1:63656 #1 (1 connection now open)
+2015-02-03T16:51:41.487-0500 [conn1] end connection 127.0.0.1:63656 (0 connections now open)
