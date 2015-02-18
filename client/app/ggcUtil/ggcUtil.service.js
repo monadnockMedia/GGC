@@ -5,7 +5,7 @@ angular.module('ggcApp')
     // AngularJS will instantiate a singleton by calling "new" on this function
 	this.getCards = function(){
 		console.log("Service.getCards");
-		 return $http.get('/api/Card');
+		 return $http.get('/api/Cards');
 	};
 	
   });
