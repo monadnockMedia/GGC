@@ -3,6 +3,9 @@ Great Gulf Challenge
 ## Getting Started
 * run `npm install` and `bower install` to install necessary (untracked) modules.
 * ~~clone the data submodule: `git submodule add https://github.com/monadnockMedia/GGC-data.git`~~
+* clone the data:
+  * `cd GGC` 
+  * `git clone https://github.com/monadnockMedia/GGC-data.git`
 * install mongodb with homebrew: `brew install mongodb`
 
 ## Running
