@@ -1,3 +1,4 @@
+/*
 'use strict';
 
 var mongoose = require('mongoose'),
@@ -10,3 +11,4 @@ var CardsSchema = new Schema({
 });
 
 module.exports = mongoose.model('Cards', CardsSchema);
+*/

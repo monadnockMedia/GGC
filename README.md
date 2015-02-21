@@ -11,6 +11,7 @@ Great Gulf Challenge
 ## Running
 * start mongodb in daemon mode ` mongod --fork --logpath ./GGC-data/mongo.log --dbpath ./GGC-data/db`
 * run `grunt serve` to view the application
+* run `grunt serve:debug` to view the application in debug mode
 
 ## Running the easy way (n00bs)
 * double-click start.command

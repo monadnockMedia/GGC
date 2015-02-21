@@ -6,6 +6,7 @@ var controller = require('./cards.controller');
 var router = express.Router();
 
 router.get('/', controller.index);
+router.get('/grouped', controller.indexGrouped);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
 router.put('/:id', controller.update);

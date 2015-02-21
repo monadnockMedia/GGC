@@ -9,7 +9,7 @@ angular.module('ggcApp')
 	};
 	
 	ggcUtil.getCards().then(function(res){
-	
+		console.log("cards",res.data);
 		$scope.cards = res.data;
 	});
 	
