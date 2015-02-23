@@ -64,7 +64,7 @@ module.exports = function(grunt) {
 				        },
 				        files: {
 				          '<%= yeoman.client %>/bower_components/bootstrap/dist/css/bootstrap.css': '<%= yeoman.client %>/bower_components/bootstrap/less/bootstrap.less', // destination file and source file
-							'<%= yeoman.client %>/app/main/main.css':'<%= yeoman.client %>/app/main/main.less'
+							'<%= yeoman.client %>/app/main/main.css':'<%= yeoman.client %>/app/main/main.less','<%= yeoman.client %>/app/app.css':'<%= yeoman.client %>/app/app.less'
 				        }
 				      }
 		
@@ -75,7 +75,7 @@ module.exports = function(grunt) {
 				tasks: ['injector:scripts']
 			},
 			buildStyles: {
-				files: ['<%= yeoman.client %>/bower_components/bootstrap/less/*.less','<%= yeoman.client %>/{app,components}/**/*.less'],
+				files: ['<%= yeoman.client %>/bower_components/bootstrap/less/*.less','<%= yeoman.client %>/{app,components}/**/*.less','<%= yeoman.client %>/{app,components}/*.less'],
 				tasks: ['less'],
 				options:{
 					nospawn: true
