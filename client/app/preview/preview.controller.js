@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .controller('PreviewCtrl', function ($scope,$http,hotkeys,$sce,ggcUtil) {
+  .controller('PreviewCtrl', function ($scope,$http,hotkeys,ggcUtil) {
 	
     $scope.currentCard = 0;
 	$scope.printObject = function(o){
@@ -18,7 +18,7 @@ angular.module('ggcApp')
 		console.log("ChangeCard", n);
 		$scope.currentCard += n;
 	}
-	$scope.trust = function(e){return $sce.trustAsHtml(e)};
+	$scope.trust = ggcUtil.trustSVG;
 	
 	hotkeys.bindTo($scope)
 	    .add({
