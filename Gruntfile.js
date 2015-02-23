@@ -71,7 +71,7 @@ module.exports = function(grunt) {
 			    },*/
 			less: {
 			    // target name
-				default:{
+				appStyles:{
 					options: {
 						sourceMap: true,
 						sourceMapFileInline: true,
@@ -84,6 +84,15 @@ module.exports = function(grunt) {
 			          dest: '.',   // Destination path prefix.
 			          ext: '.css',   // Dest filepaths will have this extension.
 			          extDot: 'first'   // Extensions in filenames begin after the first dot
+				},
+				bootstrap:{
+					options: {
+						sourceMap: true,
+						sourceMapFileInline: true,
+						compress: false,
+						yuicompress: false,
+					},
+					files:{'<%= yeoman.client %>/bower_components/bootstrap/dist/css/bootstrap.css':'<%= yeoman.client %>/bower_components/bootstrap/less/bootstrap.less'}
 				}
 			},	
 			
@@ -94,8 +103,15 @@ module.exports = function(grunt) {
 				tasks: ['injector:scripts']
 			},
 			buildStyles: {
-				files: ['<%= yeoman.client %>/bower_components/bootstrap/less/*.less','<%= yeoman.client %>/{app,components}/**/*.less','<%= yeoman.client %>/{app,components}/*.less'],
-				tasks: ['less'],
+				files: ['<%= yeoman.client %>/{app,components}/**/*.less','<%= yeoman.client %>/{app,components}/*.less'],
+				tasks: ['less:appStyles'],
+				options:{
+					nospawn: true
+				}
+			},
+			buildBootstrap: {
+				files: ['<%= yeoman.client %>/bower_components/bootstrap/less/*.less'],
+				tasks: ['less:bootstrap'],
 				options:{
 					nospawn: true
 				}
