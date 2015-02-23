@@ -18,7 +18,7 @@ angular.module('ggcApp')
 		console.log("ChangeCard", n);
 		$scope.currentCard += n;
 	}
-	 $scope.trust = function(e){return $sce.trustAsHtml(e)};
+	$scope.trust = function(e){return $sce.trustAsHtml(e)};
 	
 	hotkeys.bindTo($scope)
 	    .add({

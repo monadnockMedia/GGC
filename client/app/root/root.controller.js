@@ -1,7 +1,9 @@
 'use strict';
 
+
+
 angular.module('ggcApp')
-  .controller('NavbarCtrl', function ($scope, $location, hotkeys) {
+  .controller('AppCtrl', function ($scope, $location, hotkeys) {
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
@@ -43,5 +45,5 @@ angular.module('ggcApp')
 	    }
 	  });
 
-	
+
   });
