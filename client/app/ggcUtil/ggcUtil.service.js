@@ -11,4 +11,16 @@ angular.module('ggcApp')
 	this.trustHTML = function(e){return $sce.trustAsHtml(e)};
 	this.trustSVG = this.trustHTML;
 	
-  });
+	this.printObject = function(o){
+		return JSON.stringify(o, null, 3);
+	};
+	
+	this.getEditURL = function(id){
+		console.log("TRUSTING",id);
+		/* SCE is the securuty/trust handling in angular */
+		return $sce.trustAsResourceUrl("./data/Card/"+id+"/edit");
+	};
+	
+	
+	
+});
