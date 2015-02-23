@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 	} catch (e) {
 		localConfig = {};
 	}
-	grunt.loadNpmTasks('grunt-contrib-less');
+	//grunt.loadNpmTasks('grunt-contrib-less');
 	// Load grunt tasks automatically, when needed
 	require('jit-grunt')(grunt, {
 		express: 'grunt-express-server',
@@ -53,10 +53,10 @@ module.exports = function(grunt) {
 				url: 'http://localhost:<%= express.options.port %>'
 			}
 		},
-		less: {
+	/*	less: {
 				development: {
 				        options: {
-						sourceMap: true,/* sourceMapFilename: '<%= yeoman.client %>/bower_components/bootstrap/dist/css/bootstrap.css.map', */
+						sourceMap: true,
 						sourceMapFileInline: true,
 				          compress: false,
 				          yuicompress: false,
@@ -68,7 +68,20 @@ module.exports = function(grunt) {
 				        }
 				      }
 		
-			    },
+			    },*/
+			less: {
+			    // target name
+				default:{
+					expand: true,     // Enable dynamic expansion.
+			          cwd: '<%= yeoman.client %>/app/',      // Src matches are relative to this path.
+			          src: ['**/*.less'], // Actual pattern(s) to match.
+			          dest: '.',   // Destination path prefix.
+			          ext: '.css',   // Dest filepaths will have this extension.
+			          extDot: 'first'   // Extensions in filenames begin after the first dot
+				}
+			},	
+			
+			
 		watch: {
 			injectJS: {
 				files: ['<%= yeoman.client %>/{app,components}/**/*.js', '!<%= yeoman.client %>/{app,components}/**/*.spec.js', '!<%= yeoman.client %>/{app,components}/**/*.mock.js', '!<%= yeoman.client %>/app/app.js'],
