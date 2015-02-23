@@ -1,0 +1,42 @@
+/**
+ *Font Awesome Fonts
+ */
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../bower_components/font-awesome/fonts/fontawesome-webfont.eot?v=4.1.0');
+  src: url('../bower_components/font-awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.1.0') format('embedded-opentype'), url('../bower_components/font-awesome/fonts/fontawesome-webfont.woff?v=4.1.0') format('woff'), url('../bower_components/font-awesome/fonts/fontawesome-webfont.ttf?v=4.1.0') format('truetype'), url('../bower_components/font-awesome/fonts/fontawesome-webfont.svg?v=4.1.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/**
+ * App-wide Styles
+ */
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+.navbar-default form {
+  border-color: inherited;
+}
+.preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  -webkit-transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
+  transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
+  opacity: 1;
+}
+.relative {
+  position: relative;
+}
+.preview.ng-enter {
+  opacity: 1;
+}
+.preview.ng-hide {
+  opacity: 0;
+  top: 100vh;
+}
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNsaWVudC9hcHAvYXBwLmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBTUE7RUFDSSxhQUFhLGFBQWI7RUFDQSxTQUFTLHlFQUFUO0VBQ0EsU0FBUyxpRkFBaUYsT0FBTywwQkFDN0YsMkVBQTJFLE9BQU8sYUFDbEYsMEVBQTBFLE9BQU8saUJBQ2pGLDZGQUE2RixPQUFPLE1BSHhHO0VBSUEsbUJBQUE7RUFDQSxrQkFBQTs7Ozs7QUFPSjtFQUNJLGVBQUE7RUFDQSxnQkFBQTtFQUNBLFdBQUE7RUFDQSxnQkFBQTs7QUFJSixlQUFnQjtFQUNaLHVCQUFBOztBQUlKO0VBQ0Msa0JBQUE7RUFDQSxNQUFBO0VBQ0EsT0FBQTtFQUNBLFdBQUE7RUFDQyx3QkFBdUIseUNBQXZCO0VBQ0EsZ0JBQWUseUNBQWY7RUFDQSxVQUFBOztBQUdGO0VBRUMsa0JBQUE7O0FBR0QsUUFBUTtFQUNOLFVBQUE7O0FBR0YsUUFBUTtFQUNOLFVBQUE7RUFDRixVQUFBIn0= */

@@ -72,6 +72,12 @@ module.exports = function(grunt) {
 			less: {
 			    // target name
 				default:{
+					options: {
+						sourceMap: true,
+						sourceMapFileInline: true,
+						compress: false,
+						yuicompress: false,
+					},
 					expand: true,     // Enable dynamic expansion.
 			          cwd: '<%= yeoman.client %>/app/',      // Src matches are relative to this path.
 			          src: ['**/*.less'], // Actual pattern(s) to match.
