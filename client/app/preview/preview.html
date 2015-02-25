@@ -2,7 +2,7 @@
 	<div class = "row">
 			<h3>This is the preview view.<small> current card: {{currentCard}}</h3>
 				<div class="relative">
-					<div class = "preview"  ng-repeat = "card in cards" ng-hide="!$index == currentCard">
+					<div class = "preview"  ng-repeat = "card in cards" ng-hide="$index != currentCard">
 						<div class="col-md-8">
 							<pre>{{printObject(card)}}</pre>
 						</div>
