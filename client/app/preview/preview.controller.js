@@ -25,14 +25,15 @@ angular.module('ggcApp')
 	      combo: 'left',
 	      description: 'Previous Card',
 	      callback: function(){
-				$scope.currentCard += -1;
+				$scope.currentCard = ($scope.currentCard == 0) ? 0 : $scope.currentCard-1 ;
 			}
 	    })
 		.add({
 	      combo: 'right',
 	      description: 'Next Card',
 	      callback: function(){
-				$scope.currentCard += 1;
+				console.log("Current card test: ",$scope.currentCard + 1, $scope.cards.length )
+				$scope.currentCard = Math.min($scope.currentCard + 1, $scope.cards.length-1);
 			}
 	    })
 });
