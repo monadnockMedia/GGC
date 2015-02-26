@@ -15,7 +15,7 @@ angular.module('ggcApp')
         controller: 'CardCtrl',
       })
 	.state('preview.icons', {
-        url: '/cards',
+        url: '/icons',
         templateUrl: 'app/preview/preview.icons.html',
         controller: 'IconCtrl',
       })
