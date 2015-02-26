@@ -1,7 +1,28 @@
 'use strict';
 
 angular.module('ggcApp')
+
   .controller('PreviewCtrl', function ($scope,$http,hotkeys,ggcUtil) {
+	$scope.preview = {};
+	$scope.preview.hideNavbar = false;
+	$scope.preview.previewStates = ["cards","icons"];
+	
+    $scope.preview.currentCard = 0;
+	$scope.printObject = function(o){
+		return JSON.stringify(o, null, 3);
+	};
+	
+
+	$scope.trust = ggcUtil.trustSVG;
+	
+
+	
+});
+
+
+angular.module('ggcApp')
+  .controller('CardCtrl', function ($scope,$http,hotkeys,ggcUtil) {
+	
 	
     $scope.currentCard = 0;
 	$scope.printObject = function(o){
@@ -10,29 +31,55 @@ angular.module('ggcApp')
 	
 	ggcUtil.getCards().then(function(res){
 		console.log("cards",res.data);
-		$scope.cards = res.data;
+		$scope.preview.cards = res.data;
 	});
 	
 
-	$scope.changeCard = function(n){
-		console.log("ChangeCard", n);
-		$scope.currentCard += n;
-	}
-	$scope.trust = ggcUtil.trustSVG;
 	
 	hotkeys.bindTo($scope)
 	    .add({
 	      combo: 'left',
 	      description: 'Previous Card',
 	      callback: function(){
-				$scope.currentCard += -1;
+				$scope.preview.currentCard = ($scope.preview.currentCard == 0) ? 0 : $scope.preview.currentCard-1 ;
 			}
 	    })
 		.add({
 	      combo: 'right',
 	      description: 'Next Card',
 	      callback: function(){
-				$scope.currentCard += 1;
+				console.log("Current card test: ",$scope.preview.currentCard + 1, $scope.preview.cards.length )
+				$scope.preview.currentCard = Math.min($scope.preview.currentCard + 1, $scope.preview.cards.length-1);
 			}
 	    })
+		.add({
+			combo: 'N',
+			description: "Hide NavBar",
+			callback: function(){
+					
+					$scope.preview.hideNavbar = !$scope.preview.hideNavbar;
+				}
+			
+		})
+	
+});
+
+angular.module('ggcApp')
+  .controller('IconCtrl', function ($scope,$http,hotkeys,ggcUtil) {
+	
+		hotkeys.bindTo($scope)
+		.add({
+			combo: 'N',
+			description: "Hide NavBar",
+			callback: function(){
+					
+					$scope.preview.hideNavbar = !$scope.preview.hideNavbar;
+				}
+			
+		})
+	ggcUtil.getIcons().then(function(res){
+		console.log("icons",res.data);
+		$scope.preview.icons = res.data;
+	});
+	
 });

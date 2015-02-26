@@ -1,12 +1,18 @@
+<div ng-include="'components/navbar/navbar.html'" ng-hide ="preview.hideNavbar" ></div>
 <div class = container>
-	<div class = "row">
-			<h3>This is the preview view.<small> current card: {{currentCard}}</h3>
-				<div class="relative">
-					<div class = "preview"  ng-repeat = "card in cards" ng-hide="$index != currentCard">
-						<div class="col-md-8">
-							<pre>{{printObject(card)}}</pre>
-						</div>
-							<div class = "col-md-4" ng-bind-html="trust(card.icons.icon)" ></div>
-					</div>
-				</div>
+	<div class = "row" ng-hide ="preview.hideNavbar">
+			<div class = "col-md-4"><h1>Preview</h1></div>
+			<div class = "col-md-8">
+				<br>
+				<div class="btn-group" dropdown is-open="status.isopen">
+				      <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+				       Select Model <span class="caret"></span>
+				      </button>
+				      <ul class="dropdown-menu" role="menu">
+				        <li ng-repeat = "state in preview.previewStates"><a ui-sref = ".{{state}}" >{{state}}</a></li
+				      </ul>
+				    </div>
+			</div>
+</div>
+<ui-view>
 </div>
