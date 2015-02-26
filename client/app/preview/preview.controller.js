@@ -3,6 +3,24 @@
 angular.module('ggcApp')
   .controller('PreviewCtrl', function ($scope,$http,hotkeys,ggcUtil) {
 	
+	$scope.config.previewStates = ["cards","icons"];
+	
+    $scope.currentCard = 0;
+	$scope.printObject = function(o){
+		return JSON.stringify(o, null, 3);
+	};
+	
+
+	$scope.trust = ggcUtil.trustSVG;
+	
+
+});
+
+
+angular.module('ggcApp')
+  .controller('CardCtrl', function ($scope,$http,hotkeys,ggcUtil) {
+	
+	
     $scope.currentCard = 0;
 	$scope.printObject = function(o){
 		return JSON.stringify(o, null, 3);
@@ -18,7 +36,7 @@ angular.module('ggcApp')
 		console.log("ChangeCard", n);
 		$scope.currentCard += n;
 	}
-	$scope.trust = ggcUtil.trustSVG;
+
 	
 	hotkeys.bindTo($scope)
 	    .add({
@@ -36,4 +54,16 @@ angular.module('ggcApp')
 				$scope.currentCard = Math.min($scope.currentCard + 1, $scope.cards.length-1);
 			}
 	    })
+});
+
+angular.module('ggcApp')
+  .controller('IconCtrl', function ($scope,$http,hotkeys,ggcUtil) {
+	
+	
+	
+	ggcUtil.getIcons().then(function(res){
+		console.log("icons",res.data);
+		$scope.icons = res.data;
+	});
+	
 });
