@@ -1,19 +1,25 @@
 
 <div class = "row relative">
-				
-				<div class="col-md-5 col-md-offset-1" ng-repeat = "card in test.cards">
+				<div class="col-md-5 col-md-offset-1" ng-repeat = "card in hands.currentPlayer">
 					<div class = "row">
 						<div class = "col-md-8"><h4>{{card.action}}</h4></div>
-						<div class = "col-md-3" ng-bind-html="trust(card.icons.icon)" ></div>
+						<div class = "col-md-3" ng-bind-html="trust(card.icon.icon)" ></div>
 						<div class="col-md-12 well" ng-bind-html="card.mainText"></div>
 					
 					</div>
 				</div>
-				<div class = "col-md-4" ng-repeat = "player in test.cards">
-					<div class = "col-md-6 well" ng repeat = "card in test.cards">
+			
 					
-					</div>
-				</div>
+						<div class = "col-md-12" ng-hide = "hands.currentPlayer.length == 0" ng-repeat = "(key, value) in hands.players">
+							<div class = col-md-12><h3>{{key}}</h3></div>
+							<div class="col-md-6" ng-repeat = "card in value track by $index">
+								<ul class = "well">	<h4>{{card.action}} <em class="text-danger"> {{card.score}}</em></h4>
+									<li ng-repeat = "text in card.text"><p>{{text}}<p></li>
+								</ul>
+							
+							</div>
+						</div>
+				
 				
 </div>
 
