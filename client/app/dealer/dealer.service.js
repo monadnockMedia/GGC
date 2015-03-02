@@ -7,7 +7,9 @@ angular.module('ggcApp')
 		this.decks = {};
 		this.teams;
 		var scores = {};
-
+		this.hands = {};
+		this.hands.currentPlayer = new Array();
+		this.hands.players = {};
 		var self = this;
 		
 	///
@@ -24,26 +26,6 @@ angular.module('ggcApp')
 		
 		
 	///utility functions
-		function createPlayerArray(decks){
-			
-			self.players.forEach(function(pa){
-				
-				var deck = decks[pa];
-				deck.forEach(function(card){
-					card.players = [];
-					self.players.forEach(function(pb){
-							var effect = card.effects[pb];
-							effect.player = pb;
-							card.players.push(effect);
-					})
-				})
-				
-			
-				
-			})
-			return decks;
-			
-		}
 		
 		function shuffle(array) {
 		  var copy = [], n = array.length, i;
@@ -82,12 +64,15 @@ angular.module('ggcApp')
 			self.players.forEach(function(k){
 				pushDeck(k);
 				scores[d] = 0;
+				self.hands.players[k] = new Array(2);
 			})
-			console.log("deck pushed", self.decks);
+			console.log("deck pushed", self.decks, self.hands);
 		}
+		
+
 
 	///dealer methods
-		this.drawTwo = function(team){
+	/*	this.drawTwo = function(team){
 			var dfd = $q.defer();
 			if(this.decks[team].length <= 2 ){
 
@@ -98,7 +83,44 @@ angular.module('ggcApp')
 			while(i--) ret.push(self.decks[team].shift());
 			dfd.resolve(ret);
 			return dfd.promise;	
-		}
+			
+			$rootScope.apply();
+		} */
+		
+		this.drawTwo = function(team){
+				var cards = [];
+				
+				if(this.decks[team].length <= 4 ){
+					pushDeck(team);
+				}
+				
+				var i = 2;
+				var ret = [];
+				while(i--){
+					cards.push(self.decks[team].shift());
+					
+				} 
+				
+				var cPlayerCards = cards.map(function(c, i){
+					
+					var copy = JSON.parse(JSON.stringify(c));
+					self.players.forEach(function(k){
+						if(!copy.effects){
+							debugger;
+						}
+						var playerEffects =  copy.effects[k];
+						
+						self.hands.players[k][i] = playerEffects;
+					});
+					
+					delete copy.effects;
+					return copy;
+				})
+				
+				self.hands.currentPlayer = cards;
+				
+				
+			}
 
 		
 		this.vote = function(c){
@@ -111,7 +133,7 @@ angular.module('ggcApp')
 				var sc = e.primaryScore + e.secondaryScore;
 				scores[k] += sc;	
 			});
-			$rootScope.$apply();	
+				$rootScope.$apply();
 		}
 	
   });
