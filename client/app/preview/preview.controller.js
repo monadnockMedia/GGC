@@ -5,8 +5,7 @@ angular.module('ggcApp')
   .controller('PreviewCtrl', function ($scope,$http,hotkeys,ggcUtil) {
 	$scope.preview = {};
 	$scope.preview.hideNavbar = false;
-	$scope.preview.previewStates = ["cards","icons"];
-	
+	$scope.preview.previewStates = ["cards","icons", "test"];
     $scope.preview.currentCard = 0;
 	$scope.printObject = function(o){
 		return JSON.stringify(o, null, 3);
@@ -66,7 +65,6 @@ angular.module('ggcApp')
 
 angular.module('ggcApp')
   .controller('IconCtrl', function ($scope,$http,hotkeys,ggcUtil) {
-	
 		hotkeys.bindTo($scope)
 		.add({
 			combo: 'N',
@@ -78,8 +76,34 @@ angular.module('ggcApp')
 			
 		})
 	ggcUtil.getIcons().then(function(res){
-		console.log("icons",res.data);
 		$scope.preview.icons = res.data;
 	});
 	
 });
+angular.module('ggcApp')
+  .controller('TestCtrl', function ($scope,$http,hotkeys,dealer) {
+	
+		$scope.test = {
+			cards: [],
+			players: dealer.players
+		};
+		
+	
+		
+		hotkeys.bindTo($scope)
+		.add({
+			combo: 'D',
+			description: "Draw Two",
+			callback: function(){
+					
+						dealer.drawTwo("economy").then(function(d){
+							console.log("DRAW_TWO",d);
+							$scope.test.cards = d;
+						});
+				}
+			
+		})
+
+	
+});
+

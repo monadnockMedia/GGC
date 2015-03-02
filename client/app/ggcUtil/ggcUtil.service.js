@@ -9,7 +9,7 @@ angular.module('ggcApp')
 	};
 	
 	this.getIcons = function(){
-		 return $http.get('/api/Icon'); //fng endpoint
+		 return $http.get('/api/Icon'); //fng endpoin
 	};
 	
 	this.trustHTML = function(e){return $sce.trustAsHtml(e)};

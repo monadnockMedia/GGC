@@ -19,5 +19,10 @@ angular.module('ggcApp')
         templateUrl: 'app/preview/preview.icons.html',
         controller: 'IconCtrl',
       })
+	.state('preview.test', {
+        url: '/test',
+         templateUrl: 'app/preview/preview.test.html',
+        controller: 'TestCtrl',
+      })
 	
   });
