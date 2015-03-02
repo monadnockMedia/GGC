@@ -35,10 +35,7 @@ exports.indexGrouped = function(req, res) {
 	.exec(function (err, cards) {
 	    if(err) { return handleError(res, err); }
 	
-		else{
-			
-			
-			
+		else{	
 		}
 		var ret = sortByTeam(cards);
 	    return res.status(200).json(ret);

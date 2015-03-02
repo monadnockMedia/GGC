@@ -7,7 +7,7 @@ angular.module('ggcApp')
 		this.decks = {};
 		this.teams;
 		var scores = {};
-		
+
 		var self = this;
 		
 	///
@@ -17,7 +17,7 @@ angular.module('ggcApp')
 			console.log("Card Groups", r);
 		
 			self.players = Object.keys(r.data);
-			self.freshDecks=createPlayerArray(r.data);
+			self.freshDecks=r.data;
 			
 			initDecks();
 		}); 

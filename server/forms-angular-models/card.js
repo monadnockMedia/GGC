@@ -38,11 +38,27 @@ var CardSchema = new Schema({
 	}
 });
 
+CardSchema.set('toObject', {transform:  function(d,r,o){ 
+		var effects = d.effects;
+		var keys = Object.keys(effects.toObject());
+		console.log("KEYS",keys);
+		delete r.effects;
+		r.players = new Array();
+		keys.forEach(function(k){
+			var e = effects[k].toObject();
+			e.player = k;
+			r.players.push(e);
+			
+		})
+	
+	}})
+
 var Card;
 var modelName = 'Card';
 
 
   Card = mongoose.model(modelName, CardSchema);
+
 
 
 module.exports = Card;
