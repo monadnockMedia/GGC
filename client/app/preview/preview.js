@@ -19,10 +19,17 @@ angular.module('ggcApp')
         templateUrl: 'app/preview/preview.icons.html',
         controller: 'IconCtrl',
       })
+<<<<<<< HEAD
 	.state('preview.screen', {
         url: '/screen',
         templateUrl: 'app/preview/preview.screen.html',
         controller: 'CardCtrl',
+=======
+	.state('preview.test', {
+        url: '/test',
+         templateUrl: 'app/preview/preview.test.html',
+        controller: 'TestCtrl',
+>>>>>>> master
       })
 	
   });

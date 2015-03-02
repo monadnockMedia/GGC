@@ -9,7 +9,7 @@ var uploadSchema = new mongoose.Schema({
 });
 
 var Icon = require("./icon.js");
-console.log(Icon);
+
 
 var CardSchema = new Schema({
 	team: {type: String, index:true, default:'Pending', enum:['environment','economy','energy'], form: {type:"radio",tab:"Player" }},

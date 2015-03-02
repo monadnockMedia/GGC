@@ -1,0 +1,19 @@
+
+<div class = "row relative">
+				
+				<div class="col-md-5 col-md-offset-1" ng-repeat = "card in test.cards">
+					<div class = "row">
+						<div class = "col-md-8"><h4>{{card.action}}</h4></div>
+						<div class = "col-md-3" ng-bind-html="trust(card.icons.icon)" ></div>
+						<div class="col-md-12 well" ng-bind-html="card.mainText"></div>
+					
+					</div>
+				</div>
+				<div class = "col-md-4" ng-repeat = "player in test.players">
+					<div class = "col-md-6 well" ng repeat = "card in test.cards">
+						{{card.action}}
+					</div>
+				</div>
+				
+</div>
+

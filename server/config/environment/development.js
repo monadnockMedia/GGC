@@ -8,5 +8,5 @@ module.exports = {
     uri: 'mongodb://aries.local/ggc-dev'
   },
 
-  seedDB: true
+  seedDB: false
 };

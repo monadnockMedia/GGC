@@ -1,18 +1,18 @@
 'use strict';
 
-describe('Service: deck', function () {
+describe('Service: dealer', function () {
 
   // load the service's module
   beforeEach(module('ggcApp'));
 
   // instantiate service
-  var deck;
-  beforeEach(inject(function (_deck_) {
-    deck = _deck_;
+  var dealer;
+  beforeEach(inject(function (_dealer_) {
+    dealer = _dealer_;
   }));
 
   it('should do something', function () {
-    expect(!!deck).toBe(true);
+    expect(!!dealer).toBe(true);
   });
 
 });

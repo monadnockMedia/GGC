@@ -3,7 +3,7 @@
 
 
 angular.module('ggcApp')
-  .controller('AppCtrl', function ($scope, $location, hotkeys, $http) {
+  .controller('AppCtrl', function ($scope, $location, hotkeys, $http, dealer) {
 	
 	$http.get('app/config.json').then(function(res){
 	
@@ -11,6 +11,7 @@ angular.module('ggcApp')
 			console.log("CONFIG" , res);
 	})
 	
+
 	
     $scope.menu = [{
       'title': 'Home',
