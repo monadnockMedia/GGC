@@ -42,14 +42,20 @@ CardSchema.set('toObject', {transform:  function(d,r,o){
 		var effects = d.effects;
 		var keys = Object.keys(effects.toObject());
 		console.log("KEYS",keys);
-		delete r.effects;
-		r.players = new Array();
+		r.icon = d.icons;
+		
 		keys.forEach(function(k){
 			var e = effects[k].toObject();
+			
+			e.action = d.action;
+			delete r.icons;
+			e.icon = d.icons;
 			e.player = k;
-			r.players.push(e);
+			e.text = [e.primaryText, e.secondaryText];
+			e.score = e.primaryScore + e.secondaryScore;
 			
 		})
+		r.effects = d.effects;
 	
 	}})
 
