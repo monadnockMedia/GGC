@@ -5,7 +5,7 @@ angular.module('ggcApp')
   .controller('PreviewCtrl', function ($scope,$http,hotkeys,ggcUtil) {
 	$scope.preview = {};
 	$scope.preview.hideNavbar = false;
-	$scope.preview.previewStates = ["cards","icons"];
+	$scope.preview.previewStates = ["cards","icons","screen"];
 	
     $scope.preview.currentCard = 0;
 	$scope.printObject = function(o){

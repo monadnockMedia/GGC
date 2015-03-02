@@ -1,4 +1,12 @@
 woot {
   backgroung: solid 1px green;
 }
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNsaWVudC9hcHAvcHJldmlldy9wcmV2aWV3Lmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDQywyQkFBQSJ9 */
+.scenario-card {
+  width: 300px;
+  height: 500px;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 20px;
+  color: white;
+  padding: 20px;
+}
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNsaWVudC9hcHAvcHJldmlldy9wcmV2aWV3Lmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDQywyQkFBQTs7QUFHRDtFQUNDLFlBQUE7RUFDQSxhQUFBO0VBQ0EscUNBQUE7RUFDQSxtQkFBQTtFQUNBLFlBQUE7RUFDQSxhQUFBIn0= */

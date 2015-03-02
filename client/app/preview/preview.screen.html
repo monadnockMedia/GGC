@@ -1,0 +1,51 @@
+<div class = "row">
+			<div class = "col-md-6"><h3>Card:.<small> current card: {{preview.currentCard}}</h3></div>
+</div>
+<div class = "row relative">
+			<div class = "preview"  ng-repeat = "card in preview.cards" ng-hide="$index != preview.currentCard">
+				<div id="main">
+				  <div id="mapA" >AAA</div>
+				  <div id="mapB" >BBB</div>
+				  <div id="borderscrim"></div>
+				  <div id="perspective_plane_container">
+				    <div id="perspective_plane">
+				      <div id="hexMatrix"></div>
+				      <div id="enviroPanelOuter">
+				        <div id="enviroPanelInner">
+				          <div class="topPlane"><div class="colorbar"><h3>ENVIRONMENT</h3></div></div>
+				          <div class="bottomPlane"></div>
+				        </div>
+				      </div>
+				      <div id="econoPanelOuter">
+				        <div id="econoPanelInner">
+				          <div class="topPlane"><div class="colorbar"><h3>ECONOMY</h3></div></div>
+				          <div class="bottomPlane"></div>
+				        </div>
+				      </div>
+				      <div id="energyPanelOuter">
+				        <div id="energyPanelInner">
+				          <div class="topPlane"><div class="colorbar"><h3>ENERGY</h3></div></div>
+				          <div class="bottomPlane"></div>
+				        </div>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				
+				<div class="col-md-8">
+					<br/>
+					<div class="scenario-card">
+						<div style="width:30%; height:30%; float:left; maring-right:15px;" ng-bind-html="trust(card.icons.icon)"></div>
+						<h2 style="margin-left:130px;">{{card.action}}</h2>
+						<div style="clear:both; font-size:1.5em;" ng-bind-html="card.mainText"></div>
+					</div>
+					<br/>
+					<pre>{{printObject(card)}}</pre>
+				</div>
+			</div>
+		</div>
+</div>
+
+<script>
+	
+</script>

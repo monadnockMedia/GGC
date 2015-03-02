@@ -3,11 +3,18 @@
 </div>
 <div class = "row relative">
 			<div class = "preview"  ng-repeat = "card in preview.cards" ng-hide="$index != preview.currentCard">
+				<div class="scenario-card">
+					<div style="width:30%; height:30%; float:left; maring-right:15px;" ng-bind-html="trust(card.icons.icon)"></div>
+					<h2 style="margin-left:130px;">{{card.action}}</h2>
+					<div style="clear:both; font-size:1.5em;" ng-bind-html="card.mainText"></div>
+				</div>
+				<br/>
 				<div class="col-md-8">
-					<pre>{{printObject(card)}}</pre>
+					<pre>{{printObject(card)}}</pre>					
 				</div>
 				<div class = "col-md-4" ng-bind-html="trust(card.icons.icon)" ></div>
 			</div>
 		</div>
 </div>
+
 

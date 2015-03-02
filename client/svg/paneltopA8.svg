@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 382 402" enable-background="new 0 0 382 402" xml:space="preserve">
+<filter  height="120%" width="120%" filterUnits="objectBoundingBox" x="-10%" y="-10%" id="Bevel">
+	<feGaussianBlur  result="blur" stdDeviation="1.5" in="SourceAlpha"></feGaussianBlur>
+	
+		<feSpecularLighting  specularExponent="20" specularConstant=".9" lighting-color="white" result="specOut" in="blur" surfaceScale="5">
+		<fePointLight  x="-5000" y="-5000" z="8000"></fePointLight>
+	</feSpecularLighting>
+	<feComposite  in2="SourceAlpha" result="specOut2" in="specOut" operator="in"></feComposite>
+	<feComposite  k2="1" k1="0" in2="specOut2" k4="0" result="litPaint" in="SourceGraphic" k3="1" operator="arithmetic">
+		</feComposite>
+</filter>
+<g opacity="0.3" filter="url(#Bevel)" enable-background="new    ">
+	<path d="M342.3,345.5v44.8c0,4.5-3.5,8-8,8H205.6c-7.9,0-21,0-28.7,0H48c-4.5,0-8-3.5-8-8v-44.8c0-1.2-0.3-2.6-0.8-3.5L4.4,270.8
+		c-0.5-1.1-0.8-2.3-0.8-3.5V32c0-3.8,2.6-7.1,6.3-7.9L92.1,4c0.7-0.3,1.4-0.3,1.8-0.3h194c0.7,0,1.4,0.1,1.9,0.3l82.5,20.1
+		c3.5,1,6.3,4.2,6.3,7.9l0.1,235.4c0,1.2-0.3,2.6-0.8,3.5l-34.7,71.2C342.6,343.1,342.3,344.3,342.3,345.5z"/>
+</g>
+</svg>
