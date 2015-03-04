@@ -22,7 +22,7 @@ angular.module('ggcApp')
 	.state('preview.screen', {
         url: '/screen',
         templateUrl: 'app/preview/preview.screen.html',
-        controller: 'CardCtrl',
+        controller: 'ScreenCtrl', //CardCtrl
 	  })
 	.state('preview.test', {
         url: '/test',

@@ -106,4 +106,30 @@ angular.module('ggcApp')
 
 	
 });
+angular.module('ggcApp')
+  .controller('ScreenCtrl', function ($scope,$http,hotkeys,dealer) {
+	
+		$scope.test = {
+			cards: [],
+			players: dealer.players
+		};
+		
+	
+		
+		hotkeys.bindTo($scope)
+		.add({
+			combo: 'D',
+			description: "Draw Two",
+			callback: function(){
+					
+						dealer.drawTwo("economy").then(function(d){
+							console.log("DRAW_TWO",d);
+							$scope.test.cards = d;
+						});
+				}
+			
+		})
+
+	
+});
 

@@ -1,10 +1,10 @@
 .scenario-card {
-	width:400px;
-	height:500px;
+	height:auto;
 	background-color:rgba(0,0,0,0.75);
 	border-radius:20px;
 	color:white;
 	padding:20px;
+	margin:10px;
 }
 
 @charset "UTF-8";
@@ -33,7 +33,8 @@ div#perspective_plane_container {
 	position:absolute;
 	-webkit-perspective: 642;
 	width:1920px;
-	height:1200px;	
+	height:1200px;
+	top:0px;
 }
 div#perspective_plane {
 	position:absolute;
