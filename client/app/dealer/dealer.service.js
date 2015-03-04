@@ -6,15 +6,15 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
 	this.decks = {};
 	this.teams;
 	var scores = {};
-	this.hands = {};
-	this.game = {};
-	this.game.currentPlayer;
+	this.hands = {main:new Array(),players:{}};
+	this.game = {players:{}, currentPlayer:{}};
+	this.game.score = {};
 	this.game.phase = "none";
+	var chosenCard;
 	var currentCards;
-	this.hands.main = new Array();
-	this.hands.players = {};
 	var self = this;
 	var shuffle = ggcUtil.shuffle;
+	
 	///
 	///Setup the "fresh" deck
 	///
@@ -28,104 +28,139 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
 	});
 
 
-	///utility functions
-
-
-
+///utility functions
+	
+	///initialize
+	function init() {
+		var d = {};
+		//make a new set of deck, with shuffled cards
+		self.game.totalScore = 0;
+		eachPlayer(function(k){
+			pushDeck(k);
+			var rand = ~~(Math.random()*4+3);
+			self.game.totalScore += rand;
+			self.game.score[k]= {i:rand,p:0};
+			self.game.players[k] = {};
+		})
+		calculatePercentage();
+		setCurrentPlayer(self.players[0]);
+		console.log("deck pushed", self.decks, self.hands);
+		phases.setup();
+	}
+	
+	function calculatePercentage(){
+		var score = self.game.score;
+		eachPlayer(function(p){
+			score[p].p = score[p].i/self.game.totalScore;
+		});
+	}
+	
+	function eachPlayer( f ){
+		self.players.forEach(f);
+	}
+	function setCurrentPlayer( p ){
+		self.game.currentPlayer = p;
+		self.game.players[p].currentPlayer = true;
+	} 
+	
+	///reset the hands
+	function buildHands( player ){
+		self.hands.main = new Array();
+		
+		eachPlayer(nullHand);
+		
+		function nullHand(p){
+			self.hands.players[p] = {
+				choices: null,
+				vote: null
+			}
+		}
+	
+		self.hands.players[player].choices = new Array();
+	}
+	
+	///add a shuffled deck to the "bottom"
 	function pushDeck(team) {
-
 		var playerDeck = shuffle(self.freshDecks[team].slice(0)); //sheffle the players deck
 		//if this deck doesn't exists on dealer deck, add it
 		if (!self.decks[team]) self.decks[team] = new Array();
 		//concat shuffled deck 
 		self.decks[team] = self.decks[team].concat(playerDeck);
-
 	}
-
-	function init() {
-
-		var d = {};
-		//make a new set of deck, with shuffled cards
-		self.players.forEach(function(k) {
-			pushDeck(k);
-			scores[d] = 0;
-		})
-		self.game.currentPlayer = self.players[0];
-		console.log("deck pushed", self.decks, self.hands);
-		phases.setup();
+	
+	///Score
+	function tally(){
+		
+		var score = self.game.score;
+		self.game.totalScore = 0;
+		
+		eachPlayer(function(p){
+			score[p].i += chosenCard.effects[p].score;
+			self.game.totalScore += score[p].i;
+		});
+		
+		calculatePercentage();
 	}
-	function resetHands(){
-		self.players.forEach(function(k) {
-			self.hands.players[k] = new Array(2);
-		})
-	}
+	
+///Phases 	
 	var phases = {};
 	
 	phases.setup = function(){
 		self.game.phase = "setup";
-		self.hands.main = new Array();
-		self.players.forEach(function(k) {
-			self.hands.players[k] = new Array(2);
-		})
+		buildHands(self.game.currentPlayer);
+		
 	}
 	
 	phases.choice = function() {
-		console.log("PHASE CHOICE");
 		self.game.phase = "choice";
+		
+		console.log("PHASE CHOICE");
 		//loop through the two drawn cards
 		var cPlayerCards = currentCards.map(function(c, i) {
 			var copy = JSON.parse(JSON.stringify(c));
 			//sneakily sort out player cards in the loop
-			self.players.forEach(function(k) {
+			eachPlayer(function(k) {
 				//if this is the current player
 				if (k == self.game.currentPlayer) {
 					//build the choice view
 					var playerEffects = copy.effects[k];
-					self.hands.players[k][i] =  {
+					self.hands.players[k].choices[i] =  {
 						action: playerEffects.action,
 						icon: playerEffects.icon
 					};
-				} else {
-					//otherwise, set to null
-					self.hands.players[k][i] = null;
-				}
+				} 
 			});
 			delete copy.effects;
 			return copy;
 		})
-
 		self.hands.main = cPlayerCards;
 	}
 
 	phases.vote = function( i ) {
-		console.log("PHASE VOTE");
 		self.game.phase = "vote";
-		var cardChosen = currentCards[i];
-		self.hands.main = null;
 		
-		self.players.forEach(function(k) {
-			//if this is the current player
-				self.hands.players[k] = new Array(2);
-				//build the choice view
-				var playerEffects = cardChosen.effects[k];
-				self.hands.players[k][0] = playerEffects;
-		
+		console.log("PHASE VOTE");
+		self.votes = {};
+		chosenCard = currentCards[i];
+		self.hands.main = new Array();
+		eachPlayer(function(k) {
+			var playerEffects = chosenCard.effects[k];
+			self.hands.players[k].vote = playerEffects;
 		});
 	}
+	
+	phases.scoring = function( passed ){
+		if(passed) tally();
+		
+	}
 
-	///dealer methods
+///dealer methods
 	//pull two cards from the deck
 	this.drawTwo = function(team) {
-		
-		//jsut for testing;
-		resetHands();
-		
 		currentCards = [];
-
 		if (this.decks[team].length <= 4) {
 			pushDeck(team);
 		}
-
 		var i = 2;
 		var ret = [];
 		while (i--) {
@@ -135,22 +170,29 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
 		//call the first play phase
 		phases.choice();
 	}
-
+	
+	///currentPlayer Chooses an issue
 	this.choose = function(i) {
 		phases.vote(i);
 	}
-
-	this.vote = function(c) {
+	
+	///each player votes
+	this.vote = function(p, v) {
+		self.votes[p] = v;
+		var keys = Object.keys(self.votes);
 		
-		var card = c;
-		var effects = c.effects;
-		var keys = Object.keys(effects);
-		forEach(keys, function(k) {
-			var e = effects[e];
-			var sc = e.primaryScore + e.secondaryScore;
-			scores[k] += sc;
-		});
-		$rootScope.$apply();
+		if(keys.length == 3){
+			var i = 3;
+			var ct = 0;
+			while(i--){
+				ct+=self.votes[keys[i]];
+			}
+			var passed = (ct>=2);
+			console.log(
+				(passed) ? "PASSED" : "FAILED", ct
+			);
+			phases.scoring(passed);
+		}
 	}
 
 });
