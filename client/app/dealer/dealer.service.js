@@ -1,139 +1,198 @@
 'use strict';
 
-angular.module('ggcApp')
-  .service('dealer', function ($http, $q, $rootScope) {
-    // AngularJS will instantiate a singleton by calling "new" on this function
-		this.freshDecks;
-		this.decks = {};
-		this.teams;
-		var scores = {};
-		this.hands = {};
-		this.hands.currentPlayer = new Array();
-		this.hands.players = {};
-		var self = this;
-		
+angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUtil) {
+	// AngularJS will instantiate a singleton by calling "new" on this function
+	this.freshDecks;
+	this.decks = {};
+	this.teams;
+	var scores = {};
+	this.hands = {main:new Array(),players:{}};
+	this.game = {players:{}, currentPlayer:{}};
+	this.game.score = {};
+	this.game.phase = "none";
+	var chosenCard;
+	var currentCards;
+	var self = this;
+	var shuffle = ggcUtil.shuffle;
+	
 	///
 	///Setup the "fresh" deck
 	///
-		 $http.get('/api/cards/grouped').then(function(r){
-			console.log("Card Groups", r);
-		
-			self.players = Object.keys(r.data);
-			self.freshDecks=r.data;
-			
-			initDecks();
-		}); 
-		
-		
-	///utility functions
-		
-		function shuffle(array) {
-		  var copy = [], n = array.length, i;
+	$http.get('/api/cards/grouped').then(function(r) {
+		console.log("Card Groups", r);
 
-		  // While there remain elements to shuffle…
-		  while (n) {
+		self.players = Object.keys(r.data);
+		self.freshDecks = r.data;
 
-		    // Pick a remaining element…
-		    i = Math.floor(Math.random() * array.length);
-
-		    // If not already shuffled, move it to the new array.
-		    if (i in array) {
-		      copy.push(array[i]);
-		      delete array[i];
-		      n--;
-		    }
-		  }
-
-		  return copy;
-		}
-		function pushDeck(team){
-		
-			var playerDeck = shuffle(self.freshDecks[team].slice(0)); //sheffle the players deck
-			//if this deck doesn't exists on dealer deck, add it
-			if(!self.decks[team]) self.decks[team] = new Array();
-			//concat shuffled deck 
-			self.decks[team] = self.decks[team].concat(playerDeck);
-		
-		}
-		
-		function initDecks(){
-			
-			var d = {};
-			//make a new set of deck, with shuffled cards
-			
-			self.players.forEach(function(k){
-				pushDeck(k);
-				scores[d] = 0;
-				self.hands.players[k] = new Array(2);
-			})
-			console.log("deck pushed", self.decks, self.hands);
-		}
-		
+		init();
+	});
 
 
-	///dealer methods
-	/*	this.drawTwo = function(team){
-			var dfd = $q.defer();
-			if(this.decks[team].length <= 2 ){
-
-				pushDeck(team);
-			}	
-			var i = 2;
-			var ret = [];
-			while(i--) ret.push(self.decks[team].shift());
-			dfd.resolve(ret);
-			return dfd.promise;	
-			
-			$rootScope.apply();
-		} */
+///utility functions
+	
+	///initialize
+	function init() {
+		var d = {};
+		//make a new set of deck, with shuffled cards
+		self.game.totalScore = 0;
+		eachPlayer(function(k){
+			pushDeck(k);
+			var rand = ~~(Math.random()*4+3);
+			self.game.totalScore += rand;
+			self.game.score[k]= {i:rand,p:0};
+			self.game.players[k] = {};
+		})
+		calculatePercentage();
+		setCurrentPlayer(self.players[0]);
+		console.log("deck pushed", self.decks, self.hands);
+		phases.setup();
+	}
+	
+	function calculatePercentage(){
+		var score = self.game.score;
+		eachPlayer(function(p){
+			score[p].p = score[p].i/self.game.totalScore;
+		});
+	}
+	
+	function eachPlayer( f ){
+		self.players.forEach(f);
+	}
+	function setCurrentPlayer( p ){
+		self.game.currentPlayer = p;
+		self.game.players[p].currentPlayer = true;
+	} 
+	
+	///reset the hands
+	function buildHands( player ){
+		self.hands.main = new Array();
 		
-		this.drawTwo = function(team){
-				var cards = [];
-				
-				if(this.decks[team].length <= 4 ){
-					pushDeck(team);
-				}
-				
-				var i = 2;
-				var ret = [];
-				while(i--){
-					cards.push(self.decks[team].shift());
-					
-				} 
-				
-				var cPlayerCards = cards.map(function(c, i){
-					
-					var copy = JSON.parse(JSON.stringify(c));
-					self.players.forEach(function(k){
-						if(!copy.effects){
-							debugger;
-						}
-						var playerEffects =  copy.effects[k];
-						
-						self.hands.players[k][i] = playerEffects;
-					});
-					
-					delete copy.effects;
-					return copy;
-				})
-				
-				self.hands.currentPlayer = cards;
-				
-				
+		eachPlayer(nullHand);
+		
+		function nullHand(p){
+			self.hands.players[p] = {
+				choices: null,
+				vote: null
 			}
-
-		
-		this.vote = function(c){
-			
-			var card = c;
-			var effects = c.effects;
-			var keys = Object.keys(effects);
-			forEach(keys, function(k){
-				var e = effects[e];
-				var sc = e.primaryScore + e.secondaryScore;
-				scores[k] += sc;	
-			});
-				$rootScope.$apply();
 		}
 	
-  });
+		self.hands.players[player].choices = new Array();
+	}
+	
+	///add a shuffled deck to the "bottom"
+	function pushDeck(team) {
+		var playerDeck = shuffle(self.freshDecks[team].slice(0)); //sheffle the players deck
+		//if this deck doesn't exists on dealer deck, add it
+		if (!self.decks[team]) self.decks[team] = new Array();
+		//concat shuffled deck 
+		self.decks[team] = self.decks[team].concat(playerDeck);
+	}
+	
+	///Score
+	function tally(){
+		
+		var score = self.game.score;
+		self.game.totalScore = 0;
+		
+		eachPlayer(function(p){
+			score[p].i += chosenCard.effects[p].score;
+			self.game.totalScore += score[p].i;
+		});
+		
+		calculatePercentage();
+	}
+	
+///Phases 	
+	var phases = {};
+	
+	phases.setup = function(){
+		self.game.phase = "setup";
+		buildHands(self.game.currentPlayer);
+		
+	}
+	
+	phases.choice = function() {
+		self.game.phase = "choice";
+		
+		console.log("PHASE CHOICE");
+		//loop through the two drawn cards
+		var cPlayerCards = currentCards.map(function(c, i) {
+			var copy = JSON.parse(JSON.stringify(c));
+			//sneakily sort out player cards in the loop
+			eachPlayer(function(k) {
+				//if this is the current player
+				if (k == self.game.currentPlayer) {
+					//build the choice view
+					var playerEffects = copy.effects[k];
+					self.hands.players[k].choices[i] =  {
+						action: playerEffects.action,
+						icon: playerEffects.icon
+					};
+				} 
+			});
+			delete copy.effects;
+			return copy;
+		})
+		self.hands.main = cPlayerCards;
+	}
+
+	phases.vote = function( i ) {
+		self.game.phase = "vote";
+		
+		console.log("PHASE VOTE");
+		self.votes = {};
+		chosenCard = currentCards[i];
+		self.hands.main = new Array();
+		eachPlayer(function(k) {
+			var playerEffects = chosenCard.effects[k];
+			self.hands.players[k].vote = playerEffects;
+		});
+	}
+	
+	phases.scoring = function( passed ){
+		if(passed) tally();
+		
+	}
+
+///dealer methods
+	//pull two cards from the deck
+	this.drawTwo = function(team) {
+		currentCards = [];
+		if (this.decks[team].length <= 4) {
+			pushDeck(team);
+		}
+		var i = 2;
+		var ret = [];
+		while (i--) {
+			currentCards.push(self.decks[team].shift());
+
+		}
+		//call the first play phase
+		phases.choice();
+	}
+	
+	///currentPlayer Chooses an issue
+	this.choose = function(i) {
+		phases.vote(i);
+	}
+	
+	///each player votes
+	this.vote = function(p, v) {
+		self.votes[p] = v;
+		var keys = Object.keys(self.votes);
+		
+		if(keys.length == 3){
+			var i = 3;
+			var ct = 0;
+			while(i--){
+				ct+=self.votes[keys[i]];
+			}
+			var passed = (ct>=2);
+			console.log(
+				(passed) ? "PASSED" : "FAILED", ct
+			);
+			phases.scoring(passed);
+		}
+	}
+
+});
