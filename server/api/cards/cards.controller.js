@@ -5,6 +5,8 @@ var Cards = require("../../forms-angular-models/card");
 var findWithIcons = function(){return Cards.find()
 	.populate('icons');}
 	
+
+	
 var sortByTeam = function(_cards){
 	var ret = {};
 	
@@ -19,12 +21,42 @@ var sortByTeam = function(_cards){
 	return ret;
 }
 
+var buildPlayerArray = function(deck){
+	var ret = [];
+	//go through the deck
+	deck.forEach(function(_c,i,a){
+		var card = _c;
+		card.foo = "bar";
+		card.players = new Array();
+		var keys = Object.keys(card.effects);
+		keys.shift();
+
+		keys.forEach(function(k){
+
+			card.players.push({
+				
+				"player" : k,
+				effect: card.effects[k]
+			})
+		})
+
+		ret.push(card);
+	})
+	
+	return ret;
+}
+
 // Get list of cardss
 exports.index = function(req, res) {
   	findWithIcons()
-	.exec(function (err, cardss) {
+	.exec(function (err, _cards) {
 	    if(err) { return handleError(res, err); }
-	    return res.status(200).json(cardss);
+	
+		var cards = _cards.map(function(c){
+			return c.toObject();
+		})
+		
+	    return res.status(200).json(cards);
 	  });
 };
 
@@ -32,7 +64,7 @@ exports.index = function(req, res) {
 // Get list of cards, grouped by team
 exports.indexGrouped = function(req, res) {
   	findWithIcons()
-	.exec(function (err, cards) {
+	.exec(function (err, _cards) {
 	    if(err) { return handleError(res, err); }
 	
 		else{
@@ -40,6 +72,9 @@ exports.indexGrouped = function(req, res) {
 			
 			
 		}
+		var cards = _cards.map(function(c){
+			return c.toObject();
+		})
 		var ret = sortByTeam(cards);
 	    return res.status(200).json(ret);
 	  });

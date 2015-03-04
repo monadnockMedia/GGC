@@ -82,13 +82,14 @@ angular.module('ggcApp')
 });
 angular.module('ggcApp')
   .controller('TestCtrl', function ($scope,$http,hotkeys,dealer) {
-	
+		$scope.dealer = dealer;
+		$scope.hands = dealer.hands;
+		
 		$scope.test = {
 			cards: [],
 			players: dealer.players
 		};
 		
-	
 		
 		hotkeys.bindTo($scope)
 		.add({
@@ -96,10 +97,7 @@ angular.module('ggcApp')
 			description: "Draw Two",
 			callback: function(){
 					
-						dealer.drawTwo("economy").then(function(d){
-							console.log("DRAW_TWO",d);
-							$scope.test.cards = d;
-						});
+						dealer.drawTwo("economy");
 				}
 			
 		})
