@@ -41,7 +41,6 @@ var CardSchema = new Schema({
 CardSchema.set('toObject', {transform:  function(d,r,o){ 
 		var effects = d.effects;
 		var keys = Object.keys(effects.toObject());
-		console.log("KEYS",keys);
 		r.icon = d.icons;
 		
 		keys.forEach(function(k){

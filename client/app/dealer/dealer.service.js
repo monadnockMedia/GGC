@@ -1,26 +1,25 @@
 'use strict';
 
-angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUtil) {
+angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUtil, $interval) {
 	// AngularJS will instantiate a singleton by calling "new" on this function
 	this.freshDecks;
 	this.decks = {};
 	this.teams;
 	var scores = {};
 	this.hands = {main:new Array(),players:{}};
-	this.game = {players:{}, currentPlayer:{}};
+	this.game = {players:{}, currentPlayer:{}, playerIndex:0};
 	this.game.score = {};
 	this.game.phase = "none";
 	var chosenCard;
 	var currentCards;
 	var self = this;
+	var timer;
 	var shuffle = ggcUtil.shuffle;
-	
+	console.log("DEALER");
 	///
 	///Setup the "fresh" deck
 	///
 	$http.get('/api/cards/grouped').then(function(r) {
-		console.log("Card Groups", r);
-
 		self.players = Object.keys(r.data);
 		self.freshDecks = r.data;
 
@@ -43,7 +42,7 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
 			self.game.players[k] = {};
 		})
 		calculatePercentage();
-		setCurrentPlayer(self.players[0]);
+		setCurrentPlayer(self.game.playerIndex);
 		console.log("deck pushed", self.decks, self.hands);
 		phases.setup();
 	}
@@ -55,12 +54,22 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
 		});
 	}
 	
+	function nextPlayer(){
+		var i = self.game.playerIndex;
+		self.game.playerIndex = (i == 2 ) ? 0 : i+1;
+		setCurrentPlayer(self.game.playerIndex );
+	}
+	
 	function eachPlayer( f ){
 		self.players.forEach(f);
 	}
-	function setCurrentPlayer( p ){
+	
+	function setCurrentPlayer( i ){
+		var p = self.players[i]
 		self.game.currentPlayer = p;
-		self.game.players[p].currentPlayer = true;
+		eachPlayer(function(pp){
+			self.game.players[pp].currentPlayer = (pp==p);
+		})
 	} 
 	
 	///reset the hands
@@ -108,7 +117,7 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
 	phases.setup = function(){
 		self.game.phase = "setup";
 		buildHands(self.game.currentPlayer);
-		
+		self.drawTwo(self.game.currentPlayer);
 	}
 	
 	phases.choice = function() {
@@ -150,8 +159,13 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
 	}
 	
 	phases.scoring = function( passed ){
+		self.game.phase = "scoring";
 		if(passed) tally();
-		
+		nextPlayer();
+		var timer = $interval(function(){
+			$interval.cancel(timer);
+			phases.setup();
+		}, 2000);
 	}
 
 ///dealer methods

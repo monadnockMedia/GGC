@@ -1,11 +1,15 @@
 <div class = "row">
 	<div class = "col-md-2"><h5>Phase: {{game.phase}}</h5></div>
 	<div class = "col-md-1"><h5>Score: </h5></div>
-	<div class = "col-md-3" ng-repeat="(team, score) in game.score"><h5>{{team}}</h5><p>{{score.i}}</p><code>{{score.p}}</code></div>
+	<div class = "col-md-3" ng-repeat="(team, score) in game.score">
+		<div class="well">
+			<h5>{{team | capitalize}}</h5><p>{{score.i}}</p><code>{{score.p | percent}}</code>
+		</div>
+	</div>
 
 </div>
 
-
+<hr>
 <div class = "row relative" ng-show="hands.main[0]">
 	<div class="col-md-5 col-md-offset-1" ng-repeat = "mainCard in hands.main track by $index">
 		<div class = "row">
@@ -17,20 +21,24 @@
 	</div>
 </div>
 
+<hr>
 
 <div class = "row" ng-show="game.phase == 'choice'" >
-	<div class = "col-md-4" ng-show = "name == game.currentPlayer" ng-repeat = "(name, playerCards) in hands.players">
-		<h4 class = "text-danger">{{name}}</h4>
+	<div class = "col-md-4"  ng-repeat = "(name, playerCards) in hands.players">
+		<div ng-show = "game.players[name].currentPlayer">
+			<h4 class = "text-danger">{{name | capitalize}}, Please choose an issue to propose</h4>
 			<div class = "col-md-6" ng-click="dealer.choose($index)" ng-repeat="choice in playerCards.choices track by $index">
 				<h5>{{choice.action}}</h5>
 				<div ng-bind-html="trust(choice.icon.icon)"></div>
 			</div>
+		</div>
 	</div>
 </div>
 
 <div class = "row" ng-show = "game.phase == 'vote'">
 	<div class = "col-md-4 well"  ng-repeat = "(name, voteCard) in hands.players">
-			<h4 class = "text-danger">{{name}}</h4>
+	
+			<h4 class = "text-danger">{{name | capitalize}}</h4>
 			<div class = "col-md-6" >
 				<h5>{{voteCard.vote.action}}</h5>
 				<div ng-bind-html="trust(voteCard.vote.icon.icon)"></div>
@@ -40,6 +48,7 @@
 				<a ng-click="dealer.vote(name, 1)" class = "btn btn-primary">yes</a>
 				<a ng-click="dealer.vote(name, 0)" class = "btn btn-danger">no</a>
 			</div>
+	
 	</div>
 </div>
 
