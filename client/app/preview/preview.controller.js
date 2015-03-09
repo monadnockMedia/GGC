@@ -142,7 +142,7 @@ angular.module('ggcApp')
           $('#enviroPanelInner').removeClass('extended');
           enviroPanelExtended = false;
         }
-      } else if (player == "energy") {
+        } else if (player == "energy") {
         if (!energyPanelExtended) {
           $('#energyPanelInner').addClass('extended');
           energyPanelExtended = true;
@@ -162,7 +162,6 @@ angular.module('ggcApp')
     }
 
 
-
 		hotkeys.bindTo($scope)
 		.add({
 			combo: 'D',
@@ -178,6 +177,13 @@ angular.module('ggcApp')
 				console.log("hands:",JSON.stringify($scope.hands,null,3), "game: ",JSON.stringify($scope.game,null,3));
 			}
 		})
+      .add({
+        combo: 'm',
+        description: "Print Model",
+        callback: function () {
+          console.log("game:", $scope.game);
+        }
 
+      })
 
 });
