@@ -111,9 +111,17 @@ angular.module('ggcApp')
       })
       .add({
         combo: 'M',
-        description: "Print Model",
+        description: "Print Model JSON",
         callback: function () {
           console.log("hands:", JSON.stringify($scope.hands, null, 3), "game: ", JSON.stringify($scope.game, null, 3));
+        }
+
+      })
+      .add({
+        combo: 'm',
+        description: "Print Model",
+        callback: function () {
+          console.log("game:", $scope.game);
         }
 
       })
