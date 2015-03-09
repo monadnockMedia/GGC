@@ -4,15 +4,15 @@
 
 angular.module('ggcApp')
   .controller('AppCtrl', function ($scope, $location, hotkeys, $http, dealer) {
-	
+
 	$http.get('app/config.json').then(function(res){
-	
+
 		$scope.config = res.data;
 			console.log("CONFIG" , res);
 	})
-	
 
-	
+
+
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
@@ -24,7 +24,7 @@ angular.module('ggcApp')
       'link': '/preview'
     }];
 
-	$scope.models =["Card", "Icon", "Script", "Test"];
+	$scope.models =["Card", "Icon", "Content", "Test"];
 
     $scope.isCollapsed = true;
 
@@ -39,7 +39,7 @@ angular.module('ggcApp')
 	      $location.path('/preview');
 	    }
 	  });
-	
+
 	hotkeys.add({
 	    combo: 'E',
 	    description: 'Edit Mode',
@@ -47,7 +47,7 @@ angular.module('ggcApp')
 	      $location.path('/edit');
 	    }
 	  });
-	
+
 	hotkeys.add({
 	    combo: 'a',
 	    description: 'Alert Mode',
@@ -55,7 +55,7 @@ angular.module('ggcApp')
 	      alert("Alert");
 	    }
 	  });
-	
-	
+
+
 
   });
