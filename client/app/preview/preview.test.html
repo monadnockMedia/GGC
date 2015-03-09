@@ -45,8 +45,10 @@
 			</div>
 			<div class = "col-md-6" >
 				<p ng-repeat = "t in voteCard.vote.text">{{t}}</p>
-				<a ng-click="dealer.vote(name, 1)" class = "btn btn-primary">yes</a>
-				<a ng-click="dealer.vote(name, 0)" class = "btn btn-danger">no</a>
+				<div class="btn-group" role="group" aria-label="...">
+					<a ng-click="dealer.vote(name, 1)" class = "btn btn-primary">yes</a>
+					<a ng-click="dealer.vote(name, 0)" class = "btn btn-danger">no</a>
+				</div>
 			</div>
 	
 	</div>
