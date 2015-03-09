@@ -62,7 +62,7 @@ div#hexMatrix {
   z-index:0;
 
 }
-div#enviroPanelOuter, div#econoPanelOuter, div#energyPanelOuter {
+div#panelOuterEnvironment, div#panelOuterEconomy, div#panelOuterEnergy {
   position:absolute;
   width:375px;
   height:300px;overflow:hidden;
@@ -71,7 +71,7 @@ div#enviroPanelOuter, div#econoPanelOuter, div#energyPanelOuter {
   /*border:black solid 1px;*/
   overflow:hidden;
 }
-div#enviroPanelInner, div#econoPanelInner, div#energyPanelInner {
+div#panelInnerEnvironment, div#panelInnerEconomy, div#panelInnerEnergy {
   position:absolute;
   width:375px;
   height:350px;
@@ -83,7 +83,7 @@ top:220px;*/
   -webkit-transform-style: preserve-3d;
   transition: all .2s  ease-in-out;/**/
 }
-div#enviroPanelInner.extended, div#econoPanelInner.extended, div#energyPanelInner.extended {
+div#panelInnerEnvironment.extended, div#panelInnerEconomy.extended, div#panelInnerEnergy.extended {
   top:0px;
 }
 div.topPlane, div.bottomPlane {
@@ -113,12 +113,12 @@ div#enviroPanelOuter {
 	top: 695px;
 	-webkit-transform: rotateZ(29deg);
 }*/
-div#enviroPanelOuter {
+div#panelOuterEnvironment {
   left: 360px;
   top: 718px;
   -webkit-transform: rotateZ(29deg);
 }
-div#econoPanelOuter {
+div#panelOuterEconomy {
   left:775px;
   /*top:800px;*/
   top:825px;
@@ -136,7 +136,7 @@ div#energyPanelOuter {
 	top: 695px;
 	-webkit-transform: rotateZ(-29deg);
 }*/
-div#energyPanelOuter {
+div#panelOuterEnergy {
   right: 355px;
   top: 718px;
   -webkit-transform: rotateZ(-29deg);
@@ -166,12 +166,12 @@ div#energyPanelOuter {
   font-family: "232MKSD", Helvetica, Arial, sans-serif;
 }
 
-div#enviroPanelOuter .colorbar { background:#2fd418; }
-div#econoPanelOuter .colorbar { background:#fca204; }
-div#energyPanelOuter .colorbar { background:#4e4efc; }
-div#enviroPanelOuter h3 { border:#c8e893 solid 1px; color:#c8e893; text-shadow: 0 0 3px #c8e893; }
-div#econoPanelOuter h3 { border:#fbcd6d solid 1px; color:#fbcd6d; }
-div#energyPanelOuter h3 { border:#a8aefa solid 1px; color:#a8aefa; }
+div#panelOuterEnvironment .colorbar { background:#2fd418; }
+div#panelOuterEconomy .colorbar { background:#fca204; }
+div#panelOuterEnergy .colorbar { background:#4e4efc; }
+div#panelOuterEnvironment h3 { border:#c8e893 solid 1px; color:#c8e893; text-shadow: 0 0 3px #c8e893; }
+div#panelOuterEconomy h3 { border:#fbcd6d solid 1px; color:#fbcd6d; }
+div#panelOuterEnergy h3 { border:#a8aefa solid 1px; color:#a8aefa; }
 
 div#mapA, div#mapB, div#borderscrim {
   width:1920px;

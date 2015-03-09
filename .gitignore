@@ -7,4 +7,3 @@ dist
 /server/config/local.env.js
 .idea
 *.log
-GGC-data

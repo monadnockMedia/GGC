@@ -131,40 +131,34 @@ angular.module('ggcApp')
 
 		var visibiltyAccess=false, enviroPanelExtended=false, econoPanelExtended=false, energyPanelExtended=false;
 
-		$scope.test = {
-			cards: [],
-			players: dealer.players
-		};
 
-		$scope.toggleEnviro = function() {
-			if (!enviroPanelExtended) {
-				$('#enviroPanelInner').addClass('extended');
-				enviroPanelExtended = true;
-			} else {
-				$('#enviroPanelInner').removeClass('extended');
-				enviroPanelExtended = false;
-			}
-		}
-
-		$scope.toggleEcon = function() {
-			if (!econoPanelExtended) {
-				$('#econoPanelInner').addClass('extended');
-				econoPanelExtended = true;
-			} else {
-				$('#econoPanelInner').removeClass('extended');
-				econoPanelExtended = false;
-			}
-		}
-
-		$scope.toggleEnergy = function() {
-			if (!energyPanelExtended) {
-				$('#energyPanelInner').addClass('extended');
-				energyPanelExtended = true;
-			} else {
-				$('#energyPanelInner').removeClass('extended');
-				energyPanelExtended = false;
-			}
-		}
+    $scope.openPanel = function(player) {
+      if (player == "environment") {
+        if (!enviroPanelExtended) {
+          $('#enviroPanelInner').addClass('extended');
+          enviroPanelExtended = true;
+        } else {
+          $('#enviroPanelInner').removeClass('extended');
+          enviroPanelExtended = false;
+        }
+      } else if (player == "energy") {
+        if (!energyPanelExtended) {
+          $('#energyPanelInner').addClass('extended');
+          energyPanelExtended = true;
+        } else {
+          $('#energyPanelInner').removeClass('extended');
+          energyPanelExtended = false;
+        }
+      } else if (player == "economy") {
+        if (!econoPanelExtended) {
+          $('#econoPanelInner').addClass('extended');
+          econoPanelExtended = true;
+        } else {
+          $('#econoPanelInner').removeClass('extended');
+          econoPanelExtended = false;
+        }
+      }
+    }
 
 
 

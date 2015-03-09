@@ -3,53 +3,33 @@
 </div>
 <div class = "row relative">
 			<div class = "preview">
-				<div id="main">
-				  <div id="mapA" >AAA</div>
-				  <div id="mapB" >BBB</div>
-				  <div id="borderscrim"></div>
-				  <div class="row">
-				  	<div class="col-md-offset-4">
-						<div style="margin-top:25%; float:left; position:relative;" class="scenario-card col-md-3 text-center" ng-repeat = "mainCard in hands.main track by $index">
-							<div style="margin-left:25%;width:50%; height:50%;" ng-bind-html="trust(mainCard.icon.icon)"></div>
-							<h3>{{mainCard.action}}</h3>
-							<div style="font-size:1.25em;" ng-bind-html="mainCard.mainText"></div>
-						</div>
-					</div>
+        <div id="main">
+          <div id="mapA" >AAA</div>
+          <div id="mapB" >BBB</div>
+          <div id="borderscrim"></div>
 
-				  </div>
+          <!-- >The MAIN (Center) Cards Go Here<-->
+          <div class="row">
+            <div class="col-md-offset-4">
+              <div style="margin-top:25%; float:left; position:relative;" class="scenario-card col-md-3 text-center" ng-repeat = "mainCard in hands.main track by $index">
+                <div style="margin-left:25%;width:50%; height:50%;" ng-bind-html="trust(mainCard.icon.icon)"></div>
+                <h3>{{mainCard.action}}</h3>
+                <div style="font-size:1.25em;" ng-bind-html="mainCard.mainText"></div>
+              </div>
+            </div>
+          </div>
 
-				  <div id="perspective_plane_container">
-				    <div id="perspective_plane">
-				      <div id="hexMatrix"></div>
-				      <div id="enviroPanelOuter">
-				        <div id="enviroPanelInner" ng-click="toggleEnviro()">
-				          <div class="topPlane"><div class="colorbar"><h3>ENVIRONMENT</h3></div></div>
-				          <div class="bottomPlane"></div>
-				        </div>
-				      </div>
-				      <div id="econoPanelOuter">
-				        <div id="econoPanelInner" ng-click="toggleEcon()">
-				          <div class="topPlane"><div class="colorbar"><h3>ECONOMY</h3></div></div>
-				          <div class="bottomPlane"></div>
-				        </div>
-				      </div>
-				      <div id="energyPanelOuter">
-				        <div id="energyPanelInner" ng-click="toggleEnergy()">
-				          <div class="topPlane"><div class="colorbar"><h3>ENERGY</h3></div></div>
-				          <div class="bottomPlane"></div>
-				        </div>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-				<br/><br/><br/>
-				<div class="col-md-12" >
-					<br/>
-				</div>
+          <div id="perspective_plane_container">
+            <div id="perspective_plane">
+              <div id="hexMatrix"></div>
+
+              <!-- >The Player Panels Go Here<-->
+              <div ng-repeat="(player, hand) in hands.players">
+                <player-panel></player-panel>
+              </div>
+
+            </div>
+          </div>
+        </div>
 			</div>
-		</div>
 </div>
-
-<script>
-
-</script>
