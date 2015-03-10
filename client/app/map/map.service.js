@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('ggcApp')
-  .service('ggcMapper', function (d3) {
+  .service('ggcMapper', function (d3, $q) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     this.grid = {
       points: [], hexes: [], hexRadius: 0
     }
-
+    debugger;
     var grid = this.grid;
 
     this.buildHexes = function(columns, rows, width, height){
