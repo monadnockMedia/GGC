@@ -40,7 +40,7 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
       var rand = ~~(Math.random()*4+3);
       self.game.totalScore += rand;
       self.game.score[k]= {i:rand,p:0};
-      self.game.players[k] = { hand:{choices:[],issue:{}}};
+      self.game.players[k] = { hand:{choices:[],issue:{}}, docked:true};
     })
 
     calculatePercentage();
@@ -67,10 +67,10 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
   }
 
   function setCurrentPlayer( i ){
-    var p = self.players[i]
+    var p = self.players[i];
     self.game.currentPlayer = p;
     eachPlayer(function(pp){
-      self.game.players[pp].currentPlayer = (pp==p);
+      self.game.players[pp].currentPlayer = self.game.players[pp].docked = (pp==p);
     })
   }
 
@@ -158,6 +158,7 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
     eachPlayer(function(k) {
       var playerEffects = chosenCard.effects[k];
       self.game.players[k].hand.issue = playerEffects;
+      self.game.players[k].docked = false;
     });
   }
 
