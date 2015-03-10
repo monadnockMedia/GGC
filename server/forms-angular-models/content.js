@@ -13,7 +13,7 @@ var ContentSchema = new Schema({
   pages: [BodySchema]
 });
 
- 
+
 var Content;
 var modelName = 'Content';
 
