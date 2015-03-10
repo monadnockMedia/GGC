@@ -99,6 +99,9 @@ angular.module('ggcApp')
     };
 
 
+
+
+
     hotkeys.bindTo($scope)
       .add({
         combo: 'D',
