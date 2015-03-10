@@ -18,17 +18,16 @@ angular.module('ggcApp')
       );
 
       this.hexBin = d3.hexbin()
-        .radius(hexRadius);
+        .radius(grid.hexRadius);
 
       for (var i = 0; i < rows; i++) {
         for (var j = 0; j < columns; j++) {
-          grid.points.push([grid.hexRadius * j * 1.75, grid.hexRadius * i * 1.5]);
+          var pt = [grid.hexRadius * j * 1.75, grid.hexRadius * i * 1.5];
+          grid.points.push(pt);
         }//for j
       }//for i
-
-      grid.hexes = this.hexbin(grid.points);
+      grid.hexes = this.hexBin(grid.points);
       dfd.resolve(grid);
-
-      return dfd.promise();
+      return dfd.promise;
     }
   });
