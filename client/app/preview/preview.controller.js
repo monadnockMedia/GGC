@@ -132,6 +132,13 @@ angular.module('ggcApp')
     ///dealer.hands contains the current "card" views for each player, as well as the main player
     $scope.hands = dealer.hands;
 
+    $scope.enviroDocked = $scope.game;
+    console.log("Test");
+    console.log($scope.enviroDocked);
+
+
+    //$scope.energyDocked = dealer.game.players.energy.hand.docked;
+
 
     $scope.openPanel = function(player) {
       if (player == "environment") {
@@ -162,19 +169,36 @@ angular.module('ggcApp')
     }
 
 
+
+
 		hotkeys.bindTo($scope)
 		.add({
 			combo: 'D',
 			description: "Draw Two",
 			callback: function(){
 					dealer.drawTwo("economy");
+
 				}
 			})
+    .add({
+       combo: 'E',
+       description: "Draw Two",
+       callback: function(){
+        dealer.drawTwo("energy");
+       }
+      })
+      .add({
+        combo: 'R',
+        description: "Draw Two",
+        callback: function(){
+          dealer.drawTwo("environment");
+        }
+      })
 		.add({
 			combo: 'M',
 			description: "Print Model",
 			callback: function(){
-				console.log("hands:",JSON.stringify($scope.hands,null,3), "game: ",JSON.stringify($scope.game,null,3));
+				console.log("hands:",JSON.stringify($scope.hands,null,3), "game: ",JSON.stringify($scope.game,null,3));d
 			}
 		})
       .add({

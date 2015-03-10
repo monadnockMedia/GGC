@@ -71,6 +71,7 @@ div#hexMatrix {
 	height:1200px;
 	opacity:.1;
 	z-index:0;
+  pointer-events: none;
 
 }
 
