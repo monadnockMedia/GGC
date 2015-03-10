@@ -6,7 +6,7 @@ angular.module('ggcApp')
   .controller('PreviewCtrl', function ($scope, $http, hotkeys, ggcUtil, $rootScope) {
     $scope.preview = {};
     $scope.preview.hideNavbar = false;
-    $scope.preview.previewStates = ["cards", "icons", "test"];
+    $scope.preview.previewStates = ["cards", "icons", "game"];
     $scope.preview.currentCard = 0;
     $scope.printObject = function (o) {
       return JSON.stringify(o, null, 3);
@@ -16,7 +16,6 @@ angular.module('ggcApp')
 
     $rootScope.$on('$stateChangeStart',
       function(event, toState, toParams, fromState, fromParams){
-        debugger;
       })
 
   });
@@ -87,7 +86,7 @@ angular.module('ggcApp')
 
 //Ryan's Test controller
 angular.module('ggcApp')
-  .controller('TestCtrl', function ($scope, $http, hotkeys, dealer) {
+  .controller('GameLoopCtrl', function ($scope, $http, hotkeys, dealer) {
     $scope.dealer = dealer;
     $scope.game = dealer.game;
     ///dealer.hands contains the current "card" views for each player, as well as the main player
