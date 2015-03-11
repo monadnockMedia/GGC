@@ -24,7 +24,11 @@ angular.module('ggcApp')
 /// controller for Card preview
 
 angular.module('ggcApp')
-  .controller('CardCtrl', function ($scope,$http,hotkeys,ggcUtil) {
+  .controller('CardCtrl', function ($scope,$http,hotkeys,ggcUtil,dealer) {
+
+    $scope.dealer = dealer;
+    $scope.game = dealer.game;
+    $scope.hands = dealer.hands;
 
 
     $scope.currentCard = 0;
