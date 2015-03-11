@@ -17,8 +17,8 @@ angular.module('ggcApp')
       'title': 'Home',
       'link': '/'
     },{
-      'title': 'Edit',
-      'link': '/edit'
+      'title': 'Sandbox',
+      'link': '/sandbox'
     },{
       'title': 'Preview',
       'link': '/preview'

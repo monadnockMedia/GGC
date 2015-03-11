@@ -67,7 +67,7 @@ module.exports = function(grunt) {
 							'<%= yeoman.client %>/app/main/main.css':'<%= yeoman.client %>/app/main/main.less','<%= yeoman.client %>/app/app.css':'<%= yeoman.client %>/app/app.less'
 				        }
 				      }
-		
+
 			    },*/
 			less: {
 			    // target name
@@ -81,7 +81,7 @@ module.exports = function(grunt) {
 					expand: true,     // Enable dynamic expansion.
 			          cwd: '<%= yeoman.client %>/app/',      // Src matches are relative to this path.
 			          src: ['**/*.less'], // Actual pattern(s) to match.
-			          dest: '.',   // Destination path prefix.
+			          dest: './',   // Destination path prefix.
 			          ext: '.css',   // Dest filepaths will have this extension.
 			          extDot: 'first'   // Extensions in filenames begin after the first dot
 				},
@@ -94,9 +94,9 @@ module.exports = function(grunt) {
 					},
 					files:{'<%= yeoman.client %>/bower_components/bootstrap/dist/css/bootstrap.css':'<%= yeoman.client %>/bower_components/bootstrap/less/bootstrap.less'}
 				}
-			},	
-			
-			
+			},
+
+
 		watch: {
 			injectJS: {
 				files: ['<%= yeoman.client %>/{app,components}/**/*.js', '!<%= yeoman.client %>/{app,components}/**/*.spec.js', '!<%= yeoman.client %>/{app,components}/**/*.mock.js', '!<%= yeoman.client %>/app/app.js'],
