@@ -1,0 +1,31 @@
+.hexagon{
+  stroke-width: .5px;
+  shape-rendering: crisp-edges;
+  stroke: black;
+  fill: none;
+
+}
+
+.plane{
+  position: absolute;
+
+  -webkit-transform: rotateX(90deg);
+
+}
+
+
+.iconHex{
+  position: absolute;
+  background-color: red;
+}
+
+.gridContainer{
+  -webkit-perspective: 400px;
+  position: relative;
+  -webkit-transform: rotateX();
+
+}
+
+
+
+
