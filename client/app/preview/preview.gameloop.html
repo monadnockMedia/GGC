@@ -1,61 +1,60 @@
 <!--score -->
 <div class = "row">
-	<div class = "col-md-2"><h5>Phase: {{game.phase}}</h5></div>
-	<div class = "col-md-1"><h5>Score: </h5></div>
-	<div class = "col-md-3" ng-repeat="(team, score) in game.score">
-		<div class="well">
-			<h5>{{team | capitalize}}</h5><p>{{score.i}}</p><code>{{score.p | percent}}</code>
-		</div>
-	</div>
+  <div class = "col-md-2"><h5>Phase: {{game.phase}}</h5></div>
+  <div class = "col-md-1"><h5>Score: </h5></div>
+  <div class = "col-md-3" ng-repeat="(team, score) in game.score">
+    <div class="well">
+      <h5>{{team | capitalize}}</h5><p>{{score.i}}</p><code>{{score.p | percent}}</code>
+    </div>
+  </div>
 
 </div>
 
 <!--main area -->
 <hr>
 <div class = "row relative" ng-show="game.main[0]">
-	<div class="col-md-5 col-md-offset-1" ng-repeat = "mainCard in game.main track by $index">
-		<div class = "row">
-			<div class = "col-md-8"><h4 >{{mainCard.action}}</h4></div>
-			<div class = "col-md-3" ng-bind-html="trust(mainCard.icon.icon)" ></div>
-			<div class="col-md-12 well" ng-bind-html="mainCard.mainText"></div>
+  <div class="col-md-5 col-md-offset-1" ng-repeat = "mainCard in game.main track by $index">
+    <div class = "row">
+      <div class = "col-md-8"><h4 >{{mainCard.action}}</h4></div>
+      <div class = "col-md-3" ng-bind-html="trust(mainCard.icon.icon)" ></div>
+      <div class="col-md-12 well" ng-bind-html="mainCard.mainText"></div>
 
-		</div>
-	</div>
+    </div>
+  </div>
 </div>
 
 <hr>
 
 <!--player choice -->
 <div class = "row" ng-show="game.phase == 'choice'" >
-	<div class = "col-md-4"  ng-repeat = "(name, player) in game.players">
-		<div ng-show = "player.currentPlayer">
-			<h4 class = "text-danger">{{name | capitalize}}, Please choose an issue to propose</h4>
-			<div class = "col-md-6" ng-click="dealer.choose($index)" ng-repeat="choice in player.hand.choices track by $index">
-				<h5>{{choice.action}}</h5>
-				<div ng-bind-html="trust(choice.icon.icon)"></div>
-			</div>
-		</div>
-	</div>
+  <div class = "col-md-4"  ng-repeat = "(name, player) in game.players">
+    <div ng-show = "player.currentPlayer">
+      <h4 class = "text-danger">{{name | capitalize}}, Please choose an issue to propose</h4>
+      <div class = "col-md-6" ng-click="dealer.choose($index)" ng-repeat="choice in player.hand.choices track by $index">
+        <h5>{{choice.action}}</h5>
+        <div ng-bind-html="trust(choice.icon.icon)"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
 <!--player vote -->
 <div class = "row" ng-show = "game.phase == 'vote'">
-	<div class = "col-md-4 well"  ng-repeat = "(name, player) in game.players">
+  <div class = "col-md-4 well"  ng-repeat = "(name, player) in game.players">
 
-			<h4 class = "text-danger">{{name | capitalize}}</h4>
-			<div class = "col-md-6" >
-				<h5>{{player.hand.vote.action}}</h5>
-				<div ng-bind-html="trust(player.hand.issue.icon.icon)"></div>
-			</div>
-			<div class = "col-md-6" >
-				<p ng-repeat = "t in player.hand.issue.text">{{t}}</p>
-				<div class="btn-group" role="group" ng-hide = "player.voted" aria-label="...">
-					<a ng-click="dealer.vote(name, 1)" class = "btn btn-primary">yes</a>
-					<a ng-click="dealer.vote(name, 0)" class = "btn btn-danger">no</a>
-				</div>
-			</div>
+    <h4 class = "text-danger">{{name | capitalize}}</h4>
+    <div class = "col-md-6" >
+      <h5>{{player.hand.vote.action}}</h5>
+      <div ng-bind-html="trust(player.hand.issue.icon.icon)"></div>
+    </div>
+    <div class = "col-md-6" >
+      <p ng-repeat = "t in player.hand.issue.text">{{t}}</p>
+      <div class="btn-group" role="group" ng-hide = "player.voted" aria-label="...">
+        <a ng-click="dealer.vote(name, 1)" class = "btn btn-primary">yes</a>
+        <a ng-click="dealer.vote(name, 0)" class = "btn btn-danger">no</a>
+      </div>
+    </div>
 
-	</div>
+  </div>
 </div>
-

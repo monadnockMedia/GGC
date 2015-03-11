@@ -23,6 +23,16 @@ angular.module('ggcApp')
         url: '/game',
          templateUrl: 'app/preview/preview.gameloop.html',
         controller: 'GameLoopCtrl',
+	})
+	.state('preview.screen', {
+        url: '/screen',
+        templateUrl: 'app/preview/preview.screen.html',
+        controller: 'ScreenCtrl',
+	  })
+	.state('preview.test', {
+        url: '/test',
+         templateUrl: 'app/preview/preview.test.html',
+        controller: 'TestCtrl',
       })
 
   });
