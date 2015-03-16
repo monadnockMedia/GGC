@@ -8,12 +8,9 @@ angular.module('ggcApp')
 
 angular.module('ggcApp')
   .controller('GridCtrl', function ($scope, ggcMapper) {
-    $scope.grid = {};
+    ggcUtil.getIcons().then(function (res) {
+      $scope.icons = res.data;
 
-    ggcMapper.buildHexes(16,10,800,500).then(function(d){
-      $scope.grid = ggcMapper.grid;
-      $scope.hexBin = ggcMapper.hexBin;
-      $scope.grid.hexScale = 0.8;
-    })
+    });
 
   });
