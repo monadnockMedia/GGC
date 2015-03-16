@@ -1,17 +1,22 @@
 'use strict';
 
 angular.module('ggcApp')
-  .directive('ggcGrid', function () {
+  .directive('ggcGrid', function (ggcMapper) {
     return {
       template: '<div></div>',
       restrict: 'EA',
       link: function (scope, element, attrs) {
+        scope.grid = {};
 
+        ggcMapper.buildHexes(16,10,800,500).then(function(d){
+          scope.grid = ggcMapper.grid;
+          scope.hexBin = ggcMapper.hexBin;
+          scope.grid.hexScale = 0.8;
+          setupSVG();
+          drawHexes(scope.grid);
+        })
 
-        console.log("DIRR", scope);
-        element.text('this is the ggcGrid directive');
         var container = d3.select(element[0]);
-
         var iconGrid =  container.append("div").attr({
           "class":"iconGrid"
         })
@@ -22,19 +27,20 @@ angular.module('ggcApp')
 
         var hexGroup = svg.append("g").attr("class", "hexes");
 
-        scope.$watch('grid', renderHexes);
-        scope.$watch('SVGAttr', setupSVG);
-
-        function renderHexes(newGrid, oldGrid){
-          if(!svg.attr("width")){
-            svg.attr({
-              width: newGrid.width, height: newGrid.height
-            })
-          }
-          var data = newGrid.hexes;
+        //watch statements
+        scope.$watch('grid', update);
 
 
 
+        //useful functions
+        function setupSVG(){
+          svg.attr({
+            width: scope.grid.width, height: scope.grid.height
+          })
+        }
+
+        function drawHexes(_grid){
+          var data = _grid.hexes;
           hexGroup.selectAll(".hexagon")
             .data(data)
             .enter().append("path")
@@ -46,28 +52,25 @@ angular.module('ggcApp')
           var iconsize = scope.grid.hexRadius;
           var iconoffset = -scope.grid.hexRadius/2;
 
-          container.selectAll(".iconHex")
+          iconGrid.selectAll(".iconHex")
             .data(data)
             .enter().append("div")
             .attr("class","iconHex")
             .style({
 
-              width: iconsize+"px", height: iconsize+"px",
-            "-webkit-transform": "translateZ('-250px')"
+              width: px(iconsize), height: px(iconsize),
+              "left": function(d){return px(d.x+iconoffset)},     "top": function(d){return px(d.y+iconoffset)}
 
 
-            })/*
-            .style({
-              left: function(d){return d.x+iconoffset+"px"},  top: function(d){return d.y+iconoffset+"px"},
-              width: iconsize+"px", height: iconsize+"px"
+            })
+        }
 
-            })*/
-
+        function update(newGrid, oldGrid){
 
         }
 
-        function setupSVG(_config){
-          svg.attr(_config);
+        function px(n){
+          return  n+"px";
         }
 
         function buildClass(d){
