@@ -1,17 +1,15 @@
 .scenario-card {
-	height:400px;
+  height:400px;
   width: 600px;
-	/*border-radius:20px;
+  /*border-radius:20px;
   background-color:rgba(35,103,135,0.15);*/
   background-color:rgba(0,0,0,0.03);
-	color:white;
-	padding:20px;
-	margin:10px;
+  color:white;
+  padding:20px;
+  margin:10px;
   margin-top:375px;
-}
 
-.vote-block {
-  margin-top:70px;
+
 }
 
 .scenario-card h3 {
@@ -57,44 +55,45 @@
 }
 
 body {
-	width:1920px;
-	height:1200px;
-	margin:0;
+  width:1920px;
+  height:1200px;
+  margin:0;
 }
 div#main {
-	postition:relative;
-	width:1920px;
-	height:1200px;
-	background:url("../../bmp/gulfclear.jpg") no-repeat;
+  position:absolute !important;
+  top:0px;
+  width:1920px;
+  height:1200px;
+  background:url("../../bmp/gulfclear.jpg") no-repeat;
 }
 div#perspective_plane_container {
-	position:absolute;
-	-webkit-perspective: 642;
-	width:1920px;
-	height:1200px;
-	top:0px;
+  position:absolute;
+  -webkit-perspective: 642;
+  width:1920px;
+  height:1200px;
+  top:0px;
 }
 div#perspective_plane {
-	position:absolute;
-	/* -webkit-animation: turnin 15s;
-	animation: turnin 5s;*/
-	-webkit-transform: rotateX(15deg);
-	-webkit-transform-style: preserve-3d;
-	z-index:0;
+  position:absolute;
+  /* -webkit-animation: turnin 15s;
+    animation: turnin 5s;*/
+  -webkit-transform: rotateX(15deg);
+  -webkit-transform-style: preserve-3d;
+  z-index:0;
 }
 
 @-webkit-keyframes turnin {
-	from { -webkit-transform: rotateX(0deg); }
-	to { -webkit-transform: rotateX(70deg); }
+  from { -webkit-transform: rotateX(0deg); }
+  to { -webkit-transform: rotateX(70deg); }
 }
 
 
 div#hexMatrix {
-	background:url("../../svg/hex1.svg") 50% 50% / 10% 10% ;
-	width:1920px;
-	height:1200px;
-	opacity:.1;
-	z-index:0;
+  background:url("../../svg/hex1.svg") 50% 50% / 10% 10% ;
+  width:1920px;
+  height:1200px;
+  opacity:.1;
+  z-index:0;
   pointer-events: none;
 
 }
@@ -118,68 +117,68 @@ div.bottomPlane {
 }
 
 div.panelOuterenvironment, div.panelOutereconomy, div.panelOuterenergy {
-	position:absolute;
-	width:375px;
-	height:300px;overflow:hidden;
-	-webkit-transform-style: preserve-3d;
-	z-index:10;
-	/*border:black solid 1px;*/
-	overflow:hidden;
+  position:absolute;
+  width:375px;
+  height:300px;overflow:hidden;
+  -webkit-transform-style: preserve-3d;
+  z-index:10;
+  /*border:black solid 1px;*/
+  overflow:hidden;
 }
 div.panelInnerEnvironment, div.panelInnerEconomy, div.panelInnerEnergy {
-	position:absolute;
-	width:375px;
-	height:350px;
-			/*top:0px;
-	top:220px;*/
+  position:absolute;
+  width:375px;
+  height:350px;
+  /*top:0px;
+top:220px;*/
 
-	top:200px;
+  top:200px;
 
-	-webkit-transform-style: preserve-3d;
-	transition: all .2s  ease-in-out;/**/
+  -webkit-transform-style: preserve-3d;
+  transition: all .2s  ease-in-out;/**/
 }
 div.panelInnerEnvironment.extended, div.panelInnerEconomy.extended, div.panelInnerEnergy.extended {
-		top:0px;
+  top:0px;
 }
 
 div.panelOuterenvironment {
-left: 360px;
-top: 718px;
--webkit-transform: rotateZ(29deg);
+  left: 360px;
+  top: 718px;
+  -webkit-transform: rotateZ(29deg);
 }
 div.panelOutereconomy {
-	left:775px;
-	/*top:800px;*/
-	top:825px;
+  left:775px;
+  /*top:800px;*/
+  top:825px;
 }
 div.panelOuterenergy {
-right: 355px;
-top: 718px;
--webkit-transform: rotateZ(-29deg);
+  right: 355px;
+  top: 718px;
+  -webkit-transform: rotateZ(-29deg);
 }
 
 .colorbar {
-	position:relative;
-	width:330px;
-	height:12px;
-	border-radius:6px;
-	margin:30px auto;
+  position:relative;
+  width:330px;
+  height:12px;
+  border-radius:6px;
+  margin:30px auto;
 }
 
 .colorbar h3 {
-	position: relative;
-	width: 150px;
-	height: 20px;
-	border-radius: 6px;
-	margin: 0 auto;
-	top: -4px;
-	background: #233;
-	text-align: center;
-	font-size: 15px;
-	letter-spacing:.5px;
-	font-stretch: expanded;
-	padding-top:1px;
-	font-family: "232MKSD", Helvetica, Arial, sans-serif;
+  position: relative;
+  width: 150px;
+  height: 20px;
+  border-radius: 6px;
+  margin: 0 auto;
+  top: -4px;
+  background: #233;
+  text-align: center;
+  font-size: 15px;
+  letter-spacing:.5px;
+  font-stretch: expanded;
+  padding-top:1px;
+  font-family: "232MKSD", Helvetica, Arial, sans-serif;
 }
 
 .panelOuterenvironment .colorbar { background:#2fd418; }
@@ -190,17 +189,17 @@ top: 718px;
 .panelOuterenergy h3 { border:#a8aefa solid 1px; color:#a8aefa; }
 
 div#mapA, div#mapB, div#borderscrim {
-	width:1920px;
-	height:1200px;
-	position:absolute;
+  width:1920px;
+  height:1200px;
+  position:absolute;
 }
 div#mapA {
-	background-image: url('../../bmp/currentpop.png');
+  background-image: url('../../bmp/currentpop.png');
 }
 div#borderscrim {
-	background-image: url('../../bmp/borderandscrim.png');
-	z-index:1000;
-	pointer-events:none;
+  background-image: url('../../bmp/borderandscrim.png');
+  z-index:1000;
+  pointer-events:none;
 }
 
 
