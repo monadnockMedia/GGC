@@ -1,17 +1,12 @@
 .hexagon{
-  stroke-width: .5px;
+  stroke-width: 1px;
   shape-rendering: crisp-edges;
   stroke: black;
   fill: none;
 
 }
 
-.plane{
-  position: absolute;
 
-  -webkit-transform: rotateX(90deg);
-
-}
 
 
 .iconHex{
@@ -19,12 +14,6 @@
   background-color: red;
 }
 
-.gridContainer{
-  -webkit-perspective: 400px;
-  position: relative;
-  -webkit-transform: rotateX();
-
-}
 
 
 

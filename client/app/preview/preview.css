@@ -32,10 +32,12 @@
   /*src: url('../fonts/232MKSD_winTT/232MKM__.TTF') format('truetype');  Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
 
-body {
+body {/*
 	width:1920px;
 	height:1200px;
 	margin:0;
+	*/
+  width: 100vw;
 }
 div#main {
 	postition:relative;
@@ -53,7 +55,7 @@ div#perspective_plane_container {
 div#perspective_plane {
 	position:absolute;
 	/* -webkit-animation: turnin 15s;
-	animation: turnin 5s;*/
+	animation: turnin 5s;*/x
 	-webkit-transform: rotateX(15deg);
 	-webkit-transform-style: preserve-3d;
 	z-index:0;

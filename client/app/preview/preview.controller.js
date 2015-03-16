@@ -289,6 +289,20 @@ angular.module('ggcApp')
 /// controller for Icon preview
 angular.module('ggcApp')
   .controller('IconCtrl', function ($scope, $http, hotkeys, ggcUtil) {
+    $scope.preview.currentIcon = 0;
+
+
+      ggcUtil.getIcons().then(function (res) {
+      $scope.preview.icons = res.data;
+        $scope.preview.icon = $scope.preview.icons[$scope.preview.currentIcon];
+        $scope.$watch(function(){return  $scope.preview.currentIcon},function(nI,oI){
+          console.log(nI,oI);
+          $scope.preview.icon = $scope.preview.icons[nI] || $scope.preview.icons[0];
+          console.log($scope.preview.icon);
+
+        });
+      });
+
     hotkeys.bindTo($scope)
       .add({
         combo: 'N',
@@ -299,9 +313,23 @@ angular.module('ggcApp')
         }
 
       })
-    ggcUtil.getIcons().then(function (res) {
-      $scope.preview.icons = res.data;
-    });
+      .add({
+        combo: 'left',
+        description: 'Previous Icon',
+        callback: function () {
+          $scope.preview.currentIcon = ($scope.preview.currentIcon == 0) ? 0 : $scope.preview.currentIcon - 1;
+        }
+      })
+      .add({
+        combo: 'right',
+        description: 'Next Icon',
+        callback: function () {
+          $scope.preview.currentIcon = Math.min($scope.preview.currentIcon + 1, $scope.preview.icons.length - 1);
+        }
+      })
+
+
+
 
   });
 

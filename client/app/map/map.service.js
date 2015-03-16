@@ -34,4 +34,10 @@ angular.module('ggcApp')
       dfd.resolve(grid);
       return dfd.promise;
     }
+
+    this.getIndex = function(r,c){
+      return r + (c*grid.columns);
+    }
+
+
   });
