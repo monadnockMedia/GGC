@@ -1,0 +1,19 @@
+.iconGroup{
+  fill: blue;
+}
+svg{
+  background-color: beige;
+}
+
+.frame{
+  stroke: blue;
+}
+.energy{
+  fill: yellow;
+}
+.environment{
+  fill: green;
+}
+.economy{
+  fill: green;
+}
