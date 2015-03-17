@@ -56,6 +56,8 @@
   /*src: url('../fonts/232MKSD_winTT/232MKM__.TTF') format('truetype');  Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
 
+
+
 body {
 	width:1920px;
 	height:1200px;
@@ -199,7 +201,7 @@ div#mapA {
 }
 div#borderscrim {
 	background-image: url('../../bmp/borderandscrim.png');
-	z-index:1000;
+	z-index:15;
 	pointer-events:none;
 }
 

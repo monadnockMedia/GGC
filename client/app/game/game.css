@@ -202,4 +202,7 @@ div#borderscrim {
   pointer-events:none;
 }
 
-
+score-board {
+  z-index: 20;
+  position:absolute;
+}
