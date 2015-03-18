@@ -15,35 +15,50 @@ app.filter('capitalize', function() {
   }
 });
 
-app.filter('supercap', function() {
-
-  return function(input, scope) {
+app.filter('identify', function() {
+  return function(input) {
     if (input!=null) {
-      var i, j, lowers, uppers;
-      input = this.replace(/([^\W_]+[^\s-]*) */g, function(txt) {
-        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-      });
+      if (input == "environment")
+        return "#environmentPath";
 
-      // Certain minor words should be left lowercase unless
-      // they are the first or last words in the string
-      lowers = ['A', 'An', 'The', 'And', 'But', 'Or', 'For', 'Nor', 'As', 'At',
-        'By', 'For', 'From', 'In', 'Into', 'Near', 'Of', 'On', 'Onto', 'To', 'With'];
-      for (i = 0, j = lowers.length; i < j; i++)
-        input = input.replace(new RegExp('\\s' + lowers[i] + '\\s', 'g'),
-          function(txt) {
-            return txt.toLowerCase();
-          });
+      if (input == "energy")
+        return "#energyPath";
 
-      // Certain words such as initialisms or acronyms should be left uppercase
-      uppers = ['Id', 'Tv'];
-      for (i = 0, j = uppers.length; i < j; i++)
-        input = input.replace(new RegExp('\\b' + uppers[i] + '\\b', 'g'),
-          uppers[i].toUpperCase());
-
-
-      return input;
+      if (input == "economy")
+        return "#economyPath";
     }
-
   }
+});
 
+app.filter('scoreIcons', function() {
+  return function(input, team) {
+    var output = "";
+
+    if (team!=null) {
+      if (team == "environment") {
+        for (var i = 0; i < input; i++) {
+          output += "&#xe103 ";
+        }
+        return output;
+      }
+
+
+      if (team == "energy") {
+        for (var i = 0; i < input; i++) {
+          output += "&#xe162 ";
+        }
+        return output;
+      }
+
+
+      if (team == "economy") {
+        for (var i = 0; i < input; i++) {
+          //output += "&#xe148 ";
+          output += "&#xe225 ";
+        }
+        return output;
+      }
+
+    }
+  }
 });
