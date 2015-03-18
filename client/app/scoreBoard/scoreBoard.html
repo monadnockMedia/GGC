@@ -10,9 +10,9 @@
 	<path fill="none" id="environmentPath" stroke="none" d="M162.573,506.155c51.236-181.837,218.115-333.083,442.396-411.44"/>
 
 
-  <g fill="white">
+  <g>
     <text text-anchor="start" font-size="28" >
-      <textPath ng-bind-html="score.i | scoreIcons:team" ng-repeat="(team, score) in game.score" startOffset="3%"  letter-spacing="-5px" font-family="Glyphicons Halflings"  xlink:href="{{team | identify}}">
+      <textPath ng-bind-html="score.i | scoreIcons:team" ng-repeat="(team, score) in game.score" startOffset="3%"  letter-spacing="-5px" font-family="Glyphicons Halflings" fill="{{team | teamColor:team}}" xlink:href="{{team | identify}}">
 
       </textPath>
 

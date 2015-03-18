@@ -7,9 +7,9 @@
 
       <div ng-show="game.phase == 'choice'">
         <div ng-show = "player.currentPlayer">
-          <h4 style="margin-top:80px; margin-left:75px;" class = "tab-title">Choose an issue to propose.</h4>
+          <h4 class = "tab-title">Choose an issue to propose.</h4>
           <div class = "col-md-6" ng-click="dealer.choose($index)" ng-repeat="choice in player.hand.choices track by $index">
-            <h5 class="tab-body text-right">{{choice.action | capitalize}}</h5>
+            <h5 class="tab-body text-center">{{choice.action | capitalize}}</h5>
             <div style="" class="tab-img" ng-bind-html="trust(choice.icon.icon)"></div>
           </div>
         </div>

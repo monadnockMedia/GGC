@@ -62,3 +62,28 @@ app.filter('scoreIcons', function() {
     }
   }
 });
+
+app.filter('teamColor', function() {
+  return function(input, team) {
+    var output = "";
+
+    if (team!=null) {
+      if (team == "environment") {
+        return "#2fd418";
+      }
+
+
+      if (team == "energy") {
+        return "#4e4efc";
+      }
+
+
+      if (team == "economy") {
+        return "#fca204";
+
+      }
+
+
+    }
+  }
+});
