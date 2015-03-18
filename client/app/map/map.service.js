@@ -39,5 +39,9 @@ angular.module('ggcApp')
       return r + (c*grid.columns);
     }
 
+    this.putIcon = function(i, _id){
+      this.grid.hexes[i].iconId = _id;
+    }
+
 
   });

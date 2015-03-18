@@ -1,3 +1,6 @@
 {
-	"foo":"bar"
+	"foo":"bar",
+  "grid" : {
+    "rows":10, "cols":16
+  }
 }

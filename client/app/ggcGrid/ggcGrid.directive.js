@@ -7,7 +7,7 @@ angular.module('ggcApp')
       link: function (scope, element, attrs) {
         scope.grid = {};
 
-        ggcMapper.buildHexes(16,10,800,500).then(function(d){
+        ggcMapper.buildHexes(scope.config.grid.cols,scope.config.grid.rows,800,500).then(function(d){
           scope.grid = ggcMapper.grid;
           scope.hexBin = ggcMapper.hexBin;
           scope.grid.hexScale = 0.8;
