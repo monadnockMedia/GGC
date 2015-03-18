@@ -19,8 +19,8 @@ angular.module('ggcApp')
         var iconGroup = svg.append("g").attr("class", "iconGroup "+scope.iconClass);
 
         attrs.$observe('iconId', function (value) {
-          console.log("$OBSERVE", value);
-          if (true) {
+          console.log("$OBSERVE",  value.length);
+          if (value.length > 0) {
             iconGroup.selectAll("*").remove();
             scope.trust = ggcUtil.trustSVG;
             ggcUtil.getIcons(value).then(function (res) {

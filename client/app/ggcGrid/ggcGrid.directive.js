@@ -3,7 +3,6 @@
 angular.module('ggcApp')
   .directive('ggcGrid', function (ggcMapper) {
     return {
-      template: '<div></div>',
       restrict: 'EA',
       link: function (scope, element, attrs) {
         scope.grid = {};
@@ -52,7 +51,7 @@ angular.module('ggcApp')
           var iconsize = scope.grid.hexRadius;
           var iconoffset = -scope.grid.hexRadius/2;
 
-          iconGrid.selectAll(".iconHex")
+         /* iconGrid.selectAll(".iconHex")
             .data(data)
             .enter().append("div")
             .attr("class","iconHex")
@@ -62,11 +61,12 @@ angular.module('ggcApp')
               "left": function(d){return px(d.x+iconoffset)},     "top": function(d){return px(d.y+iconoffset)}
 
 
-            })
+            }).append("ggc-icon").attr("icon-id","54de6c38e4046d3846c96a0b").attr("frame","true"); */
+
         }
 
         function update(newGrid, oldGrid){
-
+          console.log("Grid Update");
         }
 
         function px(n){

@@ -7,7 +7,7 @@ angular.module('ggcApp')
 
 
 angular.module('ggcApp')
-  .controller('GridCtrl', function ($scope, ggcMapper) {
+  .controller('GridCtrl', function ($scope, ggcMapper, ggcUtil) {
     ggcUtil.getIcons().then(function (res) {
       $scope.icons = res.data;
 
