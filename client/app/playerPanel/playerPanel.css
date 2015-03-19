@@ -1,6 +1,8 @@
 .tab-title {
   font-family: '232MKB';
   color:white;
+  margin-top:80px;
+  margin-left:75px;
 }
 
 .tab-body {
@@ -10,10 +12,45 @@
   margin-right:10px;
 }
 
+p.tab-body {
+  margin-left:25px;
+  margin-right:25px;
+}
+
 .tab-img {
   height:50%;
   width:50%;
   margin-left:45px;
+}
+
+.vote-buttons {
+  position:absolute;
+  left:40%;
+  top:50%;
+}
+
+.tab-img-vote {
+  height:30%;
+  width:30%;
+  margin-left:30px;
+  margin-right:15px;
+  float:left;
+}
+
+.panelInnerEnvironment, .panelInnerEconomy, .panelInnerEnergy {
+  position:absolute;
+  width:375px;
+  height:350px;
+  /*top:0px;
+top:220px;*/
+
+  top:200px;
+
+  -webkit-transform-style: preserve-3d;
+  transition: all .2s  ease-in-out;/**/
+}
+.panelInnerenvironment .extended, .panelInnereconomy .extended, .panelInnerenergy .extended {
+  top:0px;
 }
 
 @charset "UTF-8";
