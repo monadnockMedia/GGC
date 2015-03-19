@@ -158,7 +158,7 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
     eachPlayer(function(k) {
       var playerEffects = chosenCard.effects[k];
       self.game.players[k].hand.issue = playerEffects;
-      self.game.players[k].docked = false;
+      self.game.players[k].docked = true;
     });
   }
 
