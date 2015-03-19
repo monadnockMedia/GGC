@@ -2,5 +2,9 @@
 	"foo":"bar",
   "grid" : {
     "rows":10, "cols":16
+  },
+  "screen" : {
+    "width":1920,
+    "height":1200
   }
 }
