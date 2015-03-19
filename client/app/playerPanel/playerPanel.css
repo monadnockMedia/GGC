@@ -37,6 +37,22 @@ p.tab-body {
   float:left;
 }
 
+.panelInnerEnvironment, .panelInnerEconomy, .panelInnerEnergy {
+  position:absolute;
+  width:375px;
+  height:350px;
+  /*top:0px;
+top:220px;*/
+
+  top:200px;
+
+  -webkit-transform-style: preserve-3d;
+  transition: all .2s  ease-in-out;/**/
+}
+.panelInnerenvironment .extended, .panelInnereconomy .extended, .panelInnerenergy .extended {
+  top:0px;
+}
+
 @charset "UTF-8";
 
 @font-face {

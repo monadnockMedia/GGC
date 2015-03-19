@@ -164,7 +164,7 @@ div.panelOuterenvironment, div.panelOutereconomy, div.panelOuterenergy {
 	/*border:black solid 1px;*/
 	overflow:hidden;
 }
-div.panelInnerEnvironment, div.panelInnerEconomy, div.panelInnerEnergy {
+.panelInnerEnvironment, .panelInnerEconomy, .panelInnerEnergy {
 	position:absolute;
 	width:375px;
 	height:350px;
@@ -176,7 +176,7 @@ div.panelInnerEnvironment, div.panelInnerEconomy, div.panelInnerEnergy {
 	-webkit-transform-style: preserve-3d;
 	transition: all .2s  ease-in-out;/**/
 }
-div.panelInnerEnvironment.extended, div.panelInnerEconomy.extended, div.panelInnerEnergy.extended {
+.panelInnerenvironment.extended, .panelInnereconomy.extended, .panelInnerenergy.extended {
 		top:0px;
 }
 
@@ -184,18 +184,39 @@ div.panelOuterenvironment {
 left: 360px;
 top: 718px;
 -webkit-transform: rotateZ(29deg);
+  transition: all .2s  ease-in-out;
+}
+div.panelOuterenvironment.retract {
+  left: 260px;
+  top: 888px;
+  -webkit-transform: rotateZ(29deg);
+  transition: all .2s  ease-in-out;
 }
 div.panelOutereconomy {
 	left:775px;
 	/*top:800px;*/
 	top:825px;
+  transition: all .2s  ease-in-out;
 }
-div.panelOuterenergy {
-right: 355px;
-top: 718px;
--webkit-transform: rotateZ(-29deg);
+div.panelOutereconomy.retract {
+  left:775px;
+  /*top:800px;*/
+  top:1020px;
+  transition: all .2s  ease-in-out;
 }
 
+div.panelOuterenergy {
+  right: 355px;
+  top: 718px;
+  -webkit-transform: rotateZ(-29deg);
+  transition: all .2s  ease-in-out;
+}
+div.panelOuterenergy.retract {
+  right: 285px;
+  top: 900px;
+  -webkit-transform: rotateZ(-29deg);
+  transition: all .2s  ease-in-out;
+}
 .colorbar {
 	position:relative;
 	width:330px;
