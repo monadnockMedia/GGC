@@ -194,7 +194,7 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
     phases.vote(i);
   }
 
-  ///each player votes
+  ///called when each player votes
   this.vote = function(p, v) {
     self.game.votes[p] = v;
     self.game.players[p].voted = true;

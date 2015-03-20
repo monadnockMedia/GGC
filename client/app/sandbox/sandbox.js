@@ -12,5 +12,10 @@ angular.module('ggcApp')
         url: '/grid',
         templateUrl: 'app/sandbox/grid.html',
         controller: 'GridCtrl'
+      })
+      .state('sandbox.three', {
+        url: '/three',
+        templateUrl: 'app/sandbox/three.html',
+        controller: 'ThreeCtrl'
       });
   });
