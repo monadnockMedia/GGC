@@ -1,12 +1,16 @@
 'use strict';
-
-angular.module('ggcApp')
+var app = angular.module('ggcApp');
+app
   .controller('SandboxCtrl', function ($scope) {
     $scope.message = 'Hello';
   });
 
+app
+  .controller('ThreeCtrl', function ($scope) {
+    $scope.message = 'Hello';
+  });
 
-angular.module('ggcApp')
+app
   .controller('GridCtrl', function ($scope, ggcMapper, ggcUtil, $interval) {
     var l = 14;
     $scope.clicked = function($ev){

@@ -39,6 +39,10 @@ angular.module('ggcApp')
       return r + (c*grid.columns);
     }
 
+    this.randomIndex = function(){
+      return ~~(Math.random()*this.grid.hexes.length-1);
+    }
+
     this.putIcon = function(i, _id){
       this.grid.hexes[i].iconId = _id;
     }
