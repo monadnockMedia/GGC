@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUtil, $interval) {
+angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUtil, $interval, ggcMapper) {
   // AngularJS will instantiate a singleton by calling "new" on this function
   this.freshDecks;
   this.decks = {};
@@ -111,8 +111,12 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
     });
 
     calculatePercentage();
+    addIcon(chosenCard.icon);
   }
+  function addIcon(icon){
+    ggcMapper.putIcon(ggcMapper.randomIndex(),icon._id)
 
+  }
 ///Phases
   var phases = {};
 
