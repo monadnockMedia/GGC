@@ -12,6 +12,7 @@
   float:left;
   position:relative;
   margin-left:00px;
+  z-index:100;
 }
 
 .scenario-card-1 {
@@ -28,6 +29,7 @@
   float:left;
   position:relative;
   margin-left:-70px;
+  z-index:100;
 }
 
 .vote-block {
@@ -133,12 +135,10 @@ div#perspective_plane {
 }
 
 
-div#hexMatrix {
-	background:url("../../svg/hex1.svg") 50% 50% / 10% 10% ;
-	width:1920px;
-	height:1200px;
-	opacity:.1;
-	z-index:0;
+#hexMatrix {
+
+	opacity:.25;
+	z-index:-500;
   pointer-events: none;
 
 }

@@ -1,7 +1,7 @@
 .hexagon{
   stroke-width: 1px;
   shape-rendering: crisp-edges;
-  stroke: black;
+  stroke: rgba(54, 154, 156, 1);
   fill: none;
 
 }
