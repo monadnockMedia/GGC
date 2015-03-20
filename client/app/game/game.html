@@ -23,7 +23,12 @@
 
   <div id="perspective_plane_container">
     <div id="perspective_plane">
-      <div id="hexMatrix"></div>
+      <div class = "gridContainer relative">
+        <div id="hexMatrix" ggc-grid='true' >
+
+      </div>
+      <ggc-icon-grid ng-click="clicked($event)"></ggc-icon-grid>
+    </div>
 
       <!-- >The Player Panels Go Here<-->
       <div ng-repeat="(name, player) in game.players">

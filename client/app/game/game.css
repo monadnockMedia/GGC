@@ -88,16 +88,6 @@ div#perspective_plane {
 }
 
 
-div#hexMatrix {
-  background:url("../../svg/hex1.svg") 50% 50% / 10% 10% ;
-  width:1920px;
-  height:1200px;
-  opacity:.1;
-  z-index:0;
-  pointer-events: none;
-
-}
-
 div.topPlane, div.bottomPlane {
   position:absolute;
   width:375px;

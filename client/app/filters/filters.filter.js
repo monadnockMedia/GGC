@@ -54,7 +54,7 @@ app.filter('scoreIcons', function() {
       if (team == "economy") {
         for (var i = 0; i < input; i++) {
           //output += "&#xe148 ";
-          output += "&#xe225 ";
+          output += "&#xe148 ";
         }
         return output;
       }
