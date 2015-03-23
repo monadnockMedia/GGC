@@ -5,7 +5,7 @@ angular.module('ggcApp')
     return {
       restrict: 'EA',
       link: function (scope, element, attrs) {
-        scope.grid = {};
+
 
         ggcMapper.buildHexes(scope.config.grid.cols,scope.config.grid.rows,scope.config.screen.width,scope.config.screen.height).then(function(d){
           scope.grid = ggcMapper.grid;
@@ -13,12 +13,29 @@ angular.module('ggcApp')
           scope.grid.hexScale = 0.8;
           setupSVG();
           drawHexes(scope.grid);
-        })
+
+          //watch for icons to be added
+          scope.$watch(
+            function(){return scope.grid.gridIcons;},
+            function(n){
+              if(n.length){
+                var sel = "."+n[n.length-1].iClass;
+
+                var path =  svg.selectAll(sel);
+                svg.selectAll(sel).style({
+                  "fill-opacity": 0, fill: "yellow"
+                }).transition()
+                  .duration(500).style("fill-opacity",1).attr("transform", function(d){return "translate("+d.x+","+d.y+") scale("+1+")"} )
+                  .transition().duration(500).style("fill-opacity",0).attr("transform", function(d){return "translate("+d.x+","+d.y+") scale("+scope.grid.hexScale+")"} );
+              }
+            }, true);
+
+        });
 
         var container = d3.select(element[0]);
         var iconGrid =  container.append("div").attr({
           "class":"iconGrid"
-        })
+        });
 
         var svg = container.append("div")
           .attr("class","plane")
@@ -51,17 +68,6 @@ angular.module('ggcApp')
           var iconsize = scope.grid.hexRadius;
           var iconoffset = -scope.grid.hexRadius/2;
 
-         /* iconGrid.selectAll(".iconHex")
-            .data(data)
-            .enter().append("div")
-            .attr("class","iconHex")
-            .style({
-
-              width: px(iconsize), height: px(iconsize),
-              "left": function(d){return px(d.x+iconoffset)},     "top": function(d){return px(d.y+iconoffset)}
-
-
-            }).append("ggc-icon").attr("icon-id","54de6c38e4046d3846c96a0b").attr("frame","true"); */
 
         }
 
@@ -72,9 +78,9 @@ angular.module('ggcApp')
         function px(n){
           return  n+"px";
         }
-
+        //classname based on row/column
         function buildClass(d){
-          return "hexagon r"+d.i+" c"+d.j;
+          return "hexagon "+ d.iClass;
         }
       }
     };
