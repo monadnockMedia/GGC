@@ -102,20 +102,6 @@ module.exports = function(grunt) {
 				files: ['<%= yeoman.client %>/{app,components}/**/*.js', '!<%= yeoman.client %>/{app,components}/**/*.spec.js', '!<%= yeoman.client %>/{app,components}/**/*.mock.js', '!<%= yeoman.client %>/app/app.js'],
 				tasks: ['injector:scripts']
 			},
-			buildStyles: {
-				files: ['<%= yeoman.client %>/{app,components}/**/*.less','<%= yeoman.client %>/{app,components}/*.less'],
-				tasks: ['less:appStyles'],
-				options:{
-					nospawn: true
-				}
-			},
-			buildBootstrap: {
-				files: ['<%= yeoman.client %>/bower_components/bootstrap/less/*.less'],
-				tasks: ['less:bootstrap'],
-				options:{
-					nospawn: true
-				}
-			},
 			injectCss: {
 				files: ['<%= yeoman.client %>/{app,components}/**/{*.css,*.less}','<%= yeoman.client %>/bower_components/bootstrap/less/*.less'],
 				tasks: ['injector:css']
