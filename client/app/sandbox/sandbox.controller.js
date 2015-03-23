@@ -15,8 +15,7 @@ app
     var l = 14;
     $scope.clicked = function($ev){
       var icon = $scope.icons[~~(Math.random() * 10)];
-      var i = $ev.target.attributes["grid-index"].value;
-      ggcMapper.putIcon(i, icon._id);
+      ggcMapper.putIcon(ggcMapper.randomIndex(), icon._id);
     };
     ggcUtil.getIcons().then(function (res) {
       $scope.icons = res.data;
