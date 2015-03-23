@@ -36,7 +36,7 @@ angular.module('ggcApp').directive(
           var width = 2*(radius*0.866);
           var cx = ~~(hex.x);
           var cy = ~~(hex.y);
-          clone.addClass("iconWrap absolute");
+          clone.addClass("iconWrap absolute "+hex.iClass);
           clone.css({
             left:cx - width/2, top: cy - height/2, width: width, height:height
           });
