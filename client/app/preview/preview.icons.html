@@ -2,9 +2,11 @@
 			<div class = "col-md-6"><h3>Icons:</h3></div>
 </div>
 <div class = "row relative">
-
+  <div  class = "col-md-4" ng-bind-html="trust(preview.icon.icon)">
+    </div>
   <div  class = "col-md-4">
     <ggc-icon frame="true" icon-class="environment" icon-id="{{preview.icon._id}}"></ggc-icon>
+    {{preview.icon.action}}
   </div>
   <div  class = "col-md-2">
     <ggc-icon  icon-class="energy" icon-id="{{preview.icon._id}}"></ggc-icon>

@@ -1,12 +1,27 @@
-.frame{
-  stroke: blue;
+.frame {
+  fill: none;
+  stroke: #049591;
+  stroke-width: 8px;
+  /*&.environment{
+    stroke: @environment-color;
+  }
+  &.economy{
+    stroke: @economy-color;
+  }
+  &.energy{
+    stroke: @energy-color;
+  }*/
 }
-.energy{
-  fill: yellow;
+.iconGroup {
+  fill: #e2edeb;
+  stroke: #c3d9d5;
 }
-.environment{
-  fill: green;
+.iconGroup.energy {
+  fill: #4e4efc;
 }
-.economy{
-  fill: green;
+.iconGroup.environment {
+  fill: #2fd418;
+}
+.iconGroup.economy {
+  fill: #fca204;
 }
