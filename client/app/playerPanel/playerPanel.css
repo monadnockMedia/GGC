@@ -15,6 +15,7 @@
 p.tab-body {
   margin-left:25px;
   margin-right:25px;
+  font-size:12px;
 }
 
 .tab-img {
@@ -23,10 +24,30 @@ p.tab-body {
   margin-left:45px;
 }
 
+.btn-icon {
+  background:url("../../svg/buttonOL.svg") 50% 50% no-repeat;
+  width:100px;
+  height:50px;
+  padding:35px;
+  margin:10px;
+}
+
+.btn-icon.economy {
+   color: #fca204;
+ }
+
+.btn-icon.energy {
+  color: #5a94fc;
+}
+
+.btn-icon.environment {
+  color: #2fd418;
+}
+
 .vote-buttons {
   position:absolute;
-  left:40%;
-  top:50%;
+  left:15%;
+  top:47%;
 }
 
 .tab-img-vote {

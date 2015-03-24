@@ -1,15 +1,35 @@
-.scenario-card {
-  height:400px;
-  width: 600px;
-  /*border-radius:20px;
-  background-color:rgba(35,103,135,0.15);*/
-  background-color:rgba(0,0,0,0.03);
+.scenario-card-0 {
+  height:250px;
+  width: 550px;
+  border-radius:20px;
+  background-color:rgba(0,0,0,0.25);
   color:white;
   padding:20px;
   margin:10px;
-  margin-top:375px;
+  margin-top:315px;
+  transform: perspective(1000px) rotateY(25deg);
+  transform-style: preserve-3d;
+  float:left;
+  position:relative;
+  margin-left:00px;
+  z-index:100;
+}
 
-
+.scenario-card-1 {
+  height:250px;
+  width: 550px;
+  border-radius:20px;
+  background-color:rgba(0,0,0,0.25);
+  color:white;
+  padding:20px;
+  margin:10px;
+  margin-top:315px;
+  transform: perspective(1000px) rotateY(-25deg);
+  transform-style: preserve-3d;
+  float:left;
+  position:relative;
+  margin-left:-70px;
+  z-index:100;
 }
 
 .scenario-card h3 {
@@ -56,21 +76,21 @@
 
 body {
   width:1920px;
-  height:1200px;
+  height:1080px;
   margin:0;
 }
 div#main {
   position:absolute !important;
   top:0px;
   width:1920px;
-  height:1200px;
-  background:url("../../bmp/gulfclear.jpg") no-repeat;
+  height:1080px;
+  background:url("../../bmp/gulfbrown.jpg") no-repeat;
 }
 div#perspective_plane_container {
   position:absolute;
   -webkit-perspective: 642;
   width:1920px;
-  height:1200px;
+  height:1080px;
   top:0px;
 }
 div#perspective_plane {
@@ -96,60 +116,82 @@ div.topPlane, div.bottomPlane {
 }
 div.topPlane {
   /*border:white solid 1px;*/
-  background:url("../../svg/paneltopA9.svg") 50% 0%  no-repeat;
+  background:url("../../svg/paneltop_n.svg") 50% 0%  no-repeat;
   -webkit-transform: translateZ(25px); /* Chrome, Safari, Opera */
 }
 
 div.bottomPlane {
   /*border:blue solid 1px;*/
-  background:url("../../svg/panelbottom3.svg") 50% 0%    no-repeat;
+  background:url("../../svg/panelbottom_n.svg") 50% 0%    no-repeat;
   -webkit-transform: translateZ(10px); /* Chrome, Safari, Opera */
 }
 
 div.panelOuterenvironment, div.panelOutereconomy, div.panelOuterenergy {
   position:absolute;
   width:375px;
-  height:300px;overflow:hidden;
+  height:300px;
+  overflow:hidden;
   -webkit-transform-style: preserve-3d;
   z-index:10;
-  /*border:black solid 1px;*/
   overflow:hidden;
+  transition: all .2s  ease-in-out;
+
 }
 div.panelInnerEnvironment, div.panelInnerEconomy, div.panelInnerEnergy {
   position:absolute;
   width:375px;
   height:350px;
-  /*top:0px;
-top:220px;*/
-
-  top:200px;
-
   -webkit-transform-style: preserve-3d;
-  transition: all .2s  ease-in-out;/**/
-}
-div.panelInnerEnvironment.extended, div.panelInnerEconomy.extended, div.panelInnerEnergy.extended {
-  top:0px;
+  transition: all .2s  ease-in-out;
 }
 
-div.panelOuterenvironment {
-  left: 360px;
-  top: 718px;
+.panelOuterenvironment.retract {
+  left: 300px;
+  top: 810px;
   -webkit-transform: rotateZ(29deg);
+  transition: all .2s  ease-in-out;
 }
 div.panelOutereconomy {
   left:775px;
   /*top:800px;*/
   top:825px;
+  transition: all .2s  ease-in-out;
+}
+.panelOutereconomy.retract {
+  left:775px;
+  /*top:800px;*/
+  top:930px;
+  transition: all .2s  ease-in-out;
+}
+
+.panelOuterenergy.retract {
+  right: 310px;
+  top: 815px;
+  -webkit-transform: rotateZ(-29deg);
+  transition: all .2s  ease-in-out;
+}
+
+div.panelOuterenvironment {
+  left: 400px;
+  top: 640px;
+  -webkit-transform: rotateZ(29deg);
+  transition: all .2s  ease-in-out;
+}
+div.panelOutereconomy {
+  left: 775px;
+  top: 733px;
+  transition: all .2s  ease-in-out;
 }
 div.panelOuterenergy {
-  right: 355px;
-  top: 718px;
+  right: 395px;
+  top: 635px;
   -webkit-transform: rotateZ(-29deg);
+  transition: all .2s  ease-in-out;
 }
 
 .colorbar {
   position:relative;
-  width:330px;
+  width:300px;
   height:12px;
   border-radius:6px;
   margin:30px auto;
@@ -171,6 +213,10 @@ div.panelOuterenergy {
   font-family: "232MKSD", Helvetica, Arial, sans-serif;
 }
 
+.hexGrid {
+  opacity:0.45;
+}
+
 .panelOuterenvironment .colorbar { background:#2fd418; }
 .panelOutereconomy .colorbar { background:#fca204; }
 .panelOuterenergy .colorbar { background:#4e4efc; }
@@ -180,7 +226,7 @@ div.panelOuterenergy {
 
 div#mapA, div#mapB, div#borderscrim {
   width:1920px;
-  height:1200px;
+  height:1080px;
   position:absolute;
 }
 div#mapA {
@@ -188,7 +234,7 @@ div#mapA {
 }
 div#borderscrim {
   background-image: url('../../bmp/borderandscrim.png');
-  z-index:1000;
+  z-index:8;
   pointer-events:none;
 }
 

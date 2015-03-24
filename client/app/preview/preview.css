@@ -1,36 +1,4 @@
-.scenario-card-0 {
-	height:250px;
-  width: 550px;
-	border-radius:20px;
-  background-color:rgba(0,0,0,0.25);
-	color:white;
-	padding:20px;
-	margin:10px;
-  margin-top:375px;
-  transform: perspective(1000px) rotateY(25deg);
-  transform-style: preserve-3d;
-  float:left;
-  position:relative;
-  margin-left:00px;
-  z-index:100;
-}
 
-.scenario-card-1 {
-  height:250px;
-  width: 550px;
-  border-radius:20px;
-  background-color:rgba(0,0,0,0.25);
-  color:white;
-  padding:20px;
-  margin:10px;
-  margin-top:375px;
-  transform: perspective(1000px) rotateY(-25deg);
-  transform-style: preserve-3d;
-  float:left;
-  position:relative;
-  margin-left:-70px;
-  z-index:100;
-}
 
 .vote-block {
   margin-top:70px;
@@ -80,14 +48,11 @@
   /*src: url('../fonts/232MKSD_winTT/232MKM__.TTF') format('truetype');  Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
 
-<<<<<<< HEAD
-body {/*
-=======
 @font-face {
   font-family: 'Icons';
   src: url('../../assets/fonts/open-iconic.svg#Icons') format('svg'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
   /*src: url('../fonts/232MKSD_winTT/232MKM__.TTF') format('truetype');  Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-}
+
 
 @font-face {
   font-family: 'symbolsttf';
@@ -100,24 +65,21 @@ body {/*
 }
 
 body {
->>>>>>> Ray's-Branch
 	width:1920px;
-	height:1200px;
+	height:1080px;
 	margin:0;
-	*/
-  width: 100vw;
 }
 div#main {
 	postition:relative;
 	width:1920px;
-	height:1200px;
+	height:10800px;
 	background:url("../../bmp/gulfclear.jpg") no-repeat;
 }
 div#perspective_plane_container {
 	position:absolute;
 	-webkit-perspective: 642;
 	width:1920px;
-	height:1200px;
+	height:1080px;
 	top:0px;
 }
 div#perspective_plane {
@@ -136,12 +98,13 @@ div#perspective_plane {
 
 
 #hexMatrix {
-
-	opacity:.25;
+	opacity:0.25;
 	z-index:-500;
   pointer-events: none;
 
 }
+
+
 
 div.topPlane, div.bottomPlane {
   position:absolute;
@@ -192,24 +155,14 @@ top: 718px;
 -webkit-transform: rotateZ(29deg);
   transition: all .2s  ease-in-out;
 }
-div.panelOuterenvironment.retract {
-  left: 260px;
-  top: 888px;
-  -webkit-transform: rotateZ(29deg);
-  transition: all .2s  ease-in-out;
-}
+
 div.panelOutereconomy {
 	left:775px;
 	/*top:800px;*/
 	top:825px;
   transition: all .2s  ease-in-out;
 }
-div.panelOutereconomy.retract {
-  left:775px;
-  /*top:800px;*/
-  top:1020px;
-  transition: all .2s  ease-in-out;
-}
+
 
 div.panelOuterenergy {
   right: 355px;
@@ -217,12 +170,7 @@ div.panelOuterenergy {
   -webkit-transform: rotateZ(-29deg);
   transition: all .2s  ease-in-out;
 }
-div.panelOuterenergy.retract {
-  right: 285px;
-  top: 900px;
-  -webkit-transform: rotateZ(-29deg);
-  transition: all .2s  ease-in-out;
-}
+
 .colorbar {
 	position:relative;
 	width:330px;
@@ -256,7 +204,7 @@ div.panelOuterenergy.retract {
 
 div#mapA, div#mapB, div#borderscrim {
 	width:1920px;
-	height:1200px;
+	height:1080px;
 	position:absolute;
 }
 div#mapA {
