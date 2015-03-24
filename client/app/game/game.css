@@ -230,7 +230,7 @@ div#mapA, div#mapB, div#borderscrim {
   position:absolute;
 }
 div#mapA {
-  background-image: url('../../bmp/currentpop.png');
+  background-image: url('../../bmp/overpop.png');
 }
 div#borderscrim {
   background-image: url('../../bmp/borderandscrim.png');

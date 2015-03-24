@@ -7,9 +7,9 @@
 
       <div ng-show="game.phase == 'choice'">
         <div ng-show = "player.currentPlayer">
-          <h4 class = "tab-title">Choose an issue to propose.</h4>
+          <h4 class = "tab-title" >CHOOSE AN ACTION</h4>
           <div class="col-md-6" ng-click="dealer.choose($index)" ng-repeat="choice in player.hand.choices track by $index">
-            <h5 class="tab-body text-center">{{choice.action | capitalize}}</h5>
+            <!--h5 class="tab-body text-center">{{choice.action | capitalize}}</h5-->
             <div style="" class="tab-img" ng-bind-html="trust(choice.icon.icon)"></div>
           </div>
         </div>
@@ -17,7 +17,7 @@
 
       <div ng-show = "game.phase == 'vote'" class="vote-block">
         <h5>{{player.hand.vote.action}}</h5>
-        <div class="tab-img-vote" ng-bind-html="trust(player.hand.issue.icon.icon)"></div>
+        <!--div class="tab-img-vote" ng-bind-html="trust(player.hand.issue.icon.icon)"></div-->
         <h6 class="tab-body" ng-repeat = "t in player.hand.issue.text">{{t}}</h6>
 
       </div>

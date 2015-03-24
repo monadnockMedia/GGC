@@ -1,15 +1,15 @@
 .tab-title {
   font-family: '232MKB';
-  color:white;
+  color: #04d1cd !important;
   margin-top:80px;
-  margin-left:75px;
+  margin-left:110px;
 }
 
 .tab-body {
   font-family: '232MKUL';
   color:white;
-  margin-left:20px;
-  margin-right:20px;
+  margin-left:50px;
+  margin-right:50px;
 }
 
 p.tab-body {
@@ -21,6 +21,7 @@ p.tab-body {
   height:50%;
   width:50%;
   margin-left:45px;
+  margin-top:25px;
 }
 
 .btn-icon {
