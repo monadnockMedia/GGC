@@ -8,14 +8,13 @@
 .tab-body {
   font-family: '232MKUL';
   color:white;
-  margin-left:10px;
-  margin-right:10px;
+  margin-left:20px;
+  margin-right:20px;
 }
 
 p.tab-body {
   margin-left:25px;
   margin-right:25px;
-  font-size:12px;
 }
 
 .tab-img {
@@ -28,7 +27,7 @@ p.tab-body {
   background:url("../../svg/buttonOL.svg") 50% 50% no-repeat;
   width:100px;
   height:50px;
-  padding:35px;
+  padding:25px;
   margin:10px;
 }
 

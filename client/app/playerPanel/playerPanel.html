@@ -18,7 +18,7 @@
       <div ng-show = "game.phase == 'vote'" class="vote-block">
         <h5>{{player.hand.vote.action}}</h5>
         <div class="tab-img-vote" ng-bind-html="trust(player.hand.issue.icon.icon)"></div>
-        <p class="tab-body" ng-repeat = "t in player.hand.issue.text">{{t}}</p>
+        <h6 class="tab-body" ng-repeat = "t in player.hand.issue.text">{{t}}</h6>
 
       </div>
 
