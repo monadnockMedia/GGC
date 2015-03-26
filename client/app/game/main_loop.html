@@ -1,0 +1,12 @@
+<!-- >The MAIN (Center) Cards Go Here<-->
+<div class="row">
+  <div id="box-wrap-inner">
+    <div style="" class="scenario-card-{{$index}} text-left" ng-repeat = "mainCard in game.main track by $index">
+      <div>
+        <div class="scenario-icon" ng-bind-html="trust(mainCard.icon.icon)"></div>
+        <h3>{{mainCard.action | capitalize}}</h3>
+      </div>
+      <div style="font-size:1.25em;" ng-bind-html="mainCard.mainText"></div>
+    </div>
+  </div>
+</div>

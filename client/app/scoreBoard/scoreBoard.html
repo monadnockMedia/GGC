@@ -1,18 +1,21 @@
 
 
-<div style="margin-top:15px; margin-left:15px;  pointer-events: none;">
+<div style="  pointer-events: none;">
 
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="1920px" height="1200px" viewBox="0 0 1920 1200" enable-background="new 0 0 1920 1200" xml:space="preserve">
-	<path fill="none" id="energyPath" stroke="none" d="M1311.139,96.628c222.659,79.287,387.805,230.671,437.731,412.249"/>
-	<path fill="none" id="economyPath" stroke="none" d="M624.771,88.036c100.929-32.846,212.813-51.113,330.572-51.113
-	c120.58,0,235,19.153,337.807,53.499"/>
-	<path fill="none" id="environmentPath" stroke="none" d="M162.573,506.155c51.236-181.837,218.115-333.083,442.396-411.44"/>
+
+<svg
+	 width="1920px" height="1080px"  xml:space="preserve">
+	<path fill="none"  id="energyPath" stroke="none" d="M246.333,457.668c0,0,54.667-154,155.333-241.333
+	s238-137.333,238-137.333"/>
+	<path fill="none" id="economyPath" stroke="none" d="M1277.863,78.908c0,0,137.333,50,238,137.333
+	c100.666,87.333,155.333,241.333,155.333,241.33"/>
+	<path fill="none" id="environmentPath" stroke="none" d="M655,73.669c0,0,138.67-47.126,305-47.126
+	c176.337,0,301.667,47.126,301.667,47.126"/>
 
 
   <g>
-    <text text-anchor="start" font-size="28" >
-      <textPath ng-bind-html="score.i | scoreIcons:team" ng-repeat="(team, score) in game.score" startOffset="3%"  letter-spacing="-5px" font-family="Glyphicons Halflings" fill="{{team | teamColor:team}}" id="{{team | identify}}" xlink:href="{{team | identify}}">
+    <text text-anchor="start" font-size="24" >
+      <textPath baseline-shift="-50%" ng-bind-html="score.i | scoreIcons:team" ng-repeat="(team, score) in game.score" startOffset="3%"  letter-spacing="-5px" font-family="Glyphicons Halflings" fill="{{team | teamColor:team}}" id="{{team | identify}}" xlink:href="{{team | identify}}">
 
       </textPath>
     </text>

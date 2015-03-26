@@ -217,12 +217,7 @@ div.panelOuterenergy {
   opacity:0.45;
 }
 
-.panelOuterenvironment .colorbar { background:#2fd418; }
-.panelOutereconomy .colorbar { background:#fca204; }
-.panelOuterenergy .colorbar { background:#4e4efc; }
-.panelOuterenvironment h3 { border:#c8e893 solid 1px; color:#c8e893; text-shadow: 0 0 3px #c8e893; }
-.panelOutereconomy h3 { border:#fbcd6d solid 1px; color:#fbcd6d; }
-.panelOuterenergy h3 { border:#a8aefa solid 1px; color:#a8aefa; }
+
 
 div#mapA, div#mapB, div#borderscrim {
   width:1920px;

@@ -1,7 +1,7 @@
 .frame {
   fill: none;
   stroke: #049591;
-  stroke-width: 8px;
+  stroke-width: 4px;
   /*&.environment{
     stroke: @environment-color;
   }
@@ -13,8 +13,8 @@
   }*/
 }
 .iconGroup {
-  fill: #e2edeb;
-  stroke: #c3d9d5;
+  fill: #46dada;
+  stroke: #28c5c5;
 }
 .iconGroup.energy {
   fill: #4e4efc;
