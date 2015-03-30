@@ -21,5 +21,11 @@ angular.module('ggcApp')
         views: {
           "main@game": {templateUrl: 'app/game/main_loop.html'}
         }
+      })
+      .state('game.play.prologue', {
+        url: '/prologue',
+        views: {
+          "main@game": {templateUrl: 'app/game/prologue.html'}
+        }
       });
   })

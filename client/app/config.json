@@ -1,7 +1,7 @@
 {
-	"foo":"bar",
+	"debug":true,
   "grid" : {
-    "rows":15, "cols":20, "debug":true
+    "rows":15, "cols":20
   },
   "screen" : {
     "width":1920,
