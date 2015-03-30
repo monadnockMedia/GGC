@@ -1,11 +1,11 @@
 {
 	"foo":"bar",
   "grid" : {
-    "rows":10, "cols":16
+    "rows":15, "cols":20, "debug":true
   },
   "screen" : {
     "width":1920,
-    "height":1200
+    "height":1080
   },
   "scene" : {
     "width": 400,
