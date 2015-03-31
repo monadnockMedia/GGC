@@ -155,10 +155,10 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
 
   phases.vote = function( i ) {
     self.game.phase = "vote";
-
-    console.log("PHASE VOTE");
     chosenCard = currentCards[i];
-    self.game.main = [];
+
+    self.game.main = [chosenCard];
+
     eachPlayer(function(k) {
       var playerEffects = chosenCard.effects[k];
       self.game.players[k].hand.issue = playerEffects;
