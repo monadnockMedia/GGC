@@ -39,17 +39,20 @@ var CardSchema = new Schema({
 });
 
 CardSchema.set('toObject', {transform:  function(d,r,o){
+
+    //get icon class for player details on vote cards
     function getIcon(score){
       var ic = (score == 0) ? "fa-circle-o" : (score > 0) ? "fa-plus" : "fa-minus" ;
       return "<i class = 'fa " + ic + "'></i> ";
     }
+
 		var effects = d.effects;
 		var keys = Object.keys(effects.toObject());
 		r.icon = d.icons;
 
+
 		keys.forEach(function(k){
 			var e = effects[k].toObject();
-
 			e.action = d.action;
 			delete r.icons;
 			e.icon = d.icons;
@@ -67,7 +70,7 @@ var Card;
 var modelName = 'Card';
 
 
-  Card = mongoose.model(modelName, CardSchema);
+Card = mongoose.model(modelName, CardSchema);
 
 
 
