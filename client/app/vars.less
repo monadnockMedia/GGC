@@ -2,6 +2,7 @@
 @environment-color: #2fd418;
 @energy-color: #4e4efc;
 @light-blue: #E2EDEB;
+//@light-blue: #46dada;
 @teal:#049591;
 
 
@@ -23,7 +24,25 @@
 }
 
 
+.text-environment{
+  color: @environment-color;
+}
 
+.text-energy{
+  color: @energy-color;
+}
+.text-economy{
+  color:@economy-color;
+}
+
+
+.bg-energy{.bgcolor(@energy-color)};
+.bg-environment{.bgcolor(@environment-color)};
+.bg-economy{.bgcolor(@economy-color)};
+
+.bgcolor(@color){
+  background-color: desaturate(@color,20);
+}
 
 .euro-med{
   font-family: 'eurostile-medium';
@@ -39,4 +58,13 @@
 
 .232MKSD{
       font-family: '232MKSD';
+}
+
+
+//mixins
+
+#textShadow{
+  &.panel{
+    text-shadow: 0 0 10px fade(white,90), -2px 4px 4px black;
+  }
 }

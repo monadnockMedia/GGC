@@ -55,6 +55,13 @@ angular.module('ggcApp')
 	      alert("Alert");
 	    }
 	  });
+    hotkeys.add({
+      combo: 'D',
+      description: 'Debug Mode',
+      callback: function() {
+        $scope.debug = true;
+      }
+    });
 
 
 

@@ -1,7 +1,7 @@
 .frame {
   fill: none;
   stroke: #049591;
-  stroke-width: 8px;
+  stroke-width: 4px;
   /*&.environment{
     stroke: @environment-color;
   }

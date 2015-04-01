@@ -25,8 +25,8 @@ angular.module('ggcApp')
                 svg.selectAll(sel).style({
                   "fill-opacity": 0, fill: "yellow"
                 }).transition()
-                  .duration(500).style("fill-opacity",1).attr("transform", function(d){return "translate("+d.x+","+d.y+") scale("+1+")"} )
-                  .transition().duration(500).style("fill-opacity",0).attr("transform", function(d){return "translate("+d.x+","+d.y+") scale("+scope.grid.hexScale+")"} );
+                  .duration(500).style("fill-opacity",1).attr("transform", function(d){return "scale("+1+")"} )
+                  .transition().duration(500).style("fill-opacity",0).attr("transform", function(d){return "scale("+scope.grid.hexScale+")"} );
               }
             }, true);
 
@@ -57,16 +57,18 @@ angular.module('ggcApp')
 
         function drawHexes(_grid){
           var data = _grid.hexes;
-          hexGroup.selectAll(".hexagon")
-            .data(data)
-            .enter().append("path")
+          var hexes = hexGroup.selectAll("g").data(data).enter().append("g")
+            .attr("transform", function(d){return "translate("+d.x+","+d.y+")"} )
+          hexes
+           .append("path")
             .attr("d", function (d) {return   scope.hexBin.hexagon()})
-            .attr("transform", function(d){return "translate("+d.x+","+d.y+") scale("+scope.grid.hexScale+")"} )
+            .attr("transform", function(d){return "scale("+scope.grid.hexScale+")"} )
             .attr("stroke-width", "1px")
             .attr("class", buildClass)
 
-          var iconsize = scope.grid.hexRadius;
-          var iconoffset = -scope.grid.hexRadius/2;
+         if(scope.config.debug){
+           hexes.append("text").text(function(d){return d.i+","+d.j}).attr("stroke","white").attr("text-anchor","middle");
+         }
 
 
         }
