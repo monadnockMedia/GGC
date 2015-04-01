@@ -9,7 +9,7 @@
         <div ng-show = "player.currentPlayer">
 
           <h4 class = "tab-title text-center">Choose an Action</h4>
-          <div class="col-md-6" ng-click="dealer.choose($index)" ng-repeat="choice in player.hand.choices track by $index">
+          <div class="col-md-6" ng-click="dealer.playerChoice(name,$index)" ng-repeat="choice in player.hand.choices track by $index">
 
             <!--div style="" class="tab-img" ng-bind-html="trust(choice.icon.icon)"></div -->
             <div ggc-icon  icon-class="{{name}}" frame="true" icon-id="{{choice.icon._id}}"></div>
@@ -29,8 +29,8 @@
 
       <div ng-show = "game.phase == 'vote'" class="vote-buttons">
         <div class="btn-group" role="group" ng-hide = "player.voted" aria-label="...">
-          <a ng-click="dealer.vote(name, 1)" class = "btn-icon {{name}}" >PASS</a>
-          <a ng-click="dealer.vote(name, 0)" class = "btn-icon {{name}}" >BLOCK</a>
+          <a ng-click="dealer.playerChoice(name, 1)" class = "btn-icon {{name}}" >PASS</a>
+          <a ng-click="dealer.playerChoice(name, 0)" class = "btn-icon {{name}}" >BLOCK</a>
         </div>
       </div>
 

@@ -1,5 +1,5 @@
 {
-	"debug":true,
+	"debug":false,
   "grid" : {
     "rows":15, "cols":20
   },
