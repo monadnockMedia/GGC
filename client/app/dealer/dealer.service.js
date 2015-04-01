@@ -195,14 +195,17 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
   ///currentPlayer Chooses an issue
   this.choose = function(p, i) {
     //set "chosen" on players choice card to true
-    self.game.players[self.game.currentPlayer].hand.choices[i].chosen = true;
-    chosenCard = currentCards[i];
+    if(p == self.game.currentPlayer){
+      self.game.players[self.game.currentPlayer].hand.choices[i].chosen = true;
+      chosenCard = currentCards[i];
 
 
-    self.game.main[+!Boolean(i)].hidden = true;
-    self.game.main[i].chosen = true;
+      self.game.main[+!Boolean(i)].hidden = true;
+      self.game.main[i].chosen = true;
 
-    phases.vote(i);
+      phases.vote(i);
+    }
+
   }
 
   ///called when each player votes
