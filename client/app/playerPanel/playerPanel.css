@@ -101,14 +101,14 @@ top:220px;*/
 @font-face {
   font-family: '232MKB';
   src: url('../../assets/fonts/232MKSD_winTT/232MKB__.TTF') format('truetype');
-  
+
   /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
   /*src: url('../fonts/232MKSD_winTT/232MKM__.TTF') format('truetype');  Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
 @font-face {
   font-family: '232MKUL';
   src: url('../../assets/fonts/232MKSD_winTT/232MKUL_.TTF') format('truetype');
-  
+
   /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
   /*src: url('../fonts/232MKSD_winTT/232MKM__.TTF') format('truetype');  Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
