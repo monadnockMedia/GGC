@@ -1,12 +1,8 @@
 @charset "UTF-8";
+@import (reference) "../vars.less";
+
 .scenario-icon {
-  width: 30%;
-  height: 100%;
-  float: left;
-  margin-right: 0%;
-  margin-left: 5%;
-  margin-top:8%;
-  z-index:20;
+
 }
 /*TODO(Ryan) explain these changes, make flex-box-y mixin*/
 #box-wrap-inner {
@@ -21,6 +17,11 @@
   -webkit-align-items: center;
   z-index:20;
 }
+
+.scenario-header {
+  #textShadow.panel;
+}
+
 .scenario-card {
   -webkit-transition: 1s all;
   -webkit-flex: auto;
@@ -221,6 +222,16 @@ div.panelOuterenergy {
   opacity: 0.1;
   z-index:-2;
 }
+
+.full-height {
+  height:100%;
+}
+
+.main-row {
+  .full-height;
+  #flex.vertical-center;
+}
+
 div#mapA,
 div#mapB,
 div#borderscrim {
