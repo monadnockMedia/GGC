@@ -156,7 +156,7 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
     self.game.phase = "vote";
 
 
-    self.game.main = [chosenCard];
+
 
     eachPlayer(function(k) {
       var playerEffects = chosenCard.effects[k];
@@ -197,6 +197,11 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
     //set "chosen" on players choice card to true
     self.game.players[self.game.currentPlayer].hand.choices[i].chosen = true;
     chosenCard = currentCards[i];
+
+
+    self.game.main[+!Boolean(i)].hidden = true;
+    self.game.main[i].chosen = true;
+
     phases.vote(i);
   }
 
@@ -214,7 +219,7 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
         ct+=self.game.votes[keys[i]];
       }
       var passed = (ct>=2);
-      debugger;
+
       console.log(
         (passed) ? "PASSED" : "FAILED", ct
       );

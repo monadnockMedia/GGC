@@ -37,18 +37,34 @@
   transform-style: preserve-3d;
   margin-left: 0;
 
-  z-index:20;
+  &.invisible{
+    opacity: 0;
+  }
 }
 .scenario-card:nth-of-type(1) {
+
   transform: perspective(1000px) rotateY(25deg) translate(50px);
   /*use translate or margin, not both*/
+  &.invisible {
+    transform: perspective(1000px) rotateY(-90deg) translate(-550px);
+  }
+  &.chosen {
+    transform: perspective(1000px) rotateY(0deg) translate(275px);
+  }
 }
 .scenario-card:nth-of-type(2) {
   transform: perspective(1000px) rotateY(-25deg) translate(-50px);
+  &.invisible {
+    transform: perspective(1000px) rotateY(90deg) translate(550px);
+  }
+  &.chosen {
+    transform: perspective(1000px) rotateY(0deg) translate(-275px);
+  }
 }
-.scenario-card:only-of-type {
-  transform: perspective(1000px) rotateY(0deg) translate(0px);
-}
+
+
+
+
 @font-face {
   font-family: '232MKB';
   src: url('../../assets/fonts/232MKSD_winTT/232MKB__.TTF') format('truetype');

@@ -33,17 +33,28 @@
   margin: 10px;
   transform-style: preserve-3d;
   margin-left: 0;
-  z-index: 20;
+}
+.scenario-card.invisible {
+  opacity: 0;
 }
 .scenario-card:nth-of-type(1) {
   transform: perspective(1000px) rotateY(25deg) translate(50px);
   /*use translate or margin, not both*/
 }
+.scenario-card:nth-of-type(1).invisible {
+  transform: perspective(1000px) rotateY(-90deg) translate(-550px);
+}
+.scenario-card:nth-of-type(1).chosen {
+  transform: perspective(1000px) rotateY(0deg) translate(275px);
+}
 .scenario-card:nth-of-type(2) {
   transform: perspective(1000px) rotateY(-25deg) translate(-50px);
 }
-.scenario-card:only-of-type {
-  transform: perspective(1000px) rotateY(0deg) translate(0px);
+.scenario-card:nth-of-type(2).invisible {
+  transform: perspective(1000px) rotateY(90deg) translate(550px);
+}
+.scenario-card:nth-of-type(2).chosen {
+  transform: perspective(1000px) rotateY(0deg) translate(-275px);
 }
 @font-face {
   font-family: '232MKB';

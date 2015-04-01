@@ -1,7 +1,7 @@
 <!-- >The MAIN (Center) Cards Go Here<-->
 
 
-    <div style="z-index:20;" class="scenario-card text-left" ng-repeat = "mainCard in game.main track by $index">
+    <div style="z-index:20;" class="scenario-card text-left"  ng-repeat = "mainCard in game.main track by $index" ng-class= "{chosen: mainCard.chosen, invisible: mainCard.hidden}">
       <div class="row">
         <!--div class="scenario-icon col-md-3" ng-bind-html="trust(mainCard.icon.icon)"></div-->
         <div class="col-md-3 scenario-icon" ggc-icon  icon-id="{{mainCard.icon._id}}"></div>
