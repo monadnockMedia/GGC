@@ -29,10 +29,11 @@
 
       <div ng-show = "game.phase == 'vote'" class="vote-buttons">
         <div class="btn-group" role="group" ng-hide = "player.voted" aria-label="...">
-          <a ng-click="dealer.playerChoice(name, 1)" class = "btn-icon {{name}}" >PASS</a>
           <a ng-click="dealer.playerChoice(name, 0)" class = "btn-icon {{name}}" >BLOCK</a>
+          <a ng-click="dealer.playerChoice(name, 1)" class = "btn-icon {{name}}" >PASS</a>
+
         </div>
       </div>
 
-    </div>
   </div>
+</div>

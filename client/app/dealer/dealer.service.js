@@ -214,6 +214,7 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
         ct+=self.game.votes[keys[i]];
       }
       var passed = (ct>=2);
+      debugger;
       console.log(
         (passed) ? "PASSED" : "FAILED", ct
       );
