@@ -25,8 +25,8 @@ angular.module('ggcApp')
                 svg.selectAll(sel).style({
                   "fill-opacity": 0, fill: "yellow"
                 }).transition()
-                  .duration(500).style("fill-opacity",1).attr("transform", function(d){return "translate("+d.x+","+d.y+") scale("+1+")"} )
-                  .transition().duration(500).style("fill-opacity",0).attr("transform", function(d){return "translate("+d.x+","+d.y+") scale("+scope.grid.hexScale+")"} );
+                  .duration(500).style("fill-opacity",1).attr("transform", function(d){return "scale("+1+")"} )
+                  .transition().duration(500).style("fill-opacity",0).attr("transform", function(d){return "scale("+scope.grid.hexScale+")"} );
               }
             }, true);
 
