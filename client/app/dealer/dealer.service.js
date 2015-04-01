@@ -2,9 +2,8 @@
 
 angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUtil, $interval, ggcMapper) {
   // AngularJS will instantiate a singleton by calling "new" on this function
-  this.freshDecks;
+
   this.decks = {};
-  this.teams;
 
   this.game = {main:{}, players:{}, currentPlayer:{}, playerIndex:0};
   this.game.score = {};
@@ -156,9 +155,9 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
   phases.vote = function( i ) {
     self.game.phase = "vote";
 
-    console.log("PHASE VOTE");
-    chosenCard = currentCards[i];
-    self.game.main = [];
+
+    self.game.main = [chosenCard];
+
     eachPlayer(function(k) {
       var playerEffects = chosenCard.effects[k];
       self.game.players[k].hand.issue = playerEffects;
@@ -194,12 +193,16 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
   }
 
   ///currentPlayer Chooses an issue
-  this.choose = function(i) {
+  this.choose = function(p, i) {
+    //set "chosen" on players choice card to true
+    self.game.players[self.game.currentPlayer].hand.choices[i].chosen = true;
+    chosenCard = currentCards[i];
     phases.vote(i);
   }
 
   ///called when each player votes
   this.vote = function(p, v) {
+    self.game.players[p].hand.issue.vote = v;
     self.game.votes[p] = v;
     self.game.players[p].voted = true;
     var keys = Object.keys(self.game.votes);
@@ -216,6 +219,16 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
       );
       phases.scoring(passed);
     }
-  }
+  };
+
+  this.playerChoice = function(p, b){
+
+    if(self.game.phase == "choice"){
+      self.choose(p,b);
+    }else if (self.game.phase == "vote"){
+      self.vote(p,b);
+    }
+
+  };
 
 });

@@ -11,3 +11,5 @@ dist
 GGC-data/
 
 *.zip
+
+client/app/vars.css
