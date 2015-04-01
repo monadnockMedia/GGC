@@ -2,7 +2,7 @@
 
 
     <div style="z-index:20;" class="scenario-card text-left" ng-repeat = "mainCard in game.main track by $index" ng-class="{invisible: mainCard.hidden, chosen: mainCard.chosen}">
-      <div class="row">
+      <div class="row main-row">
         <!--div class="scenario-icon col-md-3" ng-bind-html="trust(mainCard.icon.icon)"></div-->
         <div class="col-md-3 scenario-icon" ggc-icon  icon-id="{{mainCard.icon._id}}"></div>
         <div class="col-md-8">
@@ -10,9 +10,7 @@
          <div style="font-size:1.25em;" ng-bind-html="mainCard.mainText"></div>
         </div>
       </div>
-      <div class="row">
 
-      </div>
     </div>
 
 
