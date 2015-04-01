@@ -1,20 +1,5 @@
-.hexagon{
-  stroke-width: 1px;
+.hexagon {
+  stroke-width: .5px;
   shape-rendering: crisp-edges;
-  stroke: rgba(54, 154, 156, 1);
-  fill: none;
-
+  stroke: white;
 }
-
-
-
-
-.iconHex{
-  position: absolute;
-  background-color: red;
-}
-
-
-
-
-
