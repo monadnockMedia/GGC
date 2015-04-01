@@ -7,35 +7,23 @@
       <div class="colorbar"><h3>{{name | capitalize}}</h3></div>
       <div ng-show="game.phase == 'choice'">
         <div ng-show = "player.currentPlayer">
-<<<<<<< HEAD
-          <h4 class = "tab-title" >CHOOSE AN ACTION</h4>
-          <div class="col-md-6" ng-click="dealer.choose($index)" ng-repeat="choice in player.hand.choices track by $index">
-            <!--h5 class="tab-body text-center">{{choice.action | capitalize}}</h5-->
-            <div style="" class="tab-img" ng-bind-html="trust(choice.icon.icon)"></div>
-=======
 
           <h4 class = "tab-title text-center">Choose an Action</h4>
           <div class="col-md-6" ng-click="dealer.playerChoice(name,$index)" ng-repeat="choice in player.hand.choices track by $index">
 
             <!--div style="" class="tab-img" ng-bind-html="trust(choice.icon.icon)"></div -->
             <div ggc-icon  icon-class="{{name}}" frame="true" icon-id="{{choice.icon._id}}"></div>
->>>>>>> march25
           </div>
         </div>
       </div>
 
       <div ng-show = "game.phase == 'vote'" class="vote-block">
         <h5>{{player.hand.vote.action}}</h5>
-<<<<<<< HEAD
-        <!--div class="tab-img-vote" ng-bind-html="trust(player.hand.issue.icon.icon)"></div-->
-        <h6 class="tab-body" ng-repeat = "t in player.hand.issue.text">{{t}}</h6>
-=======
 
         <div class="tab-body" ng-repeat = "t in player.hand.issue.text">
           <div ng-bind-html="t"></div>
           <br />
         </div>
->>>>>>> march25
 
       </div>
 
@@ -46,5 +34,5 @@
         </div>
       </div>
 
+    </div>
   </div>
-</div>

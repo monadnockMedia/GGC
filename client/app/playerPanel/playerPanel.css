@@ -4,71 +4,27 @@
   padding-right: 3em;
 }
 .tab-title {
-<<<<<<< HEAD
-  font-family: '232MKB';
-  color: #04d1cd !important;
-  margin-top:80px;
-  margin-left:110px;
-=======
   font-family: 'eurostile-condensed';
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.9), -2px 4px 4px black;
   color: #d6f9f2;
->>>>>>> march25
 }
 .tab-body {
-<<<<<<< HEAD
-  font-family: '232MKUL';
-  color:white;
-  margin-left:50px;
-  margin-right:50px;
-=======
   font-family: 'eurostile-condensed';
   color: white;
   margin-left: 10px;
   margin-right: 10px;
->>>>>>> march25
 }
 p.tab-body {
-<<<<<<< HEAD
-  margin-left:25px;
-  margin-right:25px;
-=======
   margin-left: 25px;
   margin-right: 25px;
   font-size: 12px;
->>>>>>> march25
 }
 .tab-img {
-<<<<<<< HEAD
-  height:50%;
-  width:50%;
-  margin-left:45px;
-  margin-top:25px;
-=======
   height: 50%;
   width: 50%;
   margin-left: 45px;
->>>>>>> march25
 }
 .btn-icon {
-<<<<<<< HEAD
-  background:url("../../svg/buttonOL.svg") 50% 50% no-repeat;
-  width:100px;
-  height:50px;
-  padding:25px;
-  margin:10px;
-}
-
-.btn-icon.economy {
-   color: #fca204;
- }
-
-.btn-icon.energy {
-  color: #5a94fc;
-}
-
-.btn-icon.environment {
-=======
   background: url("../../svg/buttonOL.svg") 50% 50% no-repeat;
   width: 100px;
   height: 50px;
@@ -77,7 +33,6 @@ p.tab-body {
 }
 .environment i,
 .environment a {
->>>>>>> march25
   color: #2fd418;
 }
 .environment .colorbar {
@@ -146,14 +101,14 @@ top:220px;*/
 @font-face {
   font-family: '232MKB';
   src: url('../../assets/fonts/232MKSD_winTT/232MKB__.TTF') format('truetype');
-  
+
   /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
   /*src: url('../fonts/232MKSD_winTT/232MKM__.TTF') format('truetype');  Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
 @font-face {
   font-family: '232MKUL';
   src: url('../../assets/fonts/232MKSD_winTT/232MKUL_.TTF') format('truetype');
-  
+
   /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
   /*src: url('../fonts/232MKSD_winTT/232MKM__.TTF') format('truetype');  Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
