@@ -1,12 +1,18 @@
 <!-- >The MAIN (Center) Cards Go Here<-->
 
 
-    <div style="" class="scenario-card text-left" ng-repeat = "mainCard in game.main track by $index">
-      <div>
-        <div class="scenario-icon" ng-bind-html="trust(mainCard.icon.icon)"></div>
-        <h3>{{mainCard.action | capitalize}}</h3>
+    <div style="z-index:20;" class="scenario-card text-left" ng-repeat = "mainCard in game.main track by $index">
+      <div class="row">
+        <!--div class="scenario-icon col-md-3" ng-bind-html="trust(mainCard.icon.icon)"></div-->
+        <div class="col-md-3 scenario-icon" ggc-icon  icon-id="{{mainCard.icon._id}}"></div>
+        <div class="col-md-8">
+         <h4 ng-bind-html="mainCard.action"></h4>
+         <div style="font-size:1.25em;" ng-bind-html="mainCard.mainText"></div>
+        </div>
       </div>
-      <div style="font-size:1.25em;" ng-bind-html="mainCard.mainText"></div>
+      <div class="row">
+
+      </div>
     </div>
 
 
