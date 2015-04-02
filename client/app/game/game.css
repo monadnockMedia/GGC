@@ -33,7 +33,7 @@
 }
 .city {
   position: absolute;
-  background: url(../../svg/citycornerL.svg) -10px -11.11111111px no-repeat;
+  background: url(../../svg/citycornerL.svg) -12px -11.11111111px no-repeat;
   font-family: "Eurostile-Condensed";
   color: white;
   font-size: 14px;
