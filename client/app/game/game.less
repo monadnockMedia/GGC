@@ -42,6 +42,19 @@
     opacity: 0;
   }
 }
+.city {
+  position:absolute;
+  background:url(../../svg/citycornerL.svg) -10px -10px /.9em no-repeat;
+  font-family: "Eurostile-Condensed";
+  color: white;
+  font-size: 14px;
+  padding: .4em .4em;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.84);
+
+}
+#tampa.city { background:url(../../svg/citycornerR.svg) 64px -10px /.9em no-repeat; }
+img#highways { position: absolute; width: 70.5%; top: 2.5%; left: 18.35%; }
 .scenario-card:nth-of-type(1) {
 
   transform: perspective(1000px) rotateY(25deg) translate(50px);
@@ -232,7 +245,7 @@ div.panelOuterenergy {
   #flex.vertical-center;
 }
 
-div#mapA,
+/*div#mapA,
 div#mapB,
 div#borderscrim {
   width: 1920px;
@@ -242,7 +255,22 @@ div#borderscrim {
 div#mapA {
   background-image: url('../../bmp/overPop.png');
   background-size: 1920px 1200px;
+}*/
+
+#mapA, #mapB, #mapC, #foulGulf, #landmarks, #borderscrim {
+  width: 1920px;
+  height: 1080px;
+  position: absolute;
 }
+#foulGulf {
+  /*background: -webkit-linear-gradient(top, #2F2727, #1a82f7);*/
+  background: url(../bmp/gulfbrown.jpg) 50% 0 / 90%  no-repeat;
+}
+#mapA { background: url(../../bmp/currentpop.png) 50% 0% / 90% no-repeat; }
+#mapB { 	background: url(../../bmp/midpop.png) 50% 0% / 90% no-repeat; }
+#mapC { 	background: url(../../bmp/overpop.png) 50% 0% / 90% no-repeat; }
+
+
 div#borderscrim {
   background-image: url('../../bmp/borderandscrim.png');
   z-index: 8;
