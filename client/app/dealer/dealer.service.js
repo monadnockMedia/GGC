@@ -66,10 +66,15 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
   }
 
   function setCurrentPlayer( i ){
+    //p is current player name
     var p = self.players[i];
     self.game.currentPlayer = p;
     eachPlayer(function(pp){
-      self.game.players[pp].currentPlayer = self.game.players[pp].docked = (pp==p);
+      //for each player, if they are not current, set docked to true;
+      self.game.players[pp].currentPlayer = (pp==p);
+      self.game.players[pp].docked = !(pp==p);
+      debugger;
+
     })
   }
 
@@ -161,7 +166,7 @@ angular.module('ggcApp').service('dealer', function($http, $q, $rootScope, ggcUt
     eachPlayer(function(k) {
       var playerEffects = chosenCard.effects[k];
       self.game.players[k].hand.issue = playerEffects;
-      self.game.players[k].docked = true;
+      self.game.players[k].docked = false;
     });
   }
 
