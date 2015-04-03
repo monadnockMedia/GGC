@@ -165,7 +165,7 @@ div.panelInnerEnergy {
   -webkit-transform: rotateZ(29deg);
   transition: all 0.2s ease-in-out;
 }
-.panelOuter.environment .retract {
+.panelOuter.environment.retract {
   left: 300px;
   top: 870px;
   -webkit-transform: rotateZ(29deg);
@@ -176,7 +176,7 @@ div.panelInnerEnergy {
   top: 793px;
   transition: all 0.2s ease-in-out;
 }
-.panelOuter.economy .retract {
+.panelOuter.economy.retract {
   left: 775px;
   top: 990px;
   transition: all 0.2s ease-in-out;
@@ -190,41 +190,6 @@ div.panelInnerEnergy {
 .panelOuter.energy.retract {
   right: 310px;
   top: 875px;
-  -webkit-transform: rotateZ(-29deg);
-  transition: all 0.2s ease-in-out;
-}
-.panelOuterenvironment.retract {
-  left: 300px;
-  top: 810px;
-  -webkit-transform: rotateZ(29deg);
-  transition: all 0.2s ease-in-out;
-}
-.panelOutereconomy.retract {
-  left: 775px;
-  /*top:800px;*/
-  top: 930px;
-  transition: all 0.2s ease-in-out;
-}
-.panelOuterenergy.retract {
-  right: 310px;
-  top: 815px;
-  -webkit-transform: rotateZ(-29deg);
-  transition: all 0.2s ease-in-out;
-}
-div.panelOuterenvironment {
-  left: 400px;
-  top: 640px;
-  -webkit-transform: rotateZ(29deg);
-  transition: all 0.2s ease-in-out;
-}
-div.panelOutereconomy {
-  left: 775px;
-  top: 733px;
-  transition: all 0.2s ease-in-out;
-}
-div.panelOuterenergy {
-  right: 395px;
-  top: 635px;
   -webkit-transform: rotateZ(-29deg);
   transition: all 0.2s ease-in-out;
 }
