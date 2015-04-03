@@ -13,10 +13,17 @@ angular.module('ggcApp')
     $scope.trust = ggcUtil.trustSVG;
 
 
+
     $scope.dealer = dealer;
     $scope.game = dealer.game;
     ///dealer.hands contains the current "card" views for each player, as well as the main player
     $scope.hands = dealer.hands;
+
+    $scope.voteCheck = new function(player) {
+      console.log(player);
+      return false;
+    }
+
     bindKeys();
     function bindKeys(){
 
@@ -33,6 +40,7 @@ angular.module('ggcApp')
           description: 'Environment Select 2',
           callback: function(){
             dealer.playerChoice("environment",1);
+
           }
         })
 

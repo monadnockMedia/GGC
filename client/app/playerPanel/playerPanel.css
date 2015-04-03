@@ -30,6 +30,16 @@ p.tab-body {
   height: 50px;
   padding: 35px;
   margin: 10px;
+  transition: 0.25s linear all;
+}
+.btn-icon.ng-hide-add,
+.my-element.ng-hide-remove {
+  transition: 0.25s linear all;
+}
+.btn-icon.ng-hide {
+  display: inline!important;
+  opacity: 0;
+  -webkit-transform: rotate(180deg);
 }
 .environment i,
 .environment a {
