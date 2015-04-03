@@ -65,19 +65,6 @@ p.tab-body {
 /*.panelOuterenvironment .colorbar { background:#2fd418; }
 .panelOutereconomy .colorbar { background:#fca204; }
 .panelOuterenergy .colorbar { background:#4e4efc; } */
-.panelOuterenvironment h3 {
-  border: #c8e893 solid 1px;
-  color: #c8e893;
-  text-shadow: 0 0 3px #c8e893;
-}
-.panelOutereconomy h3 {
-  border: #fbcd6d solid 1px;
-  color: #fbcd6d;
-}
-.panelOuterenergy h3 {
-  border: #a8aefa solid 1px;
-  color: #a8aefa;
-}
 .vote-buttons {
   position: absolute;
   left: 15%;
@@ -150,6 +137,19 @@ div.panelInnerEnergy {
   -webkit-transform-style: preserve-3d;
   transition: all 0.2s ease-in-out;
 }
+.panelOuterenvironment h3 {
+  border: #c8e893 solid 1px;
+  color: #c8e893;
+  text-shadow: 0 0 3px #c8e893;
+}
+.panelOutereconomy h3 {
+  border: #fbcd6d solid 1px;
+  color: #fbcd6d;
+}
+.panelOuterenergy h3 {
+  border: #a8aefa solid 1px;
+  color: #a8aefa;
+}
 .panelOuter {
   position: absolute;
   width: 375px;
@@ -171,6 +171,18 @@ div.panelInnerEnergy {
   -webkit-transform: rotateZ(29deg);
   transition: all 0.2s ease-in-out;
 }
+.panelOuter.environment h3 {
+  color: #82d177;
+  border: #82d177 solid 1px;
+  text-shadow: 0 0 2px black;
+}
+.panelOuter.environment i,
+.panelOuter.environment a {
+  color: #2fd418;
+}
+.panelOuter.environment .colorbar {
+  background-color: #41bc30;
+}
 .panelOuter.economy {
   left: 775px;
   top: 793px;
@@ -180,6 +192,18 @@ div.panelInnerEnergy {
   left: 775px;
   top: 990px;
   transition: all 0.2s ease-in-out;
+}
+.panelOuter.economy h3 {
+  color: #e5bd77;
+  border: #e5bd77 solid 1px;
+  text-shadow: 0 0 2px black;
+}
+.panelOuter.economy i,
+.panelOuter.economy a {
+  color: #fca204;
+}
+.panelOuter.economy .colorbar {
+  background-color: #e39b1d;
 }
 .panelOuter.energy {
   right: 395px;
@@ -192,6 +216,18 @@ div.panelInnerEnergy {
   top: 875px;
   -webkit-transform: rotateZ(-29deg);
   transition: all 0.2s ease-in-out;
+}
+.panelOuter.energy h3 {
+  color: #b6b6f0;
+  border: #b6b6f0 solid 1px;
+  text-shadow: 0 0 2px black;
+}
+.panelOuter.energy i,
+.panelOuter.energy a {
+  color: #4e4efc;
+}
+.panelOuter.energy .colorbar {
+  background-color: #6060ea;
 }
 .colorbar {
   position: relative;
