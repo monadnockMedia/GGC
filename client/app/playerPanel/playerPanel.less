@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import (reference) "../vars.less";
 .bottomPlane{
   padding-left: 3em;
@@ -113,10 +114,9 @@ top:220px;*/
   transition: all .2s  ease-in-out;/**/
 }
 .panelInnerenvironment .extended, .panelInnereconomy .extended, .panelInnerenergy .extended {
-  top:0px;
+  top:0;
 }
 
-@charset "UTF-8";
 
 @font-face {
   font-family: '232MKB';
@@ -140,27 +140,27 @@ div.bottomPlane {
 }
 div.topPlane {
   /*border:white solid 1px;*/
-  background: url("../../svg/paneltop_n.svg") 50% 0% no-repeat;
+  background: url("../../svg/paneltop_n.svg") 50% 0 no-repeat;
   -webkit-transform: translateZ(25px);
   /* Chrome, Safari, Opera */
 }
 div.bottomPlane {
   /*border:blue solid 1px;*/
-  background: url("../../svg/panelbottom_n.svg") 50% 0% no-repeat;
+  background: url("../../svg/panelbottom_n.svg") 50% 0 no-repeat;
   -webkit-transform: translateZ(10px);
   /* Chrome, Safari, Opera */
 }
-div.panelOuterenvironment,
-div.panelOutereconomy,
-div.panelOuterenergy {
-  position: absolute;
-  width: 375px;
-  height: 300px;
-  -webkit-transform-style: preserve-3d;
-  z-index: 10;
-  overflow: hidden;
-  transition: all 0.2s ease-in-out;
-}
+//div.panelOuterenvironment,
+//div.panelOutereconomy,
+//div.panelOuterenergy {
+//  position: absolute;
+//  width: 375px;
+//  height: 300px;
+//  -webkit-transform-style: preserve-3d;
+//  z-index: 10;
+//  overflow: hidden;
+//  transition: all 0.2s ease-in-out;
+//}
 div.panelInnerEnvironment,
 div.panelInnerEconomy,
 div.panelInnerEnergy {
@@ -171,6 +171,51 @@ div.panelInnerEnergy {
   transition: all 0.2s ease-in-out;
 }
 
+.panelOuter{
+  position: absolute;
+  width: 375px;
+  height: 300px;
+  -webkit-transform-style: preserve-3d;
+  z-index: 10;
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+
+  &.environment{
+    left: 400px;
+    top: 700px;
+    -webkit-transform: rotateZ(29deg);
+    transition: all 0.2s ease-in-out;
+    & .retract{
+      left: 300px;
+      top: 870px;
+      -webkit-transform: rotateZ(29deg);
+      transition: all 0.2s ease-in-out;
+    }
+  }
+  &.economy{
+    left: 775px;
+    top: 793px;
+    transition: all 0.2s ease-in-out;
+    & .retract{
+      left: 775px;
+      top: 990px;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+  &.energy{
+    right: 395px;
+    top: 695px;
+    -webkit-transform: rotateZ(-29deg);
+    transition: all 0.2s ease-in-out;
+    &.retract{
+      right: 310px;
+      top: 875px;
+      -webkit-transform: rotateZ(-29deg);
+      transition: all 0.2s ease-in-out;
+    }
+  }
+
+}
 .panelOuterenvironment.retract {
   left: 300px;
   top: 810px;
@@ -178,10 +223,7 @@ div.panelInnerEnergy {
   transition: all 0.2s ease-in-out;
 }
 div.panelOutereconomy {
-  left: 775px;
-  /*top:800px;*/
-  top: 825px;
-  transition: all 0.2s ease-in-out;
+
 }
 .panelOutereconomy.retract {
   left: 775px;

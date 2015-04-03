@@ -1,6 +1,6 @@
 
 
-<div ng-class="player.docked ? 'panelOuter{{name}}' : 'panelOuter{{name}} retract'">
+<div class="panelOuter {{name}}" ng-class="{'retract':player.docked}">
   <div class="panelInner{{name}}" > <!--ng-class={true: 'extended', false: 'none'}[player.currentPlayer == false]-->
     <div class="topPlane"></div>
     <div class="bottomPlane">
