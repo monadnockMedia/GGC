@@ -29,8 +29,8 @@
 
       <div ng-show = "game.phase == 'vote'" class="vote-buttons" >
         <div class="btn-group" role="group" aria-label="...">
-          <a ng-hide="player.hand.issue.vote == 1" class='btn-icon {{name}}'>BLOCK</a>
-          <a ng-hide="player.hand.issue.vote == 0" class='btn-icon {{name}}'>PASS</a>
+          <a ng-hide="player.hand.issue.vote == 1" class="btn-icon block {{name}}" ng-class="{'selected':player.hand.issue.vote == 0}">BLOCK</a>
+          <a ng-hide="player.hand.issue.vote == 0" class="btn-icon pass {{name}}" ng-class="{'selected':player.hand.issue.vote == 1}">PASS</a>
         </div>
       </div>
 

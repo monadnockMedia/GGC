@@ -25,6 +25,7 @@ angular.module('ggcApp')
     }
 
     bindKeys();
+
     function bindKeys(){
 
       hotkeys.bindTo($scope)

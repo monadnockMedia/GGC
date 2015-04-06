@@ -30,11 +30,24 @@ p.tab-body {
   height: 50px;
   padding: 35px;
   margin: 10px;
-  transition: 0.25s linear all;
+}
+.btn-icon.block {
+  background-size: 124px 82px;
+}
+.btn-icon.pass {
+  background-size: 114px 82px;
+}
+.btn-icon.selected.block {
+  background: url("../../svg/buttonBLOCK.svg") 50% 50% no-repeat;
+  background-size: 124px 82px;
+}
+.btn-icon.selected.pass {
+  background: url("../../svg/buttonPASS.svg") 50% 50% no-repeat;
+  background-size: 114px 82px;
 }
 .btn-icon.ng-hide-add,
 .my-element.ng-hide-remove {
-  transition: 0.25s linear all;
+  /*transition: 0.25s linear all;*/
 }
 .btn-icon.ng-hide {
   display: inline!important;

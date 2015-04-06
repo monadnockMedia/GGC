@@ -37,14 +37,34 @@ p.tab-body {
 
 .btn-icon {
   background: url("../../svg/buttonOL.svg") 50% 50% no-repeat;
+  &.block {
+    background-size: 124px 82px;
+  }
+  &.pass {
+    background-size: 114px 82px;
+  }
   width: 100px;
   height: 50px;
   padding: 35px;
   margin: 10px;
-  transition: 0.25s linear all;
+
+  &.selected {
+    &.block {
+      background: url("../../svg/buttonBLOCK.svg") 50% 50% no-repeat;
+      background-size:124px 82px;
+
+    }
+
+    &.pass {
+      background: url("../../svg/buttonPASS.svg") 50% 50% no-repeat;
+      background-size: 114px 82px;
+
+    }
+  }
 }
 .btn-icon.ng-hide-add, .my-element.ng-hide-remove {
-  transition: 0.25s linear all;
+  /*transition: 0.25s linear all;*/
+
 }
 .btn-icon.ng-hide {
   display: inline!important;
@@ -52,6 +72,7 @@ p.tab-body {
   -webkit-transform: rotateX(180deg);
   color:grey;
 }
+
 
 .environment{
   & i,a{
