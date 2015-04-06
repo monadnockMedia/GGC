@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .controller('GameCtrl', function ($scope, $http, ggcUtil, $rootScope, dealer, hotkeys) {
+  .controller('GameCtrl', function ($scope, $http, ngAudio, ggcUtil, $rootScope, dealer, hotkeys) {
     $scope.preview = {};
     $scope.preview.hideNavbar = false;
 
@@ -11,6 +11,10 @@ angular.module('ggcApp')
 
 
     $scope.trust = ggcUtil.trustSVG;
+
+    $scope.confirmSfx = ngAudio.load("../sound/confirm.wav");
+    $scope.votePassSfx = ngAudio.load("../sound/vote_pass.wav");
+    $scope.voteBlockSfx = ngAudio.load("../sound/vote_block.wav");
 
 
 
@@ -33,13 +37,26 @@ angular.module('ggcApp')
           combo: '1',
           description: 'Environment Select 1',
           callback: function(){
+            if ($scope.game.phase == "choice") {
+              $scope.confirmSfx.play();
+            } else if ($scope.game.phase == "vote") {
+              $scope.voteBlockSfx.play();
+            }
             dealer.playerChoice("environment",0);
+
+
+            //$scope.confirmSfx.restart();
           }
         })
         .add({
           combo: '2',
           description: 'Environment Select 2',
           callback: function(){
+            if ($scope.game.phase == "choice") {
+              $scope.confirmSfx.play();
+            } else if ($scope.game.phase == "vote") {
+              $scope.votePassSfx.play();
+            }
             dealer.playerChoice("environment",1);
 
           }
@@ -49,14 +66,26 @@ angular.module('ggcApp')
           combo: '3',
           description: 'Economy Select 1',
           callback: function(){
+            if ($scope.game.phase == "choice") {
+              $scope.confirmSfx.play();
+            } else if ($scope.game.phase == "vote") {
+              $scope.voteBlockSfx.play();
+            }
             dealer.playerChoice("economy",0);
+
           }
         })
         .add({
           combo: '4',
           description: 'Environment Select 2',
           callback: function(){
+            if ($scope.game.phase == "choice") {
+              $scope.confirmSfx.play();
+            } else if ($scope.game.phase == "vote") {
+              $scope.votePassSfx.play();
+            }
             dealer.playerChoice("economy",1);
+
           }
         })
 
@@ -64,14 +93,26 @@ angular.module('ggcApp')
           combo: '5',
           description: 'Energy Select 1',
           callback: function(){
+            if ($scope.game.phase == "choice") {
+              $scope.confirmSfx.play();
+            } else if ($scope.game.phase == "vote") {
+              $scope.voteBlockSfx.play();
+            }
             dealer.playerChoice("energy",0);
+
           }
         })
         .add({
           combo: '6',
           description: 'Energy Select 2',
           callback: function(){
+            if ($scope.game.phase == "choice") {
+              $scope.confirmSfx.play();
+            } else if ($scope.game.phase == "vote") {
+              $scope.votePassSfx.play();
+            }
             dealer.playerChoice("energy",1);
+
           }
         })
     }
