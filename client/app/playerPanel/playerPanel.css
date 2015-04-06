@@ -38,8 +38,9 @@ p.tab-body {
 }
 .btn-icon.ng-hide {
   display: inline!important;
-  opacity: 0;
-  -webkit-transform: rotate(180deg);
+  opacity: 0.25;
+  -webkit-transform: rotateX(180deg);
+  color: grey;
 }
 .environment i,
 .environment a {
