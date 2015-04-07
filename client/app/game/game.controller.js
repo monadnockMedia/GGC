@@ -47,6 +47,7 @@ angular.module('ggcApp')
 
             //$scope.confirmSfx.restart();
           }
+
         })
         .add({
           combo: '2',
