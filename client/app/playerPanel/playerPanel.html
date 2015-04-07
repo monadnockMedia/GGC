@@ -35,12 +35,12 @@
         <div class="ggc-btn-wrap" >
           <div class="col-md-6">
             <div class="ggc-btn">
-              <a ng-hide="player.hand.issue.vote == 1" class='btn-icon {{name}}'>BLOCK</a>
+              <a ng-hide="player.hand.issue.vote == 1" class='btn-icon block {{name}}' class="btn-icon pass {{name}}" ng-class="{'selected':player.hand.issue.vote == 0}">BLOCK</a>
             </div>
           </div>
           <div class="col-md-6">
             <div class="ggc-btn">
-              <a ng-hide="player.hand.issue.vote == 0" class='btn-icon {{name}}'>PASS</a>
+              <a ng-hide="player.hand.issue.vote == 0" class='btn-icon pass {{name}}' class="btn-icon pass {{name}}" ng-class="{'selected':player.hand.issue.vote == 1}">PASS</a>
             </div>
           </div>
 
