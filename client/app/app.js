@@ -14,12 +14,13 @@ angular.module('ggcApp', [
   'ngCkeditor',
   'ui.select2',
   'uploadModule',
+  'ngAudio',
   'cfp.hotkeys'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider
       .otherwise('/');
-  
+
   });
 
   formsAngular.config(['cssFrameworkServiceProvider', 'routingServiceProvider', function (cssFrameworkService, routingService) {
