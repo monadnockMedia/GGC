@@ -9,11 +9,14 @@
         <div ng-show = "player.currentPlayer">
 
           <h4 class = "tab-title text-center">Choose an Action</h4>
-          <div class="col-md-6" ng-click="dealer.playerChoice(name,$index)" ng-repeat="choice in player.hand.choices track by $index">
-
-            <!--div style="" class="tab-img" ng-bind-html="trust(choice.icon.icon)"></div -->
-            <div ggc-icon  icon-class="{{name}}" frame="true" icon-id="{{choice.icon._id}}"></div>
+          <div class="ggc-btn-wrap">
+            <div class="col-md-6" ng-click="dealer.playerChoice(name,$index)" ng-repeat="choice in player.hand.choices track by $index">
+              <div class = "ggc-btn">
+                <div ggc-icon  icon-class="{{name}}" frame="true" icon-id="{{choice.icon._id}}"></div>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
 
@@ -27,10 +30,19 @@
 
       </div>
 
-      <div ng-show = "game.phase == 'vote'" class="vote-buttons" >
-        <div class="btn-group" role="group" aria-label="...">
-          <a ng-hide="player.hand.issue.vote == 1" class='btn-icon {{name}}'>BLOCK</a>
-          <a ng-hide="player.hand.issue.vote == 0" class='btn-icon {{name}}'>PASS</a>
+      <div ng-show="game.phase == 'vote'" class="vote-buttons">
+        <div class="ggc-btn-wrap" >
+          <div class="col-md-6">
+            <div class="ggc-btn">
+              <a ng-hide="player.hand.issue.vote == 1" class='btn-icon {{name}}'>BLOCK</a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="ggc-btn">
+              <a ng-hide="player.hand.issue.vote == 0" class='btn-icon {{name}}'>PASS</a>
+            </div>
+          </div>
+
         </div>
       </div>
 
