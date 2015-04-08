@@ -23,10 +23,14 @@ angular.module('ggcApp')
       return res;
     };
 
+    this.getVideoURL = function(v){
+      return $sce.trustAsResourceUrl("vid/"+v);
+    };
 
     this.trustHTML = function (e) {
       return $sce.trustAsHtml(e)
     };
+
     this.trustSVG = this.trustHTML;
 
     this.printObject = function (o) {

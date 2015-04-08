@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcUtil, $interval, ggcMapper) {
+angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcUtil, $interval, ggcMapper, $state) {
   // AngularJS will instantiate a singleton by calling "new" on this function
 
   this.decks = {};
@@ -187,14 +187,15 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     nextPlayer();
     var timer = $interval(function () {
       $interval.cancel(timer);
-      phases.setup()
-      //(roll()) ? phases.event() : phases.setup();
+      (roll()) ? phases.event() : phases.setup();
     }, 500);
   }
 
   phases.event = function () {
     self.game.phase = "event";
+    $state.go('game.play.event');  // this is a mistake, no?
     self.game.main = randomEvent();
+
   }
 
   phases.afterMath = function(){
