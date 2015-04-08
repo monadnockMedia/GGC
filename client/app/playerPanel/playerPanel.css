@@ -30,7 +30,6 @@ p.tab-body {
   height: 50px;
   padding: 35px;
   margin: 10px;
-  transition: 0.25s linear all;
   position: relative;
   top: 90px;
 }

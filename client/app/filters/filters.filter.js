@@ -37,7 +37,7 @@ app.filter('scoreIcons', function() {
     if (team!=null) {
       if (team == "environment") {
         for (var i = 0; i < input; i++) {
-          output += "&#xe103 ";
+          output += " &#xe103";
         }
         return output;
       }
@@ -45,7 +45,7 @@ app.filter('scoreIcons', function() {
 
       if (team == "energy") {
         for (var i = 0; i < input; i++) {
-          output += "&#xe162 ";
+          output += " &#xe162";
         }
         return output;
       }
@@ -54,7 +54,7 @@ app.filter('scoreIcons', function() {
       if (team == "economy") {
         for (var i = 0; i < input; i++) {
           //output += "&#xe148 ";
-          output += "&#xe148 ";
+          output += " &#xe148";
         }
         return output;
       }

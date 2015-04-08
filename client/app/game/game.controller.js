@@ -15,11 +15,21 @@ angular.module('ggcApp')
     $scope.confirmSfx = ngAudio.load("../sound/confirm.wav");
     $scope.votePassSfx = ngAudio.load("../sound/vote_pass.wav");
     $scope.voteBlockSfx = ngAudio.load("../sound/vote_block.wav");
+    $scope.wooshSfx = ngAudio.load("../sound/digital_woosh.wav");
 
 
 
     $scope.dealer = dealer;
     $scope.game = dealer.game;
+    $scope.$watch(function(){
+      return $scope.game.phase;
+    }, function(val) {
+      if (val == "choice") {
+        $scope.wooshSfx.play();
+      }
+      //debugger;
+    })
+
     ///dealer.hands contains the current "card" views for each player, as well as the main player
     $scope.hands = dealer.hands;
 
