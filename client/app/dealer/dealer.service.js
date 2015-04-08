@@ -53,7 +53,11 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   }
 
   function roll() {
-    return (chance == 0) ? false : ~~(Math.random() * chance) == 0;
+    var noRoll = (chance == 0);
+
+    return (noRoll) ? false : (~~(Math.random() * chance) == 0);
+
+
   }
 
   function randomEvent() {
@@ -73,8 +77,18 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     setCurrentPlayer(self.game.playerIndex);
   }
 
+
+  function isFirstPlayer(){
+    var test = self.game.currentPlayer == self.players[0];
+    return test;
+  }
+
   function eachPlayer(f) {
     self.players.forEach(f);
+  }
+
+  function makeDocked(p,b){
+    self.game.players[p].docked = b;
   }
 
   function setCurrentPlayer(i) {
@@ -84,7 +98,8 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     eachPlayer(function (pp) {
       //for each player, if they are not current, set docked to true;
       self.game.players[pp].currentPlayer = (pp==p);
-      self.game.players[pp].docked = !(pp==p);
+      makeDocked(pp,!(pp==p));
+      //self.game.players[pp].docked = !(pp==p);
     })
   }
 
@@ -143,6 +158,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     self.game.totalScore = 0;
     buildHands(self.game.currentPlayer);
     self.drawTwo(self.game.currentPlayer);
+    makeDocked(self.game.currentPlayer,false);
   }
 
   phases.choice = function () {
@@ -177,7 +193,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     eachPlayer(function (k) {
       var playerEffects = chosenCard.effects[k];
       self.game.players[k].hand.issue = playerEffects;
-      self.game.players[k].docked = false;
+      makeDocked(k, false);
     });
   }
 
@@ -187,13 +203,19 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     nextPlayer();
     var timer = $interval(function () {
       $interval.cancel(timer);
-      (roll()) ? phases.event() : phases.setup();
+      if(isFirstPlayer() && roll()){
+         phases.event();
+      }else{
+        phases.setup();
+      }
+
     }, 500);
   }
 
   phases.event = function () {
     self.game.phase = "event";
     $state.go('game.play.event');  // this is a mistake, no?
+    makeDocked(self.game.currentPlayer,true);
     self.game.main = randomEvent();
 
   }
@@ -256,7 +278,11 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
       phases.scoring(passed);
     }
   };
-
+  //random event video is over
+  this.videoEventEnd = function(){
+    $state.go("game.play.loop");
+    phases.setup();
+  }
   this.playerChoice = function (p, b) {
 
     if (self.game.phase == "choice") {
