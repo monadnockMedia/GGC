@@ -8,7 +8,7 @@ angular.module('ggcApp')
     $scope.preview.previewStates = ["cards", "icons", "test", "game","screen"];
 
     $scope.preview.currentCard = 0;
-
+    $scope.getVideoURL = ggcUtil.getVideoURL;
 
     $scope.trust = ggcUtil.trustSVG;
 
