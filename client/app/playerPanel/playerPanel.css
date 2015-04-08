@@ -31,10 +31,26 @@ p.tab-body {
   padding: 35px;
   margin: 10px;
   transition: 0.25s linear all;
+  position: relative;
+  top: 90px;
+}
+.btn-icon.block {
+  background-size: 124px 82px;
+}
+.btn-icon.pass {
+  background-size: 114px 82px;
+}
+.btn-icon.selected.block {
+  background: url("../../svg/buttonBLOCK.svg") 50% 50% no-repeat;
+  background-size: 124px 82px;
+}
+.btn-icon.selected.pass {
+  background: url("../../svg/buttonPASS.svg") 50% 50% no-repeat;
+  background-size: 114px 82px;
 }
 .btn-icon.ng-hide-add,
 .my-element.ng-hide-remove {
-  transition: 0.25s linear all;
+  /*transition: 0.25s linear all;*/
 }
 .btn-icon.ng-hide {
   display: inline!important;
@@ -66,11 +82,6 @@ p.tab-body {
 /*.panelOuterenvironment .colorbar { background:#2fd418; }
 .panelOutereconomy .colorbar { background:#fca204; }
 .panelOuterenergy .colorbar { background:#4e4efc; } */
-.vote-buttons {
-  position: absolute;
-  left: 15%;
-  top: 47%;
-}
 .tab-img-vote {
   height: 30%;
   width: 30%;
@@ -251,4 +262,18 @@ div.panelInnerEnergy {
   font-stretch: expanded;
   padding-top: 1px;
   font-family: "232MKSD", Helvetica, Arial, sans-serif;
+}
+.ggc-btn-wrap {
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  left: 0;
+  top: 100px;
+  padding: 5%;
+}
+.ggc-btn {
+  box-sizing: border-box;
+  height: 0;
+  padding-bottom: 100%;
+  width: 100%;
 }

@@ -83,9 +83,8 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     self.game.currentPlayer = p;
     eachPlayer(function (pp) {
       //for each player, if they are not current, set docked to true;
-      self.game.players[pp].currentPlayer = (pp == p);
-      self.game.players[pp].docked = !(pp == p);
-
+      self.game.players[pp].currentPlayer = (pp==p);
+      self.game.players[pp].docked = !(pp==p);
     })
   }
 
