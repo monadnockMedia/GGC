@@ -221,6 +221,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   }
 
   phases.afterMath = function(){
+    //TODO(Ryan) discuss aftermath of random events
     self.game.phase = "aftermath";
   }
 
