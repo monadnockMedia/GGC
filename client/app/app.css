@@ -15,6 +15,11 @@ h6 {
   color: #000;
   padding: 0.2em 0;
 }
+html {
+  width: 1920px;
+  height: 1920px;
+  overflow: hidden;
+}
 .navbar-default form {
   border-color: inherited;
 }
