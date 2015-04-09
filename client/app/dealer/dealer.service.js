@@ -12,7 +12,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   var chosenCard;
   var currentCards;
   var self = this;
-  var chance = 1;
+  var chance = 3;
   var shuffle = ggcUtil.shuffle;
   console.log("DEALER");
   ///
