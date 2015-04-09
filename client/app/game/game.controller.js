@@ -126,5 +126,13 @@ angular.module('ggcApp')
 
           }
         })
+        .add({
+          combo: '7',
+          description: 'reset',
+          callback: function(){
+           location.reload();
+
+          }
+        })
     }
   });
