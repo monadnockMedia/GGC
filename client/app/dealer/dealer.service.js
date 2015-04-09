@@ -41,6 +41,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     eachPlayer(function (k) {
       pushDeck(k);
       var rand = ~~(Math.random() * 4 + 3);
+      rand = (k == "environment") ? ~~(rand/4)  : rand;
       self.game.totalScore += rand;
       self.game.score[k] = {i: rand, p: 0};
       self.game.players[k] = {hand: {choices: [], issue: {}}, docked: true};
