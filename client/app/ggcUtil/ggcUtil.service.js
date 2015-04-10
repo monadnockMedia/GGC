@@ -38,7 +38,7 @@ angular.module('ggcApp')
     };
 
     this.getEditURL = function (id) {
-      console.log("TRUSTING", id);
+      //console.log("TRUSTING", id);
       /* SCE is the securuty/trust handling in angular */
       return $sce.trustAsResourceUrl("./data/Card/" + id + "/edit");
     };
