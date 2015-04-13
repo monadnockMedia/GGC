@@ -34,6 +34,7 @@
 
 
   padding: 20px;
+  padding-left:30px;
   margin: 10px;
   transform-style: preserve-3d;
   margin-left: 0;
@@ -41,6 +42,13 @@
   &.invisible{
     opacity: 0;
   }
+
+  & h1,h2,h3,h4{
+
+    letter-spacing: 3px;
+    text-transform: capitalize;
+  }
+
 }
 .city {
   position:absolute;
@@ -56,6 +64,9 @@
 #tampa.city { background:url(../../svg/citycornerR.svg) 64px -10px /.9em no-repeat; }
 img#highways { position: absolute; width: 70.5%; top: 2.5%; left: 18.35%; }
 .scenario-card:nth-of-type(1) {
+  & h1,h2,h3,h4{
+    #textShadow.card.left;
+  }
 
   transform: perspective(1000px) rotateY(25deg) translate(50px);
   /*use translate or margin, not both*/
@@ -67,6 +78,9 @@ img#highways { position: absolute; width: 70.5%; top: 2.5%; left: 18.35%; }
   }
 }
 .scenario-card:nth-of-type(2) {
+  & h1,h2,h3,h4{
+    #textShadow.card.right;
+  }
   transform: perspective(1000px) rotateY(-25deg) translate(-50px);
   &.invisible {
     transform: perspective(1000px) rotateY(90deg) translate(550px);
@@ -140,7 +154,7 @@ div#perspective_plane {
 }
 
 .main-row {
-  .full-height;
+  height: 80%;
   #flex.vertical-center;
 }
 
