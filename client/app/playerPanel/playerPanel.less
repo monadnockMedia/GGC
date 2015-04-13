@@ -12,10 +12,6 @@
 
 }
 
-
-
-
-
 .tab-body {
   .euro;
   color:white;
@@ -230,14 +226,16 @@ div.panelInnerEnergy {
       transition: all 0.2s ease-in-out;
     }
 
-    & h3{
-      .colorbarText(@environment-color);
-    }
+
     & i,a{
       .text-environment;
     }
     & .colorbar{
+
       .bg-environment;
+      & > h3{
+        .colorbarText(@environment-color);
+      }
     }
   }
   &.economy{
@@ -250,14 +248,15 @@ div.panelInnerEnergy {
       transition: all 0.2s ease-in-out;
     }
 
-    & h3{
-      .colorbarText(@economy-color);
-    }
+
     & i,a{
       .text-economy;
     }
     & .colorbar{
       .bg-economy;
+      & > h3{
+        .colorbarText(@economy-color);
+      }
     }
   }
   &.energy{
@@ -272,14 +271,15 @@ div.panelInnerEnergy {
       transition: all 0.2s ease-in-out;
     }
 
-    & h3{
-      .colorbarText(@energy-color);
-    }
+
     & i,a{
       .text-energy;
     }
     & .colorbar{
       .bg-energy;
+      & > h3{
+        .colorbarText(@energy-color);
+      }
     }
   }
 

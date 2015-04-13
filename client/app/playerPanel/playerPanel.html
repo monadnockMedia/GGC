@@ -8,7 +8,7 @@
 
       <div ng-show="game.phase == 'choice'">
         <div ng-show = "player.currentPlayer">
-          <h4 class = "tab-title text-center">Choose an Action</h4>
+          <h3 class = "tab-title text-center">Choose an Action</h3>
           <div class="ggc-btn-wrap">
             <div class="col-md-6" ng-click="dealer.playerChoice(name,$index)" ng-repeat="choice in player.hand.choices track by $index">
               <div class = "ggc-btn">

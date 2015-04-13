@@ -18,6 +18,8 @@
   z-index:20;
 }
 
+
+
 .scenario-header {
   #textShadow.panel;
 }
@@ -33,8 +35,8 @@
   color: white;
 
 
-  padding: 20px;
-  padding-left:30px;
+  padding: 0 20px 0 30px;
+
   margin: 10px;
   transform-style: preserve-3d;
   margin-left: 0;
@@ -112,6 +114,19 @@ body {
   height: 1080px;
   margin: 0;
 }
+div#ui-main{
+  position: relative;
+  height: 33%;
+  top: 29%;
+
+  & .title{
+    line-height: 0;
+    font-size: 4em;
+    font-variant: small-caps;
+    color: @light-blue;
+    #textShadow.panel;
+  }
+}
 div#main {
   position: absolute !important;
   top: 0px;
@@ -119,6 +134,7 @@ div#main {
   height: 1080px;
   background: url("../../bmp/gulfbrown.jpg") no-repeat;
   background-size: 1920px 1200px;
+  overflow: hidden;
 }
 div#perspective_plane_container {
   position: absolute;

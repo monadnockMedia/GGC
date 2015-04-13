@@ -182,17 +182,17 @@ div.panelInnerEnergy {
   -webkit-transform: rotateZ(29deg);
   transition: all 0.2s ease-in-out;
 }
-.panelOuter.environment h3 {
-  color: #82d177;
-  border: #82d177 solid 1px;
-  text-shadow: 0 0 2px black;
-}
 .panelOuter.environment i,
 .panelOuter.environment a {
   color: #2fd418;
 }
 .panelOuter.environment .colorbar {
   background-color: #41bc30;
+}
+.panelOuter.environment .colorbar > h3 {
+  color: #82d177;
+  border: #82d177 solid 1px;
+  text-shadow: 0 0 2px black;
 }
 .panelOuter.economy {
   left: 775px;
@@ -204,17 +204,17 @@ div.panelInnerEnergy {
   top: 990px;
   transition: all 0.2s ease-in-out;
 }
-.panelOuter.economy h3 {
-  color: #e5bd77;
-  border: #e5bd77 solid 1px;
-  text-shadow: 0 0 2px black;
-}
 .panelOuter.economy i,
 .panelOuter.economy a {
   color: #fca204;
 }
 .panelOuter.economy .colorbar {
   background-color: #e39b1d;
+}
+.panelOuter.economy .colorbar > h3 {
+  color: #e5bd77;
+  border: #e5bd77 solid 1px;
+  text-shadow: 0 0 2px black;
 }
 .panelOuter.energy {
   right: 395px;
@@ -228,17 +228,17 @@ div.panelInnerEnergy {
   -webkit-transform: rotateZ(-29deg);
   transition: all 0.2s ease-in-out;
 }
-.panelOuter.energy h3 {
-  color: #b6b6f0;
-  border: #b6b6f0 solid 1px;
-  text-shadow: 0 0 2px black;
-}
 .panelOuter.energy i,
 .panelOuter.energy a {
   color: #4e4efc;
 }
 .panelOuter.energy .colorbar {
   background-color: #6060ea;
+}
+.panelOuter.energy .colorbar > h3 {
+  color: #b6b6f0;
+  border: #b6b6f0 solid 1px;
+  text-shadow: 0 0 2px black;
 }
 .colorbar {
   position: relative;
