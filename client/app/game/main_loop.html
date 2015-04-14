@@ -1,12 +1,14 @@
 <!-- >The MAIN (Center) Cards Go Here<-->
 
-<div class="row text-center"><h1 class = "title">Actions</h1></div>
+<div class="row text-center"><h1 style = "game.phase == 'choice'" class = "title">Actions</h1></div>
+
 <div id = "box-wrap-inner">
   <div style="z-index:20;" class="scenario-card text-left" ng-repeat="mainCard in game.main track by $index"
        ng-class="{invisible: mainCard.hidden, chosen: mainCard.chosen}">
     <div class="row">
       <div class="col-md-12">
         <h3 ng-bind-html="mainCard.action"></h3>
+
       </div>
     </div>
     <div class="row main-row">
@@ -16,7 +18,7 @@
       <div class="col-md-3 scenario-icon" ggc-icon icon-class="{{game.currentPlayer}}"
            icon-id="{{mainCard.icon._id}}"></div>
       <div class="col-md-9">
-
+      <!--TODO remove whitespace-->
         <div ng-bind-html="mainCard.mainText"></div>
       </div>
     </div>
