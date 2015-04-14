@@ -31,6 +31,10 @@
   transform-style: preserve-3d;
   margin-left: 0;
 }
+.scenario-card .mainBar {
+  border-radius: 15px;
+  padding: 10px;
+}
 .scenario-card.invisible {
   opacity: 0;
 }

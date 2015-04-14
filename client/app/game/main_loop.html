@@ -7,15 +7,15 @@
        ng-class="{invisible: mainCard.hidden, chosen: mainCard.chosen}">
     <div class="row">
       <div class="col-md-12">
-        <h3 ng-bind-html="mainCard.action"></h3>
+        <h3 class="bg-{{mainCard.team}} mainBar" ng-bind-html="mainCard.action"></h3>
 
       </div>
     </div>
     <div class="row main-row">
 
-      <!--div class="scenario-icon col-md-3" ng-bind-html="trust(mainCard.icon.icon)"></div-->
+      <!--{{game.currentPlayer}} div class="scenario-icon col-md-3" ng-bind-html="trust(mainCard.icon.icon)"></div-->
 
-      <div class="col-md-3 scenario-icon" ggc-icon icon-class="{{game.currentPlayer}}"
+      <div class="col-md-3 scenario-icon" ggc-icon icon-class="{{mainCard.team}}"
            icon-id="{{mainCard.icon._id}}"></div>
       <div class="col-md-9">
       <!--TODO remove whitespace-->
