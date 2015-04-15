@@ -28,6 +28,8 @@
   opacity: 0;
 };
 
+
+
 .scenario-card {
   -webkit-transition: 1s all;
   -webkit-flex: auto;
@@ -125,6 +127,10 @@ body {
   height: 1080px;
   margin: 0;
 }
+
+.main-title{
+  height: 25px;
+}
 div#ui-main{
   position: relative;
   height: 33%;
@@ -139,20 +145,27 @@ div#ui-main{
     #textShadow.panel;
 
 
+    -webkit-transition: 1s all;
 
-    & .titleText {
+
+    opacity: 1;
+    height: 25px;
+
+
+
       transition: .5s linear all;
       &.ng-enter {
         opacity: 1;
+        height: 25px;
 
 
       }
       &.ng-hide {
         opacity: 0;
-        width:0px;
+        height:0;
 
       }
-    }
+
 
 
   }

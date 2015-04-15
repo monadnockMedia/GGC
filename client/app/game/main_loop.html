@@ -1,11 +1,15 @@
 <!-- >The MAIN (Center) Cards Go Here<-->
 
-<div class="row text-center">
-  <h1 style = "game.phase == 'choice'" class = "title">
-    <span ng-show="game.phase == 'choice'" class="titleText">Actions</span>
-    <span ng-show="game.phase == 'vote'" class="titleText">Vote</span>
+<div class="row relative text-center main-title" >
+  <h1  class = "title" ng-show="game.phase == 'choice'">
+    Actions
+  </h1>
+  <h1  class = "title" ng-show="game.phase == 'vote'">
+    Vote
   </h1>
 </div>
+
+
 
 <div id = "box-wrap-inner">
   <div style="z-index:20;" class="scenario-card text-left" ng-repeat="mainCard in game.main track by $index"
