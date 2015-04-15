@@ -37,7 +37,7 @@
   background: url("../../svg/infoPanel.svg") no-repeat  center ;
   background-size: 580px 850px;
   color: white;
-  
+
 
   padding: 0 20px 0 30px;
 
@@ -134,8 +134,27 @@ div#ui-main{
     line-height: 0;
     font-size: 4em;
     font-variant: small-caps;
+    margin-left:-35px;
     color: @light-blue;
     #textShadow.panel;
+
+
+
+    & .titleText {
+      transition: .5s linear all;
+      &.ng-enter {
+        opacity: 1;
+
+
+      }
+      &.ng-hide {
+        opacity: 0;
+        width:0px;
+
+      }
+    }
+
+
   }
 }
 div#main {
