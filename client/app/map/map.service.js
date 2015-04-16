@@ -49,7 +49,9 @@ angular.module('ggcApp')
       hex.iconId = _id;
       this.grid.gridIcons.push(hex);
     }
+    this.addPriorityIcon = function(icon){
 
+    }
     function iconClass(h){
       return "r"+h.i+"c"+ h.j;
     }
