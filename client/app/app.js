@@ -4,6 +4,7 @@
 
 angular.module('ggcApp', [
   'ui.router',
+  'ui.router.stateHelper',
 	'ngAnimate',
   'ngCookies',
   'formsAngular',
