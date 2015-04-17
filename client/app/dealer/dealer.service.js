@@ -202,6 +202,16 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     self.game.phase = "scoring";
     if (passed) tally();
     nextPlayer();
+    makeDocked("economy", true);
+    makeDocked("energy", true);
+    makeDocked("environment", true);
+    var timer1 = $interval(function () {
+      $interval.cancel(timer1);
+      makeDocked("economy", false);
+      makeDocked("energy", false);
+      makeDocked("environment", false);
+    }, 1000);
+
     var timer = $interval(function () {
       $interval.cancel(timer);
       if(isFirstPlayer() && roll()){
@@ -209,8 +219,11 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
       }else{
         phases.setup();
       }
-
-    }, 500);
+      makeDocked("economy", true);
+      makeDocked("energy", true);
+      makeDocked("environment", true);
+      makeDocked(self.game.currentPlayer,false);
+    }, 10000);
   }
 
   phases.event = function () {
