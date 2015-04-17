@@ -28,6 +28,8 @@
   opacity: 0;
 };
 
+
+
 .scenario-card {
   -webkit-transition: 1s all;
   -webkit-flex: auto;
@@ -45,36 +47,63 @@
   transform-style: preserve-3d;
   margin-left: 0;
 
-  & .mainBar {
-    border-radius: 15px;
-    padding:10px;
-    opacity:0.75;
-    #boxShadow.mainBar;
-  }
+
 
   &.invisible{
     opacity: 0;
   }
 
   & h1,h2,h3,h4{
-
     letter-spacing: 3px;
     text-transform: capitalize;
+    border-radius: .8em;
+    padding:10px;
+    border: 1px solid @blue-black;
+    line-height: 1.2em;
+    color: white;
+    &.energy{
+      .bg-energy;
+    }
+    &.economy{
+     .bg-economy;
+    }
+    &.environment{
+      .bg-environment;
+    }
+
   }
 
 }
+
+
 .city {
   position:absolute;
-  background:url(../../svg/citycornerL.svg) -12px -10px /.9em no-repeat;
+  //background:url(../../svg/citycornerL.svg) -12px -10px /.9em no-repeat;
   font-family: "Eurostile-Condensed";
   color: white;
   font-size: 14px;
   padding: .4em .4em;
   letter-spacing: 1px;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.84);
-
+  &:before{
+    position: relative;
+    top: -10px;
+    content: "\25F8";
+    margin-top: 20px;
+  }
+  &.leftlabel:before{
+    content:"";
+  }
+  &.leftlabel:after{
+    position: relative;
+    top: -10px;
+    content: "\25F9";
+    margin-top: 20px;
+  }
 }
-#tampa.city { background:url(../../svg/citycornerR.svg) 64px -10px /.9em no-repeat; }
+
+
+#tampa.city { /*background:url(../../svg/citycornerR.svg) 64px -10px /.9em no-repeat; */ }
 img#highways { position: absolute; width: 70.5%; top: 2.5%; left: 18.35%; }
 .scenario-card:nth-of-type(1) {
   & h1,h2,h3,h4{
@@ -125,6 +154,10 @@ body {
   height: 1080px;
   margin: 0;
 }
+
+.main-title{
+  height: 25px;
+}
 div#ui-main{
   position: relative;
   height: 33%;
@@ -139,20 +172,27 @@ div#ui-main{
     #textShadow.panel;
 
 
+    -webkit-transition: 1s all;
 
-    & .titleText {
+
+    opacity: 1;
+    height: 25px;
+
+
+
       transition: .5s linear all;
       &.ng-enter {
         opacity: 1;
+        height: 25px;
 
 
       }
       &.ng-hide {
         opacity: 0;
-        width:0px;
+        height:0;
 
       }
-    }
+
 
 
   }

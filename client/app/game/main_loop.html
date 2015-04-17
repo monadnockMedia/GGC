@@ -1,19 +1,30 @@
 <!-- >The MAIN (Center) Cards Go Here<-->
 
+<<<<<<< HEAD
 <div class="row text-center">
   <h1 style = "game.phase == 'choice'" class = "title">
     <span ng-show="game.phase == 'choice'" class="titleText">Actions</span>
     <span ng-show="game.phase == 'vote'" class="titleText">Vote</span>
     <span ng-show="game.phase == 'scoring'" class="titleText">Score</span>
+=======
+<div class="row relative text-center main-title" >
+  <h1  class = "title" ng-show="game.phase == 'choice'">
+    Actions
+  </h1>
+  <h1  class = "title" ng-show="game.phase == 'vote'">
+    Vote
+>>>>>>> origin/master
   </h1>
 </div>
+
+
 
 <div id = "box-wrap-inner">
   <div style="z-index:20;" class="scenario-card text-left" ng-repeat="mainCard in game.main track by $index"
        ng-class="{invisible: mainCard.hidden, chosen: mainCard.chosen}" ng-hide="game.phase == 'scoring'">
     <div class="row">
       <div class="col-md-12">
-        <h3 class="bg-{{mainCard.team}} mainBar" ng-bind-html="mainCard.action"></h3>
+        <h3 class=" mainBar {{mainCard.team}}" ng-bind-html="mainCard.action"></h3>
 
       </div>
     </div>
