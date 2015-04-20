@@ -248,10 +248,12 @@ div#borderscrim {
   background-image: url('../../bmp/borderandscrim_wrn.png');
   z-index: 8;
   pointer-events: none;
+  top: 0;
 }
 score-board {
   z-index: 20;
   position: absolute;
+  top: 0;
 }
 .ggc-video-main {
   margin-top: 0;
