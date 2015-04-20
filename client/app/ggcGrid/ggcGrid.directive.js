@@ -18,7 +18,7 @@ angular.module('ggcApp')
           scope.$watch(
             function(){return scope.grid.gridIcons;},
             function(n){
-              if(n.length){
+              if(n && n.length){
                 var sel = "."+n[n.length-1].iClass;
 
                 var path =  svg.selectAll(sel);

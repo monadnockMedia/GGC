@@ -11,21 +11,29 @@ app
   });
 
 app
-  .controller('GridCtrl', function ($scope, ggcMapper, ggcUtil, $interval) {
+  .controller('GridCtrl', function ($scope, ggcMapper, ggcUtil, $interval, hotkeys) {
     var l = 14;
     $scope.clicked = function($ev){
       var icon = $scope.icons[~~(Math.random() * 10)];
-      ggcMapper.putIcon(ggcMapper.randomIndex(), icon._id);
+      //ggcMapper.putIcon(ggcMapper.randomIndex(), icon._id);
+      ggcMapper.addPriorityIcon(icon);
     };
+
+
     ggcUtil.getIcons().then(function (res) {
       $scope.icons = res.data;
-      /*for(var j = 0; j<10; j++){
-        var icon = $scope.icons[~~(Math.random() * j)];
-
-        ggcMapper.putIcon(j, icon._id);
-        console.log(j, icon._id);
-      }*/
 
     });
+
+    hotkeys.bindTo($scope)
+      .add({
+        combo: 'g',
+        description: 'PushGrid',
+        callback: function(){
+          var icon = $scope.icons[~~(Math.random() * $scope.icons.length)];
+          //ggcMapper.putIcon(ggcMapper.randomIndex(), icon._id);
+          ggcMapper.addPriorityIcon(icon);
+        }
+      })
 
   });

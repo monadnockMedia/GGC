@@ -145,7 +145,8 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   }
 
   function addIcon(icon) {
-    ggcMapper.putIcon(ggcMapper.randomIndex(), icon._id)
+    //ggcMapper.putIcon(ggcMapper.randomIndex(), icon._id);
+    ggcMapper.addPriorityIcon(icon);
 
   }
 
