@@ -92,6 +92,10 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     self.game.players[p].docked = b;
   }
 
+  function dockAll(b){
+    eachPlayer(function(p){makeDocked(p,b)});
+  }
+
   function setCurrentPlayer(i) {
     //p is current player name
     var p = self.players[i];
@@ -203,14 +207,11 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     self.game.phase = "scoring";
     if (passed) tally();
     nextPlayer();
-    makeDocked("economy", true);
-    makeDocked("energy", true);
-    makeDocked("environment", true);
+    dockAll(true);
+
     var timer1 = $interval(function () {
       $interval.cancel(timer1);
-      makeDocked("economy", false);
-      makeDocked("energy", false);
-      makeDocked("environment", false);
+      dockAll(false);
     }, 1000);
 
     var timer = $interval(function () {
@@ -220,9 +221,8 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
       }else{
         phases.setup();
       }
-      makeDocked("economy", true);
-      makeDocked("energy", true);
-      makeDocked("environment", true);
+      eachPlayer(function(p){makeDocked(p,true)})
+
       makeDocked(self.game.currentPlayer,false);
     }, 10000);
   }
