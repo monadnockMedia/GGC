@@ -2,7 +2,8 @@ this is the ggcIconGrid directive
 <!-- div class = "relative" -->
   <div ng-repeat="hex in grid.gridIcons track by $index">
     <div icon-wrap>
-        <ggc-icon  grid-index="{{$index}}" icon-id="{{hex.iconId}}"></ggc-icon>
+        <ggc-icon  fill="false" grid-index="{{$index}}" icon-id="{{hex.iconId}}" glow="true"></ggc-icon>
+
     </div>
   </div>
 <!--/div-->
