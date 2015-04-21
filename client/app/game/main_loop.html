@@ -1,5 +1,6 @@
 <!-- >The MAIN (Center) Cards Go Here<-->
 
+
 <div class="row relative text-center main-title" >
   <h1  class = "title" ng-show="game.phase == 'choice'">
     Actions
@@ -7,13 +8,16 @@
   <h1  class = "title" ng-show="game.phase == 'vote'">
     Vote
   </h1>
+  <h1  class = "title" ng-show="game.phase == 'scoring'">
+    Score
+  </h1>
 </div>
 
 
 
 <div id = "box-wrap-inner">
   <div style="z-index:20;" class="scenario-card text-left" ng-repeat="mainCard in game.main track by $index"
-       ng-class="{invisible: mainCard.hidden, chosen: mainCard.chosen}">
+       ng-class="{invisible: mainCard.hidden, chosen: mainCard.chosen}" ng-hide="game.phase == 'scoring'">
     <div class="row">
       <div class="col-md-12">
         <h3 class=" mainBar {{mainCard.team}}" ng-bind-html="mainCard.action"></h3>
