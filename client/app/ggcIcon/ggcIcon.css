@@ -14,7 +14,7 @@
 }
 .iconGroup {
   fill: #e2edeb;
-  stroke: #c3d9d5;
+  stroke: #a3c6c0;
 }
 .iconGroup.energy {
   fill: #4e4efc;
@@ -23,5 +23,14 @@
   fill: #2fd418;
 }
 .iconGroup.economy {
+  fill: #fca204;
+}
+.l1.energy {
+  fill: #4e4efc;
+}
+.l1.environment {
+  fill: #2fd418;
+}
+.l1.economy {
   fill: #fca204;
 }

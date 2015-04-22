@@ -77,6 +77,8 @@ angular.module('ggcApp')
 
       if(positionFound){
         var hex = self.grid.hexes[index];
+
+        hex.team = icon.team;
         hex.iconId = icon._id;
         self.grid.gridIcons.push(hex);
         self.occupied[index] = true;
