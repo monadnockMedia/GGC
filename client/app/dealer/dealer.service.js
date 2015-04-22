@@ -96,6 +96,8 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     eachPlayer(function(p){makeDocked(p,b)});
   }
 
+  this.dockAll = dockAll;
+
   function setCurrentPlayer(i) {
     //p is current player name
     var p = self.players[i];
