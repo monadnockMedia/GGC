@@ -13,6 +13,11 @@ angular.module('ggcApp')
         end: 3,
         onStart: function(){dealer.dockAll(true)},
         onEnd: function(){dealer.dockAll(false)},
+      }).code({
+        start: 4,
+        end: 5,
+        onStart: function(){dealer.dockAll(true)},
+        onEnd: function(){dealer.dockAll(false)},
       })
     }
   });
