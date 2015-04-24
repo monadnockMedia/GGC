@@ -198,7 +198,30 @@ div.panelInnerEnergy {
 .panelOutereconomy h3 { border:#fbcd6d solid 1px; color:#fbcd6d; }
 .panelOuterenergy h3 { border:#a8aefa solid 1px; color:#a8aefa; }
 
-
+.score{
+  font-family: "Glyphicons Halflings";
+  & .up{
+    #textShadow.up;
+  }
+  & .down{
+    #textShadow.down;
+  }
+  & .zilch{
+    #textShadow.null;
+  }
+  & .down{
+    #textShadow.down;
+  }
+  &.environment{
+    .text-environment;
+  }
+  &.economy{
+    .text-economy;
+  }
+  &.energy{
+    .text-energy;
+  }
+}
 
 .panelOuter{
   position: absolute;

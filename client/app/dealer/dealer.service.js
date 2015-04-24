@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcUtil, $interval, ggcMapper, $state) {
+angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcUtil, $interval, ggcMapper, $state, $filter) {
   // AngularJS will instantiate a singleton by calling "new" on this function
 
   this.decks = {};
 
-  this.game = {main: {}, players: {}, currentPlayer: {}, playerIndex: 0};
+  this.game = {main: {}, players: {}, currentPlayer: {}, playerIndex: 0, action:{}};
   this.game.score = {};
   this.game.phase = "none";
   var events = [];
-  var chosenCard;
+  var chosenIndex;
   var currentCards;
   var self = this;
   var chance = 3;
@@ -142,12 +142,14 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     var score = self.game.score;
 
     eachPlayer(function (p) {
-      score[p].i += chosenCard.effects[p].score;
+      score[p].i +=  self.game.action.effects[p].score;
       self.game.totalScore += score[p].i;
+
+      self.game.players[p].hand.issue.scoreHTML = $filter("panelScore")(self.game.players[p].hand.issue.score,p);
     });
 
     calculatePercentage();
-    addIcon(chosenCard.icon);
+    addIcon( self.game.action.icon);
   }
 
   function addIcon(icon) {
@@ -162,6 +164,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
   phases.setup = function () {
     self.game.phase = "setup";
+    console.log(self.game.phase,self.game);
     self.game.votes = {};
     self.game.totalScore = 0;
     buildHands(self.game.currentPlayer);
@@ -171,7 +174,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
   phases.choice = function () {
     self.game.phase = "choice";
-
+    console.log(self.game.phase,self.game);
     console.log("PHASE CHOICE");
     //loop through the two drawn cards
     var cPlayerCards = currentCards.map(function (c, i) {
@@ -199,18 +202,27 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
 
     eachPlayer(function (k) {
-      var playerEffects = chosenCard.effects[k];
+      var playerEffects =  self.game.action.effects[k];
       self.game.players[k].hand.issue = playerEffects;
       makeDocked(k, false);
     });
   }
 
   phases.scoring = function (passed) {
+
     self.game.phase = "scoring";
+    console.log(self.game.phase,self.game);
+    eachPlayer(function(k){
+      self.game.players[k].hand.issue.passed = passed;
+    });
+    self.game.main[chosenIndex].passed = passed;
+    self.game.action.passed = passed;
     if (passed) tally();
+
     nextPlayer();
     dockAll(true);
 
+    //TODO(Ray) please explain?  can we link this to a state transition?
     var timer1 = $interval(function () {
       $interval.cancel(timer1);
       dockAll(false);
@@ -218,19 +230,22 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
     var timer = $interval(function () {
       $interval.cancel(timer);
-      if(isFirstPlayer() && roll()){
-         phases.event();
-      }else{
+      if (isFirstPlayer() && roll()) {
+        phases.event();
+      } else {
         phases.setup();
       }
-      eachPlayer(function(p){makeDocked(p,true)})
+      eachPlayer(function (p) {
+        makeDocked(p, true)
+      })
 
-      makeDocked(self.game.currentPlayer,false);
-    }, 10000);
+      makeDocked(self.game.currentPlayer, false);
+    }, 200000);
   }
 
   phases.event = function () {
     self.game.phase = "event";
+    console.log(self.game.phase,self.game);
     $state.go('game.play.event');  // this is a mistake, no?
     makeDocked(self.game.currentPlayer,true);
     self.game.main = randomEvent();
@@ -264,8 +279,9 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     //set "chosen" on players choice card to true
     if (p == self.game.currentPlayer) {
       self.game.players[self.game.currentPlayer].hand.choices[i].chosen = true;
-      chosenCard = currentCards[i];
+      self.game.action = currentCards[i];
 
+      chosenIndex = i;
 
       self.game.main[+!Boolean(i)].hidden = true;
       self.game.main[i].chosen = true;

@@ -12,6 +12,7 @@ angular.module('ggcApp')
 
     $scope.trust = ggcUtil.trustSVG;
 
+    //TODO(Ray) move loading/playing to service
     $scope.confirmSfx = ngAudio.load("../sound/confirm.wav");
     $scope.votePassSfx = ngAudio.load("../sound/vote_pass.wav");
     $scope.voteBlockSfx = ngAudio.load("../sound/vote_block.wav");
@@ -131,6 +132,22 @@ angular.module('ggcApp')
           description: 'reset',
           callback: function(){
            location.reload();
+
+          }
+        })
+        .add({
+          combo: 'M',
+          description: 'Print Model',
+          callback: function(){
+            console.log($scope.game);
+
+          }
+        })
+        .add({
+          combo: 'm',
+          description: 'Pretty Print Model',
+          callback: function(){
+            console.log(ggcUtil.printObject($scope.game));
 
           }
         })

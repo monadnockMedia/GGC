@@ -63,6 +63,34 @@ app.filter('scoreIcons', function() {
   }
 });
 
+//filter score for panel, return icons and pro/con indicator
+app.filter('panelScore', function() {
+
+  return function(input, team) {
+    var output = "";
+    var icons = {
+      economy:"&#xe148",
+      energy:"&#xe162",
+      environment:"&#xe103"
+    };
+
+    if (team!=null) {
+      var ic = (input == 0) ? "fa-circle-o" : (input > 0) ? "fa-plus" : "fa-minus" ;
+      var scClass = (input == 0) ? "zilch" : (input > 0) ? "up" : "down" ;
+      var prefix =  "<i class = 'fa " + ic + " "+scClass+"'></i> ";
+
+      var score = "<span class='"+scClass+"'>";
+      for (var i = 0; i < Math.abs(input); i++) {
+        //output += "&#xe148 ";
+        score += icons[team]+" ";
+      }
+      score+= "</span>"
+      output = prefix+score;
+    }
+    return output;
+  }
+});
+
 app.filter('teamColor', function() {
   return function(input, team) {
     var output = "";
@@ -82,7 +110,7 @@ app.filter('teamColor', function() {
         return "#fca204";
 
       }
-
+    return output;
 
     }
   }

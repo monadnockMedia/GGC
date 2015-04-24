@@ -53,7 +53,7 @@
     opacity: 0;
   }
 
-  & h1,h2,h3,h4{
+  & .mainBar{
     letter-spacing: 3px;
     text-transform: capitalize;
     border-radius: .8em;
@@ -106,7 +106,7 @@
 #tampa.city { /*background:url(../../svg/citycornerR.svg) 64px -10px /.9em no-repeat; */ }
 img#highways { position: absolute; width: 70.5%; top: 2.5%; left: 18.35%; }
 .scenario-card:nth-of-type(1) {
-  & h1,h2,h3,h4{
+  & .mainBar{
     #textShadow.card.left;
   }
 
@@ -120,7 +120,7 @@ img#highways { position: absolute; width: 70.5%; top: 2.5%; left: 18.35%; }
   }
 }
 .scenario-card:nth-of-type(2) {
-  & h1,h2,h3,h4{
+  & .mainBar{
     #textShadow.card.right;
   }
   transform: perspective(1000px) rotateY(-25deg) translate(-50px);
@@ -273,3 +273,38 @@ score-board {
 .ggc-video-main{
   margin-top: -17%;
 }
+
+.stamp{
+
+  #textShadow.card;
+  position: absolute;
+  top: 30%;
+  transform:rotate(30deg);
+  #boxShadow.stamp;
+  padding: 1em;
+  background-color: fade(black, 20);
+  &.blocked{
+    left: 37%;
+
+
+    & h1{
+      font-size: 6em;
+      color: red;
+    }
+    border: 3px solid red;
+  }
+  &.passed{
+    left: 39%;
+
+    & h1{
+      font-size: 6em;
+      color: green;
+    }
+    border: 3px solid green;
+  }
+}
+
+.dim{
+  opacity: 0.5;
+}
+

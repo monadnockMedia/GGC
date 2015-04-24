@@ -65,20 +65,35 @@
 
 //mixins
 
-#textShadow{
-  &.panel{
-    text-shadow: 0 0 10px fade(white,90), -2px 4px 4px black;
+#textShadow {
+  &.panel {
+    text-shadow: 0 0 10px fade(white, 90), -2px 4px 4px black;
 
   }
-  &.card{
-    &.left{
-      text-shadow: 0 0 4px fade(white,50), -2px 2px 2px black;
-      -webkit-box-shadow: -1px 1px 4px fade(white,20), 1px -1px 4px @blue-black;
-    }
-    &.right{
-      text-shadow: 0 0 4px fade(white,51310), 2px 2px 2px black;
-      -webkit-box-shadow: 1px 1px 4px fade(white,20), -1px -1px 4px @blue-black;
+  &.up {
+    text-shadow: 0 0 10px fade(white, 90), -2px 4px 4px white;
+
   }
+  &.down {
+    text-shadow: 0 0 10px fade(black, 90), -2px 4px 4px black;
+
+  }
+  &.null {
+    text-shadow: 0 0 10px fade(grey, 90), -2px 4px 4px grey;
+
+  }
+  &.card {
+
+      text-shadow: 0 0 4px fade(white, 50), 0px 2px 2px black;
+
+    &.left {
+      text-shadow: 0 0 4px fade(white, 50), -2px 2px 2px black;
+      -webkit-box-shadow: -1px 1px 4px fade(white, 20), 1px -1px 4px @blue-black;
+    }
+    &.right {
+      text-shadow: 0 0 4px fade(white, 51310), 2px 2px 2px black;
+      -webkit-box-shadow: 1px 1px 4px fade(white, 20), -1px -1px 4px @blue-black;
+    }
 
   }
 }
@@ -86,7 +101,10 @@
 
 
 #boxShadow{
+  &.stamp{
+    box-shadow: 0 0 12px  white;
 
+  }
 }
 
 #flex{

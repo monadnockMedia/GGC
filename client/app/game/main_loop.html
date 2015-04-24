@@ -16,8 +16,8 @@
 
 
 <div id = "box-wrap-inner">
-  <div style="z-index:20;" class="scenario-card text-left" ng-repeat="mainCard in game.main track by $index"
-       ng-class="{invisible: mainCard.hidden, chosen: mainCard.chosen}" ng-hide="game.phase == 'scoring'">
+  <div  class="relative scenario-card text-left" ng-repeat="mainCard in game.main track by $index"
+       ng-class="{invisible: mainCard.hidden, chosen: mainCard.chosen, dim:game.phase=='scoring'}" >
     <div class="row">
       <div class="col-md-12">
         <h3 class=" mainBar {{mainCard.team}}" ng-bind-html="mainCard.action"></h3>
@@ -35,7 +35,13 @@
         <div ng-bind-html="mainCard.mainText"></div>
       </div>
     </div>
+
   </div>
+</div>
+
+<div ng-show = "game.phase == 'scoring'" class="stamp" ng-class="{passed:game.action.passed, blocked:!game.action.passed}">
+  <h1 class=jumbo" ng-show="game.action.passed">PASSED</h1>
+  <h1 class=jumbo" ng-hide="game.action.passed">BLOCKED</h1>
 </div>
 
 

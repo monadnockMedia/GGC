@@ -161,6 +161,30 @@ div.panelInnerEnergy {
   border: #a8aefa solid 1px;
   color: #a8aefa;
 }
+.score {
+  font-family: "Glyphicons Halflings";
+}
+.score .up {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.9), -2px 4px 4px white;
+}
+.score .down {
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.9), -2px 4px 4px black;
+}
+.score .zilch {
+  text-shadow: 0 0 10px rgba(128, 128, 128, 0.9), -2px 4px 4px grey;
+}
+.score .down {
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.9), -2px 4px 4px black;
+}
+.score.environment {
+  color: #2fd418;
+}
+.score.economy {
+  color: #fca204;
+}
+.score.energy {
+  color: #4e4efc;
+}
 .panelOuter {
   position: absolute;
   width: 375px;

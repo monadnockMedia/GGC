@@ -34,10 +34,7 @@
 .scenario-card.invisible {
   opacity: 0;
 }
-.scenario-card h1,
-.scenario-card h2,
-.scenario-card h3,
-.scenario-card h4 {
+.scenario-card .mainBar {
   letter-spacing: 3px;
   text-transform: capitalize;
   border-radius: .8em;
@@ -46,22 +43,13 @@
   line-height: 1.2em;
   color: white;
 }
-.scenario-card h1.energy,
-.scenario-card h2.energy,
-.scenario-card h3.energy,
-.scenario-card h4.energy {
+.scenario-card .mainBar.energy {
   background-color: #6060ea;
 }
-.scenario-card h1.economy,
-.scenario-card h2.economy,
-.scenario-card h3.economy,
-.scenario-card h4.economy {
+.scenario-card .mainBar.economy {
   background-color: #e39b1d;
 }
-.scenario-card h1.environment,
-.scenario-card h2.environment,
-.scenario-card h3.environment,
-.scenario-card h4.environment {
+.scenario-card .mainBar.environment {
   background-color: #41bc30;
 }
 .city {
@@ -101,10 +89,7 @@ img#highways {
   transform: perspective(1000px) rotateY(25deg) translate(50px);
   /*use translate or margin, not both*/
 }
-.scenario-card:nth-of-type(1) h1,
-.scenario-card:nth-of-type(1) h2,
-.scenario-card:nth-of-type(1) h3,
-.scenario-card:nth-of-type(1) h4 {
+.scenario-card:nth-of-type(1) .mainBar {
   text-shadow: 0 0 4px rgba(255, 255, 255, 0.5), -2px 2px 2px black;
   -webkit-box-shadow: -1px 1px 4px rgba(255, 255, 255, 0.2), 1px -1px 4px #223333;
 }
@@ -117,10 +102,7 @@ img#highways {
 .scenario-card:nth-of-type(2) {
   transform: perspective(1000px) rotateY(-25deg) translate(-50px);
 }
-.scenario-card:nth-of-type(2) h1,
-.scenario-card:nth-of-type(2) h2,
-.scenario-card:nth-of-type(2) h3,
-.scenario-card:nth-of-type(2) h4 {
+.scenario-card:nth-of-type(2) .mainBar {
   text-shadow: 0 0 4px #ffffff, 2px 2px 2px black;
   -webkit-box-shadow: 1px 1px 4px rgba(255, 255, 255, 0.2), -1px -1px 4px #223333;
 }
@@ -257,4 +239,40 @@ score-board {
 }
 .ggc-video-main {
   margin-top: -17%;
+}
+.stamp {
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.5), 0px 2px 2px black;
+  position: absolute;
+  top: 30%;
+  transform: rotate(30deg);
+  box-shadow: 0 0 12px  white;
+  padding: 1em;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.stamp.left {
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.5), -2px 2px 2px black;
+  -webkit-box-shadow: -1px 1px 4px rgba(255, 255, 255, 0.2), 1px -1px 4px #223333;
+}
+.stamp.right {
+  text-shadow: 0 0 4px #ffffff, 2px 2px 2px black;
+  -webkit-box-shadow: 1px 1px 4px rgba(255, 255, 255, 0.2), -1px -1px 4px #223333;
+}
+.stamp.blocked {
+  left: 37%;
+  border: 3px solid red;
+}
+.stamp.blocked h1 {
+  font-size: 6em;
+  color: red;
+}
+.stamp.passed {
+  left: 39%;
+  border: 3px solid green;
+}
+.stamp.passed h1 {
+  font-size: 6em;
+  color: green;
+}
+.dim {
+  opacity: 0.5;
 }

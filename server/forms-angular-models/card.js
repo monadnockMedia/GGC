@@ -59,7 +59,7 @@ CardSchema.set('toObject', {transform:  function(d,r,o){
 			e.player = k;
 
 			e.text = [getIcon(e.primaryScore)+e.primaryText, getIcon(e.secondaryScore)+e.secondaryText];
-			e.score = e.primaryScore + e.secondaryScore;
+			e.score = e.primaryScore + ( e.secondaryScore || 0);
 
 		})
 		r.effects = d.effects;
