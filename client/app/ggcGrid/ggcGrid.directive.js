@@ -44,7 +44,7 @@ angular.module('ggcApp')
         var hexGroup = svg.append("g").attr("class", "hexes");
 
         //watch statements
-        scope.$watch('grid', update);
+        //scope.$watch('grid', update);
 
 
 
@@ -74,7 +74,7 @@ angular.module('ggcApp')
         }
 
         function update(newGrid, oldGrid){
-          console.log("Grid Update");
+          //console.log("Grid Update");
         }
 
         function px(n){

@@ -2,11 +2,11 @@
 
 
 angular.module('ggcApp')
-  .controller('AppCtrl', function ($scope, $location, hotkeys, $http, dealer) {
+  .controller('AppCtrl', function ($scope, $location, hotkeys, $http, $rootScope) {
     $http.get('app/config.json').then(function (res) {
 
       $scope.config = res.data;
-      console.log("CONFIG", res);
+      $rootScope.config = res.data;
     })
 
 

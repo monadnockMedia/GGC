@@ -29,7 +29,7 @@ angular.module('ggcApp')
         var iconGroup = svg.append("g");
 
         attrs.$observe('iconId', function (value) {
-          console.log("$OBSERVE", value.length);
+          //console.log("$OBSERVE", value.length);
           if (value.length > 0) {
 
             iconGroup.selectAll("*").remove();

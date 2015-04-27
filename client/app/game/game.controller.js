@@ -34,10 +34,7 @@ angular.module('ggcApp')
     ///dealer.hands contains the current "card" views for each player, as well as the main player
     $scope.hands = dealer.hands;
 
-    $scope.voteCheck = new function(player) {
-      console.log(player);
-      return false;
-    }
+    
 
     bindKeys();
 
@@ -139,7 +136,7 @@ angular.module('ggcApp')
           combo: 'M',
           description: 'Print Model',
           callback: function(){
-            console.log($scope.game);
+            //console.log($scope.game);
 
           }
         })

@@ -8,7 +8,7 @@ angular.module('ggcApp')
       link: function (scope, element, attrs) {
 
         scope.grid = ggcMapper.grid;
-        scope.$watch("grid", function(v){console.log(v)});
+        //scope.$watch("grid", function(v){console.log(v)});
 
 
       }

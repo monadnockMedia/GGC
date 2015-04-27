@@ -14,7 +14,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   var self = this;
   var chance = 3;
   var shuffle = ggcUtil.shuffle;
-  console.log("DEALER");
+  //console.log("DEALER");
   ///
   ///Setup the "fresh" deck
   ///
@@ -49,7 +49,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
     calculatePercentage();
     setCurrentPlayer(self.game.playerIndex);
-    console.log("deck pushed", self.decks, self.hands);
+    //console.log("deck pushed", self.decks, self.hands);
     phases.setup();
   }
 
@@ -164,7 +164,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
   phases.setup = function () {
     self.game.phase = "setup";
-    console.log(self.game.phase,self.game);
+    //console.log(self.game.phase,self.game);
     self.game.votes = {};
     self.game.totalScore = 0;
     buildHands(self.game.currentPlayer);
@@ -174,8 +174,8 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
   phases.choice = function () {
     self.game.phase = "choice";
-    console.log(self.game.phase,self.game);
-    console.log("PHASE CHOICE");
+    //console.log(self.game.phase,self.game);
+    //console.log("PHASE CHOICE");
     //loop through the two drawn cards
     var cPlayerCards = currentCards.map(function (c, i) {
       var copy = JSON.parse(JSON.stringify(c));
@@ -211,7 +211,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   phases.scoring = function (passed) {
 
     self.game.phase = "scoring";
-    console.log(self.game.phase,self.game);
+    //(self.game.phase,self.game);
     eachPlayer(function(k){
       self.game.players[k].hand.issue.passed = passed;
     });
@@ -245,7 +245,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
   phases.event = function () {
     self.game.phase = "event";
-    console.log(self.game.phase,self.game);
+    //console.log(self.game.phase,self.game);
     $state.go('game.play.event');  // this is a mistake, no?
     makeDocked(self.game.currentPlayer,true);
     self.game.main = randomEvent();
@@ -306,9 +306,9 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
       }
       var passed = (ct >= 2);
 
-      console.log(
-        (passed) ? "PASSED" : "FAILED", ct
-      );
+      //console.log(
+      //  (passed) ? "PASSED" : "FAILED", ct
+      //);
       phases.scoring(passed);
     }
   };

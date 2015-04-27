@@ -4,12 +4,12 @@ angular.module('ggcApp')
   .service('ggcUtil', function ($http, $sce) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     this.getCards = function () {
-      console.log("Service.getCards");
+      //console.log("Service.getCards");
       return $http.get('/api/cards'); //custom endpoint
     };
 
     this.getEvents = function () {
-      console.log("Service.getEvents");
+      //console.log("Service.getEvents");
       return $http.get('/api/Event'); //fng endpoint
     };
 
