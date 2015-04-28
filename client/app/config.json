@@ -11,5 +11,12 @@
     "width": 400,
     "height":400
   },
-  "hello":"foo"
+  "dealer":{
+    "event_chance":3,
+    "duration":{
+      "choice":10000,
+      "vote":10000,
+      "scoring":5000
+    }
+  }
 }

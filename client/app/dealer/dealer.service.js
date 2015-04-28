@@ -4,15 +4,15 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   // AngularJS will instantiate a singleton by calling "new" on this function
 
   this.decks = {};
-
   this.game = {main: {}, players: {}, currentPlayer: {}, playerIndex: 0, action:{}};
   this.game.score = {};
   this.game.phase = "none";
+  var config = $rootScope.config.dealer;
   var events = [];
   var chosenIndex;
   var currentCards;
   var self = this;
-  var chance = 3;
+  var chance = config.event_chance;
   var shuffle = ggcUtil.shuffle;
   //console.log("DEALER");
   ///
@@ -21,7 +21,6 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   $http.get('/api/cards/grouped').then(function (r) {
     self.players = Object.keys(r.data);
     self.freshDecks = r.data;
-
     init();
   });
   ggcUtil.getEvents().then(function (r) {
@@ -41,7 +40,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     eachPlayer(function (k) {
       pushDeck(k);
       var rand = ~~(Math.random() * 4 + 3);
-      rand = (k == "environment") ? ~~(rand/4)  : rand;
+      rand = (k == "environment") ? Math.max(~~(rand/4),1)  : rand;
       self.game.totalScore += rand;
       self.game.score[k] = {i: rand, p: 0};
       self.game.players[k] = {hand: {choices: [], issue: {}}, docked: true};
@@ -90,10 +89,18 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
   function makeDocked(p,b){
     self.game.players[p].docked = b;
+    console.log("MakeDocked",p,b);
   }
 
   function dockAll(b){
     eachPlayer(function(p){makeDocked(p,b)});
+  }
+
+  function dockOne(p, b){
+    eachPlayer(function(_p){
+      var docked = (_p===p) ? b : !b ;
+      makeDocked(_p,docked);
+    });
   }
 
   this.dockAll = dockAll;
@@ -105,7 +112,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     eachPlayer(function (pp) {
       //for each player, if they are not current, set docked to true;
       self.game.players[pp].currentPlayer = (pp==p);
-      makeDocked(pp,!(pp==p));
+      //makeDocked(pp,!(pp==p));
       //self.game.players[pp].docked = !(pp==p);
     })
   }
@@ -163,16 +170,20 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   var phases = {};
 
   phases.setup = function () {
+    dockAll(false);
     self.game.phase = "setup";
     //console.log(self.game.phase,self.game);
     self.game.votes = {};
     self.game.totalScore = 0;
     buildHands(self.game.currentPlayer);
     self.drawTwo(self.game.currentPlayer);
-    makeDocked(self.game.currentPlayer,false);
+
   }
 
   phases.choice = function () {
+
+    dockOne(self.game.currentPlayer, false);
+
     self.game.phase = "choice";
     //console.log(self.game.phase,self.game);
     //console.log("PHASE CHOICE");
@@ -204,8 +215,8 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     eachPlayer(function (k) {
       var playerEffects =  self.game.action.effects[k];
       self.game.players[k].hand.issue = playerEffects;
-      makeDocked(k, false);
     });
+    dockAll(false);
   }
 
   phases.scoring = function (passed) {
@@ -220,7 +231,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     if (passed) tally();
 
     nextPlayer();
-    dockAll(true);
+
 
     //TODO(Ray) please explain?  can we link this to a state transition?
     var timer1 = $interval(function () {
@@ -235,27 +246,19 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
       } else {
         phases.setup();
       }
-      eachPlayer(function (p) {
-        makeDocked(p, true)
-      })
-
-      makeDocked(self.game.currentPlayer, false);
-    }, 200000);
+    }, config.duration.scoring);
   }
 
   phases.event = function () {
+    dockAll(false);
     self.game.phase = "event";
     //console.log(self.game.phase,self.game);
     $state.go('game.play.event');  // this is a mistake, no?
-    makeDocked(self.game.currentPlayer,true);
+
     self.game.main = randomEvent();
 
   }
 
-  phases.afterMath = function(){
-    //TODO(Ryan) discuss aftermath of random events
-    self.game.phase = "aftermath";
-  }
 
 ///dealer methods
   //pull two cards from the deck
@@ -309,6 +312,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
       //console.log(
       //  (passed) ? "PASSED" : "FAILED", ct
       //);
+      dockAll(true);
       phases.scoring(passed);
     }
   };
