@@ -29,23 +29,32 @@
 };
 
 
+ .scenarioWrap{
+   overflow: hidden;
+   padding: 0 20px 0 30px;
 
+   margin: 10px;
+   margin-left: 0;
+   -webkit-clip-path: url(#cliphex);
+   background-color: @deep-blue;
+   width: 100%;
+   height:100%;
+ }
 .scenario-card {
+
   -webkit-transition: 1s all;
   -webkit-flex: auto;
   height: 250px;
   width: 550px;
 
-  background: url("../../svg/infoPanel.svg") no-repeat  center ;
-  background-size: 580px 850px;
+  //background: url("../../svg/infoPanel.svg") no-repeat  center ;
+  //background-size: 580px 850px;
   color: white;
 
 
-  padding: 0 20px 0 30px;
 
-  margin: 10px;
   transform-style: preserve-3d;
-  margin-left: 0;
+
 
 
 
@@ -54,11 +63,14 @@
   }
 
   & .mainBar{
+    position: relative;
     letter-spacing: 3px;
     text-transform: capitalize;
-    border-radius: .8em;
-    padding:10px;
-    border: 1px solid @blue-black;
+    //border-radius: .8em;
+    padding: 5px 25% 5px 30%;
+    margin-left: -25%;
+    width: 150%;
+    //border: 1px solid @blue-black;
     line-height: 1.2em;
     color: white;
     &.energy{
@@ -70,6 +82,7 @@
     &.environment{
       .bg-environment;
     }
+
 
   }
 
