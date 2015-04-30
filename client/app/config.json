@@ -11,12 +11,14 @@
     "width": 400,
     "height":400
   },
-  "dealer":{
+  "game":{
     "event_chance":3,
+    "rounds": 1,
+    "balanceThreshold":4,
     "duration":{
       "choice":10000,
       "vote":10000,
-      "scoring":5000
+      "scoring":500
     }
   }
 }

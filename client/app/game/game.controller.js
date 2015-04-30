@@ -18,7 +18,7 @@ angular.module('ggcApp')
     $scope.voteBlockSfx = ngAudio.load("../sound/vote_block.wav");
     $scope.wooshSfx = ngAudio.load("../sound/digital_woosh.wav");
 
-
+    $scope.printObject = ggcUtil.printObject;
 
     $scope.dealer = dealer;
     $scope.game = dealer.game;
@@ -34,7 +34,7 @@ angular.module('ggcApp')
     ///dealer.hands contains the current "card" views for each player, as well as the main player
     $scope.hands = dealer.hands;
 
-    
+
 
     bindKeys();
 
