@@ -14,6 +14,8 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   var self = this;
   var chance = config.event_chance;
   var shuffle = ggcUtil.shuffle;
+  var tutorialIcons;
+
   //console.log("DEALER");
   ///
   ///Setup the "fresh" deck
@@ -23,9 +25,21 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     self.freshDecks = r.data;
     init();
   });
+
   ggcUtil.getEvents().then(function (r) {
     events = r.data;
-  })
+  });
+
+  ggcUtil.getIcons().then(function (r) {
+    tutorialIcons = r.data;
+    console.log("Tutorial Icons: ", tutorialIcons);
+  });
+
+  function placeTutIcon(i) {
+      addIcon(tutorialIcons[i]);
+  }
+
+  this.placeTutIcon = placeTutIcon;
 
 
 ///utility functions
@@ -166,6 +180,8 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     ggcMapper.addPriorityIcon(icon);
 
   }
+
+  this.addIcon = addIcon;
 
 
 ///Phases

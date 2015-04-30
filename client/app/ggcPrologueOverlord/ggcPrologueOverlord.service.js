@@ -15,6 +15,26 @@ angular.module('ggcApp')
         onStart: function(){dealer.dockAll(true)},
         onEnd: function(){$(".environment.fullRetract").removeClass("fullRetract")},
       }).code({
+        start: 2,
+        end: 2.75,
+        onStart: function(){dealer.placeTutIcon(0);},
+        onEnd: function(){dealer.placeTutIcon(10);},
+      }).code({
+        start: 3.5,
+        end: 4.25,
+        onStart: function(){dealer.placeTutIcon(2);},
+        onEnd: function(){dealer.placeTutIcon(9);},
+      }).code({
+        start: 5,
+        end: 5.75,
+        onStart: function(){dealer.placeTutIcon(8);},
+        onEnd: function(){dealer.placeTutIcon(5);},
+      }).code({
+        start: 6.5,
+        end: 7.25,
+        onStart: function(){dealer.placeTutIcon(6);},
+        onEnd: function(){dealer.placeTutIcon(7);},
+      }).code({
         start: 12.75,
         end: 13.5,
         onStart: function(){$(".economy.fullRetract").removeClass("fullRetract")},
