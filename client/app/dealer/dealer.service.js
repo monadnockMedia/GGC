@@ -104,6 +104,8 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   }
 
   this.dockAll = dockAll;
+  this.dockOne = dockOne;
+  this.makeDocked = makeDocked;
 
   function setCurrentPlayer(i) {
     //p is current player name
@@ -168,6 +170,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
 ///Phases
   var phases = {};
+  this.phases = phases;
 
   phases.setup = function () {
     dockAll(false);
@@ -291,7 +294,6 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
       phases.vote(i);
     }
-
   }
 
   ///called when each player votes
@@ -313,7 +315,10 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
       //  (passed) ? "PASSED" : "FAILED", ct
       //);
       dockAll(true);
-      phases.scoring(passed);
+      if ($state.current.name == "game.play.loop") {
+        phases.scoring(passed);
+      }
+
     }
   };
   //random event video is over
