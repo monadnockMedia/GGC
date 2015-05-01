@@ -94,8 +94,6 @@ p.tab-body {
   position: absolute;
   width: 375px;
   height: 350px;
-  /*top:0px;
-top:220px;*/
   top: 200px;
   -webkit-transform-style: preserve-3d;
   transition: all 0.2s ease-in-out;
@@ -109,35 +107,24 @@ top:220px;*/
 @font-face {
   font-family: '232MKB';
   src: url('../../assets/fonts/232MKSD_winTT/232MKB__.TTF') format('truetype');
-  
-  /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-  /*src: url('../fonts/232MKSD_winTT/232MKM__.TTF') format('truetype');  Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
 @font-face {
   font-family: '232MKUL';
   src: url('../../assets/fonts/232MKSD_winTT/232MKUL_.TTF') format('truetype');
-  
-  /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-  /*src: url('../fonts/232MKSD_winTT/232MKM__.TTF') format('truetype');  Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
 div.topPlane,
 div.bottomPlane {
   position: absolute;
   width: 375px;
   height: 450px;
-  /*opacity:.2;*/
 }
 div.topPlane {
-  /*border:white solid 1px;*/
   background: url("../../svg/paneltop_n.svg") 50% 0 no-repeat;
   -webkit-transform: translateZ(25px);
-  /* Chrome, Safari, Opera */
 }
 div.bottomPlane {
-  /*border:blue solid 1px;*/
   background: url("../../svg/panelbottom_n.svg") 50% 0 no-repeat;
   -webkit-transform: translateZ(10px);
-  /* Chrome, Safari, Opera */
 }
 div.panelInnerEnvironment,
 div.panelInnerEconomy,
@@ -206,6 +193,10 @@ div.panelInnerEnergy {
   -webkit-transform: rotateZ(29deg);
   transition: all 0.2s ease-in-out;
 }
+.panelOuter.environment.fullRetract {
+  top: 980px;
+  transition: all 0.2s ease-in-out;
+}
 .panelOuter.environment i,
 .panelOuter.environment a {
   color: #2fd418;
@@ -226,6 +217,10 @@ div.panelInnerEnergy {
 .panelOuter.economy.retract {
   left: 775px;
   top: 990px;
+  transition: all 0.2s ease-in-out;
+}
+.panelOuter.economy.fullRetract {
+  top: 1100px;
   transition: all 0.2s ease-in-out;
 }
 .panelOuter.economy i,
@@ -250,6 +245,10 @@ div.panelInnerEnergy {
   right: 310px;
   top: 875px;
   -webkit-transform: rotateZ(-29deg);
+  transition: all 0.2s ease-in-out;
+}
+.panelOuter.energy.fullRetract {
+  top: 985px;
   transition: all 0.2s ease-in-out;
 }
 .panelOuter.energy i,

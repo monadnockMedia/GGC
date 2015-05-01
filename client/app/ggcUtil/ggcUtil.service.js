@@ -44,6 +44,7 @@ angular.module('ggcApp')
     };
 
     this.shuffle = function (array) {
+
       var copy = [],
         n = array.length,
         i;

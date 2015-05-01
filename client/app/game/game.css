@@ -246,6 +246,9 @@ score-board {
 .ggc-video-main {
   margin-top: -17%;
 }
+.ggc-video-prologue {
+  margin-top: -22%;
+}
 .stamp {
   text-shadow: 0 0 4px rgba(255, 255, 255, 0.5), 0px 2px 2px black;
   position: absolute;

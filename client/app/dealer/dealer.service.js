@@ -14,6 +14,8 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   var self = this;
   var chance = config.event_chance;
   var shuffle = ggcUtil.shuffle;
+  var tutorialIcons;
+
   //console.log("DEALER");
   ///
   ///Setup the "fresh" deck
@@ -23,9 +25,21 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     self.freshDecks = r.data;
     init();
   });
+
   ggcUtil.getEvents().then(function (r) {
     events = r.data;
-  })
+  });
+
+  ggcUtil.getIcons().then(function (r) {
+    tutorialIcons = r.data;
+    console.log("Tutorial Icons: ", tutorialIcons);
+  });
+
+  function placeTutIcon(i) {
+      addIcon(tutorialIcons[i]);
+  }
+
+  this.placeTutIcon = placeTutIcon;
 
 
 ///utility functions
@@ -104,6 +118,8 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   }
 
   this.dockAll = dockAll;
+  this.dockOne = dockOne;
+  this.makeDocked = makeDocked;
 
   function setCurrentPlayer(i) {
     //p is current player name
@@ -165,9 +181,12 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
   }
 
+  this.addIcon = addIcon;
+
 
 ///Phases
   var phases = {};
+  this.phases = phases;
 
   phases.setup = function () {
     dockAll(false);
@@ -291,7 +310,6 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
       phases.vote(i);
     }
-
   }
 
   ///called when each player votes
@@ -313,7 +331,10 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
       //  (passed) ? "PASSED" : "FAILED", ct
       //);
       dockAll(true);
-      phases.scoring(passed);
+      if ($state.current.name == "game.play.loop") {
+        phases.scoring(passed);
+      }
+
     }
   };
   //random event video is over
