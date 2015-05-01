@@ -6,8 +6,12 @@ app
   });
 
 app
-  .controller('ThreeCtrl', function ($scope) {
+  .controller('EndingCtrl', function ($scope, ggcUtil, $filter) {
     $scope.message = 'Hello';
+    ggcUtil.getEndings().then(function(d){
+      debugger;
+      $filter("endObject")(d.data);
+    })
   });
 
 app

@@ -95,6 +95,9 @@ img#highways {
   transform: perspective(1000px) rotateY(25deg) translate(50px);
   /*use translate or margin, not both*/
 }
+.scenario-card:nth-of-type(1).clearTransform {
+  transform: perspective(0) rotateY(0) translate(0);
+}
 .scenario-card:nth-of-type(1) .mainBar {
   text-shadow: 0 0 4px rgba(255, 255, 255, 0.5), -2px 2px 2px black;
   -webkit-box-shadow: -1px 1px 4px rgba(255, 255, 255, 0.2), 1px -1px 4px #223333;

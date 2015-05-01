@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .controller('GameCtrl', function ($scope, $http, ngAudio, ggcUtil, $rootScope, dealer, hotkeys) {
+  .controller('GameCtrl', function ($scope, $http, ngAudio, ggcUtil, $rootScope, dealer, hotkeys, $location) {
     $scope.preview = {};
     $scope.preview.hideNavbar = false;
 
@@ -125,10 +125,10 @@ angular.module('ggcApp')
           }
         })
         .add({
-          combo: '7',
+          combo: 'R',
           description: 'reset',
           callback: function(){
-           location.reload();
+           $location.url("/game/play/prologue");
 
           }
         })

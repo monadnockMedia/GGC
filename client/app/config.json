@@ -14,7 +14,7 @@
   "game":{
     "event_chance":3,
     "rounds": 1,
-    "balanceThreshold":4,
+    "balanceThreshold":1,
     "duration":{
       "choice":10000,
       "vote":10000,

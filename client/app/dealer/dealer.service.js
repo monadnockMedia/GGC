@@ -14,6 +14,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   var self = this;
   var chance = config.event_chance;
   var shuffle = ggcUtil.shuffle;
+  var endings = {};
   //console.log("DEALER");
   ///
   ///Setup the "fresh" deck
@@ -23,6 +24,11 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     self.freshDecks = r.data;
     init();
   });
+
+  ggcUtil.getEndings().then(function(d){
+    endings = $filter("endObject")(d.data);
+  })
+
   ggcUtil.getEvents().then(function (r) {
     events = r.data;
   })
@@ -168,53 +174,40 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   }
 
   function gameOver() {
+    self.game.phase = "ending";
     dockAll(true);
-    self.game.outcome = calculateOutcome(self.game.score);
+    var oc = calculateOutcome(self.game.score);
+    self.game.outcome = (oc.balanced) ? endings.balanced : endings.unbalanced[oc.team];
     $state.go('game.play.endgame');
   }
 
   function calculateOutcome(score) {
     var outcome = {};
     var average = 0;
-    var spread = {};
-    var orderedSpread =[];
+    var spread = [];
+
     eachPlayer(sumScores);
     average /= 3;
-    eachPlayer(makeSpread); //subtrack average from each score
-    eachPlayer(orderSpread); //put in order
-
+    eachPlayer(makeSpread); //subtract average from each score
+    spread.sort(function(a,b){return a.spread - b.spread}).reverse();
+    //eachPlayer(orderSpread); //put in order
     outcome.balanced = checkBalance();
-    outcome.tilt = orderedSpread[0].name;
+    outcome.team = spread[0].team;
+
     return outcome;
 
-    function orderSpread(p){
-      //if orderedSpread is undefined
-      var oSpread = {name:p,spread:spread[p]};
-      if(!orderedSpread[0]){
-        //first
-        orderedSpread[0] = oSpread //add to beginning
-      }else{
-        if(spread[p] >= orderedSpread[0].spread ){
-          //better
-          orderedSpread.unshift(oSpread);
-        }else{
-          //worse
-          orderedSpread.push(oSpread);
-        }
-      }
-    }
 
     function sumScores(p){
       average += score[p].i;
     };
 
     function makeSpread(p){
-      spread[p] = score[p].i - average;
+      spread.push( {team:p,spread:score[p].i - average})  ;
     }
 
     function checkBalance(){
-      var highSpread = orderedSpread[0].spread;
-      var lowSpread = orderedSpread[2].spread;
+      var highSpread = spread[0].spread;
+      var lowSpread = spread[2].spread;
       var spreadWidth = highSpread - lowSpread;
       return (spreadWidth <= config.balanceThreshold);
     }
@@ -288,10 +281,10 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     if (passed) tally(); //maybe need a deferred here
 
     //TODO(Ray) please explain?  can we link this to a state transition?
-    var timer1 = $interval(function () {
-      $interval.cancel(timer1);
-      dockAll(false);
-    }, 1000);
+    //var timer1 = $interval(function () {
+    //  $interval.cancel(timer1);
+    //  dockAll(false);
+    //}, 1000);
 
     nextPlayer();
 
