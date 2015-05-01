@@ -24,7 +24,7 @@
   margin: 10px;
   margin-left: 0;
   -webkit-clip-path: url(#cliphex);
-  background-color: #335e5c;
+  background-color: rgba(51, 94, 92, 0.85);
   width: 100%;
   height: 100%;
 }
