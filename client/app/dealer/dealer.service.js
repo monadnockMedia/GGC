@@ -339,7 +339,6 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   }
 
   phases.endRound = function(){
-      debugger;
       var timedCb;
 
       if (self.game.round == config.rounds){
