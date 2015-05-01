@@ -1,6 +1,6 @@
 
 
-<div class="panelOuter {{name}} fullRetract" ng-class="{'retract':player.docked}">
+<div class="panelOuter {{name}}" ng-class="{'retract':player.docked, 'fullRetract':currentState != 'game.play.loop'}">
   <div class="panelInner{{name}}" > <!--ng-class={true: 'extended', false: 'none'}[player.currentPlayer == false]-->
     <div class="topPlane"></div>
     <div class="bottomPlane">

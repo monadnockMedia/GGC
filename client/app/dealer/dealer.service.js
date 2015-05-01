@@ -339,7 +339,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   }
 
   phases.endRound = function(){
-
+      debugger;
       var timedCb;
 
       if (self.game.round == config.rounds){
@@ -409,7 +409,8 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
       //  (passed) ? "PASSED" : "FAILED", ct
       //);
       dockAll(true);
-      if ($state.current.name == "game.play.loop") {
+
+      if ($rootScope.currentState == "game.play.loop") {
         phases.scoring(passed);
       }
 

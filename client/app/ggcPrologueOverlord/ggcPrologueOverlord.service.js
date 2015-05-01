@@ -6,7 +6,10 @@ angular.module('ggcApp')
     var pop;
     this.makePop = function(v){
       pop = Popcorn(v);
-      pop.on("ended", function(){$state.go("game.play.loop")});
+      pop.on("ended", function(){
+        $state.go("game.play.loop");
+        dealer.dockOne(dealer.game.currentPlayer,false);
+      });
       pop.play();
 
       pop.code({

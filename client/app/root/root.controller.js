@@ -29,6 +29,13 @@ angular.module('ggcApp')
       return route === $location.path();
     };
 
+    $rootScope.$on('$stateChangeStart',
+      function(event, toState, toParams, fromState, fromParams){
+        $rootScope.currentState = toState.name;
+        $scope.currentState = toState.name;
+
+      })
+
     hotkeys.add({
       combo: 'P',
       description: 'Preview Mode',
