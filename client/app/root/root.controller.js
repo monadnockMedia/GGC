@@ -21,7 +21,7 @@ angular.module('ggcApp')
       'link': '/preview'
     }];
 
-    $scope.models = ["Card", "Icon", "Content", "Test", "Event"];
+    $scope.models = ["Card", "Icon", "Ending", "Event"];
 
     $scope.isCollapsed = true;
 

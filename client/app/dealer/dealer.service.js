@@ -4,17 +4,21 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   // AngularJS will instantiate a singleton by calling "new" on this function
 
   this.decks = {};
-  this.game = {main: {}, players: {}, currentPlayer: {}, playerIndex: 0, action:{}};
+  this.game = {main: {}, players: {}, currentPlayer: {}, playerIndex: 0, action: {}, round:1};
   this.game.score = {};
   this.game.phase = "none";
-  var config = $rootScope.config.dealer;
+  var config = $rootScope.config.game;
   var events = [];
   var chosenIndex;
   var currentCards;
   var self = this;
   var chance = config.event_chance;
   var shuffle = ggcUtil.shuffle;
-  var tutorialIcons;
+
+  var tutorialIcons = [];
+
+
+  var endings = {};
 
   //console.log("DEALER");
   ///
@@ -25,6 +29,12 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     self.freshDecks = r.data;
     init();
   });
+
+
+  ggcUtil.getEndings().then(function(d){
+    endings = $filter("endObject")(d.data);
+  })
+
 
   ggcUtil.getEvents().then(function (r) {
     events = r.data;
@@ -54,7 +64,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     eachPlayer(function (k) {
       pushDeck(k);
       var rand = ~~(Math.random() * 4 + 3);
-      rand = (k == "environment") ? Math.max(~~(rand/4),1)  : rand;
+      rand = (k == "environment") ? Math.max(~~(rand / 4), 1) : rand;
       self.game.totalScore += rand;
       self.game.score[k] = {i: rand, p: 0};
       self.game.players[k] = {hand: {choices: [], issue: {}}, docked: true};
@@ -92,7 +102,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   }
 
 
-  function isFirstPlayer(){
+  function isFirstPlayer() {
     var test = self.game.currentPlayer == self.players[0];
     return test;
   }
@@ -101,19 +111,21 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     self.players.forEach(f);
   }
 
-  function makeDocked(p,b){
+  function makeDocked(p, b) {
     self.game.players[p].docked = b;
-    console.log("MakeDocked",p,b);
+    //console.log("MakeDocked", p, b);
   }
 
-  function dockAll(b){
-    eachPlayer(function(p){makeDocked(p,b)});
+  function dockAll(b) {
+    eachPlayer(function (p) {
+      makeDocked(p, b)
+    });
   }
 
-  function dockOne(p, b){
-    eachPlayer(function(_p){
-      var docked = (_p===p) ? b : !b ;
-      makeDocked(_p,docked);
+  function dockOne(p, b) {
+    eachPlayer(function (_p) {
+      var docked = (_p === p) ? b : !b;
+      makeDocked(_p, docked);
     });
   }
 
@@ -127,7 +139,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     self.game.currentPlayer = p;
     eachPlayer(function (pp) {
       //for each player, if they are not current, set docked to true;
-      self.game.players[pp].currentPlayer = (pp==p);
+      self.game.players[pp].currentPlayer = (pp == p);
       //makeDocked(pp,!(pp==p));
       //self.game.players[pp].docked = !(pp==p);
     })
@@ -165,14 +177,14 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     var score = self.game.score;
 
     eachPlayer(function (p) {
-      score[p].i +=  self.game.action.effects[p].score;
+      score[p].i += self.game.action.effects[p].score;
       self.game.totalScore += score[p].i;
 
-      self.game.players[p].hand.issue.scoreHTML = $filter("panelScore")(self.game.players[p].hand.issue.score,p);
+      self.game.players[p].hand.issue.scoreHTML = $filter("panelScore")(self.game.players[p].hand.issue.score, p);
     });
 
     calculatePercentage();
-    addIcon( self.game.action.icon);
+    addIcon(self.game.action.icon);
   }
 
   function addIcon(icon) {
@@ -181,7 +193,51 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
   }
 
+
   this.addIcon = addIcon;
+
+  function gameOver() {
+    self.game.phase = "ending";
+    dockAll(true);
+    var oc = calculateOutcome(self.game.score);
+    self.game.outcome = (oc.balanced) ? endings.balanced : endings.unbalanced[oc.team];
+    $state.go('game.play.endgame');
+  }
+
+  function calculateOutcome(score) {
+    var outcome = {};
+    var average = 0;
+    var spread = [];
+
+    eachPlayer(sumScores);
+    average /= 3;
+    eachPlayer(makeSpread); //subtract average from each score
+    spread.sort(function(a,b){return a.spread - b.spread}).reverse();
+    //eachPlayer(orderSpread); //put in order
+    outcome.balanced = checkBalance();
+    outcome.team = spread[0].team;
+
+    return outcome;
+
+
+    function sumScores(p){
+      average += score[p].i;
+    };
+
+    function makeSpread(p){
+      spread.push( {team:p,spread:score[p].i - average})  ;
+    }
+
+    function checkBalance(){
+      var highSpread = spread[0].spread;
+      var lowSpread = spread[2].spread;
+      var spreadWidth = highSpread - lowSpread;
+      return (spreadWidth <= config.balanceThreshold);
+    }
+
+
+  }
+
 
 
 ///Phases
@@ -232,7 +288,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
 
     eachPlayer(function (k) {
-      var playerEffects =  self.game.action.effects[k];
+      var playerEffects = self.game.action.effects[k];
       self.game.players[k].hand.issue = playerEffects;
     });
     dockAll(false);
@@ -242,30 +298,34 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
     self.game.phase = "scoring";
     //(self.game.phase,self.game);
-    eachPlayer(function(k){
+    eachPlayer(function (k) {
       self.game.players[k].hand.issue.passed = passed;
     });
     self.game.main[chosenIndex].passed = passed;
     self.game.action.passed = passed;
-    if (passed) tally();
+    if (passed) tally(); //maybe need a deferred here
+
+    //TODO(Ray) please explain?  can we link this to a state transition?
+    //var timer1 = $interval(function () {
+    //  $interval.cancel(timer1);
+    //  dockAll(false);
+    //}, 1000);
 
     nextPlayer();
 
 
-    //TODO(Ray) please explain?  can we link this to a state transition?
-    var timer1 = $interval(function () {
-      $interval.cancel(timer1);
-      dockAll(false);
-    }, 1000);
-
-    var timer = $interval(function () {
-      $interval.cancel(timer);
-      if (isFirstPlayer() && roll()) {
-        phases.event();
-      } else {
+    if (isFirstPlayer()){
+      phases.endRound();
+    }else{
+      var timer = $interval(function () {
+        $interval.cancel(timer);
         phases.setup();
-      }
-    }, config.duration.scoring);
+      }, config.duration.scoring)
+    }
+
+
+
+
   }
 
   phases.event = function () {
@@ -276,6 +336,23 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
     self.game.main = randomEvent();
 
+  }
+
+  phases.endRound = function(){
+
+      var timedCb;
+
+      if (self.game.round == config.rounds){
+        gameOver();
+      }else{
+        self.game.round++;
+        timedCb = (roll()) ? phases.event() : phases.setup();
+        var timer = $interval(function () {
+          $interval.cancel(timer);
+          timedCb();
+        }, config.duration.scoring)
+
+      }
   }
 
 
@@ -295,6 +372,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     //call the first play phase
     phases.choice();
   }
+
 
   ///currentPlayer Chooses an issue
   this.choose = function (p, i) {
@@ -338,7 +416,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     }
   };
   //random event video is over
-  this.videoEventEnd = function(){
+  this.videoEventEnd = function () {
     $state.go("game.play.loop");
     phases.setup();
   }

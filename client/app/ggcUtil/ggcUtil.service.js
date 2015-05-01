@@ -13,6 +13,11 @@ angular.module('ggcApp')
       return $http.get('/api/Event'); //fng endpoint
     };
 
+    this.getEndings = function () {
+      //console.log("Service.getEvents");
+      return $http.get('/api/Ending'); //fng endpoint
+    };
+
     this.getIcons = function (_id) {
       var res;
       if (_id) {

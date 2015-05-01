@@ -8,7 +8,7 @@ app.filter('percent', function () {
   });
 
 app.filter('capitalize', function() {
-  return function(input, scope) {
+  return function(input) {
     if (input!=null)
     input = input.toLowerCase();
     return input.substring(0,1).toUpperCase()+input.substring(1);
@@ -115,3 +115,18 @@ app.filter('teamColor', function() {
     }
   }
 });
+
+app.filter('endObject', function(){
+  return function(_endings){
+
+    var ret = {balanced:{},unbalanced:{}};
+    _endings.forEach(function(e){
+      if(e.balanced){
+        ret.balanced = e;
+      }else{
+        ret.unbalanced[e.team] = e;
+      }
+    });
+    return ret;
+  }
+})

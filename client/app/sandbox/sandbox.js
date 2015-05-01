@@ -17,5 +17,9 @@ angular.module('ggcApp')
         url: '/three',
         templateUrl: 'app/sandbox/three.html',
         controller: 'ThreeCtrl'
-      });
+      }).state('sandbox.end', {
+        url: '/end',
+        templateUrl: 'app/sandbox/end.html',
+        controller: 'EndingCtrl'
+      });;
   });

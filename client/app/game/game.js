@@ -76,6 +76,14 @@ angular.module('ggcApp')
                  "main@game": {templateUrl: 'app/game/event.html'}
                }
 
+             },
+             {
+               name: "endgame",
+               url: '/endgame',
+               views: {
+                 "main@game": {templateUrl: 'app/game/end.html'}
+               }
+
              }
            ]
 
