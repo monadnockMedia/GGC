@@ -3,13 +3,11 @@ Great Gulf Challenge
 ## Getting Started
 * run `npm install` and `bower install` to install necessary (untracked) modules.
 * ~~clone the data submodule: `git submodule add https://github.com/monadnockMedia/GGC-data.git`~~
-* clone the data:
-  * `cd GGC` 
-  * `git clone https://github.com/monadnockMedia/GGC-data.git`
 * install mongodb with homebrew: `brew install mongodb`
 
 ## Running
-* start mongodb in daemon mode ` mongod --fork --logpath ./GGC-data/mongo.log --dbpath ./GGC-data/db`
+* You will need the database
+* start mongodb in daemon mode ` mongod --fork --logpath ./GGC-data/mongo.log --dbpath ./path/to/db`
 * run `grunt serve` to view the application
 * run `grunt serve:debug` to view the application in debug mode
 
