@@ -138,6 +138,9 @@ img#highways {
 body {
   margin: 0;
 }
+body.gameBody {
+  overflow: hidden;
+}
 .main-title {
   height: 25px;
 }
