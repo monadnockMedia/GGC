@@ -11,14 +11,15 @@
     "width": 400,
     "height":400
   },
+  "gameMode":true,
   "game":{
-    "event_chance":3,
+    "event_chance":1,
     "rounds": 4,
     "balanceThreshold":1,
     "duration":{
       "choice":10000,
       "vote":10000,
-      "scoring":500
+      "scoring":3000
     }
   }
 }
