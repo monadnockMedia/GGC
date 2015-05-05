@@ -297,6 +297,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   phases.scoring = function (passed) {
 
     self.game.phase = "scoring";
+    dockAll(false);
     //(self.game.phase,self.game);
     eachPlayer(function (k) {
       self.game.players[k].hand.issue.passed = passed;
@@ -339,13 +340,13 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   }
 
   phases.endRound = function(){
-      var timedCb;
+
 
       if (self.game.round == config.rounds){
         gameOver();
       }else{
         self.game.round++;
-        timedCb = (roll()) ? phases.event() : phases.setup();
+        var timedCb = (roll()) ? phases.event() : phases.setup();
         var timer = $interval(function () {
           $interval.cancel(timer);
           timedCb();
