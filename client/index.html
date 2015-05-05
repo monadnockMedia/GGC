@@ -53,7 +53,7 @@
       <!-- endinjector -->
     <!-- endbuild -->
   </head>
-  <body ng-app="ggcApp"  ng-keyup="globalShortcuts($event)" ng-controller="AppCtrl">
+  <body ng-app="ggcApp"  ng-keyup="globalShortcuts($event)" ng-controller="AppCtrl" ng-class = "{'gameBody':config.gameMode}">
 
 
     <!--[if lt IE 7]>
