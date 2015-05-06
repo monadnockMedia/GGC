@@ -73,8 +73,10 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     calculatePercentage();
     setCurrentPlayer(self.game.playerIndex);
     //console.log("deck pushed", self.decks, self.hands);
+    ggcMapper.reset();
     phases.setup();
   }
+  this.init = init;
 
   function roll() {
     var noRoll = (chance == 0);
@@ -423,10 +425,12 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   }
   this.playerChoice = function (p, b) {
 
-    if (self.game.phase == "choice") {
-      self.choose(p, b);
-    } else if (self.game.phase == "vote") {
-      self.vote(p, b);
+    if ($rootScope.currentState == "game.play.loop") {
+      if (self.game.phase == "choice") {
+        self.choose(p, b);
+      } else if (self.game.phase == "vote") {
+        self.vote(p, b);
+      }
     }
 
   };

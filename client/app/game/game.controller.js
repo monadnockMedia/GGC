@@ -129,8 +129,10 @@ angular.module('ggcApp')
           combo: 'R',
           description: 'reset',
           callback: function(){
-           $location.url("/game/play/prologue");
-
+            dealer.init();
+            $location.url("/game/play/prologue");
+           // angular.bootstrap(document, ['ggcApp']);
+            location.reload();
           }
         })
         .add({

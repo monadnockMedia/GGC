@@ -1,15 +1,15 @@
 'use strict';
 
 angular.module('ggcApp')
-  .service('ggcPrologueOverlord', function (dealer, $state) {
+  .service('ggcPrologueOverlord', function (dealer, $state, $interval) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var pop;
     this.makePop = function(v){
       pop = Popcorn(v);
       pop.on("ended", function(){
         $state.go("game.play.loop");
-
-        dealer.dockOne(dealer.game.currentPlayer,false);
+        dealer.init();
+        //dealer.dockOne(dealer.game.currentPlayer,false);
 
       });
 
@@ -71,7 +71,12 @@ angular.module('ggcApp')
         end: 50,
         //onStart: function(){dealer.makeDocked("energy", false)},
         onEnd: function(){dealer.dockAll(true)},
-      }).load().play()
+      }).load()
+
+      var t = $interval(function () {
+        $interval.cancel(t);
+        pop.play();
+      }, 2000);
 
 
 

@@ -13,7 +13,7 @@
   },
   "gameMode":true,
   "game":{
-    "event_chance":1,
+    "event_chance":4,
     "rounds": 4,
     "balanceThreshold":1,
     "duration":{
