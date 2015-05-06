@@ -63,17 +63,20 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     //setup the game by players
     eachPlayer(function (k) {
       pushDeck(k);
-      var rand = ~~(Math.random() * 4 + 3);
-      rand = (k == "environment") ? Math.max(~~(rand / 4), 1) : rand;
-      self.game.totalScore += rand;
-      self.game.score[k] = {i: rand, p: 0};
+      debugger;
+      var score = config.initialScores[k];
+
+      //var rand = ~~(Math.random() * 4 + 3);
+      //rand = (k == "environment") ? Math.max(~~(rand / 4), 1) : rand;
+      self.game.totalScore += score;
+      self.game.score[k] = {i: score, p: 0};
       self.game.players[k] = {hand: {choices: [], issue: {}}, docked: true};
     })
 
     calculatePercentage();
     setCurrentPlayer(self.game.playerIndex);
     //console.log("deck pushed", self.decks, self.hands);
-    ggcMapper.reset();
+    //ggcMapper.reset();
     phases.setup();
   }
   this.init = init;

@@ -14,12 +14,18 @@
   "gameMode":true,
   "game":{
     "event_chance":4,
-    "rounds": 4,
-    "balanceThreshold":1,
+    "rounds": 2,
+    "balanceThreshold":2,
+    "initialScores":{
+      "environment":1,
+      "economy":4,
+      "energy":6
+    },
     "duration":{
       "choice":10000,
       "vote":10000,
-      "scoring":3000
+      "scoring":4000
     }
+
   }
 }
