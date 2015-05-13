@@ -12,7 +12,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   var chosenIndex;
   var currentCards;
   var self = this;
-  var chance = config.event_chance;
+  var chance = config.eventChance;
   var shuffle = ggcUtil.shuffle;
 
   var tutorialIcons = [];
@@ -63,7 +63,6 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     //setup the game by players
     eachPlayer(function (k) {
       pushDeck(k);
-      debugger;
       var score = config.initialScores[k];
 
       //var rand = ~~(Math.random() * 4 + 3);
