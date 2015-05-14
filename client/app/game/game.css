@@ -144,9 +144,10 @@ body {
   height: 25px;
 }
 div#ui-main {
-  position: relative;
+  position: absolute;
   height: 33%;
   top: 29%;
+  left: 20%;
 }
 div#ui-main .title {
   line-height: 0;
@@ -169,7 +170,7 @@ div#ui-main .title.ng-hide {
   height: 0;
 }
 div#main {
-  position: absolute !important;
+  position: relative !important;
   top: 0px;
   width: 1920px;
   height: 1080px;
@@ -251,6 +252,7 @@ score-board {
 }
 .ggc-video-prologue {
   margin-top: -22%;
+  margin-left: 11%;
 }
 .stamp {
   text-shadow: 0 0 4px rgba(255, 255, 255, 0.5), 0px 2px 2px black;
