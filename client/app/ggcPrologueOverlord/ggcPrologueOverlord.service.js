@@ -45,11 +45,19 @@ angular.module('ggcApp')
         start: 13.75,
         end: 15.18,
         onStart: function(){$(".economy.fullRetract").removeClass("fullRetract")},
-        onEnd: function(){$(".energy.fullRetract").removeClass("fullRetract")},
+        onEnd: function(){
+          //TODO(RAY) Get Rid of JQUERY... grumblegrumble
+          //TODO(RYAN) better panel state controller
+          $(".energy.fullRetract").removeClass("fullRetract")
+
+        },
       }).code({
         start: 23.5,
         end: 27.25,
-        onStart: function(){dealer.dockOne("environment", false)},
+        onStart: function(){
+          dealer.dockOne("environment", false);
+          $state.go("game.play.prologue.cards");
+        },
         onEnd: function(){dealer.choose("environment",1);},
       }).code({
         start: 29.5,

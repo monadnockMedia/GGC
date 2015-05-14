@@ -144,6 +144,11 @@ body.gameBody {
 .main-title {
   height: 25px;
 }
+div#ui-vid {
+  position: relative;
+  width: 100%;
+  top: 25%;
+}
 div#ui-main {
   position: relative;
   height: 33%;
@@ -288,4 +293,7 @@ score-board {
 }
 .dim {
   opacity: 0.5;
+}
+.noHeight {
+  height: 0;
 }

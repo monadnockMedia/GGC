@@ -66,8 +66,19 @@ angular.module('ggcApp')
                name: "prologue",
                url: '/prologue',
                views: {
-                 "main@game": {templateUrl: 'app/game/prologue.html'}
-               }
+
+                 "vid@game": {templateUrl: 'app/game/prologue.html'}
+               },
+               children:[
+                 {
+                   name: "cards",
+                   url: "/cards",
+                   views: {
+                     "main@game": {templateUrl: 'app/game/main_loop.html'},
+                   },
+                 }
+
+               ]
              },
              {
                name: "event",
