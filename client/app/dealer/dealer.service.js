@@ -42,6 +42,8 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   this.placeTutIcon = placeTutIcon;
 
 
+
+
 ///utility functions
 
   ///initialize
@@ -161,6 +163,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
   ///Score
   function tally() {
+
 
     var score = self.game.score;
 
