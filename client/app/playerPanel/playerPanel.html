@@ -50,10 +50,10 @@
           <h3 class = "tab-title text-center">Action Passed </h3>
           <h1 class="text-center score {{name}}" ng-bind-html="player.hand.issue.scoreHTML"></h1>
           <div class="tab-body">
-            <span ng-show="(+player.hand.issue.score > 0)">Congratulations, your sector improved.</span>
-            <span ng-show="(+player.hand.issue.score == 0)">Change not, your sector did.</span>
+            <span ng-show="(+player.hand.issue.score > 0)">Your sector improved.</span>
+            <span ng-show="(+player.hand.issue.score == 0)">Your sector's score did not change.</span>
             <span
-              ng-show="(+player.hand.issue.score < 0)">Your sector declined, thanks for taking one for the team.</span>
+              ng-show="(+player.hand.issue.score < 0)">Your sector declined.</span>
           </div>
         </div>
         <div ng-hide = "player.hand.issue.passed">

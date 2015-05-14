@@ -13,3 +13,4 @@ GGC-data/
 *.zip
 
 client/app/vars.css
+*.old.webm

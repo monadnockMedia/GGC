@@ -11,14 +11,21 @@
     "width": 400,
     "height":400
   },
+  "gameMode":true,
   "game":{
-    "event_chance":3,
-    "rounds": 4,
-    "balanceThreshold":1,
+    "eventChance":3,
+    "rounds": 3,
+    "balanceThreshold":3,
+    "initialScores":{
+      "environment":1,
+      "economy":4,
+      "energy":6
+    },
     "duration":{
       "choice":10000,
       "vote":10000,
-      "scoring":500
+      "scoring":4000
     }
+
   }
 }

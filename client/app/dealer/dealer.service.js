@@ -12,7 +12,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   var chosenIndex;
   var currentCards;
   var self = this;
-  var chance = config.event_chance;
+  var chance = config.eventChance;
   var shuffle = ggcUtil.shuffle;
 
   var tutorialIcons = [];
@@ -63,18 +63,22 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     //setup the game by players
     eachPlayer(function (k) {
       pushDeck(k);
-      var rand = ~~(Math.random() * 4 + 3);
-      rand = (k == "environment") ? Math.max(~~(rand / 4), 1) : rand;
-      self.game.totalScore += rand;
-      self.game.score[k] = {i: rand, p: 0};
+      var score = config.initialScores[k];
+
+      //var rand = ~~(Math.random() * 4 + 3);
+      //rand = (k == "environment") ? Math.max(~~(rand / 4), 1) : rand;
+      self.game.totalScore += score;
+      self.game.score[k] = {i: score, p: 0};
       self.game.players[k] = {hand: {choices: [], issue: {}}, docked: true};
     })
 
     calculatePercentage();
     setCurrentPlayer(self.game.playerIndex);
     //console.log("deck pushed", self.decks, self.hands);
+    //ggcMapper.reset();
     phases.setup();
   }
+  this.init = init;
 
   function roll() {
     var noRoll = (chance == 0);
@@ -297,6 +301,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   phases.scoring = function (passed) {
 
     self.game.phase = "scoring";
+    dockAll(false);
     //(self.game.phase,self.game);
     eachPlayer(function (k) {
       self.game.players[k].hand.issue.passed = passed;
@@ -339,13 +344,13 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   }
 
   phases.endRound = function(){
-      var timedCb;
+
 
       if (self.game.round == config.rounds){
         gameOver();
       }else{
         self.game.round++;
-        timedCb = (roll()) ? phases.event() : phases.setup();
+        var timedCb = (roll()) ? phases.event() : phases.setup();
         var timer = $interval(function () {
           $interval.cancel(timer);
           timedCb();
@@ -422,10 +427,12 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   }
   this.playerChoice = function (p, b) {
 
-    if (self.game.phase == "choice") {
-      self.choose(p, b);
-    } else if (self.game.phase == "vote") {
-      self.vote(p, b);
+    if ($rootScope.currentState == "game.play.loop") {
+      if (self.game.phase == "choice") {
+        self.choose(p, b);
+      } else if (self.game.phase == "vote") {
+        self.vote(p, b);
+      }
     }
 
   };

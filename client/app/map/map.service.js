@@ -11,6 +11,8 @@ angular.module('ggcApp')
     var grid = this.grid;
 
     this.buildHexes = function(columns, rows, _w, _h){
+      this.columns = columns;
+      this.rows = rows;
       var dfd = $q.defer();
       grid.width = _w;
       grid.height = _h;
@@ -20,9 +22,7 @@ angular.module('ggcApp')
         [_w/((columns + 0.5) * Math.sqrt(3)),
           _h/((rows + 1/3) * 1.5)]
       );
-      for (var i = 0; i<columns*rows; i++){
-        this.occupied.push(false);
-      }
+      this.occupied = occupiedArray();
       this.hexBin = d3.hexbin()
         .radius(grid.hexRadius);
 
@@ -54,6 +54,11 @@ angular.module('ggcApp')
       this.grid.gridIcons.push(hex);
       this.occupied[i] = true;
       //this.grid.gridIcons[i] = hex;
+    }
+
+    this.reset = function(){
+      this.grid.gridIcons = [];
+      this.occupied = occupiedArray();
     }
 
     this.addPriorityIcon = function(icon){
@@ -99,6 +104,14 @@ angular.module('ggcApp')
 
     function clone(o){
       return JSON.parse(JSON.stringify(o));
+    }
+
+    function occupiedArray(){
+      var occ = [];
+      for (var i = 0; i<self.columns*self.rows; i++){
+        occ.push(false);
+      }
+      return occ;
     }
 
 
