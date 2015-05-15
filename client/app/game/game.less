@@ -157,8 +157,8 @@ img#highways { position: absolute; width: 70.5%; top: 2.5%; left: 18.35%; }
   /*src: url('../fonts/232MKSD_winTT/232MKM__.TTF') format('truetype');  Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
 body {
-  width: 1920px;
-  height: 1080px;
+  //width: 1920px;
+  //height: 1080px;
   margin: 0;
 }
 
@@ -209,9 +209,9 @@ div#main {
   position: relative !important;
   top: 0px;
   width: 1920px;
-  height: 1080px;
+  height: 1200px;
   background: url("../../bmp/gulfbrown.jpg") no-repeat;
-  background-size: 1920px 1200px;
+  //background-size: 1920px 1200px;
   overflow: hidden;
 }
 div#perspective_plane_container {
@@ -254,7 +254,7 @@ div#perspective_plane {
 
 #mapA, #mapB, #mapC, #foulGulf, #landmarks, #borderscrim {
   width: 1920px;
-  height: 1080px;
+  height: 1200px;
   position: absolute;
 }
 #foulGulf {
@@ -267,7 +267,8 @@ div#perspective_plane {
 
 
 div#borderscrim {
-  background-image: url('../../bmp/borderandscrim_wrn.png');
+  //background-image: url('../../bmp/borderandscrim_wrn.png');
+  background-image: url('../../bmp/borderandscrim_wrn_1200_tweak.png');
   z-index: 8;
   pointer-events: none;
   top:0;
@@ -321,3 +322,9 @@ score-board {
   opacity: 0.5;
 }
 
+
+.debugOverlay{
+  position: absolute;
+  top:0;
+  left:0;
+}
