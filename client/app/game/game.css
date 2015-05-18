@@ -124,14 +124,14 @@ img#highways {
 @font-face {
   font-family: '232MKB';
   src: url('../../assets/fonts/232MKSD_winTT/232MKB__.TTF') format('truetype');
-  
+
   /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
   /*src: url('../fonts/232MKSD_winTT/232MKM__.TTF') format('truetype');  Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
 @font-face {
   font-family: '232MKUL';
   src: url('../../assets/fonts/232MKSD_winTT/232MKUL_.TTF') format('truetype');
-  
+
   /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
   /*src: url('../fonts/232MKSD_winTT/232MKM__.TTF') format('truetype');  Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
@@ -168,11 +168,13 @@ div#ui-main .title.ng-hide {
   height: 0;
 }
 div#main {
-  position: relative !important;
+  position: absolute !important;
   top: 0px;
   width: 1920px;
   height: 1200px;
   background: url("../../bmp/gulfbrown.jpg") no-repeat;
+  background-size:1980px 1300px;
+  background-position: 50% 50%;
   overflow: hidden;
 }
 div#perspective_plane_container {
@@ -223,12 +225,14 @@ div#perspective_plane {
 #foulGulf {
   /*background: -webkit-linear-gradient(top, #2F2727, #1a82f7);*/
   background: url(../bmp/gulfbrown.jpg) 50% 0% no-repeat;
+  background-size:1920px 1200px;
 }
 #mapA {
   background: url(../../bmp/currentpop.png) 50% 0% no-repeat;
 }
 #mapB {
   background: url(../../bmp/midpop.png) 50% 0% no-repeat;
+  background-size:1680px 1200px;
 }
 #mapC {
   background: url(../../bmp/overpop.png) 50% 0% no-repeat;
