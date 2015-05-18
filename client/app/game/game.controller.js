@@ -128,12 +128,8 @@ angular.module('ggcApp')
           combo: 'R',
           description: 'reset',
           callback: function(){
-<<<<<<< HEAD
            $location.url("/game/play/prologue");
-
-=======
            location.reload();
->>>>>>> GGC-27
           }
         })
         .add({
