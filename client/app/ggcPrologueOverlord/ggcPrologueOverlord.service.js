@@ -14,7 +14,7 @@ angular.module('ggcApp')
 
       pop.code({
         start: 0.01,
-        end: 12,
+        end: 12.5,
         onStart: function(){dealer.dockAll(true)},
         onEnd: function(){$(".environment.fullRetract").removeClass("fullRetract")},
       }).code({
@@ -38,38 +38,33 @@ angular.module('ggcApp')
         onStart: function(){dealer.placeTutIcon(6);},
         onEnd: function(){dealer.placeTutIcon(7);},
       }).code({
-        start: 12.75,
-        end: 13.5,
+        start: 13.75,
+        end: 15.18,
         onStart: function(){$(".economy.fullRetract").removeClass("fullRetract")},
         onEnd: function(){$(".energy.fullRetract").removeClass("fullRetract")},
       }).code({
-        start: 17.5,
-        end: 18.5,
-        onStart: function(){dealer.makeDocked("environment", false)},
-        onEnd: function(){dealer.makeDocked("economy", false)},
-      }).code({
-        start: 19.5,
-        end: 21,
-        onStart: function(){dealer.makeDocked("energy", false)},
-        onEnd: function(){dealer.dockAll(true)},
-      }).code({
-        start: 23,
-        end: 25,
+        start: 23.5,
+        end: 27.25,
         onStart: function(){dealer.dockOne("environment", false)},
-        onEnd: function(){dealer.dockAll(true)},
+        onEnd: function(){dealer.playerChoice("environment",1);},
       }).code({
-        start: 26,
-        end: 32,
-        onStart: function(){dealer.dockAll(false)},
-        onEnd: function(){dealer.dockAll(true)},
+        start: 29.5,
+        end: 31,
+        onStart: function(){dealer.playerChoice("environment",1);},
+        onEnd: function(){dealer.playerChoice("economy",1);},
       }).code({
-        start: 37,
-        end: 37.5,
-        onStart: function(){dealer.makeDocked("environment", false)},
-        onEnd: function(){dealer.makeDocked("economy", false)},
+        start: 32.5,
+        end: 34,
+        onStart: function(){dealer.playerChoice("energy",0);},
+        onEnd: function(){dealer.dockAll(true)},
       }).code({
         start: 38,
-        end: 48,
+        end: 38.5,
+        onStart: function(){dealer.makeDocked("environment", false)},
+        onEnd: function(){dealer.makeDocked("economy", false)},
+      }).code({
+        start: 39,
+        end: 50,
         onStart: function(){dealer.makeDocked("energy", false)},
         onEnd: function(){dealer.dockAll(true)},
       })
