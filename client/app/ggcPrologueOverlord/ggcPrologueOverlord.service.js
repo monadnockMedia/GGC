@@ -13,8 +13,6 @@ angular.module('ggcApp')
 
       });
 
-
-
       pop.code({
         start: 0.01,
         end: 12.5,
