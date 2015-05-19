@@ -157,25 +157,33 @@ img#highways { position: absolute; width: 70.5%; top: 2.5%; left: 18.35%; }
   /*src: url('../fonts/232MKSD_winTT/232MKM__.TTF') format('truetype');  Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
 body {
-
+  //width: 1920px;
+  //height: 1080px;
   margin: 0;
-  &.gameBody{
-    overflow: hidden;
-  }
+  padding:0;
 }
 
 .main-title{
   height: 25px;
 }
 div#ui-vid{
-  position:relative;
-  width: 100%;
-  top:25%;
+  position:absolute;
+  height: 100%;
+  width:100%;
+
+}
+#svgDefs{
+  width:0;
+  height:0;
+  position:fixed;
+  margin:0;
+  padding:0;
 }
 div#ui-main{
-  position: relative;
+  position: absolute;
   height: 33%;
-  top: 25%;
+  top: 29%;
+  left:20%;
 
   & .title{
     line-height: 0;
@@ -212,13 +220,13 @@ div#ui-main{
   }
 }
 div#main {
-  //-webkit-transform: scaleY(1.12) scaleX(1.16) translateY(63px);
-  position: absolute !important;
+  position: relative !important;
   top: 0px;
   width: 1920px;
   height: 1200px;
   background: url("../../bmp/gulfbrown.jpg") no-repeat;
-  background-size: 1920px 1200px;
+
+  background-size: 1980px 1300px;
   overflow: hidden;
 }
 div#perspective_plane_container {
@@ -261,20 +269,23 @@ div#perspective_plane {
 
 #mapA, #mapB, #mapC, #foulGulf, #landmarks, #borderscrim {
   width: 1920px;
-  height: 1080px;
+  height: 1200px;
   position: absolute;
 }
 #foulGulf {
   /*background: -webkit-linear-gradient(top, #2F2727, #1a82f7);*/
-  background: url(../bmp/gulfbrown.jpg) 50% 0 / 90%  no-repeat;
+  background: url(../bmp/gulfbrown.jpg) 50% 0  no-repeat;
+  background-size: 1920px 1200px;
 }
-#mapA { background: url(../../bmp/currentpop.png) 50% 0% / 90% no-repeat; }
-#mapB { 	background: url(../../bmp/midpop.png) 50% 0% / 90% no-repeat; }
-#mapC { 	background: url(../../bmp/overpop.png) 50% 0% / 90% no-repeat; }
+#mapA { background: url(../../bmp/currentpop.png) 50% 0%  no-repeat; }
+#mapB { 	background: url(../../bmp/midpop.png) 50% 0%  no-repeat;
+          background-size:1680px 1200px; }
+#mapC { 	background: url(../../bmp/overpop.png) 50% 0%  no-repeat; }
 
 
 div#borderscrim {
-  background-image: url('../../bmp/borderandscrim_wrn.png');
+  //background-image: url('../../bmp/borderandscrim_wrn.png');
+  background-image: url('../../bmp/borderandscrim_wrn_1200_tweak.png');
   z-index: 8;
   pointer-events: none;
   top:0;
@@ -327,7 +338,9 @@ score-board {
   opacity: 0.5;
 }
 
-.noHeight{
-  height:0;
-}
 
+.debugOverlay{
+  position: absolute;
+  top:0;
+  left:0;
+}

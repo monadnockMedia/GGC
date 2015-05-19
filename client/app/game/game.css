@@ -137,22 +137,28 @@ img#highways {
 }
 body {
   margin: 0;
-}
-body.gameBody {
-  overflow: hidden;
+  padding: 0;
 }
 .main-title {
   height: 25px;
 }
 div#ui-vid {
-  position: relative;
+  position: absolute;
+  height: 100%;
   width: 100%;
-  top: 25%;
+}
+#svgDefs {
+  width: 0;
+  height: 0;
+  position: fixed;
+  margin: 0;
+  padding: 0;
 }
 div#ui-main {
-  position: relative;
+  position: absolute;
   height: 33%;
-  top: 25%;
+  top: 29%;
+  left: 20%;
 }
 div#ui-main .title {
   line-height: 0;
@@ -175,12 +181,12 @@ div#ui-main .title.ng-hide {
   height: 0;
 }
 div#main {
-  position: absolute !important;
+  position: relative !important;
   top: 0px;
   width: 1920px;
   height: 1200px;
   background: url("../../bmp/gulfbrown.jpg") no-repeat;
-  background-size: 1920px 1200px;
+  background-size: 1980px 1300px;
   overflow: hidden;
 }
 div#perspective_plane_container {
@@ -225,24 +231,26 @@ div#perspective_plane {
 #landmarks,
 #borderscrim {
   width: 1920px;
-  height: 1080px;
+  height: 1200px;
   position: absolute;
 }
 #foulGulf {
   /*background: -webkit-linear-gradient(top, #2F2727, #1a82f7);*/
-  background: url(../bmp/gulfbrown.jpg) 50% 0% no-repeat;
+  background: url(../bmp/gulfbrown.jpg) 50% 0 no-repeat;
+  background-size: 1920px 1200px;
 }
 #mapA {
   background: url(../../bmp/currentpop.png) 50% 0% no-repeat;
 }
 #mapB {
   background: url(../../bmp/midpop.png) 50% 0% no-repeat;
+  background-size: 1680px 1200px;
 }
 #mapC {
   background: url(../../bmp/overpop.png) 50% 0% no-repeat;
 }
 div#borderscrim {
-  background-image: url('../../bmp/borderandscrim_wrn.png');
+  background-image: url('../../bmp/borderandscrim_wrn_1200_tweak.png');
   z-index: 8;
   pointer-events: none;
   top: 0;
@@ -294,6 +302,8 @@ score-board {
 .dim {
   opacity: 0.5;
 }
-.noHeight {
-  height: 0;
+.debugOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
