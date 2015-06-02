@@ -369,6 +369,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     currentCards = [];
     if (this.decks[team].length <= 4) {
       pushDeck(team);
+
     }
     var i = 2;
     var ret = [];
