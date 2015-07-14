@@ -8,6 +8,6 @@ module.exports = {
     //uri: 'mongodb://localhost/ggc-dev'
     uri: 'mongodb://aries.local/ggc-dev'
   },
-
+  appConfig: require("../../../client/app/config.json"),
   seedDB: false
 };
