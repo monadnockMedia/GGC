@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .controller('GameCtrl', function ($scope, $http, ngAudio, ggcUtil, $rootScope, dealer, hotkeys, $location) {
+  .controller('GameCtrl', function ($scope, $http, ngAudio, ggcUtil, $rootScope, dealer, hotkeys, $location, $interval) {
     $scope.preview = {};
     $scope.preview.hideNavbar = false;
 
@@ -13,10 +13,10 @@ angular.module('ggcApp')
     $scope.trust = ggcUtil.trustSVG;
 
     //TODO(Ray) move loading/playing to service
-    $scope.confirmSfx = ngAudio.load("../sound/confirm.wav");
-    $scope.votePassSfx = ngAudio.load("../sound/vote_pass.wav");
-    $scope.voteBlockSfx = ngAudio.load("../sound/vote_block.wav");
+
+
     $scope.wooshSfx = ngAudio.load("../sound/digital_woosh.wav");
+
 
     $scope.printObject = ggcUtil.printObject;
 
@@ -27,6 +27,18 @@ angular.module('ggcApp')
     }, function(val) {
       if (val == "choice") {
         $scope.wooshSfx.play();
+      }
+      //debugger;
+    })
+
+    $scope.$watch(function(){
+      return $scope.dealer.prologue;
+    }, function(val) {
+      if (val == true) {
+        $interval(function() {
+          $scope.dealer.prologue = false;
+          $scope.dealer.signIn = false;
+        }, 20000);
       }
       //debugger;
     })
@@ -46,9 +58,9 @@ angular.module('ggcApp')
           description: 'Environment Select 1',
           callback: function(){
             if ($scope.game.phase == "choice") {
-              $scope.confirmSfx.play();
+
             } else if ($scope.game.phase == "vote") {
-              $scope.voteBlockSfx.play();
+
             }
             dealer.playerChoice("environment",0);
 
@@ -62,9 +74,9 @@ angular.module('ggcApp')
           description: 'Environment Select 2',
           callback: function(){
             if ($scope.game.phase == "choice") {
-              $scope.confirmSfx.play();
+
             } else if ($scope.game.phase == "vote") {
-              $scope.votePassSfx.play();
+
             }
             dealer.playerChoice("environment",1);
 
@@ -76,9 +88,9 @@ angular.module('ggcApp')
           description: 'Economy Select 1',
           callback: function(){
             if ($scope.game.phase == "choice") {
-              $scope.confirmSfx.play();
+
             } else if ($scope.game.phase == "vote") {
-              $scope.voteBlockSfx.play();
+
             }
             dealer.playerChoice("economy",0);
 
@@ -89,9 +101,9 @@ angular.module('ggcApp')
           description: 'Environment Select 2',
           callback: function(){
             if ($scope.game.phase == "choice") {
-              $scope.confirmSfx.play();
+
             } else if ($scope.game.phase == "vote") {
-              $scope.votePassSfx.play();
+
             }
             dealer.playerChoice("economy",1);
 
@@ -103,11 +115,13 @@ angular.module('ggcApp')
           description: 'Energy Select 1',
           callback: function(){
             if ($scope.game.phase == "choice") {
-              $scope.confirmSfx.play();
+
             } else if ($scope.game.phase == "vote") {
-              $scope.voteBlockSfx.play();
+
             }
-            dealer.playerChoice("energy",0);
+            dealer.playerChoice("energy",0)
+
+            ;
 
           }
         })
@@ -116,9 +130,9 @@ angular.module('ggcApp')
           description: 'Energy Select 2',
           callback: function(){
             if ($scope.game.phase == "choice") {
-              $scope.confirmSfx.play();
+
             } else if ($scope.game.phase == "vote") {
-              $scope.votePassSfx.play();
+
             }
             dealer.playerChoice("energy",1);
 
@@ -130,7 +144,7 @@ angular.module('ggcApp')
           callback: function(){
             dealer.init();
             $location.url("/game/play/prologue");
-           // angular.bootstrap(document, ['ggcApp']);
+            // angular.bootstrap(document, ['ggcApp']);
             location.reload();
           }
         })

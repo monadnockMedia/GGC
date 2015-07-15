@@ -31,6 +31,10 @@ p.tab-body {
   margin-left:45px;
 }
 
+.signIn-icon {
+  background: url("../../svg/buttonOL.svg") 50% 50% no-repeat;
+}
+
 .btn-icon {
   background: url("../../svg/buttonOL.svg") 50% 50% no-repeat;
   &.block {
@@ -214,6 +218,54 @@ div.panelInnerEnergy {
 }
 
 
+
+.arrow {
+
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+
+  border-top: 50px solid white;
+  transition: all 1s ease-in-out;
+  opacity:0;
+
+
+
+  position:absolute;
+  //background-color:red;
+
+  &.environment {
+    -webkit-transform: rotate(32deg) translateY(970px);
+    margin-left:220px;
+
+    &.bounce {
+      opacity:1;
+      -webkit-transform: rotate(32deg) translateY(990px);
+    }
+  }
+
+  &.economy {
+    -webkit-transform: rotate(0deg) translateY(940px);
+    margin-left:140px;
+
+    &.bounce {
+      opacity:1;
+      -webkit-transform: rotate(0deg) translateY(960px);
+    }
+  }
+
+  &.energy {
+    -webkit-transform: rotate(-32deg) translateY(970px);
+    margin-left:62px;
+
+    &.bounce {
+      opacity:1;
+      -webkit-transform: rotate(-32deg) translateY(990px);
+    }
+  }
+}
+
 .panelOuter{
   position: absolute;
   width: 375px;
@@ -228,12 +280,16 @@ div.panelInnerEnergy {
     transition: all 0.2s ease-in-out;
     position: absolute;
     &.retract{
-      -webkit-transform: rotateZ(32deg) translateY(1030px);
+      -webkit-transform: rotateZ(32deg) translateY(1035px);
       transition: all 0.2s ease-in-out;
     }
 
     &.fullRetract {
       -webkit-transform: rotate(32deg) translateY(1100px);
+      transition: all 0.2s ease-in-out;
+    }
+    &.signIn {
+      -webkit-transform: rotate(32deg) translateY(930px);
       transition: all 0.2s ease-in-out;
     }
 
@@ -250,11 +306,15 @@ div.panelInnerEnergy {
     }
   }
   &.economy{
-    -webkit-transform: rotate(0deg) translateY(830px);;
+    -webkit-transform: rotate(0deg) translateY(830px);
     transition: all 0.2s ease-in-out;
     position: absolute;
     &.retract{
       -webkit-transform: rotate(0deg) translateY(1015px);
+    }
+    &.signIn{
+      -webkit-transform: rotate(0deg) translateY(922px);
+      transition: all 0.2s ease-in-out;
     }
 
     &.fullRetract {
@@ -284,6 +344,11 @@ div.panelInnerEnergy {
 
     &.fullRetract {
       -webkit-transform: rotate(-32deg) translateY(1100px);
+      transition: all 0.2s ease-in-out;
+    }
+
+    &.signIn{
+      -webkit-transform: rotate(-32deg) translateY(930px);
       transition: all 0.2s ease-in-out;
     }
 
@@ -338,6 +403,6 @@ div.panelInnerEnergy {
   box-sizing: border-box;
   height:0;
   padding-bottom: 100%;
-//  background:red;
+  //  background:red;
   width:100%;
 }

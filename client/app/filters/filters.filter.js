@@ -2,15 +2,15 @@
 var app = angular.module('ggcApp');
 
 app.filter('percent', function () {
-    return function (input) {
-      return ~~(input*100)+"%";
-    };
-  });
+  return function (input) {
+    return ~~(input*100)+"%";
+  };
+});
 
 app.filter('capitalize', function() {
   return function(input) {
     if (input!=null)
-    input = input.toLowerCase();
+      input = input.toLowerCase();
     return input.substring(0,1).toUpperCase()+input.substring(1);
   }
 });
@@ -63,6 +63,25 @@ app.filter('scoreIcons', function() {
   }
 });
 
+app.filter('scoreIconArray', function() {
+  return function(input, team) {
+    var icons = {
+      economy:"",
+      energy:"",
+      environment:""
+    };
+
+    var output = [];
+
+    if (team!=null) {
+      for (var i = 0; i < input; i++) {
+        output.push(icons[team]);
+      }
+      return output;
+    }
+  }
+});
+
 //filter score for panel, return icons and pro/con indicator
 app.filter('panelScore', function() {
 
@@ -110,7 +129,7 @@ app.filter('teamColor', function() {
         return "#fca204";
 
       }
-    return output;
+      return output;
 
     }
   }

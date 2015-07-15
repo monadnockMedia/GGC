@@ -1,33 +1,29 @@
-<!-- >The MAIN (Center) Cards Go Here<-->
-
-
-<div id = "box-wrap-inner">
-
-  <div  class="scenario-card clearTransform" >
-    <div class="scenarioWrap">
 
 
 
-       <div class="mainBar {{game.outcome.team}}"> <h3 class="  {{game.outcome.team}}" ng-bind-html="game.outcome.mainText"></h3></div>
+<!--div class="mainBar {{game.outcome.team}}">
+  <h3 class="  {{game.outcome.team}}" ng-bind-html="game.outcome.mainText"></h3>
+</div-->
 
-      <!--</div>-->
-    <!--</div>-->
-    <div class="row">
+<!--div class="row">
+    <div class = "col-md-10 col-md-offset-1"><h4 ng-bind-html="game.outcome.additionalText"></h4></div>
+</div-->
 
-      <!-- div class="scenario-icon col-md-3" ng-bind-html="trust(mainCard.icon.icon)"></div-->
 
-      <!--TODO remove whitespace-->
-        <div class = "col-md-10 col-md-offset-1"><h4 ng-bind-html="game.outcome.additionalText"></h4></div>
-      </div>
-    </div>
-    </div>
-  </div>
-
+<div id = "box-wrap-inner" ng-show="game.outcome.team == 'economy'">
+  <video  autoplay class = "ggc-video-main" ggc-video="true">
+    <source  ng-src="../vid/end_economy.webm" type="video/webm"></source>
+  </video>
 </div>
 
-<div ng-show = "game.phase == 'scoring'" class="stamp" ng-class="{passed:game.action.passed, blocked:!game.action.passed}">
-  <h1 class=jumbo" ng-show="game.action.passed">PASSED</h1>
-  <h1 class=jumbo" ng-hide="game.action.passed">BLOCKED</h1>
+<div id = "box-wrap-inner" ng-show="game.outcome.team == 'energy'">
+  <video  autoplay class = "ggc-video-main" ggc-video="true">
+    <source  ng-src="../vid/end_energy.webm" type="video/webm"></source>
+  </video>
 </div>
 
-
+<div id = "box-wrap-inner" ng-show="game.outcome.team == 'environment'">
+  <video  autoplay class = "ggc-video-main" ggc-video="true">
+    <source  ng-src="../vid/end_environment.webm" type="video/webm"></source>
+  </video>
+</div>
