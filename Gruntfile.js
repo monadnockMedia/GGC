@@ -8,7 +8,7 @@ module.exports = function(grunt) {
   } catch (e) {
     localConfig = {};
   }
-  grunt.loadNpmTasks('grunt-node-webkit-builder');
+  grunt.loadNpmTasks('grunt-nw-builder');
   //grunt.loadNpmTasks('grunt-contrib-less');
   // Load grunt tasks automatically, when needed
   require('jit-grunt')(grunt, {
