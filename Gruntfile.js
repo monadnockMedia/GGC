@@ -26,7 +26,7 @@ module.exports = function(grunt) {
   // Define the configuration for all the tasks
   grunt.initConfig({
 
-    nodewebkit: {
+    nwjs: {
       options: {
         platforms: ['osx'], //         platforms: ['osx'],
         buildDir: './build' // Where the build version of my node-webkit app is saved
@@ -421,7 +421,7 @@ module.exports = function(grunt) {
           logConcurrentOutput: true
         }
       },
-      dist: ['imagemin', 'svgmin']
+      dist: [/*'imagemin', 'svgmin'*/]
     },
 
     // Test settings
@@ -555,7 +555,7 @@ module.exports = function(grunt) {
   /* Monadnock Build Tasks */
   grunt.registerTask('custom', function(target) {
     if (target === 'test') {
-      return grunt.task.run(['clean:dist', 'concurrent:dist', 'injector', 'wiredep', 'copy:nomin', 'env:all', 'nodewebkit']);
+      return grunt.task.run(['clean:dist', 'concurrent:dist', 'injector', 'wiredep', 'copy:nomin', 'env:all', 'nwjs']);
     } else if (target === 'build') {
       return grunt.task.run(['clean:dist', 'concurrent:dist', 'injector', 'wiredep', 'copy:nomin', 'env:all', 'env:prod', 'express:prod', 'wait', 'open', 'express-keepalive', 'nodewebkit']);
     } else if (target === 'minbuild') {

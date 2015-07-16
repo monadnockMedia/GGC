@@ -13,7 +13,7 @@ angular.module('ggcApp')
     }
 
 
-    if($rootScope.kiosk){
+    if($rootScope.config.kiosk){
       kioskMode = true;
       var gui=require("nw.gui");
       var win = gui.Window.get();

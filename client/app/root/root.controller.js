@@ -3,7 +3,7 @@
 
 angular.module('ggcApp')
   .controller('AppCtrl', function ($scope, $location, hotkeys, $http, $rootScope) {
-    $http.get('/appConfig').then(function (res) {
+    $http.get('app/config.json').then(function (res) {
       $scope.config = res.data;
       $rootScope.config = res.data;
     })
