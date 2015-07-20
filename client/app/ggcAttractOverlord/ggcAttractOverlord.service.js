@@ -7,8 +7,9 @@ angular.module('ggcApp')
     this.makePop = function(v){
       pop = Popcorn(v);
       pop.on("ended", function(){
-        $state.go("game.play.loop");
-        dealer.init();
+        $state.go("game.play.attract");
+        pop.play();
+        //dealer.init();
         //dealer.dockOne(dealer.game.currentPlayer,false);
 
       });
@@ -21,7 +22,6 @@ angular.module('ggcApp')
           dealer.introMusic.play();
         },
         onEnd: function(){}
-        //TODO(Ryan, Ray) I think I fixed this with an ng-class, but we need a state-machine for the docking classes
       }).load();
 
       var t = $interval(function () {

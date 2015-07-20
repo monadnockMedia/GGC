@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .controller('GameCtrl', function ($scope, $http, ngAudio, ggcUtil, $rootScope, dealer, hotkeys, $location, $interval) {
+  .controller('GameCtrl', function ($scope, $http, ngAudio, ggcUtil, $rootScope, dealer, hotkeys, $location, $interval, $state) {
     $scope.preview = {};
     $scope.preview.hideNavbar = false;
 
@@ -57,8 +57,8 @@ angular.module('ggcApp')
           combo: '1',
           description: 'Environment Select 1',
           callback: function(){
-            if ($scope.game.phase == "choice") {
-
+            if ($state.current.name == "game.play.attract") {
+              $state.go("game.play.prologue");
             } else if ($scope.game.phase == "vote") {
 
             }
@@ -73,8 +73,8 @@ angular.module('ggcApp')
           combo: '2',
           description: 'Environment Select 2',
           callback: function(){
-            if ($scope.game.phase == "choice") {
-
+            if ($state.current.name == "game.play.attract") {
+              $state.go("game.play.prologue");
             } else if ($scope.game.phase == "vote") {
 
             }
@@ -87,8 +87,8 @@ angular.module('ggcApp')
           combo: '3',
           description: 'Economy Select 1',
           callback: function(){
-            if ($scope.game.phase == "choice") {
-
+            if ($state.current.name == "game.play.attract") {
+              $state.go("game.play.prologue");
             } else if ($scope.game.phase == "vote") {
 
             }
@@ -100,8 +100,8 @@ angular.module('ggcApp')
           combo: '4',
           description: 'Environment Select 2',
           callback: function(){
-            if ($scope.game.phase == "choice") {
-
+            if ($state.current.name == "game.play.attract") {
+              $state.go("game.play.prologue");
             } else if ($scope.game.phase == "vote") {
 
             }
@@ -114,8 +114,8 @@ angular.module('ggcApp')
           combo: '5',
           description: 'Energy Select 1',
           callback: function(){
-            if ($scope.game.phase == "choice") {
-
+            if ($state.current.name == "game.play.attract") {
+              $state.go("game.play.prologue");
             } else if ($scope.game.phase == "vote") {
 
             }
@@ -129,8 +129,8 @@ angular.module('ggcApp')
           combo: '6',
           description: 'Energy Select 2',
           callback: function(){
-            if ($scope.game.phase == "choice") {
-
+            if ($state.current.name == "game.play.attract") {
+              $state.go("game.play.prologue");
             } else if ($scope.game.phase == "vote") {
 
             }
