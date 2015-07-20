@@ -29,7 +29,7 @@ module.exports = function(grunt) {
     nwjs: {
       options: {
         platforms: ['osx'], //         platforms: ['osx'],
-        buildDir: './build' // Where the build version of my node-webkit app is saved
+        macZip: false
       },
       src: ['dist/**/*'] // Your node-webkit app
     },
@@ -172,6 +172,13 @@ module.exports = function(grunt) {
         files: [{
           dot: true,
           src: ['.tmp', '<%= yeoman.dist %>/*', '!<%= yeoman.dist %>/.git*', '!<%= yeoman.dist %>/.openshift', '!<%= yeoman.dist %>/Procfile']
+        }]
+      },
+      build:{
+        files: [{
+          dot: true,
+          src: ['build/*/**'],
+          force: true
         }]
       },
       server: '.tmp'
@@ -364,22 +371,31 @@ module.exports = function(grunt) {
         }]
       },
       nomin: {
-        files: [{
+        files: [
+          {
+            expand: true,
+            dest: '<%= yeoman.dist %>',
+            src: ['!**grunt**', '!**karma*', 'package.json', 'server/**/*', 'node_modules/**/*','!**/*grunt*/**','!**/karma*/**']
+          },{
           expand: true,
           dot: true,
           cwd: '<%= yeoman.client %>',
           dest: '<%= yeoman.dist %>/public',
-          src: ['*.{ico,png,txt}', '.htaccess', 'bower_components/**/*', 'assets/**/*', 'app/**/*', 'lib/*', 'index.html', 'components/**/*', 'bmp/*', 'svg/*', 'vid/*']
+          src: ['*.{ico,png,txt}', '.htaccess', 'bower_components/**/*', 'assets/**/*', 'app/**/*', 'lib/*', 'index.html','NWIndex.html', 'components/**/*', 'bmp/*', 'svg/*', 'vid/*']
         }, {
           expand: true,
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/public/assets/images',
           src: ['generated/*']
-        }, {
-          expand: true,
-          dest: '<%= yeoman.dist %>',
-          src: ['package.json', 'server/**/*']
         }]
+      },
+      node_modules:{
+        files: [
+          {
+            expand: true,
+            dest: '<%= yeoman.dist %>',
+            src: [ 'node_modules/**/*','!**/*grunt*/**','!**/karma*/**']
+          }]
       },
       styles: {
         expand: true,
@@ -553,13 +569,9 @@ module.exports = function(grunt) {
 
 
   /* Monadnock Build Tasks */
-  grunt.registerTask('custom', function(target) {
-    if (target === 'test') {
-      return grunt.task.run(['clean:dist', 'concurrent:dist', 'injector', 'wiredep', 'copy:nomin', 'env:all', 'nwjs']);
-    } else if (target === 'build') {
-      return grunt.task.run(['clean:dist', 'concurrent:dist', 'injector', 'wiredep', 'copy:nomin', 'env:all', 'env:prod', 'express:prod', 'wait', 'open', 'express-keepalive', 'nodewebkit']);
-    } else if (target === 'minbuild') {
-      return grunt.task.run(['build', 'env:all', 'env:prod', 'express:prod', 'wait', 'open', 'express-keepalive']);
-    } else grunt.task.run(['test:server', 'test:client']);
+  grunt.registerTask('nwbuild', function(target) {
+
+      return grunt.task.run(['clean:dist', 'clean:build','concurrent:dist', 'injector', 'wiredep', 'copy:nomin', 'env:all', 'nwjs']);
+
   });
 };
