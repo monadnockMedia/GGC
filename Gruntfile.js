@@ -28,8 +28,8 @@ module.exports = function(grunt) {
 
     nwjs: {
       options: {
-        platforms: ['osx'], //         platforms: ['osx'],
-        macZip: false
+        platforms: ['osx','win64'], //         platforms: ['osx'],
+        macZip: true
       },
       src: ['dist/**/*'] // Your node-webkit app
     },
@@ -170,15 +170,17 @@ module.exports = function(grunt) {
     clean: {
       dist: {
         files: [{
+
           dot: true,
-          src: ['.tmp', '<%= yeoman.dist %>/*', '!<%= yeoman.dist %>/.git*', '!<%= yeoman.dist %>/.openshift', '!<%= yeoman.dist %>/Procfile']
+          src: ['.tmp', '<%= yeoman.dist %>/*', '!<%= yeoman.dist %>/.git*', '!<%= yeoman.dist %>/.openshift', '!<%= yeoman.dist %>/Procfile','!<%= yeoman.dist %>/node_modules/**/*']
         }]
       },
       build:{
         files: [{
           dot: true,
-          src: ['build/*/**'],
-          force: true
+          force: true,
+          src: ['build/ggc']
+
         }]
       },
       server: '.tmp'
@@ -375,13 +377,13 @@ module.exports = function(grunt) {
           {
             expand: true,
             dest: '<%= yeoman.dist %>',
-            src: ['!**grunt**', '!**karma*', 'package.json', 'server/**/*', 'node_modules/**/*','!**/*grunt*/**','!**/karma*/**']
+            src: [ 'package.json', 'server/**/*']
           },{
           expand: true,
           dot: true,
           cwd: '<%= yeoman.client %>',
           dest: '<%= yeoman.dist %>/public',
-          src: ['*.{ico,png,txt}', '.htaccess', 'bower_components/**/*', 'assets/**/*', 'app/**/*', 'lib/*', 'index.html','NWIndex.html', 'components/**/*', 'bmp/*', 'svg/*', 'vid/*']
+          src: ['*.{ico,png,txt}', '.htaccess', 'bower_components/**/*',  'assets/**/*', 'app/**/*', 'lib/*', 'index.html','NWIndex.html', 'components/**/*', 'bmp/*', 'svg/*', 'vid/*','!**/examples/**', '!**/test/**','!**/docs/**','!**/doc/**',]
         }, {
           expand: true,
           cwd: '.tmp/images',
@@ -571,7 +573,7 @@ module.exports = function(grunt) {
   /* Monadnock Build Tasks */
   grunt.registerTask('nwbuild', function(target) {
 
-      return grunt.task.run(['clean:dist', 'clean:build','concurrent:dist', 'injector', 'wiredep', 'copy:nomin', 'env:all', 'nwjs']);
+      return grunt.task.run(['clean:dist', 'clean:build','concurrent:dist', 'injector', 'wiredep', 'copy:nomin', 'env:all']);
 
   });
 };
