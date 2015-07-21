@@ -462,8 +462,12 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   //random event video is over
   this.videoEventEnd = function () {
     if ($rootScope.currentState != "game.play.loop.endgame") {
+      console.log("End Video: Loop");
       $state.go("game.play.loop");
       phases.setup();
+    } else {
+      $state.go("game.play.attract");
+      console.log("End Video: Attract");
     }
   }
   this.playerChoice = function (p, b) {

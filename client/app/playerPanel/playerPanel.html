@@ -1,4 +1,7 @@
 
+<div class="arrow environment"></div>
+<div class="arrow economy"></div>
+<div class="arrow energy"></div>
 
 <div class="panelOuter {{name}}" ng-class="{'retract':player.docked, 'fullRetract':currentState != 'game.play.loop'}">
   <div class="panelInner{{name}}" > <!--ng-class={true: 'extended', false: 'none'}[player.currentPlayer == false]-->
@@ -7,7 +10,7 @@
     <div class="bottomPlane">
       <div class="colorbar"><h3>{{name | capitalize}}</h3></div>
 
-      <div ng-show="game.phase == 'choice'">
+      <div ng-show="game.phase == 'choice' && dealer.introText == false">
         <div ng-show = "player.currentPlayer">
           <h3 class = "tab-title text-center">Choose an Action</h3>
           <div class="ggc-btn-wrap">
@@ -18,6 +21,13 @@
             </div>
           </div>
 
+        </div>
+      </div>
+
+      <div ng-show="game.phase == 'choice' && dealer.introText == true">
+        <div>
+          <h3 class = "tab-title text-center">_______________</h3>
+          <h3 class = "tab-title text-center">You will be playing as the {{name | capitalize}} sector.</h3>
         </div>
       </div>
 
@@ -46,7 +56,7 @@
         </div>
       </div>
 
-      <div ng-show="game.phase == 'scoring'" class="vote-buttons">
+      <div ng-show="game.phase == 'scoring' && dealer.signIn == false" class="vote-buttons">
         <div  ng-show = "player.hand.issue.passed">
           <h3 class = "tab-title text-center">Action Passed </h3>
           <h1 class="text-center score {{name}}" ng-bind-html="player.hand.issue.scoreHTML"></h1>
@@ -60,9 +70,13 @@
         <div ng-hide = "player.hand.issue.passed">
           <h3 class = "tab-title text-center">Action Blocked</h3>
         </div>
+      </div>
 
-
-
+      <div ng-show="dealer.signIn == true">
+          <h3 class = "tab-title text-center col-md-6">Get</h3>
+          <h3 class = "tab-title text-center col-md-6">Ready !</h3>
+          <div class="ggc-btn-wrap">
+          </div>
       </div>
 
   </div>

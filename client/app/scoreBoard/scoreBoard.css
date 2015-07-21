@@ -1,10 +1,37 @@
 #energyPath {
-
+  font-family:"Glyphicons Halflings";
 }
 
 #economyPath {
+  font-family:"Glyphicons Halflings";
 }
 
 #environmentPath {
+  font-family:"Glyphicons Halflings";
+}
+
+.glyphIcons {
+  font-family:"Glyphicons Halflings";
+  font-size:60px;
+}
+
+.environment.glyphIcons {
+  fill: white;
+}
+
+.energy.glyphIcons {
+  fill: white;
+}
+
+.economy.glyphIcons {
+  fill: white;
+}
+
+.iconAnimator {
+  margin-left:20px;
+}
+
+.svgScoreboard {
+  text-anchor:middle;
 
 }
