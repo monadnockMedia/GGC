@@ -56,6 +56,13 @@ angular.module('ggcApp')
            },
            children: [
              {
+               name: "attract",
+               url: '/attract',
+               views: {
+                 "vid@game": {templateUrl: 'app/game/attract.html'}
+               }
+             },
+             {
                name: "loop",
                url: '/loop',
                views: {

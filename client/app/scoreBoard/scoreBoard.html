@@ -1,17 +1,25 @@
 <div style="  pointer-events: none;">
 
-  <svg width="1920px" height="1080px"  xml:space="preserve">
-    <path id="environmentPath" fill="none" d="M264.391,457.668c0,0,53.362-154,151.626-241.333S648.338,79.002,648.338,79.002"/>
-	  <path id="energyPath" fill="none" d="M1271.307,78.908c0,0,134.056,50,232.32,137.333s151.627,241.333,151.627,241.33"/>
-	  <path id="economyPath" fill="none" d="M663.306,73.669c0,0,135.361-47.126,297.722-47.126 c172.129,0,294.469,47.126,294.469,47.126"/>
+  <svg width="1920px" height="1080px"  xml:space="preserve" >
+    <g ggc-score team="environment" class="svgScoreboard">
+      <path id="environmentPath" fill="none" d="M159.336,508.876 c46.219-185.061,213.5-339.903,440.785-420.62"/>
+    </g>
 
-  <g>
+	  <g ggc-score team="energy" class="svgScoreboard">
+      <path id="energyPath"  fill="none" d="M1319.243,88.214 c227.343,80.704,394.673,235.566,440.901,420.657"/>
+    </g>
+
+    <g ggc-score team="economy" class="svgScoreboard">
+      <path id="economyPath" fill="none" d="M619.831,81.493 c103.427-34.266,218.565-53.379,339.911-53.379c122.114,0,237.942,19.355,341.876,54.033"/>
+    </g>
+
+  <!--g>
     <text text-anchor="start" font-size="24" >
       <textPath baseline-shift="-50%" ng-bind-html="score.i | scoreIcons:team" ng-repeat="(team, score) in game.score" startOffset="3%"  letter-spacing="-10px" font-family="Glyphicons Halflings" fill="{{team | teamColor:team}}" id="{{team | identify}}" xlink:href="{{team | identify}}">
 
       </textPath>
     </text>
-  </g>
+  </g-->
 </svg>
 
 </div>
