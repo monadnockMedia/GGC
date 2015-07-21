@@ -461,12 +461,18 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   };
   //random event video is over
   this.videoEventEnd = function () {
-    if ($rootScope.currentState != "game.play.loop.endgame") {
+    if ($rootScope.currentState != "game.play.endgame") {
       console.log("End Video: Loop");
       $state.go("game.play.loop");
       phases.setup();
     } else {
       $state.go("game.play.attract");
+      ggcMapper.reset();
+      init();
+      ggcUtil.getIcons().then(function (r) {
+        tutorialIcons = r.data;
+        console.log("Tutorial Icons: ", tutorialIcons);
+      });
       console.log("End Video: Attract");
     }
   }
