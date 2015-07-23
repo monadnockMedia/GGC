@@ -59,10 +59,10 @@ angular.module('ggcApp')
           callback: function(){
             if ($state.current.name == "game.play.attract") {
               $state.go("game.play.prologue");
-            } else if ($scope.game.phase == "vote") {
-
+            } else if ($state.current.name != "game.play.prologue") {
+              dealer.playerChoice("environment",0);
             }
-            dealer.playerChoice("environment",0);
+
 
 
             //$scope.confirmSfx.restart();
@@ -75,10 +75,10 @@ angular.module('ggcApp')
           callback: function(){
             if ($state.current.name == "game.play.attract") {
               $state.go("game.play.prologue");
-            } else if ($scope.game.phase == "vote") {
-
+            } else if ($state.current.name != "game.play.prologue") {
+              dealer.playerChoice("environment",1);
             }
-            dealer.playerChoice("environment",1);
+
 
           }
         })
@@ -89,10 +89,10 @@ angular.module('ggcApp')
           callback: function(){
             if ($state.current.name == "game.play.attract") {
               $state.go("game.play.prologue");
-            } else if ($scope.game.phase == "vote") {
-
+            } else if ($state.current.name != "game.play.prologue") {
+              dealer.playerChoice("economy",0);
             }
-            dealer.playerChoice("economy",0);
+
 
           }
         })
@@ -102,10 +102,10 @@ angular.module('ggcApp')
           callback: function(){
             if ($state.current.name == "game.play.attract") {
               $state.go("game.play.prologue");
-            } else if ($scope.game.phase == "vote") {
-
+            } else if ($state.current.name != "game.play.prologue") {
+              dealer.playerChoice("economy",1);
             }
-            dealer.playerChoice("economy",1);
+
 
           }
         })
@@ -116,12 +116,10 @@ angular.module('ggcApp')
           callback: function(){
             if ($state.current.name == "game.play.attract") {
               $state.go("game.play.prologue");
-            } else if ($scope.game.phase == "vote") {
-
+            } else if ($state.current.name != "game.play.prologue") {
+              dealer.playerChoice("energy",0);
             }
-            dealer.playerChoice("energy",0)
 
-            ;
 
           }
         })
@@ -131,10 +129,10 @@ angular.module('ggcApp')
           callback: function(){
             if ($state.current.name == "game.play.attract") {
               $state.go("game.play.prologue");
-            } else if ($scope.game.phase == "vote") {
-
+            } else if ($state.current.name != "game.play.prologue") {
+              dealer.playerChoice("energy",1);
             }
-            dealer.playerChoice("energy",1);
+
 
           }
         })
