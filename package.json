@@ -3,6 +3,14 @@
   "version": "0.0.0",
   "main": "public/NWIndex.html",
   "node-main": "server/app.js",
+  "window": {
+    "title": "Great Gulf Challenge",
+    "toolbar": false,
+    "frame": false,
+    "position": "center",
+    "resizable": false,
+    "always-on-top": true
+  },
   "dependencies": {
     "express": "^4.9.0",
     "morgan": "^1.0.0",
