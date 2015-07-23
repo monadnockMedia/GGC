@@ -54,7 +54,7 @@ angular.module('ggcApp')
 
       hotkeys.bindTo($scope)
         .add({
-          combo: '1',
+          combo: '0',
           description: 'Environment Select 1',
           callback: function(){
             if ($state.current.name == "game.play.attract") {
@@ -70,7 +70,7 @@ angular.module('ggcApp')
 
         })
         .add({
-          combo: '2',
+          combo: '1',
           description: 'Environment Select 2',
           callback: function(){
             if ($state.current.name == "game.play.attract") {
@@ -84,7 +84,7 @@ angular.module('ggcApp')
         })
 
         .add({
-          combo: '3',
+          combo: '2',
           description: 'Economy Select 1',
           callback: function(){
             if ($state.current.name == "game.play.attract") {
@@ -97,7 +97,7 @@ angular.module('ggcApp')
           }
         })
         .add({
-          combo: '4',
+          combo: '3',
           description: 'Environment Select 2',
           callback: function(){
             if ($state.current.name == "game.play.attract") {
@@ -111,7 +111,7 @@ angular.module('ggcApp')
         })
 
         .add({
-          combo: '5',
+          combo: '4',
           description: 'Energy Select 1',
           callback: function(){
             if ($state.current.name == "game.play.attract") {
@@ -126,7 +126,7 @@ angular.module('ggcApp')
           }
         })
         .add({
-          combo: '6',
+          combo: '5',
           description: 'Energy Select 2',
           callback: function(){
             if ($state.current.name == "game.play.attract") {
