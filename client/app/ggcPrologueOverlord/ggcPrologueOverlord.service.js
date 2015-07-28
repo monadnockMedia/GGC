@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .service('ggcPrologueOverlord', function (dealer, $state, $interval) {
+  .service('ggcPrologueOverlord', function (dealer, $state, $interval, ggcMapper) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var pop;
     this.makePop = function(v){
@@ -9,8 +9,9 @@ angular.module('ggcApp')
       pop.on("ended", function(){
         $state.go("game.play.loop");
         dealer.init();
-        //dealer.dockOne(dealer.game.currentPlayer,false);
-
+        dealer.prologue = false;
+        dealer.signIn = false;
+        ggcMapper.reset();
       });
 
       pop.code({
@@ -40,7 +41,7 @@ angular.module('ggcApp')
       }).code({
         start: 11.5,
         end: 12,
-        onStart: function(){dealer.placeTutIcon(22);},
+        onStart: function(){dealer.placeTutIcon(25);},
         onEnd: function(){dealer.placeTutIcon(20);},
       }).code({
         start: 13.75,
@@ -154,13 +155,13 @@ angular.module('ggcApp')
         },
       }).code({
         start: 49,
-        end: 61,
+        end:60.9,
         onStart: function(){
           $(".retract").removeClass("retract").addClass("signIn");
         },
         onEnd: function(){
-
-          //  dealer.prologue = false;
+          /*dealer.prologue = false;
+          dealer.signIn = false;*/
         },
       }).load()
 

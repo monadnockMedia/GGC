@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcUtil, $interval, ggcMapper, $state, $filter, ngAudio) {
+angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcUtil, $interval, ggcMapper, $state, $filter, ngAudio, $location) {
   // AngularJS will instantiate a singleton by calling "new" on this function
 
   this.decks = {};
@@ -73,6 +73,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
     //make a new set of deck, with shuffled cards
     self.game.totalScore = 0;
+    self.game.round = 1;
 
     //setup the game by players
     eachPlayer(function (k) {
@@ -317,7 +318,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   }
 
   phases.scoring = function (passed) {
-
+    console.log("scoring");
     self.game.phase = "scoring";
     dockAll(false);
     //(self.game.phase,self.game);
@@ -340,12 +341,14 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     if ($rootScope.currentState == "game.play.loop") {
       nextPlayer();
 
+
       if (isFirstPlayer()) {
         phases.endRound();
       } else {
         var timer = $interval(function () {
           $interval.cancel(timer);
           phases.setup();
+
         }, config.duration.scoring)
       }
     } else {
@@ -371,14 +374,16 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
 
     if (self.game.round == config.rounds){
-
+      console.log("GameOver");
       gameOver();
     }else{
       self.game.round++;
-      var timedCb = (roll()) ? phases.event() : phases.setup();
+      //var timedCb = (roll()) ? phases.event() : phases.setup();
+      var callback = (roll()) ? "event" : "setup";
       var timer = $interval(function () {
+        phases[callback].call(this);
         $interval.cancel(timer);
-        timedCb();
+        //timedCb();
       }, config.duration.scoring)
 
     }
@@ -436,7 +441,10 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     self.game.players[p].voted = true;
     var keys = Object.keys(self.game.votes);
 
+    console.log("keys.length == ", keys.length);
     if (keys.length == 3) {
+
+      //debugger;
       var i = 3;
       var ct = 0;
       while (i--) {
@@ -461,19 +469,29 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   };
   //random event video is over
   this.videoEventEnd = function () {
-    if ($rootScope.currentState != "game.play.endgame") {
+    if ($rootScope.currentState == "game.play.event") {
       console.log("End Video: Loop");
       $state.go("game.play.loop");
       phases.setup();
-    } else {
-      $state.go("game.play.attract");
+    } else if ($rootScope.currentState == "game.play.endgame") {
+      /*$state.go("game.play.attract");
+      self.prologue = false;
+      self.signIn = false;
+      self.introText = false;
       ggcMapper.reset();
       init();
       ggcUtil.getIcons().then(function (r) {
         tutorialIcons = r.data;
         console.log("Tutorial Icons: ", tutorialIcons);
       });
-      console.log("End Video: Attract");
+      console.log("End Video: Attract");*/
+      ggcMapper.reset();
+      init();
+      ggcUtil.getIcons().then(function (r) {
+        tutorialIcons = r.data;
+        console.log("Tutorial Icons: ", tutorialIcons);
+      });
+      $location.url("/game/play/attract");
     }
   }
   this.playerChoice = function (p, b) {

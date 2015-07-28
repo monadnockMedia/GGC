@@ -31,18 +31,6 @@ angular.module('ggcApp')
       //debugger;
     })
 
-    $scope.$watch(function(){
-      return $scope.dealer.prologue;
-    }, function(val) {
-      if (val == true) {
-        $interval(function() {
-          $scope.dealer.prologue = false;
-          $scope.dealer.signIn = false;
-        }, 20000);
-      }
-      //debugger;
-    })
-
     ///dealer.hands contains the current "card" views for each player, as well as the main player
     $scope.hands = dealer.hands;
 

@@ -14,19 +14,12 @@ angular.module('ggcApp')
 
       });
 
-      pop.code({
-        start: 0.01,
-        end: 12.5,
-        onStart: function(){
-          dealer.dockAll(true);
-          dealer.introMusic.play();
-        },
-        onEnd: function(){}
-      }).load();
+
 
       var t = $interval(function () {
         $interval.cancel(t);
         pop.play();
+        pop.loop(true);
       }, 2000);
 
 
