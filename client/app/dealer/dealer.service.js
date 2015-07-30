@@ -32,6 +32,8 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
   var endings = {};
 
+
+
   //console.log("DEALER");
   ///
   ///Setup the "fresh" deck
@@ -56,6 +58,8 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     tutorialIcons = r.data;
     console.log("Tutorial Icons: ", tutorialIcons);
   });
+
+
 
   function placeTutIcon(i) {
     addIcon(tutorialIcons[i]);

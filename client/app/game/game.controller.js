@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .controller('GameCtrl', function ($scope, $http, ngAudio, ggcUtil, $rootScope, dealer, hotkeys, $location, $interval, $state) {
+  .controller('GameCtrl', function ($scope, $http, ngAudio, ggcUtil, $rootScope, dealer, hotkeys, $location, $interval, $state, nwkiosk) {
     $scope.preview = {};
     $scope.preview.hideNavbar = false;
 
@@ -33,6 +33,10 @@ angular.module('ggcApp')
 
     ///dealer.hands contains the current "card" views for each player, as well as the main player
     $scope.hands = dealer.hands;
+
+    if ($rootScope.kiosk == "true") {
+      nwkiosk.toggleKiosk();
+    }
 
 
 
@@ -147,6 +151,22 @@ angular.module('ggcApp')
           description: 'Pretty Print Model',
           callback: function(){
             console.log(ggcUtil.printObject($scope.game));
+
+          }
+        })
+        .add({
+          combo: 'd',
+          description: 'Toggles developer console',
+          callback: function(){
+            nwkiosk.toggleDevTools();
+
+          }
+        })
+        .add({
+          combo: 'k',
+          description: 'Tpggles kiosk mode',
+          callback: function(){
+            nwkiosk.toggleKiosk();
 
           }
         })
