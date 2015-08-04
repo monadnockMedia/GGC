@@ -71,5 +71,13 @@ angular.module('ggcApp')
       return copy;
     }
 
+    this.roll() {
+      var noRoll = (chance == 0);
+
+      return (noRoll) ? false : (~~(Math.random() * chance) == 0);
+
+
+    }
+
 
   });

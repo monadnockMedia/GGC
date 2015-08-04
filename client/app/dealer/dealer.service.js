@@ -4,6 +4,8 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   // AngularJS will instantiate a singleton by calling "new" on this function
 
   this.decks = {};
+
+  //TODO(@cupofnestor) Make game service
   this.game = {main: {}, players: {}, currentPlayer: {}, playerIndex: 0, action: {}, round:1};
   this.game.score = {environment: {}, economy: {}, energy: {}};
   this.game.phase = "none";
@@ -26,12 +28,13 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   var self = this;
   var chance = config.eventChance;
   var shuffle = ggcUtil.shuffle;
-
+  var roll = ggcUtil.roll;
   var tutorialIcons = [];
 
-
+  var panelClasses = ["fullRetract","retract","signIn"," "]
   var endings = {};
 
+  //TODO(@cupofnestor) make deck service
   //console.log("DEALER");
   ///
   ///Setup the "fresh" deck
@@ -84,7 +87,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
       //rand = (k == "environment") ? Math.max(~~(rand / 4), 1) : rand;
       self.game.totalScore += score;
       self.game.score[k] = {i: score, p: 0};
-      self.game.players[k] = {hand: {choices: [], issue: {}}, docked: true};
+      self.game.players[k] = {hand: {choices: [], issue: {}}, docked: true, panelClass: false};
     })
 
     calculatePercentage();
@@ -95,13 +98,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   }
   this.init = init;
 
-  function roll() {
-    var noRoll = (chance == 0);
 
-    return (noRoll) ? false : (~~(Math.random() * chance) == 0);
-
-
-  }
 
   function randomEvent() {
     return events[~~(Math.random() * events.length)];
@@ -132,25 +129,45 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
   function makeDocked(p, b) {
     self.game.players[p].docked = b;
-    self.panelSfx.play();
+    self.game.players[p].panelClass = (b) ? panelClasses[1] : " ";
+
     //console.log("MakeDocked", p, b);
   }
 
   function dockAll(b) {
+
+    self.panelSfx.play();
     eachPlayer(function (p) {
       makeDocked(p, b);
-      self.panelSfx.play();
+
     });
   }
 
   function dockOne(p, b) {
+    self.panelSfx.play();
     eachPlayer(function (_p) {
       var docked = (_p === p) ? b : !b;
       makeDocked(_p, docked);
-      self.panelSfx.play();
     });
   }
 
+  function setPanelState(p,s){
+    self.game.players[p].panelClass = s;
+  }
+
+  function setPanelStates(arg){
+    if( isNaN(arg) ){ //arg is a string
+      if(panelClasses.indexOf(arg) >=0) {
+        eachPlayer(function(p){
+          setPanelState(p,panelClasses[arg])
+        })
+      }else{ //arg is number
+        if(){
+
+        }
+      }
+    }
+  }
   this.dockAll = dockAll;
   this.dockOne = dockOne;
   this.makeDocked = makeDocked;
@@ -286,6 +303,8 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     //console.log(self.game.phase,self.game);
     //console.log("PHASE CHOICE");
     //loop through the two drawn cards
+
+    //TODO(@cupofnestor) add to filter defs
     var cPlayerCards = currentCards.map(function (c, i) {
       var copy = JSON.parse(JSON.stringify(c));
       //sneakily sort out player cards in the loop
@@ -328,14 +347,6 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     self.game.main[chosenIndex].passed = passed;
     self.game.action.passed = passed;
     if (passed) tally(); //maybe need a deferred here
-
-    //TODO(Ray) please explain?  can we link this to a state transition?
-    //var timer1 = $interval(function () {
-    //  $interval.cancel(timer1);
-    //  dockAll(false);
-    //}, 1000);
-
-
 
     //If it's the prologue, don't do this
     if ($rootScope.currentState == "game.play.loop") {
