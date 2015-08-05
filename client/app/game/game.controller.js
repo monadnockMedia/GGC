@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .controller('GameCtrl', function ($scope, $http, ngAudio, ggcUtil, $rootScope, dealer, hotkeys, $location, $interval, $state) {
+  .controller('GameCtrl', function ($scope, $http, ngAudio, ggcUtil, $rootScope, dealer, ggcGame, hotkeys, $location, $interval, $state) {
     $scope.preview = {};
     $scope.preview.hideNavbar = false;
 
@@ -20,8 +20,10 @@ angular.module('ggcApp')
 
     $scope.printObject = ggcUtil.printObject;
 
-    $scope.dealer = dealer;
-    $scope.game = dealer.game;
+    $scope.dealer = dealer
+    debugger;
+
+    $scope.game = ggcGame.game;
     $scope.$watch(function(){
       return $scope.game.phase;
     }, function(val) {

@@ -1,14 +1,18 @@
 'use strict';
 
-angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcUtil, $interval, ggcMapper, $state, $filter, ngAudio, $location) {
+angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q, $rootScope, ggcUtil, $interval, ggcMapper, $state, $filter, ngAudio, $location) {
   // AngularJS will instantiate a singleton by calling "new" on this function
 
   this.decks = {};
 
   //TODO(@cupofnestor) Make game service
-  this.game = {main: {}, players: {}, currentPlayer: {}, playerIndex: 0, action: {}, round:1};
-  this.game.score = {environment: {}, economy: {}, energy: {}};
-  this.game.phase = "none";
+  var game = ggcGame.game;
+  this.game = game;
+  self = {game:game}; //temporary
+  var deck = ggcDeck;
+ // this.game = {main: {}, players: {}, currentPlayer: {}, playerIndex: 0, action: {}, round:1};
+ // this.game.score = {environment: {}, economy: {}, energy: {}};
+//  this.game.phase = "none";
   this.prologue = false;
   this.signIn = false;
   this.introText = false;
@@ -27,7 +31,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   var currentCards;
   var self = this;
   var chance = config.eventChance;
-  var shuffle = ggcUtil.shuffle;
+
   var roll = ggcUtil.roll;
   var tutorialIcons = [];
 
@@ -73,12 +77,20 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
   ///initialize
   function init() {
+    deck.init().then(function(_players){
+      deck.b = "woot";
+      ggcGame.init().then(function(){
 
-    //make a new set of deck, with shuffled cards
-    self.game.totalScore = 0;
-    self.game.round = 1;
+          phases.setup();
+
+
+
+      });
+
+    })
 
     //setup the game by players
+   /*
     eachPlayer(function (k) {
       pushDeck(k);
       var score = config.initialScores[k];
@@ -95,6 +107,8 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     //console.log("deck pushed", self.decks, self.hands);
     //ggcMapper.reset();
     phases.setup();
+    */
+
   }
   this.init = init;
 
@@ -104,15 +118,16 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
     return events[~~(Math.random() * events.length)];
   }
 
-  function calculatePercentage() {
-    var score = self.game.score;
-    eachPlayer(function (p) {
-      score[p].p = score[p].i / self.game.totalScore;
-    });
-  }
+  //TODO(Ryan) Delete once tested
+  //function calculatePercentage() {
+  //  var score = self.game.score;
+  //  eachPlayer(function (p) {
+  //    score[p].p = score[p].i / self.game.totalScore;
+  //  });
+  //}
 
   function nextPlayer() {
-    var i = self.game.playerIndex;
+    var i = game.playerIndex;
     self.game.playerIndex = (i == 2 ) ? 0 : i + 1;
     setCurrentPlayer(self.game.playerIndex);
   }
@@ -162,9 +177,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
           setPanelState(p,panelClasses[arg])
         })
       }else{ //arg is number
-        if(){
-
-        }
+        console.log("foo");
       }
     }
   }
@@ -200,7 +213,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
 
     self.game.players[player].hand.choices = [];
   }
-
+  //TODO(Ryan) Delete when tested
   ///add a shuffled deck to the "bottom"
   function pushDeck(team) {
     var playerDeck = shuffle(self.freshDecks[team].slice(0)); //sheffle the players deck
@@ -285,21 +298,22 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
   this.phases = phases;
 
   phases.setup = function () {
-    dockAll(false);
-    self.game.phase = "setup";
+    //dockAll(false);
+    ggcGame.setPhase("setup");
     //console.log(self.game.phase,self.game);
-    self.game.votes = {};
-    self.game.totalScore = 0;
-    buildHands(self.game.currentPlayer);
-    self.drawTwo(self.game.currentPlayer);
+    //self.game.votes = {};
+    //self.game.totalScore = 0;
+    //buildHands(self.game.currentPlayer);
+    deck.drawTwo().then(phases.choice());
+    //self.drawTwo(self.game.currentPlayer);
 
   }
 
   phases.choice = function () {
 
-    dockOne(self.game.currentPlayer, false);
-
-    self.game.phase = "choice";
+   // dockOne(self.game.currentPlayer, false);
+    game.phase("choice");
+    //self.game.phase = "choice";
     //console.log(self.game.phase,self.game);
     //console.log("PHASE CHOICE");
     //loop through the two drawn cards
