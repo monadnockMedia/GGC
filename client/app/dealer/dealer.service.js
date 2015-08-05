@@ -496,6 +496,7 @@ angular.module('ggcApp').service('dealer', function ($http, $q, $rootScope, ggcU
         console.log("Tutorial Icons: ", tutorialIcons);
       });
       $location.url("/game/play/attract");
+      location.reload();
     }
   }
   this.playerChoice = function (p, b) {

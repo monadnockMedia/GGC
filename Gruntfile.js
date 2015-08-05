@@ -383,7 +383,7 @@ module.exports = function(grunt) {
           dot: true,
           cwd: '<%= yeoman.client %>',
           dest: '<%= yeoman.dist %>/public',
-          src: ['*.{ico,png,txt}', '.htaccess', 'bower_components/**/*',  'assets/**/*', 'app/**/*', 'lib/*', 'index.html','NWIndex.html', 'components/**/*', 'bmp/*', 'svg/*', 'vid/*','!**/examples/**', '!**/test/**','!**/docs/**','!**/doc/**',]
+          src: ['*.{ico,png,txt}', '.htaccess', 'bower_components/**/*',  'assets/**/*', 'app/**/*', 'lib/*', 'index.html','NWIndex.html', 'components/**/*', 'bmp/*', 'svg/*', 'sound/*', 'vid/*','!**/examples/**', '!**/test/**','!**/docs/**','!**/doc/**',]
         }, {
           expand: true,
           cwd: '.tmp/images',

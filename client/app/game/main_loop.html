@@ -3,13 +3,13 @@
 
 <div class="row relative text-center main-title" >
   <h1  class = "title" ng-show="game.phase == 'choice'">
-    Actions
+    {{game.currentPlayer | capitalize}} Chooses an Action
   </h1>
   <h1  class = "title" ng-show="game.phase == 'vote'">
-    Vote
+    Everyone Votes
   </h1>
   <h1  class = "title" ng-show="game.phase == 'scoring' && dealer.prologue == false">
-    Score
+    Results
   </h1>
 </div>
 
