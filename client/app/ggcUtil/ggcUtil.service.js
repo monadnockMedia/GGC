@@ -39,7 +39,13 @@ angular.module('ggcApp')
     this.trustSVG = this.trustHTML;
 
     this.printObject = function (o) {
-      return JSON.stringify(o, null, 3);
+      return JSON.stringify(o, function(k,v){
+        if (k === "icon"){
+          return "<!-- SVG ICON -->"
+        }else{
+          return v;
+        }
+      }, 3);
     };
 
     this.getEditURL = function (id) {
@@ -71,7 +77,7 @@ angular.module('ggcApp')
       return copy;
     }
 
-    this.roll = function() {
+    this.roll = function(chance) {
       var noRoll = (chance == 0);
 
       return (noRoll) ? false : (~~(Math.random() * chance) == 0);
