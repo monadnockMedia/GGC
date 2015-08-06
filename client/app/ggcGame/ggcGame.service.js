@@ -33,19 +33,11 @@ angular.module('ggcApp')
 
     //////////
     function init(){
-
       var d = $q.defer();
-
-
       eachPlayer(function (k) {
         var init_score = config.initialScores[k];
-
-        //var rand = ~~(Math.random() * 4 + 3);
-        //rand = (k == "environment") ? Math.max(~~(rand / 4), 1) : rand;
         game.totalScore += init_score;
         game.score[k] = {i: init_score, p: 0};
-
-
         game.players[k] = {hand: clone(null_hand), docked: true, panelClass: false, isCurrentPlayer:false};
       })
       setCurrentPlayer(game.playerIndex);
@@ -62,12 +54,6 @@ angular.module('ggcApp')
       var i = game.playerIndex;
       game.playerIndex = (i == 2 ) ? 0 : i + 1;
       setCurrentPlayer(game.playerIndex);
-    }
-
-
-    function isFirstPlayer() {
-      var test = game.currentPlayer === playerNames[0];
-      return test;
     }
 
     function isLastPlayer() {
@@ -248,7 +234,7 @@ angular.module('ggcApp')
     function randomEvent() {
       return events[~~(Math.random() * events.length)];
     }
-
+    //TODO(Ryan) create nextPhase(), possibly figure out a better way of inserting phases on-the-fly
     var phaseFunctions = {
       ////////SETUP////////
       setup: function () {
@@ -377,24 +363,6 @@ angular.module('ggcApp')
     this.setEndings = setEndings;
     this.setEvents = setEvents;
 
-
-
- /*   return{
-      init: init,
-      main: main,
-      players: players,
-      phase:phase,
-      setPlayerNames: setPlayerNames,
-      getCurrentPlayer: function(){return CurrentPlayer},
-      currentCards: currentCards,
-      playerIndex: playerIndex,
-      action:action,
-      phase:phase,
-      round:round,
-      totalScore:totalScore,
-      score:score,
-      phase: setPhase
-    }; */
 
 
 

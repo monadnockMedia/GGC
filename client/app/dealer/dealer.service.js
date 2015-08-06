@@ -82,151 +82,14 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
   }
   this.init = init;
 
-
-
-
-
-  //TODO(Ryan) Delete once tested
-  //function calculatePercentage() {
-  //  var score = self.game.score;
-  //  eachPlayer(function (p) {
-  //    score[p].p = score[p].i / self.game.totalScore;
-  //  });
-  //}
-
-  function nextPlayer() {
-    var i = game.playerIndex;
-    self.game.playerIndex = (i == 2 ) ? 0 : i + 1;
-    setCurrentPlayer(self.game.playerIndex);
-  }
-
-
-  function isFirstPlayer() {
-    var test = self.game.currentPlayer == self.players[0];
-    return test;
-  }
-
-  function eachPlayer(f) {
-    self.players.forEach(f);
-  }
-
-  //function makeDocked(p, b) {
-  //  self.game.players[p].docked = b;
-  //  self.game.players[p].panelClass = (b) ? panelClasses[1] : " ";
-  //
-  //  //console.log("MakeDocked", p, b);
-  //}
-  //
-  //function dockAll(b) {
-  //
-  //  self.panelSfx.play();
-  //  eachPlayer(function (p) {
-  //    makeDocked(p, b);
-  //
-  //  });
-  //}
-  //
-  //function dockOne(p, b) {
-  //  self.panelSfx.play();
-  //  eachPlayer(function (_p) {
-  //    var docked = (_p === p) ? b : !b;
-  //    makeDocked(_p, docked);
-  //  });
-  //}
-  //
-  //function setPanelState(p,s){
-  //  self.game.players[p].panelClass = s;
-  //}
-  //
-  //function setPanelStates(arg){
-  //  if( isNaN(arg) ){ //arg is a string
-  //    if(panelClasses.indexOf(arg) >=0) {
-  //      eachPlayer(function(p){
-  //        setPanelState(p,panelClasses[arg])
-  //      })
-  //    }else{ //arg is number
-  //      console.log("foo");
-  //    }
-  //  }
-  //}
-  //this.dockAll = dockAll;
-  //this.dockOne = dockOne;
-  //this.makeDocked = makeDocked;
-
-  function setCurrentPlayer(i) {
-    //p is current player name
-    var p = self.players[i];
-    self.game.currentPlayer = p;
-    eachPlayer(function (pp) {
-      //for each player, if they are not current, set docked to true;
-      self.game.players[pp].currentPlayer = (pp == p);
-      //makeDocked(pp,!(pp==p));
-      //self.game.players[pp].docked = !(pp==p);
-    })
-  }
-
-  ///reset the hands
-  function buildHands(player) {
-    self.game.main = [];
-
-    eachPlayer(nullHand);
-
-    function nullHand(p) {
-      self.game.players[p].voted = false;
-      self.game.players[p].hand = {
-        choices: null,
-        issue: null
-      }
-    }
-
-    self.game.players[player].hand.choices = [];
-  }
-  //TODO(Ryan) Delete when tested
-  ///add a shuffled deck to the "bottom"
-  function pushDeck(team) {
-    var playerDeck = shuffle(self.freshDecks[team].slice(0)); //sheffle the players deck
-    //if this deck doesn't exists on dealer deck, add it
-    if (!self.decks[team]) self.decks[team] = new Array();
-    //concat shuffled deck
-    self.decks[team] = self.decks[team].concat(playerDeck);
-  }
-
-  ///Score
-  function tally() {
-
-
-    var score = self.game.score;
-
-    eachPlayer(function (p) {
-      score[p].i += self.game.action.effects[p].score;
-      self.game.totalScore += score[p].i;
-
-      self.game.players[p].hand.issue.scoreHTML = $filter("panelScore")(self.game.players[p].hand.issue.score, p);
-    });
-
-    calculatePercentage();
-    addIcon(self.game.action.icon);
-  }
-
+  //TODO(Ray) use ggcMapper.addIcon directly form controller
   function addIcon(icon) {
     //ggcMapper.putIcon(ggcMapper.randomIndex(), icon._id);
     ggcMapper.addPriorityIcon(icon);
 
   }
 
-
   this.addIcon = addIcon;
-
-  function gameOver() {
-    self.game.phase = "ending";
-    dockAll(true);
-    var oc = calculateOutcome(self.game.score);
-    self.game.outcome = (oc.balanced) ? endings.balanced : endings.unbalanced[oc.team];
-    $state.go('game.play.endgame');
-  }
-
-
-
 
 
 ///Phases
@@ -234,15 +97,7 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
   this.phases = phases;
 
   phases.setup = function () {
-    //dockAll(false);
-   // ggcGame.setPhase("setup");
-    //console.log(self.game.phase,self.game);
-    //self.game.votes = {};
-    //self.game.totalScore = 0;
-    //buildHands(self.game.currentPlayer);
     deck.drawTwo().then(ggcGame.setPhase("choice")).catch(function(a){debugger;});
-    //self.drawTwo(self.game.currentPlayer);
-
   }
 
   phases.choice = function () {
@@ -260,49 +115,14 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
 
   phases.event = function () {
     self.newsSfx.play();
-    $state.go('game.play.event');  // this is a mistake, no?
+    $state.go('game.play.event');
   }
 
   phases.endRound = function(){
 
-
-    //if (self.game.round == config.rounds){
-    //  console.log("GameOver");
-    //  gameOver();
-    //}else{
-    //  self.game.round++;
-    //  //var timedCb = (roll()) ? phases.event() : phases.setup();
-    //  var callback = (roll()) ? "event" : "setup";
-    //  var timer = $interval(function () {
-    //    phases[callback].call(this);
-    //    $interval.cancel(timer);
-    //    //timedCb();
-    //  }, config.duration.scoring)
-    //
-    //}
   }
 
-
-///dealer methods
-  //pull two cards from the deck
-  //this.drawTwo = function (team) {
-  //  currentCards = [];
-  //  if (this.decks[team].length <= 4) {
-  //    pushDeck(team);
-  //
-  //  }
-  //  var i = 2;
-  //
-  //  var ret = [];
-  //  while (i--) {
-  //    currentCards.push(self.decks[team].shift());
-  //
-  //  }
-  //  //call the first play phase
-  //  phases.choice();
-  //}
-
-
+  //TODO(Ryan) are these neccessary?
   ///currentPlayer Chooses an issue
   this.choose = function (p, i) {
     //set "chosen" on players choice card to true
@@ -322,57 +142,21 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
 
     ggcGame.voteIssue(p,v);
 
-    //self.game.players[p].hand.issue.vote = v;
-    //self.game.votes[p] = v;
-    //self.game.players[p].voted = true;
-    //var keys = Object.keys(self.game.votes);
-    //
-    //console.log("keys.length == ", keys.length);
-    //if (keys.length == 3) {
-    //
-    //  //debugger;
-    //  var i = 3;
-    //  var ct = 0;
-    //  while (i--) {
-    //    ct += self.game.votes[keys[i]];
-    //  }
-    //  var passed = (ct >= 2);
-    //
-    //  //console.log(
-    //  //  (passed) ? "PASSED" : "FAILED", ct
-    //  //);
-    //  dockAll(true);
-    //
-    //
-    //
-    //  if ($rootScope.currentState == "game.play.loop") {
-    //    phases.scoring(passed);
-    //  } else {
-    //    phases.scoring(passed);
-    //  }
-    //
-    //}
+
   };
   //random event video is over
+  //TODO(Ray) attach callback to controller so it can be changed based on state?
+  //$scope.videoEndEvent = function(){}
   this.videoEventEnd = function () {
     if ($rootScope.currentState == "game.play.event") {
       console.log("End Video: Loop");
       $state.go("game.play.loop");
       ggcGame.setPhase("setup");
     } else if ($rootScope.currentState == "game.play.endgame") {
-      /*$state.go("game.play.attract");
-      self.prologue = false;
-      self.signIn = false;
-      self.introText = false;
       ggcMapper.reset();
       init();
-      ggcUtil.getIcons().then(function (r) {
-        tutorialIcons = r.data;
-        console.log("Tutorial Icons: ", tutorialIcons);
-      });
-      console.log("End Video: Attract");*/
-      ggcMapper.reset();
-      init();
+      //TODO(Ray) Qu'est-ce que c'est?
+      //Where to these get used?  why reload them?
       ggcUtil.getIcons().then(function (r) {
         tutorialIcons = r.data;
         console.log("Tutorial Icons: ", tutorialIcons);
