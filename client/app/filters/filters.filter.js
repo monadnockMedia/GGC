@@ -8,10 +8,15 @@ app.filter('percent', function () {
 });
 
 app.filter('capitalize', function() {
+
   return function(input) {
-    if (input!=null)
+
+    if (input && typeof(input) === "string") {
       input = input.toLowerCase();
-    return input.substring(0,1).toUpperCase()+input.substring(1);
+      return input.substring(0, 1).toUpperCase() + input.substring(1);
+    }else{
+      return false;
+    }
   }
 });
 
