@@ -19,7 +19,7 @@ module.exports = {
             process.env.MONGOLAB_URI ||
             process.env.MONGOHQ_URL ||
             process.env.OPENSHIFT_MONGODB_DB_URL+process.env.OPENSHIFT_APP_NAME ||
-            'mongodb://127.0.0.1/ggc'
+            'mongodb://aries.local/ggc'
   },
   appConfig: require(process.env.HOME+"/exhibit/ggc_config.json"),
 };

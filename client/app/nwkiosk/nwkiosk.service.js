@@ -13,12 +13,18 @@ angular.module('ggcApp')
     }
 
 
-    if($rootScope.config.kiosk){
-      kioskMode = true;
+    console.log("Get GUI");
+
+    try {
       var gui=require("nw.gui");
       var win = gui.Window.get();
 
-      win.enterKioskMode();
+      console.log("GUI");
+      kioskMode = false;
+
+
+      //win.enterKioskMode();
+      //win.showDevTools();
 
       this.toggleKiosk = function(){
         (kioskMode) ? win.enterKioskMode() : win.leaveKioskMode() ;
@@ -26,10 +32,12 @@ angular.module('ggcApp')
       }
 
       this.toggleDevTools = function(){
-        (devTools) ? gui.Window.get().showDevTools() : gui.Window.get().closeDevTools();
+        (devTools) ? win.showDevTools() : win.closeDevTools();
         devTools=!devTools;
       }
-    }else{
+    }
+    catch(err) {
+      console.log("Error: ", err);
       kioskMode = false;
 
       this.toggleKiosk = function(){

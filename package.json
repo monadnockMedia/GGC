@@ -3,13 +3,14 @@
   "version": "0.0.0",
   "main": "public/NWIndex.html",
   "node-main": "server/app.js",
+  "node-remote":"localhost",
   "window": {
     "title": "Great Gulf Challenge",
     "toolbar": false,
-    "frame": false,
+    "frame": true,
     "position": "center",
-    "resizable": false,
-    "always-on-top": true
+    "resizable": true,
+    "always-on-top": false
   },
   "dependencies": {
     "express": "^4.9.0",
