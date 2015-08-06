@@ -21,7 +21,7 @@ angular.module('ggcApp')
     $scope.printObject = ggcUtil.printObject;
 
     $scope.dealer = dealer
-    debugger;
+
 
     $scope.game = ggcGame.game;
     $scope.$watch(function(){
@@ -38,7 +38,7 @@ angular.module('ggcApp')
 
 
 
-    bindKeys();
+
 
     function bindKeys(){
 
@@ -133,7 +133,7 @@ angular.module('ggcApp')
             dealer.init();
             $location.url("/game/play/prologue");
             // angular.bootstrap(document, ['ggcApp']);
-            location.reload();
+            //location.reload();
           }
         })
         .add({
@@ -153,4 +153,8 @@ angular.module('ggcApp')
           }
         })
     }
+
+    bindKeys();
+    dealer.init();
+
   });
