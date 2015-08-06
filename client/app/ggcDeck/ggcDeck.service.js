@@ -39,7 +39,6 @@ angular.module('ggcApp')
     function drawTwo() {
       var d = $q.defer();
       var currentCards = [];
-      debugger;
       if (decks[game.currentPlayer].length <= 4) {
         pushDeck(game.currentPlayer);
 
@@ -51,7 +50,7 @@ angular.module('ggcApp')
         currentCards.push(decks[game.currentPlayer].shift());
 
       }
-      game.currentCards = currentCards;
+      ggcGame.setCards(currentCards);
       d.resolve(currentCards);
       //call the first play phase
       //phases.choice();
