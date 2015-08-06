@@ -10,9 +10,6 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
   this.game = game;
   self = {game:game}; //temporary
   var deck = ggcDeck;
- // this.game = {main: {}, players: {}, currentPlayer: {}, playerIndex: 0, action: {}, round:1};
- // this.game.score = {environment: {}, economy: {}, energy: {}};
-//  this.game.phase = "none";
   this.prologue = false;
   this.signIn = false;
   this.introText = false;
@@ -30,33 +27,23 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
   var chosenIndex;
   var currentCards;
   var self = this;
-  var chance = config.eventChance;
 
-  var roll = ggcUtil.roll;
+
   var tutorialIcons = [];
 
-  var panelClasses = ["fullRetract","retract","signIn"," "]
   var endings = {};
 
-  //TODO(@cupofnestor) make deck service
-  //console.log("DEALER");
-  ///
-  ///Setup the "fresh" deck
-  ///
-  $http.get('/api/cards/grouped').then(function (r) {
-    self.players = Object.keys(r.data);
-    self.freshDecks = r.data;
-    init();
+  $rootScope.$on("phaseChange", function(scope,arg,c){
+    phases[arg].call(self);
   });
 
-
   ggcUtil.getEndings().then(function(d){
-    endings = $filter("endObject")(d.data);
+    ggcGame.setEndings = $filter("endObject")(d.data);
   })
 
 
   ggcUtil.getEvents().then(function (r) {
-    events = r.data;
+    ggcGame.setEvents(r.data);
   });
 
   ggcUtil.getIcons().then(function (r) {
@@ -77,46 +64,27 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
 
   ///initialize
   function init() {
+
     deck.init().then(function(_players){
-      deck.b = "woot";
       ggcGame.init().then(function(){
 
-          phases.setup();
+          ggcGame.setPhase("setup");
 
 
 
       });
+      $rootScope.$on("votingComplete", function(t,c,n){phases.scoring();} );
+
 
     })
 
-    //setup the game by players
-   /*
-    eachPlayer(function (k) {
-      pushDeck(k);
-      var score = config.initialScores[k];
-
-      //var rand = ~~(Math.random() * 4 + 3);
-      //rand = (k == "environment") ? Math.max(~~(rand / 4), 1) : rand;
-      self.game.totalScore += score;
-      self.game.score[k] = {i: score, p: 0};
-      self.game.players[k] = {hand: {choices: [], issue: {}}, docked: true, panelClass: false};
-    })
-
-    calculatePercentage();
-    setCurrentPlayer(self.game.playerIndex);
-    //console.log("deck pushed", self.decks, self.hands);
-    //ggcMapper.reset();
-    phases.setup();
-    */
 
   }
   this.init = init;
 
 
 
-  function randomEvent() {
-    return events[~~(Math.random() * events.length)];
-  }
+
 
   //TODO(Ryan) Delete once tested
   //function calculatePercentage() {
@@ -142,48 +110,48 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
     self.players.forEach(f);
   }
 
-  function makeDocked(p, b) {
-    self.game.players[p].docked = b;
-    self.game.players[p].panelClass = (b) ? panelClasses[1] : " ";
-
-    //console.log("MakeDocked", p, b);
-  }
-
-  function dockAll(b) {
-
-    self.panelSfx.play();
-    eachPlayer(function (p) {
-      makeDocked(p, b);
-
-    });
-  }
-
-  function dockOne(p, b) {
-    self.panelSfx.play();
-    eachPlayer(function (_p) {
-      var docked = (_p === p) ? b : !b;
-      makeDocked(_p, docked);
-    });
-  }
-
-  function setPanelState(p,s){
-    self.game.players[p].panelClass = s;
-  }
-
-  function setPanelStates(arg){
-    if( isNaN(arg) ){ //arg is a string
-      if(panelClasses.indexOf(arg) >=0) {
-        eachPlayer(function(p){
-          setPanelState(p,panelClasses[arg])
-        })
-      }else{ //arg is number
-        console.log("foo");
-      }
-    }
-  }
-  this.dockAll = dockAll;
-  this.dockOne = dockOne;
-  this.makeDocked = makeDocked;
+  //function makeDocked(p, b) {
+  //  self.game.players[p].docked = b;
+  //  self.game.players[p].panelClass = (b) ? panelClasses[1] : " ";
+  //
+  //  //console.log("MakeDocked", p, b);
+  //}
+  //
+  //function dockAll(b) {
+  //
+  //  self.panelSfx.play();
+  //  eachPlayer(function (p) {
+  //    makeDocked(p, b);
+  //
+  //  });
+  //}
+  //
+  //function dockOne(p, b) {
+  //  self.panelSfx.play();
+  //  eachPlayer(function (_p) {
+  //    var docked = (_p === p) ? b : !b;
+  //    makeDocked(_p, docked);
+  //  });
+  //}
+  //
+  //function setPanelState(p,s){
+  //  self.game.players[p].panelClass = s;
+  //}
+  //
+  //function setPanelStates(arg){
+  //  if( isNaN(arg) ){ //arg is a string
+  //    if(panelClasses.indexOf(arg) >=0) {
+  //      eachPlayer(function(p){
+  //        setPanelState(p,panelClasses[arg])
+  //      })
+  //    }else{ //arg is number
+  //      console.log("foo");
+  //    }
+  //  }
+  //}
+  //this.dockAll = dockAll;
+  //this.dockOne = dockOne;
+  //this.makeDocked = makeDocked;
 
   function setCurrentPlayer(i) {
     //p is current player name
@@ -257,39 +225,7 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
     $state.go('game.play.endgame');
   }
 
-  function calculateOutcome(score) {
-    var outcome = {};
-    var average = 0;
-    var spread = [];
 
-    eachPlayer(sumScores);
-    average /= 3;
-    eachPlayer(makeSpread); //subtract average from each score
-    spread.sort(function(a,b){return a.spread - b.spread}).reverse();
-    //eachPlayer(orderSpread); //put in order
-    outcome.balanced = checkBalance();
-    outcome.team = spread[0].team;
-
-    return outcome;
-
-
-    function sumScores(p){
-      average += score[p].i;
-    };
-
-    function makeSpread(p){
-      spread.push( {team:p,spread:score[p].i - average})  ;
-    }
-
-    function checkBalance(){
-      var highSpread = spread[0].spread;
-      var lowSpread = spread[2].spread;
-      var spreadWidth = highSpread - lowSpread;
-      return (spreadWidth <= config.balanceThreshold);
-    }
-
-
-  }
 
 
 
@@ -299,156 +235,79 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
 
   phases.setup = function () {
     //dockAll(false);
-    ggcGame.setPhase("setup");
+   // ggcGame.setPhase("setup");
     //console.log(self.game.phase,self.game);
     //self.game.votes = {};
     //self.game.totalScore = 0;
     //buildHands(self.game.currentPlayer);
-    deck.drawTwo().then(phases.choice());
+    deck.drawTwo().then(ggcGame.setPhase("choice")).catch(function(a){debugger;});
     //self.drawTwo(self.game.currentPlayer);
 
   }
 
   phases.choice = function () {
 
-   // dockOne(self.game.currentPlayer, false);
-    game.phase("choice");
-    //self.game.phase = "choice";
-    //console.log(self.game.phase,self.game);
-    //console.log("PHASE CHOICE");
-    //loop through the two drawn cards
 
-    //TODO(@cupofnestor) add to filter defs
-    var cPlayerCards = currentCards.map(function (c, i) {
-      var copy = JSON.parse(JSON.stringify(c));
-      //sneakily sort out player cards in the loop
-      eachPlayer(function (k) {
-        //if this is the current player
-        if (k == self.game.currentPlayer) {
-          //build the choice view
-          var playerEffects = copy.effects[k];
-          self.game.players[k].hand.choices[i] = {
-            action: playerEffects.action,
-            icon: playerEffects.icon
-          };
-        }
-      });
-      delete copy.effects;
-      return copy;
-    })
-    self.game.main = cPlayerCards;
   }
 
-  phases.vote = function (i) {
-    self.game.phase = "vote";
+  phases.vote = function () {
 
-
-    eachPlayer(function (k) {
-      var playerEffects = self.game.action.effects[k];
-      self.game.players[k].hand.issue = playerEffects;
-    });
-    dockAll(false);
   }
 
-  phases.scoring = function (passed) {
-    console.log("scoring");
-    self.game.phase = "scoring";
-    dockAll(false);
-    //(self.game.phase,self.game);
-    eachPlayer(function (k) {
-      self.game.players[k].hand.issue.passed = passed;
-    });
-    self.game.main[chosenIndex].passed = passed;
-    self.game.action.passed = passed;
-    if (passed) tally(); //maybe need a deferred here
-
-    //If it's the prologue, don't do this
-    if ($rootScope.currentState == "game.play.loop") {
-      nextPlayer();
-
-
-      if (isFirstPlayer()) {
-        phases.endRound();
-      } else {
-        var timer = $interval(function () {
-          $interval.cancel(timer);
-          phases.setup();
-
-        }, config.duration.scoring)
-      }
-    } else {
-      //self.prologue = true;
-    }
-
-
+  phases.scoring = function () {
 
   }
 
   phases.event = function () {
-    dockAll(false);
     self.newsSfx.play();
-    self.game.phase = "event";
-    //console.log(self.game.phase,self.game);
     $state.go('game.play.event');  // this is a mistake, no?
-
-    self.game.main = randomEvent();
-
   }
 
   phases.endRound = function(){
 
 
-    if (self.game.round == config.rounds){
-      console.log("GameOver");
-      gameOver();
-    }else{
-      self.game.round++;
-      //var timedCb = (roll()) ? phases.event() : phases.setup();
-      var callback = (roll()) ? "event" : "setup";
-      var timer = $interval(function () {
-        phases[callback].call(this);
-        $interval.cancel(timer);
-        //timedCb();
-      }, config.duration.scoring)
-
-    }
+    //if (self.game.round == config.rounds){
+    //  console.log("GameOver");
+    //  gameOver();
+    //}else{
+    //  self.game.round++;
+    //  //var timedCb = (roll()) ? phases.event() : phases.setup();
+    //  var callback = (roll()) ? "event" : "setup";
+    //  var timer = $interval(function () {
+    //    phases[callback].call(this);
+    //    $interval.cancel(timer);
+    //    //timedCb();
+    //  }, config.duration.scoring)
+    //
+    //}
   }
 
 
 ///dealer methods
   //pull two cards from the deck
-  this.drawTwo = function (team) {
-    currentCards = [];
-    if (this.decks[team].length <= 4) {
-      pushDeck(team);
-
-    }
-    var i = 2;
-
-    var ret = [];
-    while (i--) {
-      currentCards.push(self.decks[team].shift());
-
-    }
-    //call the first play phase
-    phases.choice();
-  }
+  //this.drawTwo = function (team) {
+  //  currentCards = [];
+  //  if (this.decks[team].length <= 4) {
+  //    pushDeck(team);
+  //
+  //  }
+  //  var i = 2;
+  //
+  //  var ret = [];
+  //  while (i--) {
+  //    currentCards.push(self.decks[team].shift());
+  //
+  //  }
+  //  //call the first play phase
+  //  phases.choice();
+  //}
 
 
   ///currentPlayer Chooses an issue
   this.choose = function (p, i) {
     //set "chosen" on players choice card to true
     if (p == self.game.currentPlayer) {
-      self.confirmSfx.play();
-      self.game.players[self.game.currentPlayer].hand.choices[i].chosen = true;
-      self.game.action = currentCards[i];
-
-      chosenIndex = i;
-
-      self.game.main[+!Boolean(i)].hidden = true;
-      self.game.main[i].chosen = true;
-
-      phases.vote(i);
+      ggcGame.chooseIssue(p,i);
     }
   }
 
@@ -461,43 +320,45 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
       this.votePassSfx.play();
     }
 
-    self.game.players[p].hand.issue.vote = v;
-    self.game.votes[p] = v;
-    self.game.players[p].voted = true;
-    var keys = Object.keys(self.game.votes);
+    ggcGame.voteIssue(p,v);
 
-    console.log("keys.length == ", keys.length);
-    if (keys.length == 3) {
-
-      //debugger;
-      var i = 3;
-      var ct = 0;
-      while (i--) {
-        ct += self.game.votes[keys[i]];
-      }
-      var passed = (ct >= 2);
-
-      //console.log(
-      //  (passed) ? "PASSED" : "FAILED", ct
-      //);
-      dockAll(true);
-
-
-
-      if ($rootScope.currentState == "game.play.loop") {
-        phases.scoring(passed);
-      } else {
-        phases.scoring(passed);
-      }
-
-    }
+    //self.game.players[p].hand.issue.vote = v;
+    //self.game.votes[p] = v;
+    //self.game.players[p].voted = true;
+    //var keys = Object.keys(self.game.votes);
+    //
+    //console.log("keys.length == ", keys.length);
+    //if (keys.length == 3) {
+    //
+    //  //debugger;
+    //  var i = 3;
+    //  var ct = 0;
+    //  while (i--) {
+    //    ct += self.game.votes[keys[i]];
+    //  }
+    //  var passed = (ct >= 2);
+    //
+    //  //console.log(
+    //  //  (passed) ? "PASSED" : "FAILED", ct
+    //  //);
+    //  dockAll(true);
+    //
+    //
+    //
+    //  if ($rootScope.currentState == "game.play.loop") {
+    //    phases.scoring(passed);
+    //  } else {
+    //    phases.scoring(passed);
+    //  }
+    //
+    //}
   };
   //random event video is over
   this.videoEventEnd = function () {
     if ($rootScope.currentState == "game.play.event") {
       console.log("End Video: Loop");
       $state.go("game.play.loop");
-      phases.setup();
+      ggcGame.setPhase("setup");
     } else if ($rootScope.currentState == "game.play.endgame") {
       /*$state.go("game.play.attract");
       self.prologue = false;
