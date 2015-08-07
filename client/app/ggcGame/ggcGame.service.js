@@ -165,6 +165,7 @@ angular.module('ggcApp')
     }
 
     function setPanelState(p, arg) {
+      //sets state of playerpanel p to arg, which can be either and index or a string
       var s = false;
       if (isNaN(arg)) { //if string is valid
         if (panelClasses.indexOf(arg) >= 0) { //if string is valid
@@ -181,6 +182,7 @@ angular.module('ggcApp')
 
 
     function setPanelStates(arg) {
+      //set all panels to the same state
       eachPlayer(function (p) {
         setPanelState(p, arg)
       })

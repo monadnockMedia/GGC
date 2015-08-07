@@ -6,6 +6,7 @@ angular.module('ggcApp')
     var pop;
     this.makePop = function(v){
       pop = Popcorn(v);
+      //TODO(Ray) try getting the tutorial icons here rather than in dealer
       pop.on("ended", function(){
         $state.go("game.play.loop");
         dealer.init();
@@ -21,11 +22,12 @@ angular.module('ggcApp')
           dealer.dockAll(true);
           dealer.introMusic.play();
         },
+        //TODO(Ray) set panel states with ggcGame.setPanelState() or setPanelStates()
         onEnd: function(){$(".environment.fullRetract").removeClass("fullRetract")}
-        //TODO(Ryan, Ray) I think I fixed this with an ng-class, but we need a state-machine for the docking classes
       }).code({
         start: 2,
         end: 5,
+        //TODO(Ray) simplify, just call ggcMapper.addPriorityIcon();
         onStart: function(){dealer.placeTutIcon(0);},
         onEnd: function(){dealer.placeTutIcon(16);},
       }).code({
@@ -49,7 +51,6 @@ angular.module('ggcApp')
         onStart: function(){$(".economy.fullRetract").removeClass("fullRetract")},
         onEnd: function(){
           //TODO(RAY) Get Rid of JQUERY... grumblegrumble
-          //TODO(RYAN) better panel state controller
           $(".energy.fullRetract").removeClass("fullRetract")
 
         },
@@ -66,6 +67,7 @@ angular.module('ggcApp')
         start: 19,
         end: 20,
         onStart: function(){
+          //TODO(Ray) Can we do this without jquery? Maybe use $scope by passing it in from the directive
           $(".arrow").addClass("bounce");
         },
         onEnd: function(){
@@ -76,6 +78,7 @@ angular.module('ggcApp')
         end: 22,
         onStart: function(){
           dealer.introText = true;
+          //TODO(Ray) makeDocked is now on ggcGame
           dealer.makeDocked("environment", false);
         },
         onEnd: function(){
