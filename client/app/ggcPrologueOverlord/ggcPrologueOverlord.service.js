@@ -67,7 +67,7 @@ angular.module('ggcApp')
         start: 19,
         end: 20,
         onStart: function(){
-          //TODO(Ray) Can we do this without jquery? Maybe use $scope by passing it in from the directive
+          //TODO(Ryan) Add this to the model
           $(".arrow").addClass("bounce");
         },
         onEnd: function(){
