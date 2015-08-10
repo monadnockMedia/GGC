@@ -18,7 +18,6 @@ angular.module('ggcApp')
 
     var null_game = {
       main: {},
-      newsEvent:{},
       phase: "none",
       players: {},
       currentPlayer: {},
@@ -308,11 +307,15 @@ angular.module('ggcApp')
       event: function () {
         dockAll(false);
         game.newsEvent = randomEvent();
-        game.main = [game.newsEvent.main];
-        debugger;
       },
       eventScoring:function(){
+        game.main = [game.newsEvent.main];
         tally(game.newsEvent.effects);
+        var timer = $interval(function () {
+          $interval.cancel(timer);
+          game.main.pop();
+          setPhase("setup");
+        }, config.duration.scoring);
       },
       ////////ENDROUND////////
       endRound: function () {

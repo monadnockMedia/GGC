@@ -58,6 +58,9 @@
 .scenario-card .mainBar.environment {
   background-color: #41bc30;
 }
+.scenario-card .mainBar.warning {
+  background-color: #e61919;
+}
 .city {
   position: absolute;
   font-family: "Eurostile-Condensed";
@@ -120,6 +123,9 @@ img#highways {
 }
 .scenario-card:nth-of-type(2).chosen {
   transform: perspective(1000px) rotateY(0deg) translate(-275px);
+}
+.scenario-card:only-of-type {
+  transform: perspective(0) rotateY(0) translate(0);
 }
 @font-face {
   font-family: '232MKB';
