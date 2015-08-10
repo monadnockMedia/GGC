@@ -15,8 +15,10 @@ angular.module('ggcApp')
     this.votePassed = votePassed;
     var roll = ggcUtil.roll;
     var addIcon = ggcMapper.addPriorityIcon;
+
     var null_game = {
       main: {},
+      newsEvent:{},
       phase: "none",
       players: {},
       currentPlayer: {},
@@ -27,6 +29,7 @@ angular.module('ggcApp')
       totalScore : 0
     };
     var game = clone(null_game);
+
     this.game = game;
     var null_hand = {choices: [], issue: {} };
     var panelClasses = ["fullRetract","retract","signIn"," "]
@@ -287,7 +290,7 @@ angular.module('ggcApp')
         });
         game.main[chosenIndex].passed = votePassed;
         game.action.passed = votePassed;
-        if (votePassed) tally(); //maybe need a deferred here
+        if (votePassed) tally(game.action.effects); //maybe need a deferred here
 
         //If it's the prologue, don't do this
         if ($rootScope.currentState == "game.play.loop") {
@@ -303,8 +306,11 @@ angular.module('ggcApp')
       ////////EVENT////////
       event: function () {
         dockAll(false);
+        game.newsEvent = randomEvent();
         debugger;
-        game.main = randomEvent();
+      },
+      eventScoring:function(){
+        tally(game.newsEvent.effects);
       },
       ////////ENDROUND////////
       endRound: function () {
@@ -339,22 +345,37 @@ angular.module('ggcApp')
       $rootScope.$emit("phaseChange", p);
     }
 
-    function tally() {
-
-
+    function tally(effects) {
       var score = game.score;
-
       eachPlayer(function (p) {
-        score[p].i += game.action.effects[p].score;
-        game.totalScore += score[p].i;
+        if(effects[p]){
+          score[p].i += effects[p].score;
+          game.totalScore += score[p].i;
+          game.players[p].hand.issue.scoreHTML = $filter("panelScore")(effects[p].score, p);
+        }
 
-        game.players[p].hand.issue.scoreHTML = $filter("panelScore")(game.players[p].hand.issue.score, p);
       });
-
-
-
       calculatePercentage();
-      addIcon(game.action.icon);
+      if (game.phase == "scoring") addIcon(game.action.icon);
+    }
+
+    //function tally() {
+    //  var score = game.score;
+    //  eachPlayer(function (p) {
+    //    score[p].i += game.action.effects[p].score;
+    //    game.totalScore += score[p].i;
+    //
+    //    game.players[p].hand.issue.scoreHTML = $filter("panelScore")(game.players[p].hand.issue.score, p);
+    //  });
+    //  calculatePercentage();
+    //  addIcon(game.action.icon);
+    //}
+
+    function eventTally(){
+      var score = game.score;
+      var ev = event;
+      eachPlayer(function (p){
+      })
     }
 
 

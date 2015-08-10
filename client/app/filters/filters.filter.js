@@ -154,3 +154,14 @@ app.filter('endObject', function(){
     return ret;
   }
 })
+
+app.filter('newsEvent', function(){
+  return function(event){
+    event.main = {
+      mainText: event.text,
+      action:event.eventName,
+      team:"warning",
+      icon: event.icon
+    }
+  }
+})

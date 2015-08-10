@@ -34,7 +34,10 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
   var endings = {};
 
   $rootScope.$on("phaseChange", function(scope,arg,c){
-    phases[arg].call(self);
+    if(phases[arg]){
+      phases[arg].call(self);
+    }
+
   });
 
   ggcUtil.getEndings().then(function(d){
@@ -43,6 +46,7 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
 
 
   ggcUtil.getEvents().then(function (r) {
+    r.data.map(function(d){$filter("newsEvent")(d)});
     ggcGame.setEvents(r.data);
   });
 
@@ -151,7 +155,7 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
     if ($rootScope.currentState == "game.play.event") {
       console.log("End Video: Loop");
       $state.go("game.play.loop");
-      ggcGame.setPhase("setup");
+      ggcGame.setPhase("eventScoring");
     } else if ($rootScope.currentState == "game.play.endgame") {
       ggcMapper.reset();
       init();
