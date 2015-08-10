@@ -2,8 +2,10 @@ node_modules
 public
 .tmp
 .idea
-client/bower_components
-dist
+client/bower_component*
+/dist
+cache
+build
 /server/config/local.env.js
 .idea
 *.log
