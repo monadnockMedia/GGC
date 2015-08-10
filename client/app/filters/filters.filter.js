@@ -161,7 +161,7 @@ app.filter('newsEvent', function(){
       mainText: event.text,
       action:event.eventName,
       team:"warning",
-      icon: event.icon
+      icon: {_id:event.icons}
     }
   }
 })

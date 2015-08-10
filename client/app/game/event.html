@@ -1,6 +1,7 @@
 
 <div id = "box-wrap-inner">
   <video  autoplay class = "ggc-video-main" ggc-video="true">
+    {{getVideoURL(game.newsEvent.videoFile)}}
     <source  ng-src="{{getVideoURL(game.newsEvent.videoFile)}}" type="video/webm"></source>
   </video>
 </div>

@@ -22,6 +22,7 @@ angular.module('ggcApp')
       phase: "none",
       players: {},
       currentPlayer: {},
+      newsEvent:{},
       playerIndex: 0,
       action: {},
       round:1,
@@ -307,6 +308,7 @@ angular.module('ggcApp')
       event: function () {
         dockAll(false);
         game.newsEvent = randomEvent();
+        game.main = [game.newsEvent.main];
         debugger;
       },
       eventScoring:function(){
