@@ -379,17 +379,17 @@ module.exports = function(grunt) {
             dest: '<%= yeoman.dist %>',
             src: [ 'package.json', 'server/**/*']
           },{
-          expand: true,
-          dot: true,
-          cwd: '<%= yeoman.client %>',
-          dest: '<%= yeoman.dist %>/public',
-          src: ['*.{ico,png,txt}', '.htaccess', 'bower_components/**/*',  'assets/**/*', 'app/**/*', 'lib/*', 'index.html','NWIndex.html', 'components/**/*', 'bmp/*', 'svg/*', 'sound/*', 'vid/*','!**/examples/**', '!**/test/**','!**/docs/**','!**/doc/**',]
-        }, {
-          expand: true,
-          cwd: '.tmp/images',
-          dest: '<%= yeoman.dist %>/public/assets/images',
-          src: ['generated/*']
-        }]
+            expand: true,
+            dot: true,
+            cwd: '<%= yeoman.client %>',
+            dest: '<%= yeoman.dist %>/public',
+            src: ['*.{ico,png,txt}', '.htaccess', 'bower_components/**/*',  'assets/**/*', 'app/**/*', 'lib/*', 'index.html','NWIndex.html', 'components/**/*', 'bmp/*', 'svg/*', 'vid/*','!**/examples/**', '!**/test/**','!**/docs/**','!**/doc/**',]
+          }, {
+            expand: true,
+            cwd: '.tmp/images',
+            dest: '<%= yeoman.dist %>/public/assets/images',
+            src: ['generated/*']
+          }]
       },
       node_modules:{
         files: [
@@ -573,7 +573,7 @@ module.exports = function(grunt) {
   /* Monadnock Build Tasks */
   grunt.registerTask('nwbuild', function(target) {
 
-      return grunt.task.run(['clean:dist', 'clean:build','concurrent:dist', 'injector', 'wiredep', 'copy:nomin', 'env:all']);
+    return grunt.task.run(['clean:dist', 'clean:build','concurrent:dist', 'injector', 'wiredep', 'copy:nomin', 'env:all']);
 
   });
 };
