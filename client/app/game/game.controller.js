@@ -21,7 +21,7 @@ angular.module('ggcApp')
     $scope.printObject = ggcUtil.printObject;
 
     $scope.dealer = dealer
-
+    $scope.isArray = ggcUtil.isArray;
 
     $scope.game = ggcGame.game;
     $scope.$watch(function(){

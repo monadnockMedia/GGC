@@ -58,7 +58,7 @@
 
       <div ng-show="game.phase == 'scoring' || game.phase == 'eventScoring'" class="vote-buttons">
         <div  ng-show = "player.hand.issue.passed">
-          <!--TODO() Make this part of model so we can change it in event Scoring-->
+          <!--TODO() Make this a directive so we can change it in event Scoring-->
           <h3 class = "tab-title text-center">Action Passed</h3>
           <h1 class="text-center score {{name}}" ng-bind-html="player.hand.issue.scoreHTML"></h1>
           <div class="tab-body">

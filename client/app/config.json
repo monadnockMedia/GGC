@@ -14,8 +14,8 @@
   },
   "gameMode":true,
   "game":{
-    "eventChance":1,
-    "rounds": 3,
+    "eventChance":0,
+    "rounds": 1,
     "balanceThreshold":3,
     "initialScores":{
       "environment":1,
@@ -25,7 +25,9 @@
     "duration":{
       "choice":10000,
       "vote":10000,
-      "scoring":4000
+      "scoring":3000,
+      "warn":3000
+
     }
 
   }

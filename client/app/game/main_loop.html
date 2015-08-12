@@ -15,34 +15,49 @@
 
 
 
-<div id = "box-wrap-inner">
+<div ng-hide="game.phase=='warn'" id = "box-wrap-inner">
 
-  <div  class="relative scenario-card text-left" ng-repeat="mainCard in game.main track by $index"
-        ng-class="{invisible: mainCard.hidden, chosen: mainCard.chosen, dim:game.phase=='scoring'}" ng-hide="dealer.prologue == true">
+    <div  class="relative scenario-card text-left" ng-repeat="mainCard in game.main track by $index"
+          ng-class="{invisible: mainCard.hidden, chosen: mainCard.chosen, dim:game.phase=='scoring'}" ng-hide="dealer.prologue == true">
+      <div class="scenarioWrap">
+
+
+        <!--<div class="row">-->
+        <!--<div class="col-md-12">-->
+        <div class="mainBar {{mainCard.team}}"> <h3 class="  {{mainCard.team}}" ng-bind-html="mainCard.action"></h3></div>
+
+        <!--</div>-->
+        <!--</div>-->
+        <div class="row main-row">
+
+          <!-- div class="scenario-icon col-md-3" ng-bind-html="trust(mainCard.icon.icon)"></div-->
+
+          <div class="col-md-3 scenario-icon" ggc-icon fill="true"
+               icon-id="{{mainCard.icon._id}}"></div>
+          <div class="col-md-9">
+            <!--TODO remove whitespace-->
+            <div ng-bind-html="mainCard.mainText"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<div ng-show="game.phase=='warn'" id = "box-wrap-inner">
+  <div  class="relative scenario-card text-left">
     <div class="scenarioWrap">
+      <div class="mainBar {{game.warning.team}}"> <h3 class="  {{game.warning.team}}" ng-bind-html="game.warning.action"></h3></div>
 
-
-      <!--<div class="row">-->
-      <!--<div class="col-md-12">-->
-      <div class="mainBar {{mainCard.team}}"> <h3 class="  {{mainCard.team}}" ng-bind-html="mainCard.action"></h3></div>
-
-      <!--</div>-->
-      <!--</div>-->
       <div class="row main-row">
-
-        <!-- div class="scenario-icon col-md-3" ng-bind-html="trust(mainCard.icon.icon)"></div-->
-
         <div class="col-md-3 scenario-icon" ggc-icon fill="true"
-             icon-id="{{mainCard.icon._id}}"></div>
+             icon-id="{{game.warning.icon._id}}"></div>
         <div class="col-md-9">
-          <!--TODO remove whitespace-->
-          <div ng-bind-html="mainCard.mainText"></div>
+          <div ng-bind-html="game.warning.mainText"></div>
         </div>
       </div>
     </div>
   </div>
-
 </div>
+
 
 <div ng-show="game.phase == 'scoring' && dealer.prologue == false" class="stamp" ng-class="{passed:game.action.passed, blocked:!game.action.passed}">
   <h1 class=jumbo" ng-show="game.action.passed">PASSED</h1>

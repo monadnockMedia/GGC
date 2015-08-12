@@ -15,9 +15,10 @@ angular.module('ggcApp')
     this.votePassed = votePassed;
     var roll = ggcUtil.roll;
     var addIcon = ggcMapper.addPriorityIcon;
-
+    var nextPhase;
     var null_game = {
       main: {},
+      warning:{},
       phase: "none",
       players: {},
       currentPlayer: {},
@@ -291,31 +292,37 @@ angular.module('ggcApp')
         game.main[chosenIndex].passed = votePassed;
         game.action.passed = votePassed;
         if (votePassed) tally(game.action.effects); //maybe need a deferred here
+        var oc = calculateOutcome(game.score);
+        game.warning = $filter("balance")(oc);
 
-        //If it's the prologue, don't do this
+        //If it's th11e prologue, don't do this
         if ($rootScope.currentState == "game.play.loop") {
 
-          var nextPhase = (isLastPlayer()) ? "endRound" : "setup"; //if we're on the last turn, go to end round, if not, just setup another turn.
+          nextPhase = (isLastPlayer()) ? "endRound" : "setup"; //if we're on the last turn, go to end round, if not, just setup another turn.
           nextPlayer();
-          var timer = $interval(function () {
-            $interval.cancel(timer);
+          if(oc.balanced) {
             setPhase(nextPhase);
-          }, config.duration.scoring);
+          }else{
+            ggcUtil.wait(function(){setPhase("warn")}, config.duration.scoring);
+          }
         }
+      },
+      ////////WARN////////
+      warn: function () {
+        dockAll(true);
+        ggcUtil.wait(function(){setPhase(nextPhase)}, config.duration.warn);
       },
       ////////EVENT////////
       event: function () {
         dockAll(false);
+        game.main = [];
         game.newsEvent = randomEvent();
       },
       eventScoring:function(){
-        game.main = [game.newsEvent.main];
+        game.warning = game.newsEvent.main;
         tally(game.newsEvent.effects);
-        var timer = $interval(function () {
-          $interval.cancel(timer);
-          game.main.pop();
-          setPhase("setup");
-        }, config.duration.scoring);
+        nextPhase = "setup";
+        ggcUtil.wait(function(){setPhase("warn")}, config.duration.scoring/2);
       },
       ////////ENDROUND////////
       endRound: function () {
@@ -340,6 +347,7 @@ angular.module('ggcApp')
         dockAll(true);
         var oc = calculateOutcome(game.score);
         game.outcome = (oc.balanced) ? endings.balanced : endings.unbalanced[oc.team];
+
       }
     };
 

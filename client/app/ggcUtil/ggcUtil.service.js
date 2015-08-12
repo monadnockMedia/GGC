@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .service('ggcUtil', function ($http, $sce) {
+  .service('ggcUtil', function ($http, $sce, $interval) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     this.getCards = function () {
       //console.log("Service.getCards");
@@ -84,6 +84,18 @@ angular.module('ggcApp')
 
 
     }
+
+    this.wait = function(f,t){
+      var timer = $interval(function () {
+        $interval.cancel(timer);
+        f.call();
+      }, t);
+    }
+
+    this.isArray = function(a) { //testing for single object or array contain
+      return Object.prototype.toString.call(a) === "[object Array]";
+    }
+
 
 
   });

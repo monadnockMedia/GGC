@@ -41,7 +41,7 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
   });
 
   ggcUtil.getEndings().then(function(d){
-    ggcGame.setEndings = $filter("endObject")(d.data);
+    ggcGame.setEndings ($filter("endObject")(d.data));
   })
 
 
@@ -73,13 +73,7 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
       ggcGame.init().then(function(){
 
           ggcGame.setPhase("setup");
-
-
-
       });
-      $rootScope.$on("votingComplete", function(t,c,n){phases.scoring();} );
-
-
     })
 
 
@@ -104,18 +98,6 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
     deck.drawTwo().then(ggcGame.setPhase("choice")).catch(function(a){debugger;});
   }
 
-  phases.choice = function () {
-
-
-  }
-
-  phases.vote = function () {
-
-  }
-
-  phases.scoring = function () {
-
-  }
 
   phases.event = function () {
     self.newsSfx.play();
@@ -124,6 +106,10 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
 
   phases.endRound = function(){
 
+  }
+
+  phases.gameOver = function(){
+    $state.go('game.play.endgame');
   }
 
   //TODO(Ryan) are these neccessary?

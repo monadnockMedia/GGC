@@ -3,26 +3,26 @@ var app = angular.module('ggcApp');
 
 app.filter('percent', function () {
   return function (input) {
-    return ~~(input*100)+"%";
+    return ~~(input * 100) + "%";
   };
 });
 
-app.filter('capitalize', function() {
+app.filter('capitalize', function () {
 
-  return function(input) {
+  return function (input) {
 
     if (input && typeof(input) === "string") {
       input = input.toLowerCase();
       return input.substring(0, 1).toUpperCase() + input.substring(1);
-    }else{
+    } else {
       return false;
     }
   }
 });
 
-app.filter('identify', function() {
-  return function(input) {
-    if (input!=null) {
+app.filter('identify', function () {
+  return function (input) {
+    if (input != null) {
       if (input == "environment")
         return "#environmentPath";
 
@@ -35,11 +35,11 @@ app.filter('identify', function() {
   }
 });
 
-app.filter('scoreIcons', function() {
-  return function(input, team) {
+app.filter('scoreIcons', function () {
+  return function (input, team) {
     var output = "";
 
-    if (team!=null) {
+    if (team != null) {
       if (team == "environment") {
         for (var i = 0; i < input; i++) {
           output += " &#xe103";
@@ -68,17 +68,17 @@ app.filter('scoreIcons', function() {
   }
 });
 
-app.filter('scoreIconArray', function() {
-  return function(input, team) {
+app.filter('scoreIconArray', function () {
+  return function (input, team) {
     var icons = {
-      economy:"",
-      energy:"",
-      environment:""
+      economy: "",
+      energy: "",
+      environment: ""
     };
 
     var output = [];
 
-    if (team!=null) {
+    if (team != null) {
       for (var i = 0; i < input; i++) {
         output.push(icons[team]);
       }
@@ -88,38 +88,42 @@ app.filter('scoreIconArray', function() {
 });
 
 //filter score for panel, return icons and pro/con indicator
-app.filter('panelScore', function() {
+//<i class = 'fa fa-plus up'></i> <span class='up'>&#xe103 &#xe103 </span>
+//TODO(Ryan) This should be a directive;
 
-  return function(input, team) {
+
+app.filter('panelScore', function () {
+
+  return function (input, team) {
     var output = "";
     var icons = {
-      economy:"&#xe148",
-      energy:"&#xe162",
-      environment:"&#xe103"
+      economy: "&#xe148",
+      energy: "&#xe162",
+      environment: "&#xe103"
     };
 
-    if (team!=null) {
-      var ic = (input == 0) ? "fa-circle-o" : (input > 0) ? "fa-plus" : "fa-minus" ;
-      var scClass = (input == 0) ? "zilch" : (input > 0) ? "up" : "down" ;
-      var prefix =  "<i class = 'fa " + ic + " "+scClass+"'></i> ";
+    if (team != null) {
+      var ic = (input == 0) ? "fa-circle-o" : (input > 0) ? "fa-plus" : "fa-minus";
+      var scClass = (input == 0) ? "zilch" : (input > 0) ? "up" : "down";
+      var prefix = "<i class = 'fa " + ic + " " + scClass + "'></i> ";
 
-      var score = "<span class='"+scClass+"'>";
+      var score = "<span class='" + scClass + "'>";
       for (var i = 0; i < Math.abs(input); i++) {
         //output += "&#xe148 ";
-        score += icons[team]+" ";
+        score += icons[team] + " ";
       }
-      score+= "</span>"
-      output = prefix+score;
+      score += "</span>"
+      output = prefix + score;
     }
     return output;
   }
 });
 
-app.filter('teamColor', function() {
-  return function(input, team) {
+app.filter('teamColor', function () {
+  return function (input, team) {
     var output = "";
 
-    if (team!=null) {
+    if (team != null) {
       if (team == "environment") {
         return "#2fd418";
       }
@@ -140,14 +144,14 @@ app.filter('teamColor', function() {
   }
 });
 
-app.filter('endObject', function(){
-  return function(_endings){
+app.filter('endObject', function () {
+  return function (_endings) {
 
-    var ret = {balanced:{},unbalanced:{}};
-    _endings.forEach(function(e){
-      if(e.balanced){
+    var ret = {balanced: {}, unbalanced: {}};
+    _endings.forEach(function (e) {
+      if (e.balanced) {
         ret.balanced = e;
-      }else{
+      } else {
         ret.unbalanced[e.team] = e;
       }
     });
@@ -155,13 +159,30 @@ app.filter('endObject', function(){
   }
 })
 
-app.filter('newsEvent', function(){
-  return function(event){
+app.filter('newsEvent', function () {
+  return function (event) {
     event.main = {
       mainText: event.text,
-      action:event.eventName,
-      team:"warning",
-      icon: {_id:event.icons}
+      action: event.eventName,
+      team: "warning",
+      icon: {_id: event.icons}
     }
+  }
+})
+
+app.filter('balance', function () {
+  return function (oc) {
+    var ret = {};
+    ret.mainText =
+      (oc.balanced) ?
+        "The score is balanced, keep up the good work" :
+        "The score is not balanced, pay more attention";
+    ret.action =
+      (oc.balanced) ?
+        "Score Balanced" :
+        "Score Unbalanced";
+    ret.icon = {_id: "55c8d041e224ac9921e13f0e"};
+    ret.team = "warning";
+    return ret;
   }
 })
