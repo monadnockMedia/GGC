@@ -149,7 +149,7 @@ app.filter('endObject', function () {
     var ret = {balanced: {}, unbalanced: {}};
     _endings.forEach(function (e) {
       if (e.balanced) {
-        e.videoFile = "end_balanced.webm";
+        e.videoFile = "end_balance.webm";
         ret.balanced = e;
 
       } else {
