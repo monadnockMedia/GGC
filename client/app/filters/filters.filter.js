@@ -146,14 +146,17 @@ app.filter('teamColor', function () {
 
 app.filter('endObject', function () {
   return function (_endings) {
-
     var ret = {balanced: {}, unbalanced: {}};
     _endings.forEach(function (e) {
       if (e.balanced) {
+        e.videoFile = "end_balanced.webm";
         ret.balanced = e;
+
       } else {
+        e.videoFile = "end_"+ e.team+".webm";
         ret.unbalanced[e.team] = e;
       }
+
     });
     return ret;
   }

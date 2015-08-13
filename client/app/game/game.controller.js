@@ -133,7 +133,7 @@ angular.module('ggcApp')
           description: 'reset',
           callback: function(){
             dealer.init();
-            $location.url("/game/play/prologue");
+            $location.url("/game/play/attract");
             // angular.bootstrap(document, ['ggcApp']);
             //location.reload();
           }

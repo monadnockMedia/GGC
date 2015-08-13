@@ -14,7 +14,7 @@
   },
   "gameMode":true,
   "game":{
-    "eventChance":0,
+    "eventChance":1,
     "rounds": 1,
     "balanceThreshold":3,
     "initialScores":{

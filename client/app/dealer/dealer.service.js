@@ -31,7 +31,6 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
 
   var tutorialIcons = [];
 
-  var endings = {};
 
   $rootScope.$on("phaseChange", function(scope,arg,c){
     if(phases[arg]){
@@ -95,6 +94,7 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
   this.phases = phases;
 
   phases.setup = function () {
+   // if($rootScope.currentState != 'game.play.loop') $state.go('game.play.loop');
     deck.drawTwo().then(ggcGame.setPhase("choice")).catch(function(a){debugger;});
   }
 
@@ -110,6 +110,10 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
 
   phases.gameOver = function(){
     $state.go('game.play.endgame');
+  }
+
+  phases.warn = function(){
+    $state.go('game.play.warn');
   }
 
   //TODO(Ryan) are these neccessary?
@@ -137,7 +141,7 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
   //random event video is over
   //TODO(Ray) attach callback to controller so it can be changed based on state?
   //$scope.videoEndEvent = function(){}
-  this.videoEventEnd = function () {
+  this.videoEventEnd = function (d,i,a) {
     if ($rootScope.currentState == "game.play.event") {
       console.log("End Video: Loop");
       $state.go("game.play.loop");
@@ -151,6 +155,7 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
         tutorialIcons = r.data;
         console.log("Tutorial Icons: ", tutorialIcons);
       });
+      //$state.go("game.play.attract");
       $location.url("/game/play/attract");
     }
   }
