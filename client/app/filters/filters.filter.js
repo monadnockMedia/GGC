@@ -173,17 +173,15 @@ app.filter('newsEvent', function () {
   }
 })
 
-app.filter('balance', function () {
+app.filter('balance', function ($filter) {
   return function (oc) {
     var ret = {};
-    ret.mainText =
-      (oc.balanced) ?
-        "The score is balanced, keep up the good work" :
-        "The score is not balanced, pay more attention";
-    ret.action =
-      (oc.balanced) ?
-        "Score Balanced" :
-        "Score Unbalanced";
+    ret.mainText = "<h1>Score Unbalanced</h1>";
+    ret.mainText += "<p>"+$filter("capitalize")(oc.team)+" is growing too fast.</p>";
+    ret.mainText += "<p>Remember, your goal is to bring the 3 sectors into balance</p>";
+
+    ret.action = "WARNING";
+
     ret.icon = {_id: "55c8d041e224ac9921e13f0e"};
     ret.team = "warning";
     return ret;

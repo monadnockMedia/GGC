@@ -176,7 +176,7 @@ angular.module('ggcApp')
           s = arg;
         }
       } else { //arg is number
-        s = (arg >= 0 || arg <= panelStates.length) ? panelStates[arg] : false;
+        s = (arg >= 0 || arg <= panelClasses.length) ? panelClasses[arg] : false;
       }
 
       if (s) {
@@ -291,7 +291,11 @@ angular.module('ggcApp')
         });
         game.main[chosenIndex].passed = votePassed;
         game.action.passed = votePassed;
-        if (votePassed) tally(game.action.effects); //maybe need a deferred here
+        if (votePassed){
+          tally(game.action.effects); //maybe need a deferred here
+        } else{
+          setPanelStates(2);
+        }
         var oc = calculateOutcome(game.score);
         game.warning = $filter("balance")(oc);
 
@@ -350,7 +354,6 @@ angular.module('ggcApp')
         dockAll(true);
         var oc = calculateOutcome(game.score);
         game.outcome = (oc.balanced) ? endings.balanced : endings.unbalanced[oc.team];
-        debugger;
       }
     };
 
@@ -371,7 +374,7 @@ angular.module('ggcApp')
         }
 
       });
-      calculatePercentage();
+      calculatePercentage();c
       if (game.phase == "scoring") addIcon(game.action.icon);
     }
 

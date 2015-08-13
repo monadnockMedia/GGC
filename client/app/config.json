@@ -25,8 +25,8 @@
     "duration":{
       "choice":10000,
       "vote":10000,
-      "scoring":3000,
-      "warn":3000
+      "scoring":5000,
+      "warn":5000
 
     }
 
