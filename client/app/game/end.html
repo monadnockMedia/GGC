@@ -1,29 +1,6 @@
 
-
-
-<!--div class="mainBar {{game.outcome.team}}">
-  <h3 class="  {{game.outcome.team}}" ng-bind-html="game.outcome.mainText"></h3>
-</div-->
-
-<!--div class="row">
-    <div class = "col-md-10 col-md-offset-1"><h4 ng-bind-html="game.outcome.additionalText"></h4></div>
-</div-->
-
-
-<div id = "box-wrap-inner" ng-show="game.outcome.team == 'economy'">
+<div id = "box-wrap-inner">
   <video  autoplay class = "ggc-video-main" ggc-video="true">
-    <source  ng-src="../vid/end_economy.webm" type="video/webm"></source>
-  </video>
-</div>
-
-<div id = "box-wrap-inner" ng-show="game.outcome.team == 'energy'">
-  <video  autoplay class = "ggc-video-main" ggc-video="true">
-    <source  ng-src="../vid/end_energy.webm" type="video/webm"></source>
-  </video>
-</div>
-
-<div id = "box-wrap-inner" ng-show="game.outcome.team == 'environment'">
-  <video  autoplay class = "ggc-video-main" ggc-video="true">
-    <source  ng-src="../vid/end_environment.webm" type="video/webm"></source>
+    <source  ng-src="{{getVideoURL(game.outcome.videoFile)}}" type="video/webm"></source>
   </video>
 </div>
