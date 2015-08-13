@@ -324,6 +324,7 @@ angular.module('ggcApp')
         game.newsEvent = randomEvent();
       },
       eventScoring:function(){
+        setPanelStates(2);
         game.warning = game.newsEvent.main;
         tally(game.newsEvent.effects);
         nextPhase = "setup";
