@@ -70,6 +70,7 @@
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.84);
 }
 .city:before {
+  font-family: Arial;
   position: relative;
   top: -10px;
   content: "\25F8";
