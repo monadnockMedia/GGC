@@ -15,7 +15,7 @@
   -webkit-align-content: center;
   -webkit-box-align: center;
   -webkit-align-items: center;
-  z-index:20;
+  //z-index:20;
 }
 
 
@@ -235,7 +235,7 @@ div#perspective_plane {
     animation: turnin 5s;*/
   -webkit-transform: rotateX(15deg);
   -webkit-transform-style: preserve-3d;
-  z-index: 0;
+  //z-index: 0;
 }
 @-webkit-keyframes turnin {
   from {
@@ -245,10 +245,12 @@ div#perspective_plane {
     -webkit-transform: rotateX(70deg);
   }
 }
-
+#ui-panels{
+  //z-index:1;
+}
 .hexGrid {
   opacity: 0.1;
-  z-index:-2;
+  //z-index:-2;
 }
 
 .full-height {
@@ -279,12 +281,12 @@ div#perspective_plane {
 div#borderscrim {
   //background-image: url('../../bmp/borderandscrim_wrn.png');
   background-image: url('../../bmp/borderandscrim_wrn_1200_tweak.png');
-  z-index: 8;
+  //z-index: 8;
   pointer-events: none;
   top:0;
 }
 score-board {
-  z-index: 20;
+  //z-index: 20;
   position: absolute;
   top:0;
 }

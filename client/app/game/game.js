@@ -15,6 +15,7 @@ angular.module('ggcApp')
            views: {
              "scrim": {templateUrl: 'app/game/scrim.html'},
              "plane": {templateUrl: 'app/game/plane.html'},
+             "panels" : {templateUrl: 'app/game/panels.html'},
              "background" : {templateUrl: 'app/game/background.html'}
            },
            children: [
