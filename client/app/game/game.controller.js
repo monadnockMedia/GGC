@@ -12,9 +12,6 @@ angular.module('ggcApp')
 
     $scope.trust = ggcUtil.trustSVG;
 
-    //TODO(Ray) move loading/playing to service
-
-
     $scope.wooshSfx = ngAudio.load("../sound/digital_woosh.wav");
 
 

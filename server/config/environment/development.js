@@ -7,7 +7,7 @@ module.exports = {
   mongo: {
     //uri: 'mongodb://localhost/ggc-dev'
       uri:  process.env.MONGOD_URI ||
-          'mongodb://localhost/ggc-dev'
+          'mongodb://aries.local/ggc-dev'
   },
   appConfig: require("../../../client/app/config.json"),
   seedDB: false

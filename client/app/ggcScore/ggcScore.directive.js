@@ -9,6 +9,7 @@ angular.module('ggcApp')
       transclude: true,
       link: function (scope, element, attrs) {
         var team = attrs.team;
+        var iconIndex;
 
         var pathEl = element.find("path")[0];
         //debugger;
@@ -28,7 +29,8 @@ angular.module('ggcApp')
           if (newV.hasOwnProperty("i")) {
             var glyphiconColor = $filter("teamColor")("", team);
             var scoreData = $filter("scoreIconArray")(newV.i, team);
-
+            var previousPoint = pathEl.getPointAtLength(0);
+            var nextPoint;
             var glyphIconPOS = {environment: [575, 900], economy: [950, 1000], energy: [1370, 900]};
 
             var changed = group.selectAll("text").data(scoreData);
@@ -51,8 +53,11 @@ angular.module('ggcApp')
                   var pt = pathEl.getPointAtLength(newI*step);
 
                   return pt.y+15;
+                },
+                transform: function(d,i) {
+                  var newI = i+1;
                 }
-              }).style("fill", glyphiconColor).style("font-size", "30px").duration(2000).text(function(d){return d});
+              }).style("fill", glyphiconColor).style("font-size", "26px").duration(2000).text(function(d){return d});
 
             group.selectAll("text").data(scoreData).exit().transition().attr({
               x: glyphIconPOS[team][0],
