@@ -319,7 +319,7 @@ angular.module('ggcApp')
       },
       ////////EVENT////////
       event: function () {
-        dockAll(false);
+        dockAll(true);
         game.main = [];
         game.newsEvent = randomEvent();
       },
