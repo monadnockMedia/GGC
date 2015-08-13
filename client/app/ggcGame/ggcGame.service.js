@@ -176,7 +176,7 @@ angular.module('ggcApp')
           s = arg;
         }
       } else { //arg is number
-        s = (arg >= 0 || arg <= panelStates.length) ? panelStates[arg] : false;
+        s = (arg >= 0 || arg <= panelClasses.length) ? panelClasses[arg] : false;
       }
 
       if (s) {
@@ -350,7 +350,7 @@ angular.module('ggcApp')
         dockAll(true);
         var oc = calculateOutcome(game.score);
         game.outcome = (oc.balanced) ? endings.balanced : endings.unbalanced[oc.team];
-        debugger;
+       // debugger;
       }
     };
 
