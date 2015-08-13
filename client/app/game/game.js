@@ -33,6 +33,13 @@ angular.module('ggcApp')
                }
              },
              {
+               name: "warn",
+               url: '/warn',
+               views: {
+                 "main@game": {templateUrl: 'app/game/warn.html'}
+               }
+             },
+             {
                name: "prologue",
                url: '/prologue',
                views: {
