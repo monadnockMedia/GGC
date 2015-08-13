@@ -1,0 +1,40 @@
+<!-- >The MAIN (Center) Cards Go Here<-->
+
+
+<!--<div class="row relative text-center main-title" >-->
+  <!--<h1  class = "title" ng-show="game.phase == 'choice'">-->
+    <!--{{game.currentPlayer | capitalize}} Chooses an Action-->
+  <!--</h1>-->
+  <!--<h1  class = "title" ng-show="game.phase == 'vote'">-->
+    <!--Everyone Votes-->
+  <!--</h1>-->
+  <!--<h1  class = "title" ng-show="game.phase == 'scoring' && dealer.prologue == false">-->
+    <!--Results-->
+  <!--</h1>-->
+<!--</div>-->
+
+
+
+<div  id = "box-wrap-inner">
+  <div  class="relative scenario-card text-left">
+    <div class="scenarioWrap">
+      <div class="mainBar {{game.warning.team}}"> <h3 class="  {{game.warning.team}}" ng-bind-html="game.warning.action"></h3></div>
+
+      <div class="row main-row">
+        <div class="col-md-3 scenario-icon" ggc-icon fill="true"
+             icon-id="{{game.warning.icon._id}}"></div>
+        <div class="col-md-9">
+          <div ng-bind-html="game.warning.mainText"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--<div ng-show="game.phase == 'scoring' && dealer.prologue == false" class="stamp" ng-class="{passed:game.action.passed, blocked:!game.action.passed}">-->
+  <!--<h1 class=jumbo" ng-show="game.action.passed">PASSED</h1>-->
+  <!--<h1 class=jumbo" ng-hide="game.action.passed">BLOCKED</h1>-->
+<!--</div>-->
+
+

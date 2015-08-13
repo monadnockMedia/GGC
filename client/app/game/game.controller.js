@@ -18,7 +18,7 @@ angular.module('ggcApp')
     $scope.printObject = ggcUtil.printObject;
 
     $scope.dealer = dealer
-
+    $scope.isArray = ggcUtil.isArray;
 
     $scope.game = ggcGame.game;
     $scope.$watch(function(){
@@ -130,7 +130,7 @@ angular.module('ggcApp')
           description: 'reset',
           callback: function(){
             dealer.init();
-            $location.url("/game/play/prologue");
+            $location.url("/game/play/attract");
             // angular.bootstrap(document, ['ggcApp']);
             //location.reload();
           }

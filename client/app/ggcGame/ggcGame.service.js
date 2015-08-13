@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .service('ggcGame', function ($rootScope, $q, $interval, $filter, ggcMapper, ggcUtil) {
+  .service('ggcGame', function ($state, $rootScope, $q, $interval, $filter, ggcMapper, ggcUtil) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var config = $rootScope.config.game;
     var playerNames = [];
@@ -15,11 +15,14 @@ angular.module('ggcApp')
     this.votePassed = votePassed;
     var roll = ggcUtil.roll;
     var addIcon = ggcMapper.addPriorityIcon;
+    var nextPhase;
     var null_game = {
       main: {},
+      warning:{},
       phase: "none",
       players: {},
       currentPlayer: {},
+      newsEvent:{},
       playerIndex: 0,
       action: {},
       round:1,
@@ -27,6 +30,7 @@ angular.module('ggcApp')
       totalScore : 0
     };
     var game = clone(null_game);
+
     this.game = game;
     var null_hand = {choices: [], issue: {} };
     var panelClasses = ["fullRetract","retract","signIn"," "]
@@ -287,24 +291,41 @@ angular.module('ggcApp')
         });
         game.main[chosenIndex].passed = votePassed;
         game.action.passed = votePassed;
-        if (votePassed) tally(); //maybe need a deferred here
+        if (votePassed) tally(game.action.effects); //maybe need a deferred here
+        var oc = calculateOutcome(game.score);
+        game.warning = $filter("balance")(oc);
 
-        //If it's the prologue, don't do this
+        //If it's th11e prologue, don't do this
         if ($rootScope.currentState == "game.play.loop") {
 
-          var nextPhase = (isLastPlayer()) ? "endRound" : "setup"; //if we're on the last turn, go to end round, if not, just setup another turn.
+          nextPhase = (isLastPlayer()) ? "endRound" : "setup"; //if we're on the last turn, go to end round, if not, just setup another turn.
           nextPlayer();
-          var timer = $interval(function () {
-            $interval.cancel(timer);
+          if(oc.balanced) {
             setPhase(nextPhase);
-          }, config.duration.scoring);
+          }else{
+            ggcUtil.wait(function(){setPhase("warn")}, config.duration.scoring);
+          }
         }
+      },
+      ////////WARN////////
+      warn: function () {
+        dockAll(true);
+        ggcUtil.wait(function(){
+          $state.go('game.play.loop');
+          setPhase(nextPhase);
+        }, config.duration.warn);
       },
       ////////EVENT////////
       event: function () {
         dockAll(false);
-        debugger;
-        game.main = randomEvent();
+        game.main = [];
+        game.newsEvent = randomEvent();
+      },
+      eventScoring:function(){
+        game.warning = game.newsEvent.main;
+        tally(game.newsEvent.effects);
+        nextPhase = "setup";
+        ggcUtil.wait(function(){setPhase("warn")}, config.duration.scoring/2);
       },
       ////////ENDROUND////////
       endRound: function () {
@@ -329,6 +350,7 @@ angular.module('ggcApp')
         dockAll(true);
         var oc = calculateOutcome(game.score);
         game.outcome = (oc.balanced) ? endings.balanced : endings.unbalanced[oc.team];
+        debugger;
       }
     };
 
@@ -339,22 +361,37 @@ angular.module('ggcApp')
       $rootScope.$emit("phaseChange", p);
     }
 
-    function tally() {
-
-
+    function tally(effects) {
       var score = game.score;
-
       eachPlayer(function (p) {
-        score[p].i += game.action.effects[p].score;
-        game.totalScore += score[p].i;
+        if(effects[p]){
+          score[p].i += effects[p].score;
+          game.totalScore += score[p].i;
+          game.players[p].hand.issue.scoreHTML = $filter("panelScore")(effects[p].score, p);
+        }
 
-        game.players[p].hand.issue.scoreHTML = $filter("panelScore")(game.players[p].hand.issue.score, p);
       });
-
-
-
       calculatePercentage();
-      addIcon(game.action.icon);
+      if (game.phase == "scoring") addIcon(game.action.icon);
+    }
+
+    //function tally() {
+    //  var score = game.score;
+    //  eachPlayer(function (p) {
+    //    score[p].i += game.action.effects[p].score;
+    //    game.totalScore += score[p].i;
+    //
+    //    game.players[p].hand.issue.scoreHTML = $filter("panelScore")(game.players[p].hand.issue.score, p);
+    //  });
+    //  calculatePercentage();
+    //  addIcon(game.action.icon);
+    //}
+
+    function eventTally(){
+      var score = game.score;
+      var ev = event;
+      eachPlayer(function (p){
+      })
     }
 
 

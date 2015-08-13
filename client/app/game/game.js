@@ -15,6 +15,7 @@ angular.module('ggcApp')
            views: {
              "scrim": {templateUrl: 'app/game/scrim.html'},
              "plane": {templateUrl: 'app/game/plane.html'},
+             "panels" : {templateUrl: 'app/game/panels.html'},
              "background" : {templateUrl: 'app/game/background.html'}
            },
            children: [
@@ -30,6 +31,13 @@ angular.module('ggcApp')
                url: '/loop',
                views: {
                  "main@game": {templateUrl: 'app/game/main_loop.html'}
+               }
+             },
+             {
+               name: "warn",
+               url: '/warn',
+               views: {
+                 "main@game": {templateUrl: 'app/game/warn.html'}
                }
              },
              {

@@ -25,6 +25,9 @@
 .iconGroup.economy {
   fill: #fca204;
 }
+.iconGroup.warning {
+  fill: red;
+}
 .l1.energy {
   fill: #4e4efc;
 }

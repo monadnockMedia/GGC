@@ -8,7 +8,9 @@ angular.module('ggcApp')
       link: function (scope, element, attrs, nullController, transclude) {
 
         transclude(scope, function(clone){
-          $(clone).on("ended",function(a){dealer.videoEventEnd();});
+          $(clone).css("visibility","hidden");
+          $(clone).on("ended",function(a,b,c){debugger; dealer.videoEventEnd();});
+          $(clone).on("playing",function(a){$(this).css("visibility", "visible");});
           element.after( clone );
         })
       }
