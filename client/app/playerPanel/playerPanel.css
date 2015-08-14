@@ -44,11 +44,20 @@ p.tab-body {
 .btn-icon.pass {
   background-size: 110px 82px;
 }
+.btn-icon.attract {
+  top: -20px;
+}
 .btn-icon.environment {
   top: 90px;
 }
+.btn-icon.environment.attract {
+  top: -20px;
+}
 .btn-icon.energy {
   top: 90px;
+}
+.btn-icon.energy.attract {
+  top: -20px;
 }
 .btn-icon.selected.block {
   background: url("../../svg/buttonBLOCK.svg") 50% 50% no-repeat;
@@ -128,6 +137,7 @@ div.bottomPlane {
   position: absolute;
   width: 375px;
   height: 450px;
+  font-family: "232MKSD";
 }
 div.topPlane {
   background: url("../../svg/paneltop_n.svg") 50% 0 no-repeat;

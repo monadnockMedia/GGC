@@ -47,6 +47,7 @@ angular.module('ggcApp')
           description: 'Environment Select 1',
           callback: function(){
             if ($state.current.name == "game.play.attract") {
+              ggcGame.setPanelStates("fullRetract");
               $state.go("game.play.prologue");
             } else if ($state.current.name != "game.play.prologue") {
               dealer.playerChoice("environment",0);
@@ -63,6 +64,7 @@ angular.module('ggcApp')
           description: 'Environment Select 2',
           callback: function(){
             if ($state.current.name == "game.play.attract") {
+              ggcGame.setPanelStates("fullRetract");
               $state.go("game.play.prologue");
             } else if ($state.current.name != "game.play.prologue") {
               dealer.playerChoice("environment",1);
@@ -77,6 +79,7 @@ angular.module('ggcApp')
           description: 'Economy Select 1',
           callback: function(){
             if ($state.current.name == "game.play.attract") {
+              ggcGame.setPanelStates("fullRetract");
               $state.go("game.play.prologue");
             } else if ($state.current.name != "game.play.prologue") {
               dealer.playerChoice("economy",0);
@@ -90,6 +93,7 @@ angular.module('ggcApp')
           description: 'Environment Select 2',
           callback: function(){
             if ($state.current.name == "game.play.attract") {
+              ggcGame.setPanelStates("fullRetract");
               $state.go("game.play.prologue");
             } else if ($state.current.name != "game.play.prologue") {
               dealer.playerChoice("economy",1);
@@ -104,6 +108,7 @@ angular.module('ggcApp')
           description: 'Energy Select 1',
           callback: function(){
             if ($state.current.name == "game.play.attract") {
+              ggcGame.setPanelStates("fullRetract");
               $state.go("game.play.prologue");
             } else if ($state.current.name != "game.play.prologue") {
               dealer.playerChoice("energy",0);
@@ -117,6 +122,7 @@ angular.module('ggcApp')
           description: 'Energy Select 2',
           callback: function(){
             if ($state.current.name == "game.play.attract") {
+              ggcGame.setPanelStates("fullRetract");
               $state.go("game.play.prologue");
             } else if ($state.current.name != "game.play.prologue") {
               dealer.playerChoice("energy",1);

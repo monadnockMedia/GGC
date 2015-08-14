@@ -23,7 +23,8 @@ angular.module('ggcApp')
                name: "attract",
                url: '/attract',
                views: {
-                 "vid@game": {templateUrl: 'app/game/attract.html'}
+                 "vid@game": {templateUrl: 'app/game/attract.html'},
+                 "panels@game": {templateUrl: 'app/game/introPanels.html'}
                }
              },
              {

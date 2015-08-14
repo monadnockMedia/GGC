@@ -1,0 +1,29 @@
+<!-- >The Player Panels Go Here<-->
+<div ng-repeat="(name, player) in game.players">
+  <div class="playerPanel {{name}}">
+
+
+    <div class="panelOuter {{name}}" ng-class="game.players[name].panelClass">
+      <div class="panelInner{{name}}">
+        <!--ng-class={true: 'extended', false: 'none'}[player.isCurrentPlayer == false]-->
+        <div class="topPlane"></div>
+
+        <div class="bottomPlane">
+          <div class="colorbar"><h3>{{name | capitalize}}</h3></div>
+
+
+          <div class="ggc-btn-wrap">
+            <div class="col-md-6">
+              <h2 style="color:white; text-align: center; margin-top:-50px;">Touch<br>to<br>Start</h2>
+            </div>
+            <div class="col-md-6">
+              <div class="ggc-btn">
+                <a class="btn-icon pass {{name}} attract"> Start </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
