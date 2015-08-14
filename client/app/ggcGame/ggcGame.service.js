@@ -283,7 +283,7 @@ angular.module('ggcApp')
       },
       ////////SCORING////////
       scoring: function () {
-        dockAll(false);
+        setPanelStates(2);
         //(self.game.phase,self.game);
         eachPlayer(function (k) {
 
@@ -291,17 +291,19 @@ angular.module('ggcApp')
         });
         game.main[chosenIndex].passed = votePassed;
         game.action.passed = votePassed;
-        if (votePassed) tally(game.action.effects); //maybe need a deferred here
+        if (votePassed){
+          tally(game.action.effects); //maybe need a deferred here
+        } else{
+          setPanelStates(2);
+        }
         var oc = calculateOutcome(game.score);
         game.warning = $filter("balance")(oc);
-
         //If it's th11e prologue, don't do this
         if ($rootScope.currentState == "game.play.loop") {
-
           nextPhase = (isLastPlayer()) ? "endRound" : "setup"; //if we're on the last turn, go to end round, if not, just setup another turn.
           nextPlayer();
           if(oc.balanced) {
-            setPhase(nextPhase);
+            ggcUtil.wait(function(){setPhase(nextPhase)}, config.duration.scoring);
           }else{
             ggcUtil.wait(function(){setPhase("warn")}, config.duration.scoring);
           }
@@ -309,7 +311,7 @@ angular.module('ggcApp')
       },
       ////////WARN////////
       warn: function () {
-        dockAll(true);
+       setPanelStates(2);
         ggcUtil.wait(function(){
           $state.go('game.play.loop');
           setPhase(nextPhase);
@@ -317,15 +319,16 @@ angular.module('ggcApp')
       },
       ////////EVENT////////
       event: function () {
-        dockAll(false);
+        dockAll(true);
         game.main = [];
         game.newsEvent = randomEvent();
       },
       eventScoring:function(){
+        setPanelStates(2);
         game.warning = game.newsEvent.main;
         tally(game.newsEvent.effects);
         nextPhase = "setup";
-        ggcUtil.wait(function(){setPhase("warn")}, config.duration.scoring/2);
+        ggcUtil.wait(function(){setPhase("warn")}, config.duration.scoring);
       },
       ////////ENDROUND////////
       endRound: function () {

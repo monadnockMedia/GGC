@@ -171,18 +171,20 @@ div.panelInnerEnergy {
 }
 .score {
   font-family: "Glyphicons Halflings";
-}
-.score .up {
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), -2px 4px 4px rgba(255, 255, 255, 0.5);
-}
-.score .down {
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5), -2px 4px 4px rgba(255, 255, 255, 0.5);
-}
-.score .zilch {
-  text-shadow: 0 0 10px rgba(128, 128, 128, 0.9), -2px 4px 4px grey;
-}
-.score .down {
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5), -2px 4px 4px rgba(255, 255, 255, 0.5);
+  font-size: 20px;
+  line-height: 0;
+  /* & .up{
+    #textShadow.up;
+  }
+  & .down{
+    #textShadow.down;
+  }
+  & .zilch{
+    #textShadow.null;
+  }
+  & .down{
+    #textShadow.down;
+  } */
 }
 .score.environment {
   color: #2fd418;
