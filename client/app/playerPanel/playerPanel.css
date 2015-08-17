@@ -31,7 +31,7 @@ p.tab-body {
   background: url("../../svg/buttonOL.svg") 50% 50% no-repeat;
   width: 144px;
   height: 82px;
-  padding: 35px;
+  padding: 45px;
   margin: 15px;
   background-size: 110px 82px;
   font-size: 1.75em;
@@ -116,8 +116,6 @@ p.tab-body {
   height: 350px;
   top: 200px;
   -webkit-transform-style: preserve-3d;
-  transition: all 0.2s ease-in-out;
-  /**/
 }
 .panelInnerenvironment .extended,
 .panelInnereconomy .extended,
@@ -235,30 +233,29 @@ div.panelInnerEnergy {
   opacity: 1;
   -webkit-transform: rotate(-32deg) translateY(990px);
 }
+.panelTransition {
+  transition: -webkit-transform 0.25s ease-in-out;
+}
 .panelOuter {
   position: absolute;
   width: 375px;
   height: 300px;
   -webkit-transform-style: preserve-3d;
   overflow: hidden;
-  transition: all 0.2s ease-in-out;
 }
 .panelOuter.environment {
   -webkit-transform: rotate(32deg) translateY(830px);
-  transition: all 0.2s ease-in-out;
+  transition: -webkit-transform 0.25s ease-in-out;
   position: absolute;
 }
 .panelOuter.environment.retract {
   -webkit-transform: rotateZ(32deg) translateY(1035px);
-  transition: all 0.2s ease-in-out;
 }
 .panelOuter.environment.fullRetract {
   -webkit-transform: rotate(32deg) translateY(1100px);
-  transition: all 0.2s ease-in-out;
 }
 .panelOuter.environment.signIn {
   -webkit-transform: rotate(32deg) translateY(930px);
-  transition: all 0.2s ease-in-out;
 }
 .panelOuter.environment i,
 .panelOuter.environment a {
@@ -274,7 +271,7 @@ div.panelInnerEnergy {
 }
 .panelOuter.economy {
   -webkit-transform: rotate(0deg) translateY(830px);
-  transition: all 0.2s ease-in-out;
+  transition: -webkit-transform 0.25s ease-in-out;
   position: absolute;
 }
 .panelOuter.economy.retract {
@@ -282,11 +279,9 @@ div.panelInnerEnergy {
 }
 .panelOuter.economy.signIn {
   -webkit-transform: rotate(0deg) translateY(922px);
-  transition: all 0.2s ease-in-out;
 }
 .panelOuter.economy.fullRetract {
   -webkit-transform: rotate(0deg) translateY(1100px);
-  transition: all 0.2s ease-in-out;
 }
 .panelOuter.economy i,
 .panelOuter.economy a {
@@ -302,20 +297,17 @@ div.panelInnerEnergy {
 }
 .panelOuter.energy {
   -webkit-transform: rotate(-32deg) translateY(830px);
-  transition: all 0.2s ease-in-out;
+  transition: -webkit-transform 0.25s ease-in-out;
   position: absolute;
 }
 .panelOuter.energy.retract {
   -webkit-transform: rotate(-32deg) translateY(1030px);
-  transition: all 0.2s ease-in-out;
 }
 .panelOuter.energy.fullRetract {
   -webkit-transform: rotate(-32deg) translateY(1100px);
-  transition: all 0.2s ease-in-out;
 }
 .panelOuter.energy.signIn {
   -webkit-transform: rotate(-32deg) translateY(930px);
-  transition: all 0.2s ease-in-out;
 }
 .panelOuter.energy i,
 .panelOuter.energy a {

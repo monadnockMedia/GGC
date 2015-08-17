@@ -45,7 +45,7 @@ p.tab-body {
   }
   width: 144px;
   height: 82px;
-  padding: 35px;
+  padding: 45px;
   margin: 15px;
   background-size: 110px 82px;
   font-size:1.75em;
@@ -154,7 +154,7 @@ p.tab-body {
   top:200px;
 
   -webkit-transform-style: preserve-3d;
-  transition: all .2s  ease-in-out;/**/
+  //transition: all .2s  ease-in-out;/**/
 }
 .panelInnerenvironment .extended, .panelInnereconomy .extended, .panelInnerenergy .extended {
   top:0;
@@ -288,7 +288,9 @@ div.panelInnerEnergy {
     }
   }
 }
-
+.panelTransition{
+  transition: -webkit-transform 0.25s ease-in-out;1
+}
 .panelOuter{
   position: absolute;
   width: 375px;
