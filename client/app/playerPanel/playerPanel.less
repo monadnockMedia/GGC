@@ -295,24 +295,24 @@ div.panelInnerEnergy {
   height: 300px;
   -webkit-transform-style: preserve-3d;
   overflow: hidden;
-  transition: all 0.2s ease-in-out;
+
 
   &.environment{
     -webkit-transform: rotate(32deg) translateY(830px);
-    transition: all 0.2s ease-in-out;
+    .panelTransition;
     position: absolute;
     &.retract{
       -webkit-transform: rotateZ(32deg) translateY(1035px);
-      transition: all 0.2s ease-in-out;
+
     }
 
     &.fullRetract {
       -webkit-transform: rotate(32deg) translateY(1100px);
-      transition: all 0.2s ease-in-out;
+
     }
     &.signIn {
       -webkit-transform: rotate(32deg) translateY(930px);
-      transition: all 0.2s ease-in-out;
+
     }
 
 
@@ -329,19 +329,19 @@ div.panelInnerEnergy {
   }
   &.economy{
     -webkit-transform: rotate(0deg) translateY(830px);
-    transition: all 0.2s ease-in-out;
+    .panelTransition;
     position: absolute;
     &.retract{
       -webkit-transform: rotate(0deg) translateY(1015px);
     }
     &.signIn{
       -webkit-transform: rotate(0deg) translateY(922px);
-      transition: all 0.2s ease-in-out;
+
     }
 
     &.fullRetract {
       -webkit-transform: rotate(0deg) translateY(1100px);
-      transition: all 0.2s ease-in-out;
+
     }
 
     & i,a{
@@ -356,22 +356,22 @@ div.panelInnerEnergy {
   }
   &.energy{
     -webkit-transform: rotate(-32deg) translateY(830px);;
-    transition: all 0.2s ease-in-out;
+    .panelTransition;
     position: absolute;
     &.retract{
 
       -webkit-transform: rotate(-32deg) translateY(1030px);
-      transition: all 0.2s ease-in-out;
+
     }
 
     &.fullRetract {
       -webkit-transform: rotate(-32deg) translateY(1100px);
-      transition: all 0.2s ease-in-out;
+
     }
 
     &.signIn{
       -webkit-transform: rotate(-32deg) translateY(930px);
-      transition: all 0.2s ease-in-out;
+
     }
 
 
