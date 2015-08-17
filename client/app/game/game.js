@@ -24,7 +24,7 @@ angular.module('ggcApp')
                url: '/attract',
                views: {
                  "vid@game": {templateUrl: 'app/game/attract.html'},
-                 "panels@game": {templateUrl: 'app/game/introPanels.html'}
+                 "panels@game": {templateUrl: 'app/game/attractPanels.html'},
                }
              },
              {
@@ -45,8 +45,9 @@ angular.module('ggcApp')
                name: "prologue",
                url: '/prologue',
                views: {
+                 "vid@game": {templateUrl: 'app/game/prologue.html'},
+                 "panels@game": {templateUrl: 'app/game/prologuePanels.html'},
 
-                 "vid@game": {templateUrl: 'app/game/prologue.html'}
                },
                children:[
                  {
