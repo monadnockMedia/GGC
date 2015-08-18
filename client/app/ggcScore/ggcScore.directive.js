@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .directive('ggcScore', function ($filter, d3, ngAudio) {
+  .directive('ggcScore', function ($filter, d3, ngAudio, $location) {
     return {
       template: '<g ng-transclude>',
       restrict: 'A',
@@ -10,7 +10,7 @@ angular.module('ggcApp')
       link: function (scope, element, attrs) {
         var team = attrs.team;
         var iconIndex;
-
+        var abs = $location.absUrl();
         var pathEl = element.find("path")[0];
         //debugger;
         var l = pathEl.getTotalLength();
@@ -22,7 +22,7 @@ angular.module('ggcApp')
         scope.$watch(function() {
           return scope.game.score[team];
         }, update, true);
-
+        //TODO(Ryan/Ray) add second layer group for enter/exit glow.
         function update(newV, oldV) {
           scoreSfx.play();
           console.log(Boolean(newV));
@@ -39,7 +39,8 @@ angular.module('ggcApp')
               x: glyphIconPOS[team][0],
               y: glyphIconPOS[team][1],
               class: team + " glyphIcons",
-            }).transition() //add the transition
+            })
+              .transition() //add the transition
               //push the new attributes (could be any xhtml attributes)
               .attr({
                 x: function(d,i){
@@ -53,17 +54,19 @@ angular.module('ggcApp')
                   var pt = pathEl.getPointAtLength(newI*step);
 
                   return pt.y+15;
-                },
-                transform: function(d,i) {
-                  var newI = i+1;
                 }
-              }).style("fill", glyphiconColor).style("font-size", "26px").duration(2000).text(function(d){return d});
+              })
+              .delay(function(d,i){return i*100}) // a delay based on index
+              .style("fill", glyphiconColor).style("font-size", "26px").duration(2000).text(function(d){return d});
 
-            group.selectAll("text").data(scoreData).exit().transition().attr({
-              x: glyphIconPOS[team][0],
-              y: glyphIconPOS[team][1],
+            group.selectAll("text").data(scoreData).exit()
+              .transition().attr({
+                x: glyphIconPOS[team][0],
+                y: glyphIconPOS[team][1],
 
-            }).style("opacity", 0.3).style("font-size", "60px").duration(1000).remove();
+              })
+              .delay(function(d,i){return i*100})
+              .style("opacity", 0.3).style("font-size", "60px").duration(1000).remove();
           }
         }
       }
