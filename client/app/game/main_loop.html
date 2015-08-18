@@ -8,17 +8,17 @@
   <h1  class = "title" ng-show="game.phase == 'vote'">
     Everyone Votes
   </h1>
-  <h1  class = "title" ng-show="game.phase == 'scoring' && dealer.prologue == false">
+  <h1  class = "title" ng-show="game.phase == 'scoring'">
     Results
   </h1>
 </div>
 
 
-
+1
 <div id = "box-wrap-inner">
 
     <div  class="relative scenario-card text-left" ng-repeat="mainCard in game.main track by $index"
-          ng-class="{invisible: mainCard.hidden, chosen: mainCard.chosen, dim:game.phase=='scoring'}" ng-hide="dealer.prologue == true">
+          ng-class="{invisible: mainCard.hidden, chosen: mainCard.chosen, dim:game.phase=='scoring'}" >
       <div class="scenarioWrap">
 
 
@@ -44,7 +44,7 @@
 </div>
 
 
-<div ng-show="game.phase == 'scoring' && dealer.prologue == false" class="stamp" ng-class="{passed:game.action.passed, blocked:!game.action.passed}">
+<div ng-show="game.phase == 'scoring'" class="stamp" ng-class="{passed:game.action.passed, blocked:!game.action.passed}">
   <h1 class=jumbo" ng-show="game.action.passed">PASSED</h1>
   <h1 class=jumbo" ng-hide="game.action.passed">BLOCKED</h1>
 </div>
