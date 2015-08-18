@@ -31,6 +31,7 @@ angular.module('ggcApp')
                name: "loop",
                url: '/loop',
                views: {
+                 "vid@game": {template: ''},
                  "main@game": {templateUrl: 'app/game/main_loop.html'}
                }
              },

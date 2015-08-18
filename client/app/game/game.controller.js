@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .controller('GameCtrl', function ($scope, $http, ngAudio, ggcUtil, $rootScope, dealer, ggcGame, hotkeys, $location, $interval, $state, nwkiosk) {
+  .controller('GameCtrl', function ($scope, $http, ngAudio, ggcUtil, $rootScope, dealer, ggcGame, hotkeys, $location, $interval, $state, nwkiosk, ggcPrologueOverlord) {
     $scope.preview = {};
     $scope.preview.hideNavbar = false;
 
@@ -122,13 +122,13 @@ angular.module('ggcApp')
         ggcGame.setPanelStates("fullRetract");
         $state.go("game.play.prologue");
       } else if ($state.current.name == "game.play.prologue") {
-        $state.go("game.play.loop");
-        dealer.init();
+        ggcPrologueOverlord.ended();
       }else if ($state.current.name == "game.play.loop"){
         dealer.playerChoice(t,i);
       }
     }
     bindKeys();
+    //debugger;
     dealer.init();
 
   });

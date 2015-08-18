@@ -4,6 +4,16 @@ angular.module('ggcApp')
   .service('ggcPrologueOverlord', function (dealer, $state, $interval, ggcMapper, ggcGame) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var pop;
+
+    function ended(){
+      //dealer.init();
+      $state.go("game.play.loop", {}, {reload:true});
+      //dealer.prologue = false;
+      //dealer.signIn = false;
+      ggcMapper.reset();
+    }
+
+    this.ended = ended;
     this.makePop = function (v) {
       pop = Popcorn(v);
 
@@ -13,13 +23,7 @@ angular.module('ggcApp')
         ended();
       });
 
-      function ended(){
-        dealer.init();
-        $state.go("game.play.loop", {}, {reload:true});
-        //dealer.prologue = false;
-        //dealer.signIn = false;
-        ggcMapper.reset();
-      }
+
 
       pop.on("playing", function () {
         ggcGame.setPanelStates(2);
@@ -184,11 +188,10 @@ angular.module('ggcApp')
 
         },
       }).code({
-        start: 47.25,
+        start: 48,
         end: 47.5,
         onStart: function () {
-          ended();
-          //dealer.signIn = true;
+          ggcGame.setPanelStates("signIn");
         },
         //onEnd: function(){dealer.makeDocked("economy", false)},
       }).code({
@@ -196,7 +199,7 @@ angular.module('ggcApp')
         end: 60.5,
         onStart: function(){},  //temporary
         onEnd: function () {
-          //1ggcGame.setPanelStates("retract");
+
           //dealer.dockAll(true);
         },
       }).code({
