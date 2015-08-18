@@ -70,10 +70,10 @@
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.84);
 }
 .city:before {
-  font-family: Arial;
+  font-family: Lucida Sans Unicode, sans-serif;
   position: relative;
   top: -10px;
-  content: "\25F8";
+  content: "◤";
   margin-top: 20px;
 }
 .city.leftlabel:before {
@@ -82,7 +82,7 @@
 .city.leftlabel:after {
   position: relative;
   top: -10px;
-  content: "\25F9";
+  content: "◥";
   margin-top: 20px;
 }
 #tampa.city {
