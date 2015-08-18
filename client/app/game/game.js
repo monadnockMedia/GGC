@@ -55,6 +55,7 @@ angular.module('ggcApp')
                    url: "/cards",
                    views: {
                      "main@game": {templateUrl: 'app/game/main_loop.html'},
+                     "panels@game" : {templateUrl: 'app/game/panels.html'},
                    },
                  }
 
