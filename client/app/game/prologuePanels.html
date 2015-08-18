@@ -1,7 +1,7 @@
 <!-- >The Player Panels Go Here<-->
 <div ng-repeat="(name, player) in game.players">
   <div class="playerPanel {{name}}">
-
+    <div class="arrow {{name}}"></div>
 
     <div class="panelOuter {{name}}" ng-class="game.players[name].panelClass">
       <div class="panelInner{{name}}">

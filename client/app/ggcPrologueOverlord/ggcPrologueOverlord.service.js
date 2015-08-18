@@ -15,7 +15,7 @@ angular.module('ggcApp')
 
       function ended(){
         dealer.init();
-        $state.go("game.play.loop");
+        $state.go("game.play.loop", {}, {reload:true});
         //dealer.prologue = false;
         //dealer.signIn = false;
         ggcMapper.reset();
@@ -112,7 +112,7 @@ angular.module('ggcApp')
         end: 22,
         onStart: function () {
           dealer.introText = true;
-          ggcGame.setPanelState("environment", 3);
+          ggcGame.setPanelState("environment", 2);
         },
         onEnd: function () {
         },
@@ -120,7 +120,7 @@ angular.module('ggcApp')
         start: 23,
         end: 24,
         onStart: function () {
-          ggcGame.setPanelState("economy", 3);
+          ggcGame.setPanelState("economy", 2);
         },
         onEnd: function () {
         },
@@ -128,7 +128,7 @@ angular.module('ggcApp')
         start: 25,
         end: 26,
         onStart: function () {
-          ggcGame.setPanelState("energy", 3);
+          ggcGame.setPanelState("energy", 2);
         },
         onEnd: function () {
         },
@@ -171,20 +171,23 @@ angular.module('ggcApp')
         },
       }).code({
         start: 41.5,
-        end: 43,
+        end: 42,
         onStart: function () {
           ggcGame.voteIssue("energy", 0);
           dealer.prologue = true;
 
+
         },
         onEnd: function () {
           ggcGame.dockAll(true);
+          $state.go("game.play.prologue");
 
         },
       }).code({
-        start: 44,
+        start: 47.25,
         end: 47.5,
         onStart: function () {
+          ended();
           //dealer.signIn = true;
         },
         //onEnd: function(){dealer.makeDocked("economy", false)},
