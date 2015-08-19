@@ -141,7 +141,7 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
   //random event video is over
   //TODO(Ray) attach callback to controller so it can be changed based on state?
   //$scope.videoEndEvent = function(){}
-  this.videoEventEnd = function (d,i,a) {
+  this.videoEventEnd = function (d, i, a) {
     if ($rootScope.currentState == "game.play.event") {
       console.log("End Video: Loop");
       $state.go("game.play.loop");
@@ -155,8 +155,8 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
         tutorialIcons = r.data;
         console.log("Tutorial Icons: ", tutorialIcons);
       });
-      //$state.go("game.play.attract");
-      $location.url("/game/play/attract");
+      $state.go("game.play.attract", {}, {reload: true});
+
     }
   }
   this.playerChoice = function (p, b) {
