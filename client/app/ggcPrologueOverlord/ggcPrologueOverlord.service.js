@@ -30,11 +30,10 @@ angular.module('ggcApp')
       });
 
       pop.code({
-        start: 0.0,
+        start: 0.2,
         end: 9,
         onStart: function () {
-
-          //dealer.introMusic.play();
+          dealer.introMusic.play();
         },
         //TODO(Ray) Remove skip tutorial buttons here
         onEnd: function () {
