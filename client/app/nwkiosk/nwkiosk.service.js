@@ -25,9 +25,14 @@ angular.module('ggcApp')
 
       //win.enterKioskMode();
       //win.showDevTools();
-
+      this.setKioskMode = function(_kioskMode){
+        if (_kioskMode != kioskMode){
+          kioskMode = _kioskMode;
+          (kioskMode) ? win.enterKioskMode() : win.leaveKioskMode() ;
+        }
+      }
       this.toggleKiosk = function(){
-        (kioskMode) ? win.enterKioskMode() : win.leaveKioskMode() ;
+        (!kioskMode) ? win.enterKioskMode() : win.leaveKioskMode() ;
         kioskMode = !kioskMode;
       }
 
@@ -39,10 +44,10 @@ angular.module('ggcApp')
     catch(err) {
       console.log("Error: ", err);
       kioskMode = false;
-
+      var docElm = document.documentElement;
       this.toggleKiosk = function(){
         console.log("kioskMode unavailable");
-        var docElm = document.documentElement;
+
         if (docElm.requestFullscreen) {
           docElm.requestFullscreen();
         }
@@ -59,6 +64,10 @@ angular.module('ggcApp')
 
       this.toggleDevTools = function(){
         console.log("devTools unavailable")
+      }
+      this.setKioskMode = function(_kioskMode){
+        console.log("devTools unavailable")
+        docElm.webkitRequestFullScreen();
       }
     }
 
