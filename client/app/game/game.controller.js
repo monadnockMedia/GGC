@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .controller('GameCtrl', function ($scope, $http, ngAudio, ggcUtil, $rootScope, dealer, ggcGame, hotkeys, $location, $interval, $state, nwkiosk, ggcPrologueOverlord) {
+  .controller('GameCtrl', function ($scope, $http, ggcSounds, ggcUtil, $rootScope, dealer, ggcGame, hotkeys, $location, $interval, $state, nwkiosk, ggcPrologueOverlord) {
     $scope.preview = {};
     $scope.preview.hideNavbar = false;
 
@@ -12,7 +12,7 @@ angular.module('ggcApp')
 
     $scope.trust = ggcUtil.trustSVG;
 
-    $scope.wooshSfx = ngAudio.load("../sound/digital_woosh.wav");
+
 
 
     $scope.printObject = ggcUtil.printObject;
@@ -25,7 +25,7 @@ angular.module('ggcApp')
       return $scope.game.phase;
     }, function(val) {
       if (val == "choice") {
-        $scope.wooshSfx.play();
+        ggcSounds.wooshSfx.play();
       }
       //debugger;
     })

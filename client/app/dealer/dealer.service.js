@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q, $rootScope, ggcUtil, $interval, ggcMapper, $state, $filter, ngAudio, $location) {
+angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q, $rootScope, ggcUtil, $interval, ggcMapper, $state, $filter, ggcSounds, $location) {
   // AngularJS will instantiate a singleton by calling "new" on this function
 
   this.decks = {};
@@ -13,14 +13,6 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
   this.prologue = false;
   this.signIn = false;
   this.introText = false;
-
-
-  this.votePassSfx = ngAudio.load("../sound/vote_pass.wav");
-  this.voteBlockSfx = ngAudio.load("../sound/vote_block.wav");
-  this.panelSfx = ngAudio.load("../sound/panel_slide.wav");
-  this.newsSfx = ngAudio.load("../sound/news_jingle.wav");
-  this.confirmSfx = ngAudio.load("../sound/confirm.wav");
-  this.introMusic = ngAudio.load("../sound/prologue_music.wav");
 
   var config = $rootScope.config.game;
   var events = [];
@@ -100,7 +92,7 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
 
 
   phases.event = function () {
-    self.newsSfx.play();
+    ggcSounds.newsSfx.play();
     $state.go('game.play.event');
   }
 
@@ -121,6 +113,7 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
   this.choose = function (p, i) {
     //set "chosen" on players choice card to true
     if (p == self.game.currentPlayer) {
+      ggcSounds.confirmSfx.play();
       ggcGame.chooseIssue(p,i);
     }
   }
@@ -129,9 +122,9 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
   this.vote = function (p, v) {
 
     if (v == 0) {
-      this.voteBlockSfx.play();
+      ggcSounds.voteBlockSfx.play();
     }else {
-      this.votePassSfx.play();
+      ggcSounds.votePassSfx.play();
     }
 
     ggcGame.voteIssue(p,v);

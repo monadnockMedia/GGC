@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('ggcApp')
-  .service('ggcPrologueOverlord', function (dealer, $state, $interval, ggcMapper, ggcGame) {
+  .service('ggcPrologueOverlord', function (dealer, $state, $interval, ggcMapper, ggcGame, ggcSounds) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var pop;
 
     function ended(){
       //dealer.init();
+      ggcSounds.introMusic.stop();
       $state.go("game.play.loop", {}, {reload:true});
       //dealer.prologue = false;
       //dealer.signIn = false;
@@ -34,7 +35,7 @@ angular.module('ggcApp')
         end: 9,
         onStart: function () {
 
-          //dealer.introMusic.play();
+          ggcSounds.introMusic.play();
         },
         //TODO(Ray) Remove skip tutorial buttons here
         onEnd: function () {
@@ -163,21 +164,26 @@ angular.module('ggcApp')
         },
         onEnd: function () {
           ggcGame.chooseIssue("environment", 1);
+          ggcSounds.panelSfx.play();
+
         },
       }).code({
         start: 38.5,
         end: 40,
         onStart: function () {
           ggcGame.voteIssue("environment", 1);
+          ggcSounds.votePassSfx.play();
         },
         onEnd: function () {
           ggcGame.voteIssue("economy", 1);
+          ggcSounds.votePassSfx.play();
         },
       }).code({
         start: 41.5,
         end: 42,
         onStart: function () {
           ggcGame.voteIssue("energy", 0);
+          ggcSounds.voteBlockSfx.play();
           dealer.prologue = true;
 
 
