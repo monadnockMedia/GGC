@@ -353,6 +353,7 @@ angular.module('ggcApp')
         dockAll(true);
         var oc = calculateOutcome(game.score);
         game.outcome = (oc.balanced) ? endings.balanced : endings.unbalanced[oc.team];
+        game.round = 1;
        // debugger;
       }
     };
