@@ -32,10 +32,8 @@ angular.module('ggcApp')
 
     ///dealer.hands contains the current "card" views for each player, as well as the main player
     $scope.hands = dealer.hands;
+    nwkiosk.setKioskMode($rootScope.config.kiosk);
 
-    if ($rootScope.kiosk == "true") {
-      nwkiosk.toggleKiosk();
-    }
 
 
 
