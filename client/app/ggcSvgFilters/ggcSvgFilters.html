@@ -13,6 +13,28 @@
           <!--<feMergeNode in="glow"/>-->
         </feMerge>
       </filter>
+
+      <filter id="pulse" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur stdDeviation="10" result="glow">
+          <animate
+            id    =   "pulse"
+            attributeName="stdDeviation"
+            values="2;10;8;2"
+            dur="0.6s"
+            fill="freeze"
+            repeatCount="indefinite"
+            />
+        </feGaussianBlur>
+        <feMerge>
+          <feMergeNode in="glow"/>
+          <feMergeNode in="glow"/>
+          <!--<feMergeNode in="glow"/>-->
+        </feMerge>
+
+
+
+      </filter>
+
     </defs>
 
 </svg>
