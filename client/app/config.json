@@ -1,6 +1,7 @@
 {
   "kiosk":false,
 	"debug":true,
+  "resize":true,
   "grid" : {
     "rows":15, "cols":20
   },

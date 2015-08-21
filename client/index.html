@@ -54,7 +54,7 @@
       <!-- endinjector -->
     <!-- endbuild -->
   </head>
-  <body ng-app="ggcApp"  ng-keyup="globalShortcuts($event)" ng-controller="AppCtrl" ng-class = "{'gameBody':config.gameMode}">
+  <body ng-app="ggcApp"  class="{{body-transform}}" ng-keyup="globalShortcuts($event)" ng-controller="AppCtrl" ng-class = "{'gameBody':config.gameMode, 'transform':config.resize}">
 
 
     <!--[if lt IE 7]>
