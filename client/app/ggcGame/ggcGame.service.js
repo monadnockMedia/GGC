@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .service('ggcGame', function ($state, $rootScope, $q, $interval, $filter, ggcMapper, ggcUtil) {
+  .service('ggcGame', function ($state, $rootScope, $q, $interval, $filter, ggcMapper, ggcUtil, ggcSounds) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var config = $rootScope.config.game;
     var playerNames = [];
@@ -152,8 +152,7 @@ angular.module('ggcApp')
     }
 
     function dockAll(b) {
-
-      //self.panelSfx.play();
+      ggcSounds.panelSfx.play();
       eachPlayer(function (p) {
         makeDocked(p, b);
 
@@ -161,7 +160,7 @@ angular.module('ggcApp')
     }
 
     function dockOne(p, b) {
-      //self.panelSfx.play();
+      ggcSounds.panelSfx.play();
       eachPlayer(function (_p) {
         var docked = (_p === p) ? b : !b;
         makeDocked(_p, docked);
@@ -180,6 +179,7 @@ angular.module('ggcApp')
       }
 
       if (s) {
+        ggcSounds.panelSfx.play();
         game.players[p].panelClass = s;
       }
     }
