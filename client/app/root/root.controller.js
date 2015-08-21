@@ -2,11 +2,15 @@
 
 
 angular.module('ggcApp')
-  .controller('AppCtrl', function ($scope, $location, hotkeys, $http, $rootScope) {
+  .controller('AppCtrl', function ($scope, $location, hotkeys, $http, $rootScope, nwkiosk) {
+    $scope.config = true;
     $http.get('/appConfig').then(function (res) {
       $scope.config = res.data;
       $rootScope.config = res.data;
     })
+    $rootScope.$watch(function(){return $scope.config.kiosk }, function(n,o){
+      if(n !== o )  nwkiosk.setKioskMode(n);
+    });
 
 
     $scope.menu = [{
