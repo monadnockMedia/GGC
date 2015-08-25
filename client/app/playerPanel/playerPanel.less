@@ -290,7 +290,7 @@ div.panelInnerEnergy {
   }
 }
 .panelTransition{
-  transition: -webkit-transform 0.25s ease-in-out;1
+  transition: -webkit-transform 0.25s ease-in-out;
 }
 .panelOuter{
   position: absolute;
@@ -329,6 +329,9 @@ div.panelInnerEnergy {
         .colorbarText(@environment-color);
       }
     }
+    & .hint{
+      -webkit-animation: environment-glow 1s infinite;
+    }
   }
   &.economy{
     -webkit-transform: rotate(0deg) translateY(830px);
@@ -355,6 +358,9 @@ div.panelInnerEnergy {
       & > h3{
         .colorbarText(@economy-color);
       }
+    }
+    & .hint{
+      -webkit-animation: economy-glow 1s infinite;
     }
   }
   &.energy{
@@ -387,33 +393,74 @@ div.panelInnerEnergy {
         .colorbarText(@energy-color);
       }
     }
+    & .hint{
+      -webkit-animation: energy-glow 1s infinite;
+    }
   }
 
 }
+@flipTime: 0.25s;
 .colorbar {
-  position: relative;
+  transition: all linear @flipTime;
+  //transition: opacity linear 1s;
+  transform: rotateX(0deg);
+  &.ng-hide{
+    transform: rotateX(90deg);
+    display: block!important;
+    opacity: 0;
+  }
+  position: absolute;
   width: 300px;
   height: 12px;
   border-radius: 6px;
   margin: 30px auto;
 }
+
+
+
 .colorbar h3 {
-  position: relative;
   width: 150px;
   height: 20px;
   border-radius: 6px;
-  margin: 0 auto;
+  margin: -4px auto;
   top: -4px;
   background: #233;
   text-align: center;
   font-size: 15px;
   letter-spacing: .5px;
   font-stretch: expanded;
-  padding-top: 1px;
+  padding: 0 3px 0 3px;
   font-family: "232MKSD", Helvetica, Arial, sans-serif;
 }
 
+div.hint-wrap{
 
+  padding: 0 12px 0 12px;
+  background:none !important;
+  height: auto;
+  display:-webkit-box;
+}
+
+h3.hint{
+  .ng-hide{
+    & h3.hint{
+      -webkit-animation: none;
+    }
+  }
+  opacity: inherit;
+  padding: 5px 1em 5px 1em;
+  width: auto;
+  height: auto;
+}
+
+.bar-wrap{
+  position: relative;
+  width: 90%;
+  margin-left: 5%;
+  height: 67px;
+  max-height: 67px;
+  overflow: visible;
+}
 .ggc-btn-wrap{
   width: 100%;
   height: 50%;
@@ -430,4 +477,19 @@ div.panelInnerEnergy {
   padding-bottom: 100%;
 //  background:red;
   width:100%;
+}
+
+@-webkit-keyframes energy-glow
+{
+    .glowFrames(@energy-color)
+}
+
+@-webkit-keyframes environment-glow
+{
+  .glowFrames(@environment-color)
+}
+
+@-webkit-keyframes economy-glow
+{
+  .glowFrames(@economy-color)
 }
