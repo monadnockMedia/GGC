@@ -28,7 +28,8 @@
       </div>
 
       <div ng-show = "game.phase == 'vote'" class="vote-block">
-        <h5>{{player.hand.vote.action}}</h5>
+        <h5 class = "tab-title text-center">Pros and Cons</h5>
+        <!--<h5>{{player.hand.vote.action}}</h5>-->
 
         <div class="tab-body" ng-repeat = "t in player.hand.issue.text">
           <div ng-bind-html="t"></div>
