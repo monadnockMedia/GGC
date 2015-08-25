@@ -5,6 +5,11 @@
 
 
   <!--div id="mapA" >AAA</div-->
+
+  <div class="water brown" ng-class="{ 'transparent' : game.gulfState != 2 }"></div>
+  <div class="water normal" ng-class="{ 'transparent' : game.gulfState != 1 }"></div>
+  <div class="water clear" ng-class="{ 'transparent' : game.gulfState != 0 }"></div>
+
   <div id="mapB" >BBB</div>
   <div id="landmarks">
     <!--img  id="highways" src="svg/highways.svg"  /-->
