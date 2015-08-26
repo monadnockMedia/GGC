@@ -56,15 +56,18 @@ angular.module('ggcApp')
         end: 10,
         onStart: function () {
           dealer.placeTutIcon(8);
+          ggcGame.setGulfState(1);
         },
         onEnd: function () {
           dealer.placeTutIcon(9);
+
         },
       }).code({
         start: 10.5,
         end: 11,
         onStart: function () {
           dealer.placeTutIcon(15);
+
         },
         onEnd: function () {
           dealer.placeTutIcon(11);

@@ -177,7 +177,6 @@ div#main {
   top: 0px;
   width: 1920px;
   height: 1200px;
-  background: url("../../bmp/gulfbrown.jpg") no-repeat;
   background-size: 1980px 1300px;
   overflow: hidden;
 }
@@ -225,9 +224,30 @@ div#perspective_plane {
   position: absolute;
 }
 #foulGulf {
-  /*background: -webkit-linear-gradient(top, #2F2727, #1a82f7);*/
   background: url(../bmp/gulfbrown.jpg) 50% 0 no-repeat;
   background-size: 1920px 1200px;
+}
+.water {
+  width: 1920px;
+  height: 1200px;
+  position: absolute;
+  -webkit-transition: 3s all;
+  opacity: 1;
+}
+.water.clear {
+  background: url(../../bmp/gulfclear.jpg) 50% 0 no-repeat;
+  background-size: 1980px 1300px;
+}
+.water.normal {
+  background: url(../../bmp/gulfbrowner_mockup.png) 50% 0 no-repeat;
+  background-size: 1980px 1300px;
+}
+.water.brown {
+  background: url(../../bmp/gulfbrown.jpg) 50% 0 no-repeat;
+  background-size: 1980px 1300px;
+}
+.water.transparent {
+  opacity: 0;
 }
 #mapA {
   background: url(../../bmp/currentpop.png) 50% 0% no-repeat;

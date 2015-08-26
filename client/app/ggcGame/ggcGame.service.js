@@ -27,7 +27,8 @@ angular.module('ggcApp')
       action: {},
       round:1,
       score : {environment: {}, economy: {}, energy: {}},
-      totalScore : 0
+      totalScore : 0,
+      gulfState : 0
     };
     var game = clone(null_game);
 
@@ -81,6 +82,9 @@ angular.module('ggcApp')
     }
     function setEvents(e){
       events = e;
+    }
+    function setGulfState(e) {
+      game.gulfState = e;
     }
 
     function setCurrentPlayer(i) {
@@ -201,6 +205,7 @@ angular.module('ggcApp')
     this.makeDocked = makeDocked;
     this.setPanelStates = setPanelStates;
     this.setPanelState = setPanelState;
+    this.setGulfState = setGulfState;
 
     function clone(o){
       return JSON.parse(JSON.stringify(o));
@@ -355,7 +360,14 @@ angular.module('ggcApp')
       gameOver: function(){
         dockAll(true);
         var oc = calculateOutcome(game.score);
-        game.outcome = (oc.balanced) ? endings.balanced : endings.unbalanced[oc.team];
+        //game.outcome = (oc.balanced) ? endings.balanced : endings.unbalanced[oc.team];
+        if (oc.balanced) {
+          game.outcome = endings.balanced;
+          setGulfState(0);
+        } else {
+          game.outcome = endings.unbalanced[oc.team];
+          setGulfState(3);
+        }
         game.round = 1;
        // debugger;
       }
