@@ -247,12 +247,14 @@ angular.module('ggcApp')
 
     function randomEvent() {
       return events[~~(Math.random() * events.length)];
+      return events[~~(Math.random() * events.length)];
     }
     //TODO(Ryan) create nextPhase(), possibly figure out a better way of inserting phases on-the-fly
     var phaseFunctions = {
       ////////SETUP////////
       setup: function () {
         dockAll(false);
+        setGulfState(1);
         dockOne(game.currentPlayer, false);
         votes = {};
         game.totalScore = 0;
