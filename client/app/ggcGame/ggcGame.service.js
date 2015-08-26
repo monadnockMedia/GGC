@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .service('ggcGame', function ($state, $rootScope, $q, $interval, $filter, ggcMapper, ggcUtil, ggcSounds) {
+  .service('ggcGame', function ($state, $rootScope, $q, $interval, $filter, ggcMapper, ggcHints, ggcUtil, ggcSounds) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var config = $rootScope.config.game;
     var playerNames = [];
@@ -42,7 +42,10 @@ angular.module('ggcApp')
         var init_score = config.initialScores[k];
         game.totalScore += init_score;
         game.score[k] = {i: init_score, p: 0};
-        game.players[k] = {hand: clone(null_hand), docked: true, panelClass: false, isCurrentPlayer:false};
+        game.players[k] = {
+          hand: clone(null_hand),       docked: true,       panelClass: false,
+          isCurrentPlayer:false,        hint: ggcHints.playerHints[k]
+        };
       })
       setCurrentPlayer(game.playerIndex);
 

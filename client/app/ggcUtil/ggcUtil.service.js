@@ -18,6 +18,11 @@ angular.module('ggcApp')
       return $http.get('/api/Ending'); //fng endpoint
     };
 
+    this.getHints = function () {
+      //console.log("Service.getHints");
+      return $http.get('/api/Hint'); //fng endpoint
+    };
+
     this.getIcons = function (_id) {
       var res;
       if (_id) {
