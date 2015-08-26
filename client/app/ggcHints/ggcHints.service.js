@@ -44,11 +44,11 @@ angular.module('ggcApp')
       }
     });
 
-    $interval(function(){
-      playerNames.forEach(function(n){
-        playerHints[n].visible = !playerHints[n].visible;
-      });
-    },6000)
+    //$interval(function(){
+    //  playerNames.forEach(function(n){
+    //    playerHints[n].visible = !playerHints[n].visible;
+    //  });
+    //},6000)
 
 
   });
