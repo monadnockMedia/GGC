@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .service('ggcHints', function (ggcUtil, $rootScope) {
+  .service('ggcHints', function (ggcUtil, $rootScope, $interval) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var bareHint = {visible: false, text:""};
     var playerHints = {
@@ -29,6 +29,7 @@ angular.module('ggcApp')
         playerNames.forEach(function(n){
           var h = playerHints[n];
           h.text = randomHint(arg);
+          h.visible = false;
         });
       }
 
@@ -37,12 +38,17 @@ angular.module('ggcApp')
     $rootScope.$on("idle", function(scope,arg){
       if(hints[arg]){
         playerNames.forEach(function(n){
-          var h = playerHints[n];
-          h.text = randomHint(arg);
+
+
         });
       }
     });
 
+    $interval(function(){
+      playerNames.forEach(function(n){
+        playerHints[n].visible = !playerHints[n].visible;
+      });
+    },6000)
 
 
   });

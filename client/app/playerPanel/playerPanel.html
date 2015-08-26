@@ -12,7 +12,7 @@
         <div class="colorbar hint-wrap" ng-hide="!player.hint.visible"><h3 class="hint">{{player.hint.text}}</h3></div>
       </div>
 
-
+<!---->
       <div ng-show="game.phase == 'choice'">
         <div ng-show = "player.isCurrentPlayer">
           <h3 class = "tab-title text-center">Choose an Action</h3>
@@ -26,14 +26,14 @@
 
         </div>
       </div>
-
+<!---->
       <div ng-show = "game.phase == 'vote'" class="vote-block">
         <h5 class = "tab-title text-center">Pros and Cons</h5>
         <!--<h5>{{player.hand.vote.action}}</h5>-->
 
         <div class="tab-body" ng-repeat = "t in player.hand.issue.text">
-          <div ng-bind-html="t"></div>
-          <br />
+          <div style="margin-bottom: 8px" ng-bind-html="t"></div>
+
         </div>
       </div>
 
@@ -52,8 +52,8 @@
           </div>
         </div>
       </div>
-
-      <div ng-show="game.phase == 'scoring' || game.phase == 'eventScoring' || game.phase == 'warn'" class="vote-buttons">
+<!---->
+      <div ng-show="game.phase == 'scoring' || game.phase == 'eventScoring'" class="vote-buttons">
         <div  ng-show = "player.hand.issue.passed">
           <!--TODO() Make this a directive so we can change it in event Scoring-->
           <h3 ng-show = "game.phase == 'scoring'" class = "tab-title text-center">Action Passed</h3>
@@ -70,6 +70,16 @@
           <h3 class = "tab-title text-center">Action Blocked</h3>
         </div>
       </div>
+<!---->
+      <div ng-show="game.phase == 'warn'" class="vote-buttons">
+        <div  ng-show = "player.hand.issue.passed">
+          <h3 ng-hide = "game.phase == 'scoring'" class = "tab-title text-center">{{game.warning.action}}</h3>
+          <div class="tab-body text-center">
+            <i class="fa fa-exclamation-triangle"></i>{{" "+player.warning || "Lorem Ipsum Dolor Sit amet"}}
+          </div>
+        </div>
+      </div>
+<!---->
 
   </div>
 </div>

@@ -360,7 +360,7 @@ div.panelInnerEnergy {
   font-family: "232MKSD", Helvetica, Arial, sans-serif;
 }
 div.hint-wrap {
-  padding: 0 12px 0 12px;
+  margin-top: 18px;
   background: none !important;
   height: auto;
   display: -webkit-box;
@@ -378,7 +378,7 @@ h3.hint .ng-hide h3.hint {
   position: relative;
   width: 90%;
   margin-left: 5%;
-  height: 52px;
+  height: 58px;
   max-height: 67px;
   overflow: visible;
 }
