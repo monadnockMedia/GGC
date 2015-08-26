@@ -9,4 +9,6 @@ angular.module('ggcApp')
     this.confirmSfx = ngAudio.load("../sound/confirm.wav");
     this.introMusic = ngAudio.load("../sound/prologue_music.wav");
     this.wooshSfx = ngAudio.load("../sound/digital_woosh.wav");
+    this.winningMusic = ngAudio.load("../sound/winning_music.wav");
+    this.losingMusic = ngAudio.load("../sound/losing_music.wav");
   });

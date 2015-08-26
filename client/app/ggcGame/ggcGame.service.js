@@ -342,6 +342,7 @@ angular.module('ggcApp')
         if (game.round == config.rounds){ ///It's the last round
           console.log("GameOver");
           setPhase("gameOver");
+
         }else{
           game.round++;
           //var timedCb = (roll()) ? phases.event() : phases.setup();
@@ -349,6 +350,7 @@ angular.module('ggcApp')
           var timer = $interval(function () {
             setPhase(callback);
             $interval.cancel(timer);
+
             //timedCb();
           }, 0)
 
@@ -361,9 +363,11 @@ angular.module('ggcApp')
         if (oc.balanced) {
           game.outcome = endings.balanced;
           setGulfState(0);
+          ggcSounds.winningMusic.play();
         } else {
           game.outcome = endings.unbalanced[oc.team];
           setGulfState(3);
+          ggcSounds.losingMusic.play();
         }
         game.round = 1;
        // debugger;
