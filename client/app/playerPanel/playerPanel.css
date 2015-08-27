@@ -1,7 +1,7 @@
 @charset "UTF-8";
 .bottomPlane {
-  padding-left: 3em;
-  padding-right: 3em;
+  padding-left: 2em;
+  padding-right: 2em;
 }
 .tab-title {
   font-family: 'eurostile-condensed';
@@ -9,11 +9,11 @@
   color: #d6f9f2;
 }
 .tab-body {
-  font-family:"232MKUL";
+  font-family: "232MKUL";
   color: white;
   margin-left: 10px;
   margin-right: 10px;
-  font-size:14px;
+  font-size: 14px;
 }
 p.tab-body {
   margin-left: 25px;
@@ -270,6 +270,9 @@ div.panelInnerEnergy {
   border: #82d177 solid 1px;
   text-shadow: 0 0 2px black;
 }
+.panelOuter.environment .hint {
+  -webkit-animation: environment-glow 1s infinite;
+}
 .panelOuter.economy {
   -webkit-transform: rotate(0deg) translateY(830px);
   transition: -webkit-transform 0.25s ease-in-out;
@@ -295,6 +298,9 @@ div.panelInnerEnergy {
   color: #e5bd77;
   border: #e5bd77 solid 1px;
   text-shadow: 0 0 2px black;
+}
+.panelOuter.economy .hint {
+  -webkit-animation: economy-glow 1s infinite;
 }
 .panelOuter.energy {
   -webkit-transform: rotate(-32deg) translateY(830px);
@@ -322,27 +328,59 @@ div.panelInnerEnergy {
   border: #b6b6f0 solid 1px;
   text-shadow: 0 0 2px black;
 }
+.panelOuter.energy .hint {
+  -webkit-animation: energy-glow 1s infinite;
+}
 .colorbar {
-  position: relative;
+  transition: all linear 0.25s;
+  transform: rotateX(0deg);
+  position: absolute;
   width: 300px;
   height: 12px;
   border-radius: 6px;
   margin: 30px auto;
 }
+.colorbar.ng-hide {
+  transform: rotateX(90deg);
+  display: block!important;
+  opacity: 0;
+}
 .colorbar h3 {
-  position: relative;
   width: 150px;
   height: 20px;
   border-radius: 6px;
-  margin: 0 auto;
+  margin: -4px auto;
   top: -4px;
   background: #233;
   text-align: center;
   font-size: 15px;
   letter-spacing: .5px;
   font-stretch: expanded;
-  padding-top: 1px;
+  padding: 0 3px 0 3px;
   font-family: "232MKSD", Helvetica, Arial, sans-serif;
+}
+div.hint-wrap {
+  margin-top: 18px;
+  background: none !important;
+  height: auto;
+  display: -webkit-box;
+}
+h3.hint {
+  opacity: inherit;
+  padding: 5px 1em 5px 1em;
+  width: auto;
+  height: auto;
+}
+h3.hint .ng-hide h3.hint {
+  -webkit-animation: none;
+}
+.bar-wrap {
+  position: relative;
+  width: 90%;
+  margin-left: 5%;
+  height: 58px;
+  max-height: 67px;
+  overflow: visible;
 }
 .ggc-btn-wrap {
   width: 100%;
@@ -357,4 +395,37 @@ div.panelInnerEnergy {
   height: 0;
   padding-bottom: 100%;
   width: 100%;
+}
+@-webkit-keyframes energy-glow {
+  0% {
+    box-shadow: 0 0 0 0 #4e4efc;
+  }
+  50% {
+    box-shadow: 0 0 10px 4px #4e4efc;
+  }
+  100% {
+    box-shadow: 0 0 0 0 #4e4efc;
+  }
+}
+@-webkit-keyframes environment-glow {
+  0% {
+    box-shadow: 0 0 0 0 #2fd418;
+  }
+  50% {
+    box-shadow: 0 0 10px 4px #2fd418;
+  }
+  100% {
+    box-shadow: 0 0 0 0 #2fd418;
+  }
+}
+@-webkit-keyframes economy-glow {
+  0% {
+    box-shadow: 0 0 0 0 #fca204;
+  }
+  50% {
+    box-shadow: 0 0 10px 4px #fca204;
+  }
+  100% {
+    box-shadow: 0 0 0 0 #fca204;
+  }
 }

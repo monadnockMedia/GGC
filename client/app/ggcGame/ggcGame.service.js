@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .service('ggcGame', function ($state, $rootScope, $q, $interval, $filter, ggcMapper, ggcUtil, ggcSounds) {
+  .service('ggcGame', function ($state, $rootScope, $q, $interval, $filter, ggcMapper, ggcHints, ggcUtil, ggcSounds) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var config = $rootScope.config.game;
     var playerNames = [];
@@ -43,7 +43,10 @@ angular.module('ggcApp')
         var init_score = config.initialScores[k];
         game.totalScore += init_score;
         game.score[k] = {i: init_score, p: 0};
-        game.players[k] = {hand: clone(null_hand), docked: true, panelClass: false, isCurrentPlayer:false};
+        game.players[k] = {
+          hand: clone(null_hand),       docked: true,       panelClass: false,
+          isCurrentPlayer:false,        hint: ggcHints.playerHints[k],      warning:" "
+        };
       })
       setCurrentPlayer(game.playerIndex);
 
@@ -113,7 +116,7 @@ angular.module('ggcApp')
       });
     }
 
-    function calculateOutcome(score) {
+    function calculateOutcome(score, threshold) {
       var outcome = {};
       var average = 0;
       var spread = [];
@@ -123,7 +126,7 @@ angular.module('ggcApp')
       eachPlayer(makeSpread); //subtract average from each score
       spread.sort(function(a,b){return a.spread - b.spread}).reverse();
       //eachPlayer(orderSpread); //put in order
-      outcome.balanced = checkBalance();
+      outcome.balanced = checkBalance(threshold);
       outcome.team = spread[0].team;
 
       return outcome;
@@ -137,11 +140,11 @@ angular.module('ggcApp')
         spread.push( {team:p,spread:score[p].i - average})  ;
       }
 
-      function checkBalance(){
+      function checkBalance(threshold){
         var highSpread = spread[0].spread;
         var lowSpread = spread[2].spread;
         var spreadWidth = highSpread - lowSpread;
-        return (spreadWidth <= config.balanceThreshold);
+        return (spreadWidth <= threshold);
       }
 
 
@@ -250,6 +253,7 @@ angular.module('ggcApp')
       ////////SETUP////////
       setup: function () {
         dockAll(false);
+        setGulfState(1);
         dockOne(game.currentPlayer, false);
         votes = {};
         game.totalScore = 0;
@@ -301,8 +305,8 @@ angular.module('ggcApp')
         } else{
           setPanelStates(2);
         }
-        var oc = calculateOutcome(game.score);
-        game.warning = $filter("balance")(oc);
+        //calculate outcome for balance warning purposes
+        var oc = calculateOutcome(game.score,config.balanceThreshold);  //for balance warning, make threshold larger
         //If it's th11e prologue, don't do this
         if ($rootScope.currentState == "game.play.loop") {
           nextPhase = (isLastPlayer()) ? "endRound" : "setup"; //if we're on the last turn, go to end round, if not, just setup another turn.
@@ -310,6 +314,11 @@ angular.module('ggcApp')
           if(oc.balanced) {
             ggcUtil.wait(function(){setPhase(nextPhase)}, config.duration.scoring);
           }else{
+            //warn players to keep in balance
+            game.warning = $filter("balance")(oc);
+            eachPlayer(function(p){
+                game.players[p].warning = (p === oc.team) ? "Your sector is growing too fast." : $filter("capitalize")(oc.team)+" is growing too fast.";
+            });
             ggcUtil.wait(function(){setPhase("warn")}, config.duration.scoring);
           }
         }
@@ -331,6 +340,9 @@ angular.module('ggcApp')
       eventScoring:function(){
         setPanelStates(2);
         game.warning = game.newsEvent.main;
+        eachPlayer(function(p){
+          game.players[p].warning = game.newsEvent.effects[p].message;
+        });
         tally(game.newsEvent.effects);
         nextPhase = "setup";
         ggcUtil.wait(function(){setPhase("warn")}, config.duration.scoring);
@@ -358,7 +370,7 @@ angular.module('ggcApp')
       },
       gameOver: function(){
         dockAll(true);
-        var oc = calculateOutcome(game.score);
+        var oc = calculateOutcome(game.score,config.balanceThreshold);
         //game.outcome = (oc.balanced) ? endings.balanced : endings.unbalanced[oc.team];
         if (oc.balanced) {
           game.outcome = endings.balanced;

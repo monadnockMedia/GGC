@@ -123,3 +123,12 @@
   border: @textColor solid 1px;
   text-shadow: 0 0 2px black;
 }
+
+
+.glowFrames(@color){
+  0% {box-shadow: 0 0 0 0 @color }
+  50%{box-shadow: 0 0 10px 4px @color}
+  100%{box-shadow: 0 0 0 0 @color}
+}
+
+
