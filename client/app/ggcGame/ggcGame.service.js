@@ -28,7 +28,8 @@ angular.module('ggcApp')
       round:1,
       score : {environment: {}, economy: {}, energy: {}},
       totalScore : 0,
-      gulfState : 0
+      gulfState : 0,
+      scoreGlow : false
     };
     var game = clone(null_game);
 
@@ -94,6 +95,11 @@ angular.module('ggcApp')
       eachPlayer(function (pp) {
         game.players[pp].isCurrentPlayer = (pp === p);
       });
+    }
+
+    function setGlow(g) {
+      console.log("setGlow( ", g, " )");
+      game.scoreGlow = g;
     }
 
     ///reset the hands
@@ -315,11 +321,15 @@ angular.module('ggcApp')
             ggcUtil.wait(function(){setPhase(nextPhase)}, config.duration.scoring);
           }else{
             //warn players to keep in balance
+
             game.warning = $filter("balance")(oc);
             eachPlayer(function(p){
                 game.players[p].warning = (p === oc.team) ? "Your sector is growing too fast." : $filter("capitalize")(oc.team)+" is growing too fast.";
             });
-            ggcUtil.wait(function(){setPhase("warn")}, config.duration.scoring);
+            ggcUtil.wait(function(){
+              setPhase("warn");
+              setGlow(true);
+            }, config.duration.scoring);
           }
         }
       },
@@ -328,6 +338,7 @@ angular.module('ggcApp')
        setPanelStates(2);
         ggcUtil.wait(function(){
           $state.go('game.play.loop');
+          setGlow(false);
           setPhase(nextPhase);
         }, config.duration.warn);
       },
@@ -369,6 +380,7 @@ angular.module('ggcApp')
         }
       },
       gameOver: function(){
+        setGlow(true);
         dockAll(true);
         var oc = calculateOutcome(game.score,config.balanceThreshold);
         //game.outcome = (oc.balanced) ? endings.balanced : endings.unbalanced[oc.team];
@@ -433,6 +445,7 @@ angular.module('ggcApp')
     this.setPhase = setPhase;
     this.setEndings = setEndings;
     this.setEvents = setEvents;
+    this.setGlow = setGlow;
 
 
 
