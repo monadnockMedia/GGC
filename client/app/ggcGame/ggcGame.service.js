@@ -307,19 +307,20 @@ angular.module('ggcApp')
         }
         //calculate outcome for balance warning purposes
         var oc = calculateOutcome(game.score,config.balanceThreshold);  //for balance warning, make threshold larger
-        //If it's th11e prologue, don't do this
+        //If it's the prologue, don't do this
         if ($rootScope.currentState == "game.play.loop") {
           nextPhase = (isLastPlayer()) ? "endRound" : "setup"; //if we're on the last turn, go to end round, if not, just setup another turn.
           nextPlayer();
-          if(oc.balanced) {
+          if(oc.balanced ) { //score is balanced
             ggcUtil.wait(function(){setPhase(nextPhase)}, config.duration.scoring);
-          }else{
-            //warn players to keep in balance
+          }else if(votePassed){ //vote was passed and is not balanced, warn players
             game.warning = $filter("balance")(oc);
             eachPlayer(function(p){
                 game.players[p].warning = (p === oc.team) ? "Your sector is growing too fast." : $filter("capitalize")(oc.team)+" is growing too fast.";
             });
             ggcUtil.wait(function(){setPhase("warn")}, config.duration.scoring);
+          }else{  //score is still unbalanced but vote was not passed (score unchanged)
+            ggcUtil.wait(function(){setPhase(nextPhase)}, config.duration.scoring);
           }
         }
       },
