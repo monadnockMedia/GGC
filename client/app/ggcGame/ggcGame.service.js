@@ -394,6 +394,7 @@ angular.module('ggcApp')
       eachPlayer(function (p) {
         if(effects[p]){
           score[p].i += effects[p].score;
+          score[p].i = Math.max(0, score[p].i);
           game.totalScore += score[p].i;
           game.players[p].hand.issue.scoreHTML = $filter("panelScore")(effects[p].score, p);
         }
