@@ -404,17 +404,6 @@ angular.module('ggcApp')
       if (game.phase == "scoring") addIcon(game.action.icon);
     }
 
-    //function tally() {
-    //  var score = game.score;
-    //  eachPlayer(function (p) {
-    //    score[p].i += game.action.effects[p].score;
-    //    game.totalScore += score[p].i;
-    //
-    //    game.players[p].hand.issue.scoreHTML = $filter("panelScore")(game.players[p].hand.issue.score, p);
-    //  });
-    //  calculatePercentage();
-    //  addIcon(game.action.icon);
-    //}
 
     function eventTally(){
       var score = game.score;
