@@ -36,10 +36,12 @@ angular.module('ggcApp')
         onStart: function () {
 
           ggcSounds.introMusic.play();
+          ggcGame.setGulfState(1);
         },
         //TODO(Ray) Remove skip tutorial buttons here
         onEnd: function () {
           ggcGame.setPanelStates(0);
+
         }
       }).code({
         start: 2,
@@ -56,7 +58,7 @@ angular.module('ggcApp')
         end: 10,
         onStart: function () {
           dealer.placeTutIcon(8);
-          ggcGame.setGulfState(1);
+
         },
         onEnd: function () {
           dealer.placeTutIcon(9);

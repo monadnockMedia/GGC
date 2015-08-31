@@ -6,6 +6,7 @@ angular.module('ggcApp')
     var pop;
 
     this.makePop = function(v){
+      ggcGame.setGulfState(0);
       pop = Popcorn(v);
       pop.on("ended", function(){
         $state.go("game.play.attract");
