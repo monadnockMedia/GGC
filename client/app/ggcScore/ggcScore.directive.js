@@ -21,9 +21,15 @@ angular.module('ggcApp')
         var center = {x:960,y:540};
         var scoreSfx = ngAudio.load("../sound/score_slide.wav");
         var angles = {"environment": -25,"economy" : 0, "energy":25};
+
         scope.$watch(function() {
           return scope.game.score[team];
         }, update, true);
+
+        scope.$watch(function() {
+          return scope.game.scoreGlow;
+        }, glow, true);
+
         //TODO(Ryan/Ray) add second layer group for enter/exit glow.
         function update(newV, oldV) {
           scoreSfx.play();
@@ -41,9 +47,13 @@ angular.module('ggcApp')
             var exitGroups = changed.exit()
 
             enterGroups.append("text").text(function(d){return d}).attr({
+              class: "glowie"
+            }).style("fill", "white")
+
+            enterGroups.append("text").text(function(d){return d}).attr({
               class: "scoreDupe"
             }).style("fill", "white").style("filter","url("+abs+"#pulse)")
-              .transition().delay(dur*4).style("opacity",0).style("filter",null);
+              .transition().delay(dur*4).style("opacity",0)//.style("filter",null);
 
             enterGroups.append("text").text(function(d){return d}).attr({
               class: team + " glyphIcons",  id: function(d,i){return team+"Score"+i}
@@ -92,6 +102,20 @@ angular.module('ggcApp')
             exitGroups
               .selectAll(".scoreDupe").style("fill","red").style("filter","url("+abs+"#pulse)").style("opacity","1");
           }
+        }
+        function glow(n,o){
+          if (n !== o){
+            if(n == true){
+              group.selectAll(".glowie").style("opacity","1").transition().delay(dTime).style("filter","url("+abs+"#pop)");
+            }else{
+              group.selectAll(".glowie").transition().delay(dTime).style("opacity","0").style("filter",null);
+            }
+
+          }
+        }
+        var interval = 100;
+        function dTime(d,i,a){
+          return i*interval;
         }
       }
     };

@@ -114,6 +114,22 @@ angular.module('ggcApp')
 
           }
         })
+        .add({
+          combo: 'g',
+          description: 'glow true',
+          callback: function(){
+            ggcGame.setGlow(true);
+
+          }
+        })
+        .add({
+          combo: 'G',
+          description: 'glow true',
+          callback: function(){
+            ggcGame.setGlow(false);
+
+          }
+        })
     }
     function btnHandler(t,i){
       if ($state.current.name == "game.play.attract") {
