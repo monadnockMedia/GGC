@@ -263,42 +263,64 @@ div#perspective_plane {
   #flex.vertical-center;
 }
 
-#mapA, #mapB, #mapC, #foulGulf, #landmarks, #borderscrim {
+#currentMap, #middleMap, #futureMap, #foulGulf, #landmarks, #borderscrim {
   width: 1920px;
   height: 1200px;
   position: absolute;
+  opacity:1;
+  -webkit-transition: 0.5s all;
 
 }
 #foulGulf {
-  background: url(../bmp/gulfbrown.jpg) 50% 0  no-repeat;
+  background: url(../bmp/gulfFuture.png) 50% 0  no-repeat;
   background-size: 1920px 1200px;
 }
 .water {
   width: 1920px;
   height: 1200px;
   position: absolute;
-  -webkit-transition: 3s all;
+  -webkit-transition: 0.5s all;
   opacity:1;
   &.clear {
-    background: url(../../bmp/gulfclear.jpg) 50% 0  no-repeat;
+    background: url(../../bmp/gulfCurrent.png) 50% 0  no-repeat;
     background-size: 1980px 1300px;
   }
   &.normal {
-    background: url(../../bmp/gulfbrowner_mockup.png) 50% 0  no-repeat;
+    background: url(../../bmp/gulfMid.png) 50% 0  no-repeat;
     background-size: 1980px 1300px;
   }
   &.brown {
-    background: url(../../bmp/gulfbrown.jpg) 50% 0  no-repeat;
+    background: url(../../bmp/gulfFuture.png) 50% 0  no-repeat;
     background-size: 1980px 1300px;
   }
   &.transparent {
     opacity:0;
+    -webkit-transition: 3s all;
   }
 }
-#mapA { background: url(../../bmp/currentpop.png) 50% 0%  no-repeat; }
-#mapB { 	background: url(../../bmp/midpop.png) 50% 0%  no-repeat;
-  background-size:1680px 1200px; }
-#mapC { 	background: url(../../bmp/overpop.png) 50% 0%  no-repeat; }
+#currentMap {
+  background: url(../../bmp/currentPop.png)  no-repeat;
+  &.transparent {
+    -webkit-transition: 2s all;
+    opacity:0;
+  }
+}
+
+#middleMap {
+  background: url(../../bmp/midPop.png)   no-repeat;
+  -webkit-transition: 2s all;
+  &.transparent {
+    opacity:0;
+  }
+}
+
+#futureMap {
+  background: url(../../bmp/futurePop.png)  no-repeat;
+  -webkit-transition: 2s all;
+  &.transparent {
+    opacity:0;
+  }
+}
 
 
 div#borderscrim {

@@ -4,15 +4,18 @@
 
 
 
-  <!--div id="mapA" >AAA</div-->
 
   <div class="water brown" ng-class="{ 'transparent' : game.gulfState != 2 }"></div>
   <div class="water normal" ng-class="{ 'transparent' : game.gulfState != 1 }"></div>
   <div class="water clear" ng-class="{ 'transparent' : game.gulfState != 0 }"></div>
 
-  <div id="mapB" >BBB</div>
+
+
+  <div id="futureMap"  ng-class="{ 'transparent' : game.gulfState != 2 }"></div>
+  <div id="middleMap"  ng-class="{ 'transparent' : game.gulfState != 1 }"></div>
+  <div id="currentMap"  ng-class="{ 'transparent' : game.gulfState != 0 }" ></div>
+
   <div id="landmarks">
-    <!--img  id="highways" src="svg/highways.svg"  /-->
     <div id="corpuschristi" class="city" style="left:16.25%; top:34.75%;">Corpus Christi</div>
     <div id="houston" class="city" style="left:29.5%; top:22.5%;">Houston</div>
     <div id="neworleans" class="city" style="left:49.5%; top:23%;">New Orleans</div>
