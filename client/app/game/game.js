@@ -63,6 +63,26 @@ angular.module('ggcApp')
                ]
              },
              {
+               name: "tutorial",
+               url: '/tutorial',
+               views: {
+                 "tutorial@game": {templateUrl: 'app/game/tutorial.html', controller:"TutorialCtrl"},
+                 "panels@game": {templateUrl: 'app/game/prologuePanels.html'}
+               },
+               children:[
+                 {
+                   name: "cards",
+                   url: "/cards",
+                   views: {
+                     "main@game": {templateUrl: 'app/game/main_loop.html'},
+                     "panels@game" : {templateUrl: 'app/game/panels.html'},
+                   },
+                 }
+
+               ]
+
+             },
+             {
                name: "event",
                url: '/event',
                views: {
