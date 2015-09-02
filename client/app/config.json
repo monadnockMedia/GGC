@@ -23,13 +23,21 @@
       "economy":4,
       "energy":6
     },
-    "duration":{
-      "choice":10000,
-      "vote":10000,
-      "scoring":5000,
-      "warn":5000
-
+    "duration": {
+      "choice": 10000,
+      "vote": 10000,
+      "scoring": 5000,
+      "warn": 5000
     }
-
+  },
+  "hints": {
+    "instructions": {
+      "choice": "Touch an icon below to choose your issue.",
+      "vote": "Touch 'yes' or 'no' below to vote."
+    },
+    "dur": 1000
+  },
+  "governor": {
+    "durs": [5000,3000,3000,3000]
   }
 }
