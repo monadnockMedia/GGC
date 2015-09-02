@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q, $rootScope, ggcUtil, $interval, ggcMapper, $state, $filter, ggcSounds, $location) {
+angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, ggcGovernor, $http, $q, $rootScope, ggcUtil, $interval, ggcMapper, $state, $filter, ggcSounds, $location) {
   // AngularJS will instantiate a singleton by calling "new" on this function
 
   this.decks = {};
@@ -62,7 +62,7 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
 
     deck.init().then(function(_players){
       ggcGame.init().then(function(){
-
+          ggcGovernor.init();
           ggcGame.setPhase("setup");
       });
     })
@@ -155,6 +155,7 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
   this.playerChoice = function (p, b) {
 
     if ($rootScope.currentState == "game.play.loop") {
+      ggcGovernor.active(p);
       if (self.game.phase == "choice") {
         self.choose(p, b);
       } else if (self.game.phase == "vote") {

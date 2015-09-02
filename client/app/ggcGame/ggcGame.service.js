@@ -212,6 +212,7 @@ angular.module('ggcApp')
     this.setPanelStates = setPanelStates;
     this.setPanelState = setPanelState;
     this.setGulfState = setGulfState;
+    this.eachPlayer = eachPlayer;
 
     function clone(o){
       return JSON.parse(JSON.stringify(o));
@@ -396,7 +397,7 @@ angular.module('ggcApp')
       console.log("GamePhase: ",p);
       game.phase = p;
       phaseFunctions[p].call(self);
-      $rootScope.$emit("phaseChange", p);
+      $rootScope.$emit("phaseChange", p, game.currentPlayer);
     }
 
     function tally(effects) {
