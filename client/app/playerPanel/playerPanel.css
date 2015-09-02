@@ -332,17 +332,29 @@ div.panelInnerEnergy {
   -webkit-animation: energy-glow 1s infinite;
 }
 .colorbar {
-  transition: all linear 0.25s;
+  opacity: 1;
   transform: rotateX(0deg);
+  /* when hiding */
+  /* when showing the thing */
   position: absolute;
+  top: 0;
   width: 300px;
   height: 12px;
   border-radius: 6px;
   margin: 30px auto;
 }
+.colorbar.ng-hide-add {
+  transition: all 0.25s ease-out, opacity 0.05s linear 0.2s;
+  transform: rotateX(0deg);
+  opacity: 1;
+}
+.colorbar.ng-hide-remove {
+  transition: all 0.25s ease-in 0.25s, opacity 0.05s linear 0.25s;
+  transform: rotateX(0deg);
+  opacity: 1;
+}
 .colorbar.ng-hide {
-  transform: rotateX(90deg);
-  display: block!important;
+  transform: rotateX(-90deg);
   opacity: 0;
 }
 .colorbar h3 {
@@ -366,13 +378,9 @@ div.hint-wrap {
   display: -webkit-box;
 }
 h3.hint {
-  opacity: inherit;
   padding: 5px 1em 5px 1em;
   width: auto;
   height: auto;
-}
-h3.hint .ng-hide h3.hint {
-  -webkit-animation: none;
 }
 .bar-wrap {
   position: relative;
