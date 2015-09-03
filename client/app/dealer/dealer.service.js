@@ -31,6 +31,7 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, ggcGovern
 
   });
 
+
   ggcUtil.getEndings().then(function(d){
     ggcGame.setEndings ($filter("endObject")(d.data));
   })
@@ -62,7 +63,8 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, ggcGovern
 
     deck.init().then(function(_players){
       ggcGame.init().then(function(){
-          ggcGovernor.init();
+
+         ggcGovernor.init();
           ggcGame.setPhase("setup");
       });
     })
@@ -156,13 +158,28 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, ggcGovern
 
     if ($rootScope.currentState == "game.play.loop") {
       ggcGovernor.active(p);
-      if (self.game.phase == "choice") {
-        self.choose(p, b);
-      } else if (self.game.phase == "vote") {
-        self.vote(p, b);
-      }
+      (ggcGame.isAI(p)) ? choiceFunctions.ai(p) : choiceFunctions[self.game.phase].call(self,p,b);
+      //if (self.game.phase == "choice") {
+      //  self.choose(p, b);
+      //} else if (self.game.phase == "vote") {
+      //  self.vote(p, b);
+      //}
     }
 
   };
+
+  var choiceFunctions = {
+    choice: function(p,b){
+      self.choose(p,b)
+    },
+    vote: function(p,b){
+      self.vote(p,b)
+    },
+    ai: function(p){
+      ggcGame.setAI(p,false);
+    }
+  };
+
+
 
 });
