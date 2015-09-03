@@ -33,9 +33,11 @@
   "hints": {
     "instructions": {
       "choice": "Touch an icon below to choose your issue.",
-      "vote": "Touch 'yes' or 'no' below to vote."
+      "vote": "Touch 'yes' or 'no' below to vote.",
+      "AI": "If you do not act soon, the computer will take over.",
+      "AIOverride": "Touch 'Override' at any time to join the game"
     },
-    "dur": 1000
+    "dur": 2000
   },
   "governor": {
     "durs": [5000,3000,3000,3000]

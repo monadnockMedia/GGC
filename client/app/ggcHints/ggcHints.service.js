@@ -16,7 +16,9 @@ angular.module('ggcApp')
     var phase;
     var instructions = $rootScope.config.instructions || {
         choice: "Touch an icon below to choose your issue.",
-        vote: "Touch 'yes' or 'no' below to vote."
+        vote: "Touch 'yes' or 'no' below to vote.",
+        AI: "If you do not act soon, the computer will take over.",
+        AIOverride: "Touch 'Override' at any time to join the game"
       };
 
     ggcUtil.getHints().then(function(d){
@@ -62,26 +64,17 @@ angular.module('ggcApp')
 
     var idleFunctions = {
       0: function(p){
-        (isAI(p)) ? warnAIOverride(p) : showHint(p);
+        (isAI(p)) ? warnInstruct("AIOverride") : showHint(p);
       },
       1: function(p){
-        (isAI(p)) ? warnAIOverride(p) : warnInstruct(p);
+        (isAI(p)) ? warnInstruct("AIOverride") : warnInstruct(p);
       },
       2: function(p){
-        (isAI(p)) ? warnAIOverride(p) : warnAI(p);
+        (isAI(p)) ? warnInstruct("AIOverride") : warnInstruct("AI");
       }
     };
 
-    var warnAIOverride = function(p){
-      var hint = playerHints[p];
-      hint.text = "Touch 'Override' at any time to play";
-      showHint(p);
-    }
-    var warnAI = function(p){
-      var hint = playerHints[p];
-      hint.text = "If you do not act soon, the computer will take over.";
-      showHint(p);
-    };
+
 
     var warnInstruct = function(p){
       var hint = playerHints[p];
@@ -104,7 +97,6 @@ angular.module('ggcApp')
       }
     };
 
-    this.warnAI = warnAI;
     this.showHint = showHint;
     this.hideHint = hideHint;
     this.setHint = setHint;
