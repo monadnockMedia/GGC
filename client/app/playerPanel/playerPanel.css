@@ -46,19 +46,8 @@ p.tab-body {
   background-size: 110px 82px;
 }
 .btn-icon.attract {
-  top: -20px;
-}
-.btn-icon.environment {
-  top: 90px;
-}
-.btn-icon.environment.attract {
-  top: -20px;
-}
-.btn-icon.energy {
-  top: 90px;
-}
-.btn-icon.energy.attract {
-  top: -20px;
+  top: 40px;
+  margin: 0;
 }
 .btn-icon.selected.block {
   background: url("../../svg/buttonBLOCK.svg") 50% 50% no-repeat;
@@ -388,6 +377,9 @@ h3.hint .ng-hide h3.hint {
   left: 0;
   top: 100px;
   padding: 5%;
+}
+.ggc-btn-wrap.closed {
+  top: 40px;
 }
 .ggc-btn {
   box-sizing: border-box;

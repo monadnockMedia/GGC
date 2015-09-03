@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q, $rootScope, ggcUtil, $interval, ggcMapper, $state, $filter, ggcSounds, $location) {
+angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, ggcGovernor, $http, $q, $rootScope, ggcUtil, $interval, ggcMapper, $state, $filter, ggcSounds, $location) {
   // AngularJS will instantiate a singleton by calling "new" on this function
 
   this.decks = {};
@@ -30,6 +30,7 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
     }
 
   });
+
 
   ggcUtil.getEndings().then(function(d){
     ggcGame.setEndings ($filter("endObject")(d.data));
@@ -63,6 +64,7 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
     deck.init().then(function(_players){
       ggcGame.init().then(function(){
 
+         ggcGovernor.init();
           ggcGame.setPhase("setup");
       });
     })
@@ -155,13 +157,29 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, $http, $q
   this.playerChoice = function (p, b) {
 
     if ($rootScope.currentState == "game.play.loop") {
-      if (self.game.phase == "choice") {
-        self.choose(p, b);
-      } else if (self.game.phase == "vote") {
-        self.vote(p, b);
-      }
+      ggcGovernor.active(p);
+      (ggcGame.isAI(p)) ? choiceFunctions.ai(p) : choiceFunctions[self.game.phase].call(self,p,b);
+      //if (self.game.phase == "choice") {
+      //  self.choose(p, b);
+      //} else if (self.game.phase == "vote") {
+      //  self.vote(p, b);
+      //}
     }
 
   };
+
+  var choiceFunctions = {
+    choice: function(p,b){
+      self.choose(p,b)
+    },
+    vote: function(p,b){
+      self.vote(p,b)
+    },
+    ai: function(p){
+      ggcGame.setAI(p,false);
+    }
+  };
+
+
 
 });
