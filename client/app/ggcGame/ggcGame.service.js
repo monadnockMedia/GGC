@@ -45,7 +45,7 @@ angular.module('ggcApp')
         game.totalScore += init_score;
         game.score[k] = {i: init_score, p: 0};
         game.players[k] = {
-          hand: clone(null_hand),       docked: true,       panelClass: false,
+          hand: clone(null_hand),       docked: true,       panelClass: false,    ai: false,
           isCurrentPlayer:false,        hint: ggcHints.playerHints[k],      warning:" "
         };
       })
@@ -55,6 +55,8 @@ angular.module('ggcApp')
       d.resolve("foo");
       return d.promise;
     }
+
+    $rootScope.$on("idle", idleHandler);
     ////////
     function eachPlayer(f) {
       playerNames.forEach(f);
@@ -95,6 +97,15 @@ angular.module('ggcApp')
       eachPlayer(function (pp) {
         game.players[pp].isCurrentPlayer = (pp === p);
       });
+    }
+    function setAI(p,b){
+      game.players[p].ai = b;
+      ggcHints.setAI(p,b);
+      makeDocked(p,false);
+    }
+
+    function isAI(p){
+      return  game.players[p].ai;
     }
 
     function setGlow(g) {
@@ -158,8 +169,14 @@ angular.module('ggcApp')
 
     ////////DOCKING
     function makeDocked(p, b) {
-      game.players[p].docked = b;
-      game.players[p].panelClass = (b) ? panelClasses[1] : " ";
+      var pc;
+      if(b) {
+        pc = panelClasses[1];
+      }else{
+        pc = (isAI(p)) ? panelClasses[2] : panelClasses[3];
+      };
+
+      game.players[p].panelClass =  pc;
 
       //console.log("MakeDocked", p, b);
     }
@@ -182,14 +199,16 @@ angular.module('ggcApp')
 
     function setPanelState(p, arg) {
       //sets state of playerpanel p to arg, which can be either and index or a string
-      var s = false;
-      if (isNaN(arg)) { //if string is valid
-        if (panelClasses.indexOf(arg) >= 0) { //if string is valid
-          s = arg;
+
+        var s = false;
+        if (isNaN(arg)) { //if string is valid
+          if (panelClasses.indexOf(arg) >= 0) { //if string is valid
+            s = arg;
+          }
+        } else { //arg is number
+          s = (arg >= 0 || arg <= panelClasses.length) ? panelClasses[arg] : false;
         }
-      } else { //arg is number
-        s = (arg >= 0 || arg <= panelClasses.length) ? panelClasses[arg] : false;
-      }
+
 
       if (s) {
         ggcSounds.panelSfx.play();
@@ -255,6 +274,35 @@ angular.module('ggcApp')
     function randomEvent() {
       return events[~~(Math.random() * events.length)];
     }
+
+    function idleHandler(scope,p,s){
+      if(idleFunctions[s]) idleFunctions[s].call(null,p);
+    }
+
+    var idleFunctions = {
+      1:function(p){
+        checkAI(p)
+      },
+      4: function(p){ //strike 4, resistance is futile
+        if(!isAI(p)){
+          setAI(p,true);
+          aiFunctions[game.phase].call(this,p);
+        }
+      }
+    };
+
+    function checkAI(p){
+      if(isAI(p) && aiFunctions[game.phase]) aiFunctions[game.phase].call(this,p);
+    }
+
+    var aiFunctions = {
+      choice: function (p) {
+        self.chooseIssue(p,~~(Math.random()*2));
+      },
+      vote: function (p) {
+        self.voteIssue(p,~~(Math.random()*2));
+      }
+    };
     //TODO(Ryan) create nextPhase(), possibly figure out a better way of inserting phases on-the-fly
     var phaseFunctions = {
       ////////SETUP////////
@@ -431,8 +479,6 @@ angular.module('ggcApp')
     this.setEndings = setEndings;
     this.setEvents = setEvents;
     this.setGlow = setGlow;
-
-
-
-
+    this.setAI = setAI;
+    this.isAI = isAI;
   });
