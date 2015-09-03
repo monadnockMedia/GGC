@@ -86,6 +86,7 @@ angular.module('ggcApp')
     }
     function setGulfState(e) {
       game.gulfState = e;
+      console.log("gulfState = ", e);
     }
 
     function setCurrentPlayer(i) {
@@ -259,7 +260,7 @@ angular.module('ggcApp')
       ////////SETUP////////
       setup: function () {
         dockAll(false);
-        setGulfState(1);
+        setGulfState(0);
         dockOne(game.currentPlayer, false);
         votes = {};
         game.totalScore = 0;
