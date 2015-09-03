@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .controller('GameCtrl', function ($scope, $http, ggcSounds, ggcUtil, $rootScope, dealer, ggcGame, hotkeys, $location, $interval, $state, nwkiosk, ggcPrologueOverlord) {
+  .controller('GameCtrl', function ($scope, $http, ggcSounds, ggcGovernor, ggcUtil, $rootScope, dealer, ggcGame, hotkeys, $location, $interval, $state, nwkiosk, ggcPrologueOverlord) {
     $scope.preview = {};
     $scope.preview.hideNavbar = false;
 
@@ -130,6 +130,15 @@ angular.module('ggcApp')
 
           }
         })
+        .add({
+          combo: 'p',
+          description: 'pause AI',
+          callback: function(){
+            ggcGovernor.pause();
+
+          }
+        })
+
     }
     function btnHandler(t,i){
       if ($state.current.name == "game.play.attract") {
