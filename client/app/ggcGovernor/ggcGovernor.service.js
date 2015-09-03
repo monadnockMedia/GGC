@@ -5,6 +5,7 @@ angular.module('ggcApp')
     // AngularJS will instantiate a singleton by calling "new" on this function
     var players = {};
     var phase;
+    var timedPhases = ["vote","choice"];
     var durs = $rootScope.config.governor.durs || [5000,5000,5000,5000];
 
     function init(){
@@ -23,30 +24,37 @@ angular.module('ggcApp')
       players[p].strike = 0;
     }
     $rootScope.$on("phaseChange", function(scope,arg,cp){
-      clearStrikes();
+
       phase = arg;
-      resetTimers();
-      //cancel timers for inactive players
-      if(phase == "choice"){
-        ggcGame.eachPlayer(function(p){
-          if(p != cp){
-            active(p);
-          }
-        })
-      }1
+      var timedPhase = timedPhases.indexOf(phase);
+      if($rootScope.currentState == "game.play.loop" && timedPhases.indexOf(phase) >= 0){
+        //we're in the loop, and a phase that needs timing
+
+        clearStrikes();
+
+        resetTimers();
+        if(phase == "choice"){
+          ggcGame.eachPlayer(function(p){
+            if(p != cp){
+              active(p);
+            }
+          })
+        }
+      }else{
+        //we're in the prologue, tutorial, etc
+        //or we are in  phase not in timedPhases
+        killTimers();
+      }
+
 
     });
 
     function active(p){
       clearStrike(p);
-      $timeout.cancel(players[p].timer);
-      players[p].timer = null;
-      ggcHints.hideHint(p);
-
+      killTimer(p);
     }
 
     function idle(p){
-
       var player = players[p];
       $rootScope.$emit("idle",p,player.strike);
       player.strike++;
@@ -55,13 +63,23 @@ angular.module('ggcApp')
     }
 
     function resetTimer(p){
-      $timeout.cancel(players[p].timer);
-      players[p].timer = null;
+      killTimer(p);
       players[p].timer = $timeout(function(){idle(p)}, durs[players[p].strike]);
     }
+    function killTimer(p){
+      $timeout.cancel(players[p].timer);
+      players[p].timer = null;
+      //ggcHints.hideHint(p);
+    }
 
+    function killTimers(){
+      ggcGame.eachPlayer(
+        function(p){
+          killTimer(p);
+        }
 
-
+      )
+    }
     function resetTimers(){
       ggcGame.eachPlayer(
        function(p){
@@ -70,7 +88,11 @@ angular.module('ggcApp')
 
       )
     }
-
+    var paused = false;
+    this.pause=function(){
+      (paused) ? killTimers() : resetTimers();
+      paused = !paused;
+    };
 
     this.init = init;
     this.active = active;
