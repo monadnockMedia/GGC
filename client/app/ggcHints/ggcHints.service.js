@@ -46,22 +46,37 @@ angular.module('ggcApp')
 
     });
 
+
+    function setAI(p,b){
+      playerHints[p].ai = b;
+    }
+    this.setAI = setAI;
+    function isAI(p){
+      return playerHints[p].ai;
+    }
+
     $rootScope.$on("idle", function(scope,p,s){
+
       if (idleFunctions[s]) idleFunctions[s].call(null,p);
     });
 
     var idleFunctions = {
       0: function(p){
-        showHint(p);
+        (isAI(p)) ? warnAIOverride(p) : showHint(p);
       },
       1: function(p){
-        warnInstruct(p);
+        (isAI(p)) ? warnAIOverride(p) : warnInstruct(p);
       },
       2: function(p){
-        warnAI(p);
+        (isAI(p)) ? warnAIOverride(p) : warnAI(p);
       }
-    }
+    };
 
+    var warnAIOverride = function(p){
+      var hint = playerHints[p];
+      hint.text = "Touch 'Override' at any time to play";
+      showHint(p);
+    }
     var warnAI = function(p){
       var hint = playerHints[p];
       hint.text = "If you do not act soon, the computer will take over.";
