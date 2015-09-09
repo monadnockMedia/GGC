@@ -30,6 +30,20 @@ angular.module('ggcApp')
       //debugger;
     })
 
+    $scope.tutorial = false;
+    $scope.$watch(function(){
+      return $state.current.name;
+    }, function(val) {
+      if (val == "game.play.tutorial.cards") {
+        $scope.tutorial = true;
+        console.log("Tutorial = true");
+      } else {
+        $scope.tutorial = false;
+        console.log("Tutorial = false");
+      }
+      //debugger;
+    })
+
     ///dealer.hands contains the current "card" views for each player, as well as the main player
     $scope.hands = dealer.hands;
 

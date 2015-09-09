@@ -131,4 +131,56 @@
   100%{box-shadow: 0 0 0 0 @color}
 }
 
+.flipShow(@t:.5s){
+  @d: @t/5;
+  opacity: 1;
+  transform: rotateX(0deg);
+
+  /* when hiding */
+  &.ng-hide-add         {
+    transition: all @t ease-out, opacity @d linear @t - @d;
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+
+  /* when showing the thing */
+  &.ng-hide-remove      {
+
+    transition: all @t ease-in @t, opacity @d linear @t;
+
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+
+  &.ng-hide{
+    transform: rotateX(-90deg);
+    opacity: 0;
+
+  }
+}
+
+.flip(@t: .5s){
+  @d: @t/5;
+  &.ng-animate{
+
+  }
+  &.ng-enter{
+    transition: all @t ease-in, opacity @d linear;
+    opacity:0;
+    transform: rotateX(-90deg);
+  }
+  &.ng-enter-active{
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+  &.ng-leave{
+    transition: all @t ease-out, opacity @d linear @t-@d;
+    transform: rotateX(0deg);
+  }
+  &.ng-leave-active{
+    transform: rotateX(90deg);
+    opacity:0;
+  }
+}
+
 

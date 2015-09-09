@@ -2,7 +2,7 @@
 
 
 <div class="row relative text-center main-title" >
-  <h1  class = "title" ng-show="game.phase == 'choice'">
+  <h1  class = "title" ng-show="game.phase == 'choice' && !tutorial">
     {{game.currentPlayer | capitalize}} Chooses an Action
   </h1>
   <h1  class = "title" ng-show="game.phase == 'vote'">

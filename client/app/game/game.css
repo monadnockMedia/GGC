@@ -146,13 +146,15 @@ div#ui-vid {
   margin: 0;
   padding: 0;
 }
-div#ui-main {
+div#ui-main,
+div#ui-tutorial {
   position: absolute;
   height: 33%;
   top: 29%;
   width: 100%;
 }
-div#ui-main .title {
+div#ui-main .title,
+div#ui-tutorial .title {
   line-height: 0;
   font-size: 4em;
   font-variant: small-caps;
@@ -164,13 +166,19 @@ div#ui-main .title {
   height: 25px;
   transition: .5s linear all;
 }
-div#ui-main .title.ng-enter {
+div#ui-main .title.ng-enter,
+div#ui-tutorial .title.ng-enter {
   opacity: 1;
   height: 25px;
 }
-div#ui-main .title.ng-hide {
+div#ui-main .title.ng-hide,
+div#ui-tutorial .title.ng-hide {
   opacity: 0;
   height: 0;
+}
+div#ui-tutorial {
+  padding: 0 27% 0 27%;
+  color: white;
 }
 div#main {
   position: relative !important;
