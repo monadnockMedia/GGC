@@ -1,31 +1,106 @@
 'use strict';
 
 angular.module('ggcApp')
-  .controller('TutorialCtrl', function ($scope, $window, $interval) {
+  .controller('TutorialCtrl', function ($scope, $window, $interval, $state, ggcGame, ggcSounds) {
 
     var timers = {};
     // Define an array of Toddler objects
     var tick = 500;
     $scope.frames = {
       2:{
-        dur: 5000
-      },
-      4:{
-        dur: 2000
-      },
-      5:{  //this keyframe will execute at 5s
-        dur: 3000,  //it will last for 3000ms
-        enter: function(){  //this will be called when the duration has elapsed
-          $window.alert("enter");
+        dur: 6000,
+        enter: function(){  //this will be called at the beginning
+          ggcGame.setPanelStates("retract");
         },
         exit: function(){  //this will be called when the duration has elapsed
-          $window.alert("¯\_(ツ)_/¯");
         }
       },
-      7:{
-        dur: 3000
+      3:{
+        dur: 1000,
+        enter: function(){  //this will be called at the beginning
+          $(".arrow").addClass("bounce");
+        },
+        exit: function(){  //this will be called when the duration has elapsed
+          $(".arrow").removeClass("bounce");
+
+        }
       },
-      end:10
+      5:{
+        dur: 1000,
+        enter: function(){  //this will be called at the beginning
+          $(".arrow").addClass("bounce");
+        },
+        exit: function(){  //this will be called when the duration has elapsed
+          $(".arrow").removeClass("bounce");
+        }
+      },
+      8:{
+        dur: 8000,
+        enter: function(){  //this will be called at the beginning
+
+        },
+        exit: function(){  //this will be called when the duration has elapsed
+
+        }
+      },
+      11:{
+        dur: 3000,
+        enter: function(){  //this will be called at the beginning
+          $state.go("game.play.tutorial.cards");
+        },
+        exit: function(){  //this will be called when the duration has elapsed
+          ggcGame.setPanelState("environment", 3);
+        }
+      },
+      12: {
+        dur:4000,
+        enter: function(){  //this will be called at the beginning
+
+        },
+        exit: function(){  //this will be called when the duration has elapsed
+          ggcGame.chooseIssue("environment", 1);
+          ggcSounds.confirmSfx.play();
+          ggcSounds.wooshSfx.play();
+        }
+      },
+      16:{  //this keyframe will execute at 5s
+        dur: 5000
+      },
+      18: {
+        dur:1000,
+        enter: function(){  //this will be called at the beginning
+          ggcGame.voteIssue("environment", 1);
+          ggcSounds.votePassSfx.play();
+        },
+        exit: function(){  //this will be called when the duration has elapsed
+          ggcGame.voteIssue("economy", 0);
+          ggcSounds.voteBlockSfx.play();
+        }
+      },
+      20: {
+        dur:1000,
+        enter: function(){  //this will be called at the beginning
+          ggcGame.voteIssue("energy", 1);
+          ggcSounds.votePassSfx.play();
+        },
+        exit: function(){  //this will be called when the duration has elapsed
+
+        }
+      },
+      22:{
+        dur: 4000
+      },
+      26:{
+        dur: 4000,
+        enter: function(){  //this will be called at the beginning
+
+        },
+        exit: function(){  //this will be called when the duration has elapsed
+          //$state.go("game.play.loop");
+          $state.go("game.play.loop", {}, {reload:true});
+        }
+      },
+      end:34
     }
 
     var clock = $interval(enterFrame, tick);
@@ -40,7 +115,7 @@ angular.module('ggcApp')
 
       var frame = t*tick/1000;
       if(frame >= $scope.frames.end){
-        alert("amination complete");
+        //alert("amination complete");
         clearTimers();
 
       }

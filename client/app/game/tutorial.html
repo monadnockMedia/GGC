@@ -3,17 +3,26 @@
 
 <div class="row relative text-center main-title" >
   <h1  class = "title" ng-show="game.phase == 'choice'">
-     Tutorial
+     How to Play
   </h1>
+  <!--h1  class = "title">
+    The Challenge
+  </h1-->
 </div>
 
+<div class="container"> <!-- Center ng-show="frames[2].active" -->
 
+  <div class = "row">
+    <div class="colorbar col-md-10 T1" ng-show="frames[2].active"><h1>Each Player represents a sector.</h1></div>
+    <div class="colorbar col-md-10 T2" ng-show="frames[8].active"><h1>On your turn, choose an action</br>to benefit your sector.</h1></div>
+  </div>
 
-<div class="container">
+  <div class = "row"> <!-- Bottom Center -->
+    <div class="colorbar col-md-10 T3" ng-show="frames[16].active"><h1>Everyone votes.</br>The majority decides.</h1></div>
+    <div class="colorbar col-md-10 T4" ng-show="frames[22].active"><h1>Environment, Economy and Energy</br>must cooperate and restore balance.</h1></div>
+    <div class="colorbar col-md-10 T5" ng-show="frames[26].active"><h1>Get ready to play!</h1></div>
+  </div>
 
-<div class = "row">
-  <h1 class = col-md-12" ng-show="frames[4].active">Each Player represents a sector.</h1>
-</div>
 </div>
 
 

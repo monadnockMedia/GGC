@@ -8,7 +8,7 @@ angular.module('ggcApp')
     function ended(){
       //dealer.init();
       ggcSounds.introMusic.stop();
-      $state.go("game.play.loop", {}, {reload:true});
+      $state.go("game.play.tutorial", {}, {reload:true});
       //dealer.prologue = false;
       //dealer.signIn = false;
       ggcMapper.reset();
@@ -56,7 +56,7 @@ angular.module('ggcApp')
         end: 10,
         onStart: function () {
           dealer.placeTutIcon(8);
-          ggcGame.setGulfState(1);
+
         },
         onEnd: function () {
           dealer.placeTutIcon(9);
@@ -67,16 +67,19 @@ angular.module('ggcApp')
         end: 11,
         onStart: function () {
           dealer.placeTutIcon(15);
+          ggcGame.setGulfState(1);
 
         },
         onEnd: function () {
           dealer.placeTutIcon(11);
+
         },
       }).code({
         start: 11.5,
         end: 12,
         onStart: function () {
           dealer.placeTutIcon(25);
+
         },
         onEnd: function () {
           dealer.placeTutIcon(20);

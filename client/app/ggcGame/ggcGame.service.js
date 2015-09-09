@@ -28,7 +28,7 @@ angular.module('ggcApp')
       round:1,
       score : {environment: {}, economy: {}, energy: {}},
       totalScore : 0,
-      gulfState : 0,
+      gulfState : 1,
       scoreGlow : false
     };
     var game = clone(null_game);
@@ -86,6 +86,7 @@ angular.module('ggcApp')
     }
     function setGulfState(e) {
       game.gulfState = e;
+      console.log("HELLO", e);
     }
 
     function setCurrentPlayer(i) {

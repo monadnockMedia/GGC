@@ -415,6 +415,40 @@ div.panelInnerEnergy {
   height: 12px;
   border-radius: 6px;
   margin: 30px auto;
+
+  &.T1 {
+    top:150px;
+    left:200px;
+  }
+  &.T2 {
+    top:375px;
+    left:205px;
+  }
+  &.T3 {
+    top:375px;
+    left:273px;
+  }
+  &.T4 {
+    top:375px;
+    left:175px;
+  }
+  &.T5 {
+    top:375px;
+    left:288px;
+  }
+}
+
+.colorbar h1 {
+  border-radius: 18px;
+  margin: -4px auto;
+  top: -4px;
+  background: #233;
+  text-align: center;
+  padding: 10px 13px 10px 13px;
+  border:3px solid white;
+  font-family: "232MKSD", Helvetica, Arial, sans-serif;
+  position:absolute;
+  -webkit-animation: energy-glow-white 1s infinite;
 }
 
 
@@ -432,6 +466,21 @@ div.panelInnerEnergy {
   font-stretch: expanded;
   padding: 0 3px 0 3px;
   font-family: "232MKSD", Helvetica, Arial, sans-serif;
+
+}
+
+
+
+
+.container .row {
+  position:relative;
+
+  h1 {
+    position:absolute;
+    text-align: center;
+    //.flipShow(0.25s);
+
+  }
 }
 
 div.hint-wrap{
@@ -478,6 +527,11 @@ h3.hint{
   padding-bottom: 100%;
 //  background:red;
   width:100%;
+}
+
+@-webkit-keyframes energy-glow-white
+{
+  .glowFrames(#FFFFFF)
 }
 
 @-webkit-keyframes energy-glow
