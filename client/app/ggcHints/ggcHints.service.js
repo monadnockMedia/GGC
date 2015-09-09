@@ -64,21 +64,21 @@ angular.module('ggcApp')
 
     var idleFunctions = {
       0: function(p){
-        (isAI(p)) ? warnInstruct("AIOverride") : showHint(p);
+        (isAI(p)) ? warnInstruct(p,"AIOverride") : showHint(p,phase);
       },
       1: function(p){
-        (isAI(p)) ? warnInstruct("AIOverride") : warnInstruct(p);
+        (isAI(p)) ? warnInstruct(p,"AIOverride") : warnInstruct(p,phase);
       },
       2: function(p){
-        (isAI(p)) ? warnInstruct("AIOverride") : warnInstruct("AI");
+        (isAI(p)) ? warnInstruct(p,"AIOverride") : warnInstruct(p,"AI");
       }
     };
 
 
 
-    var warnInstruct = function(p){
+    var warnInstruct = function(p,k){
       var hint = playerHints[p];
-      hint.text = instructions[phase];
+      hint.text = instructions[k];
       showHint(p);
     };
 

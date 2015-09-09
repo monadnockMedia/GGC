@@ -11,7 +11,6 @@ angular.module('ggcApp', [
   'ngResource',
   'ngSanitize',
   'ui.bootstrap',
-  'ngGrid',
   'ngCkeditor',
   'ui.select2',
   'uploadModule',
