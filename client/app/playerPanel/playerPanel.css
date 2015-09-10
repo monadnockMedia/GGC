@@ -231,20 +231,28 @@ div.panelInnerEnergy {
   height: 300px;
   -webkit-transform-style: preserve-3d;
   overflow: hidden;
+  display: none;
 }
 .panelOuter.environment {
-  -webkit-transform: rotate(32deg) translateY(830px);
   transition: -webkit-transform 0.25s ease-in-out;
   position: absolute;
+  -webkit-transform: rotate(32deg) translateY(1600px);
+}
+.panelOuter.environment.extend {
+  -webkit-transform: rotate(32deg) translateY(830px);
+  display: block;
 }
 .panelOuter.environment.retract {
   -webkit-transform: rotateZ(32deg) translateY(1035px);
+  display: block;
 }
 .panelOuter.environment.fullRetract {
   -webkit-transform: rotate(32deg) translateY(1100px);
+  display: block;
 }
 .panelOuter.environment.signIn {
   -webkit-transform: rotate(32deg) translateY(930px);
+  display: block;
 }
 .panelOuter.environment i,
 .panelOuter.environment a {
@@ -262,18 +270,25 @@ div.panelInnerEnergy {
   -webkit-animation: environment-glow 1s infinite;
 }
 .panelOuter.economy {
-  -webkit-transform: rotate(0deg) translateY(830px);
   transition: -webkit-transform 0.25s ease-in-out;
   position: absolute;
+  display: none;
+}
+.panelOuter.economy.extend {
+  -webkit-transform: rotate(0deg) translateY(830px);
+  display: block;
 }
 .panelOuter.economy.retract {
   -webkit-transform: rotate(0deg) translateY(1015px);
+  display: block;
 }
 .panelOuter.economy.signIn {
   -webkit-transform: rotate(0deg) translateY(922px);
+  display: block;
 }
 .panelOuter.economy.fullRetract {
   -webkit-transform: rotate(0deg) translateY(1100px);
+  display: block;
 }
 .panelOuter.economy i,
 .panelOuter.economy a {
@@ -291,18 +306,25 @@ div.panelInnerEnergy {
   -webkit-animation: economy-glow 1s infinite;
 }
 .panelOuter.energy {
-  -webkit-transform: rotate(-32deg) translateY(830px);
+  display: none;
   transition: -webkit-transform 0.25s ease-in-out;
   position: absolute;
 }
+.panelOuter.energy.extend {
+  -webkit-transform: rotate(-32deg) translateY(830px);
+  display: block;
+}
 .panelOuter.energy.retract {
   -webkit-transform: rotate(-32deg) translateY(1030px);
+  display: block;
 }
 .panelOuter.energy.fullRetract {
   -webkit-transform: rotate(-32deg) translateY(1100px);
+  display: block;
 }
 .panelOuter.energy.signIn {
   -webkit-transform: rotate(-32deg) translateY(930px);
+  display: block;
 }
 .panelOuter.energy i,
 .panelOuter.energy a {

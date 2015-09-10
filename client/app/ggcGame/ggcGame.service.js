@@ -35,7 +35,7 @@ angular.module('ggcApp')
 
     this.game = game;
     var null_hand = {choices: [], issue: {} };
-    var panelClasses = ["fullRetract","retract","signIn"," "]
+    var panelClasses = ["fullRetract","retract","signIn","extend"]
 
     //////////
     function init(){
@@ -366,7 +366,7 @@ angular.module('ggcApp')
         if ($rootScope.currentState == "game.play.loop") {
           nextPhase = (isLastPlayer()) ? "endRound" : "setup"; //if we're on the last turn, go to end round, if not, just setup another turn.
           nextPlayer();
-          if(oc.balanced ) { //score is balanced
+          if(oc.balanced || !votePassed) { //score is balanced or vote was not passed
             ggcUtil.wait(function(){setPhase(nextPhase)}, config.duration.scoring);
           }else{
             //warn players to keep in balance
