@@ -330,6 +330,26 @@ div.panelInnerEnergy {
   height: 12px;
   border-radius: 6px;
   margin: 30px auto;
+  /*&.T1 {
+    top:150px;
+    left:200px;
+  }
+  &.T2 {
+    top:375px;
+    left:205px;
+  }
+  &.T3 {
+    top:375px;
+    left:273px;
+  }
+  &.T4 {
+    top:375px;
+    left:175px;
+  }
+  &.T5 {
+    top:375px;
+    left:288px;
+  }*/
 }
 .colorbar.ng-hide-add {
   transition: all 0.25s ease-out, opacity 0.05s linear 0.2s;
@@ -345,37 +365,47 @@ div.panelInnerEnergy {
   transform: rotateX(-90deg);
   opacity: 0;
 }
-.colorbar.T1 {
-  top: 150px;
-  left: 200px;
+.full-width {
+  width: 100%;
 }
-.colorbar.T2 {
-  top: 375px;
-  left: 205px;
+.tutorialText {
+  position: absolute;
+  width: 100%;
 }
-.colorbar.T3 {
-  top: 375px;
-  left: 273px;
+.tutorialText.ng-enter {
+  transition: all 0.25s ease-in, opacity 0.05s linear;
+  opacity: 0;
+  transform: rotateX(-90deg);
 }
-.colorbar.T4 {
-  top: 375px;
-  left: 175px;
+.tutorialText.ng-enter-active {
+  transform: rotateX(0deg);
+  opacity: 1;
 }
-.colorbar.T5 {
-  top: 375px;
-  left: 288px;
+.tutorialText.ng-leave {
+  transition: all 0.25s ease-out, opacity 0.05s linear 0.2s;
+  transform: rotateX(0deg);
 }
-.colorbar h1 {
+.tutorialText.ng-leave-active {
+  transform: rotateX(90deg);
+  opacity: 0;
+}
+.tutorialText h1 {
+  width: 65%;
   border-radius: 18px;
   margin: -4px auto;
   top: -4px;
   background: #233;
   text-align: center;
   padding: 10px 13px 10px 13px;
-  border: 3px solid white;
   font-family: "232MKSD", Helvetica, Arial, sans-serif;
-  position: absolute;
-  -webkit-animation: energy-glow-white 1s infinite;
+  -webkit-animation: tutorial-glow 1s infinite;
+  color: #e2f8f7;
+  border: #e2f8f7 solid 3px;
+  text-shadow: 0 0 2px black;
+}
+.above-cards {
+  margin-top: 50px;
+  height: 375px;
 }
 .colorbar h3 {
   width: 150px;
@@ -390,13 +420,6 @@ div.panelInnerEnergy {
   font-stretch: expanded;
   padding: 0 3px 0 3px;
   font-family: "232MKSD", Helvetica, Arial, sans-serif;
-}
-.container .row {
-  position: relative;
-}
-.container .row h1 {
-  position: absolute;
-  text-align: center;
 }
 div.hint-wrap {
   margin-top: 18px;
@@ -434,15 +457,15 @@ h3.hint {
   padding-bottom: 100%;
   width: 100%;
 }
-@-webkit-keyframes energy-glow-white {
+@-webkit-keyframes tutorial-glow {
   0% {
-    box-shadow: 0 0 0 0 #ffffff;
+    box-shadow: 0 0 0 0 #07f8f2;
   }
   50% {
-    box-shadow: 0 0 10px 4px #ffffff;
+    box-shadow: 0 0 10px 4px #07f8f2;
   }
   100% {
-    box-shadow: 0 0 0 0 #ffffff;
+    box-shadow: 0 0 0 0 #07f8f2;
   }
 }
 @-webkit-keyframes energy-glow {

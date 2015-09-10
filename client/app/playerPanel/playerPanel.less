@@ -405,7 +405,7 @@ div.panelInnerEnergy {
   border-radius: 6px;
   margin: 30px auto;
 
-  &.T1 {
+  /*&.T1 {
     top:150px;
     left:200px;
   }
@@ -424,20 +424,35 @@ div.panelInnerEnergy {
   &.T5 {
     top:375px;
     left:288px;
-  }
+  }*/
 }
 
-.colorbar h1 {
+.full-width {
+  width:100%;
+}
+
+.tutorialText {
+  position:absolute;
+  .full-width;
+  .tutorial-flip(0.25s);
+}
+
+.tutorialText h1 {
+  width:65%;
   border-radius: 18px;
   margin: -4px auto;
   top: -4px;
   background: #233;
   text-align: center;
   padding: 10px 13px 10px 13px;
-  border:3px solid white;
   font-family: "232MKSD", Helvetica, Arial, sans-serif;
-  position:absolute;
-  -webkit-animation: energy-glow-white 1s infinite;
+  -webkit-animation: tutorial-glow 1s infinite;
+  .colorbarText(lighten(desaturate(@teal, 5), 45), 3px);
+}
+
+.above-cards {
+  margin-top:50px;
+  height:375px;
 }
 
 
@@ -455,21 +470,6 @@ div.panelInnerEnergy {
   font-stretch: expanded;
   padding: 0 3px 0 3px;
   font-family: "232MKSD", Helvetica, Arial, sans-serif;
-
-}
-
-
-
-
-.container .row {
-  position:relative;
-
-  h1 {
-    position:absolute;
-    text-align: center;
-    //.flipShow(0.25s);
-
-  }
 }
 
 div.hint-wrap{
@@ -522,9 +522,9 @@ h3.hint{
   width:100%;
 }
 
-@-webkit-keyframes energy-glow-white
+@-webkit-keyframes tutorial-glow
 {
-  .glowFrames(#FFFFFF)
+  .glowFrames(lighten(@teal, 20))
 }
 
 @-webkit-keyframes energy-glow

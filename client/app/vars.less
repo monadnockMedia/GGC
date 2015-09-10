@@ -117,10 +117,10 @@
   }
 }
 
-.colorbarText(@color){
+.colorbarText(@color, @width: 1px){
   @textColor: lighten(desaturate(@color, 30),18);
   color: @textColor;
-  border: @textColor solid 1px;
+  border: @textColor solid @width;
   text-shadow: 0 0 2px black;
 }
 
@@ -159,7 +159,7 @@
   }
 }
 
-.flip(@t: .5s){
+.tutorial-flip(@t: .5s){
   @d: @t/5;
   &.ng-animate{
 
@@ -174,7 +174,7 @@
     opacity: 1;
   }
   &.ng-leave{
-    transition: all @t ease-out, opacity @d linear @t-@d;
+    transition: all @t ease-out, opacity @d linear @t - @d;
     transform: rotateX(0deg);
   }
   &.ng-leave-active{
