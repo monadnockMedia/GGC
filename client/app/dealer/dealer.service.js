@@ -43,8 +43,7 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, ggcGovern
   });
 
   ggcUtil.getIcons().then(function (r) {
-    tutorialIcons = r.data;
-    console.log("Tutorial Icons: ", tutorialIcons);
+    tutorialIcons = r.data.filter(function(d){return d.tutorial});
   });
 
   function placeTutIcon(i) {
