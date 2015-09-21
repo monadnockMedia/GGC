@@ -183,4 +183,35 @@
   }
 }
 
+.tutorial-flip-two(@t: .5s){
+  @d: @t/5;
+  /* when hiding the thing */
+  /* when hiding the thing */
+  &.ng-leave         {
+    -webkit-transition-timing-function:cubic-bezier(0.25, 0.76, 0.75, 0.94)
+
+  }
+
+  &.ng-animate{
+    transition: all @t ease-in;
+    -webkit-transform-origin: 50% 100%;
+  }
+  /* when showing the thing */
+  &.ng-enter      {
+    -webkit-transition-timing-function:cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    -webkit-transform: translateZ(300px) rotateX(-90deg);
+    opacity: 0;
+  }
+
+  &.ng-leave-active{
+    -webkit-transform: translateZ(-1200px) rotateX(180deg) ;
+    opacity: 0;
+  }
+
+  &.ng-enter-active{
+    -webkit-transform: translateZ(0) rotateX(0);
+    opacity: 1;
+  }
+}
+
 

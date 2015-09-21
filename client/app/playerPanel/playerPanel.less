@@ -446,14 +446,20 @@ div.panelInnerEnergy {
   width:100%;
 }
 
+.rel{
+  perspective: 700px;
+  position: relative;
+  -webkit-transform-style: preserve-3d
+}
+
 .tutorialText {
   position:absolute;
   .full-width;
-  .tutorial-flip(0.25s);
+  .tutorial-flip-two(0.5s);
 }
 
 .tutorialText h1 {
-  width:65%;
+  width:60%;
   border-radius: 18px;
   margin: -4px auto;
   top: -4px;
@@ -535,6 +541,15 @@ h3.hint{
   padding-bottom: 100%;
 //  background:red;
   width:100%;
+
+
+}
+
+.chosenIcon {
+  position:absolute;
+  width:150px;
+  height:150px;
+  //background-image:url(../../bmp/checkmark.png);
 }
 
 @-webkit-keyframes tutorial-glow
