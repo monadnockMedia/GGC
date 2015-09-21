@@ -28,7 +28,7 @@ angular.module('ggcApp')
       round:1,
       score : {environment: {}, economy: {}, energy: {}},
       totalScore : 0,
-      gulfState : 1,
+      gulfState : 0,
       scoreGlow : false
     };
     var game = clone(null_game);
@@ -244,7 +244,13 @@ angular.module('ggcApp')
 
       game.main[+!Boolean(i)].hidden = true;
       game.main[i].chosen = true;
-      setPhase("vote");
+
+      $rootScope.buttons.lockout = true;
+
+      ggcUtil.wait(function(){
+        setPhase("vote");
+        $rootScope.buttons.lockout = false;
+      }, 2000);
     };
 
     this.voteIssue = function(p,v){
@@ -260,11 +266,17 @@ angular.module('ggcApp')
           ct += votes[keys[i]];
         }
         votePassed = (ct >= 2);
-        dockAll(true);
 
 
-        $rootScope.$emit("votingComplete");
-        setPhase("scoring");
+        $rootScope.buttons.lockout = true;
+
+        ggcUtil.wait(function(){
+          $rootScope.buttons.lockout = false;
+          dockAll(true);
+          $rootScope.$emit("votingComplete");
+          setPhase("scoring");
+        }, 2000);
+
 
       }
 
@@ -307,7 +319,6 @@ angular.module('ggcApp')
       ////////SETUP////////
       setup: function () {
         dockAll(false);
-        setGulfState(1);
         dockOne(game.currentPlayer, false);
         votes = {};
         game.totalScore = 0;
@@ -346,6 +357,9 @@ angular.module('ggcApp')
       },
       ////////SCORING////////
       scoring: function () {
+
+
+
         setPanelStates(2);
         //(self.game.phase,self.game);
         eachPlayer(function (k) {
@@ -360,7 +374,7 @@ angular.module('ggcApp')
           setPanelStates(2);
         }
         //calculate outcome for balance warning purposes
-        var oc = calculateOutcome(game.score,config.balanceThreshold);  //for balance warning, make threshold larger
+        var oc = calculateOutcome(game.score,config.warnThreshold);  //for balance warning, make threshold larger
         //If it's the prologue, don't do this
         if ($rootScope.currentState == "game.play.loop") {
           nextPhase = (isLastPlayer()) ? "endRound" : "setup"; //if we're on the last turn, go to end round, if not, just setup another turn.
@@ -432,7 +446,7 @@ angular.module('ggcApp')
           ggcSounds.winningMusic.play();
         } else {
           game.outcome = endings.unbalanced[oc.team];
-          setGulfState(3);
+          setGulfState(2);
           ggcSounds.losingMusic.play();
         }
         game.round = 1;

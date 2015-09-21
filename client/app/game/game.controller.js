@@ -12,6 +12,7 @@ angular.module('ggcApp')
 
     $scope.trust = ggcUtil.trustSVG;
 
+    $rootScope.buttons = {lockout:false};
 
 
 
@@ -155,13 +156,17 @@ angular.module('ggcApp')
 
     }
     function btnHandler(t,i){
-      if ($state.current.name == "game.play.attract") {
-        ggcGame.setPanelStates("fullRetract");
-        $state.go("game.play.prologue");
-      } else if ($state.current.name == "game.play.prologue") {
-        ggcPrologueOverlord.ended();
-      }else if ($state.current.name == "game.play.loop"){
-        dealer.playerChoice(t,i);
+      if (!$rootScope.buttons.lockout) {
+        if ($state.current.name == "game.play.attract") {
+          ggcGame.setPanelStates("fullRetract");
+          $state.go("game.play.prologue");
+        } else if ($state.current.name == "game.play.prologue") {
+          ggcPrologueOverlord.ended();
+        }else if ($state.current.name == "game.play.tutorial"){
+          $rootScope.$emit("cancelTutorial");
+        }else if ($state.current.name == "game.play.loop"){
+          dealer.playerChoice(t,i);
+        }
       }
     }
     bindKeys();

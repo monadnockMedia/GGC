@@ -5,10 +5,10 @@
   <h1  class = "title" ng-show="game.phase == 'choice' && !tutorial">
     {{game.currentPlayer | capitalize}} Chooses an Action
   </h1>
-  <h1  class = "title" ng-show="game.phase == 'vote'">
+  <h1  class = "title" ng-show="game.phase == 'vote' && !tutorial">
     Everyone Votes
   </h1>
-  <h1  class = "title" ng-show="game.phase == 'scoring'">
+  <h1  class = "title" ng-show="game.phase == 'scoring' && !tutorial">
     Results
   </h1>
 </div>

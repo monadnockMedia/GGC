@@ -18,6 +18,7 @@
     "eventChance":1,
     "rounds": 3,
     "balanceThreshold":3,
+    "warnThreshold":6,
     "initialScores":{
       "environment":1,
       "economy":4,

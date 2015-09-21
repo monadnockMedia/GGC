@@ -21,7 +21,13 @@
             <div class="ggc-btn-wrap">
               <div class="col-md-6" ng-click="dealer.playerChoice(name,$index)"
                    ng-repeat="choice in player.hand.choices track by $index">
-                <div class="ggc-btn">
+                <div class="chosenIcon" ng-hide="!choice.chosen">
+                  <svg    x="0px" y="0px"
+                          width="125px" height="125px" viewBox="0 0 150 150"  >
+                    <polyline fill="#55B949" points="12.389,68.056 43.917,99.583 138.5,5 138.5,52.292 43.917,146.875 12.389,115.348 "/>
+                  </svg>
+                </div>
+                <div class="ggc-btn" ng-hide="choice.chosen" >
                   <div ggc-icon fill="true" frame="true" icon-id="{{choice.icon._id}}"></div>
                 </div>
               </div>

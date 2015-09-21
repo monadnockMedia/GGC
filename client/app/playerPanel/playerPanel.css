@@ -390,29 +390,40 @@ div.panelInnerEnergy {
 .full-width {
   width: 100%;
 }
+.rel {
+  perspective: 700px;
+  position: relative;
+  -webkit-transform-style: preserve-3d;
+}
 .tutorialText {
   position: absolute;
   width: 100%;
-}
-.tutorialText.ng-enter {
-  transition: all 0.25s ease-in, opacity 0.05s linear;
-  opacity: 0;
-  transform: rotateX(-90deg);
-}
-.tutorialText.ng-enter-active {
-  transform: rotateX(0deg);
-  opacity: 1;
+  /* when hiding the thing */
+  /* when hiding the thing */
+  /* when showing the thing */
 }
 .tutorialText.ng-leave {
-  transition: all 0.25s ease-out, opacity 0.05s linear 0.2s;
-  transform: rotateX(0deg);
+  -webkit-transition-timing-function: cubic-bezier(0.25, 0.76, 0.75, 0.94);
 }
-.tutorialText.ng-leave-active {
-  transform: rotateX(90deg);
+.tutorialText.ng-animate {
+  transition: all 0.5s ease-in;
+  -webkit-transform-origin: 50% 100%;
+}
+.tutorialText.ng-enter {
+  -webkit-transition-timing-function: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  -webkit-transform: translateZ(300px) rotateX(-90deg);
   opacity: 0;
 }
+.tutorialText.ng-leave-active {
+  -webkit-transform: translateZ(-1200px) rotateX(180deg);
+  opacity: 0;
+}
+.tutorialText.ng-enter-active {
+  -webkit-transform: translateZ(0) rotateX(0);
+  opacity: 1;
+}
 .tutorialText h1 {
-  width: 65%;
+  width: 60%;
   border-radius: 18px;
   margin: -4px auto;
   top: -4px;
@@ -478,6 +489,11 @@ h3.hint {
   height: 0;
   padding-bottom: 100%;
   width: 100%;
+}
+.chosenIcon {
+  position: absolute;
+  width: 150px;
+  height: 150px;
 }
 @-webkit-keyframes tutorial-glow {
   0% {

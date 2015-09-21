@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .controller('TutorialCtrl', function ($scope, $window, $interval, $state, ggcGame, ggcSounds) {
+  .controller('TutorialCtrl', function ($rootScope, $scope, $window, $interval, $state, ggcGame, ggcSounds) {
 
     var timers = {};
     // Define an array of Toddler objects
@@ -11,6 +11,7 @@ angular.module('ggcApp')
         dur: 6000,
         enter: function(){  //this will be called at the beginning
           ggcGame.setPanelStates("retract");
+          ggcSounds.wooshSfx.play();
         },
         exit: function(){  //this will be called when the duration has elapsed
         }
@@ -37,7 +38,7 @@ angular.module('ggcApp')
       8:{
         dur: 8000,
         enter: function(){  //this will be called at the beginning
-
+          ggcSounds.wooshSfx.play();
         },
         exit: function(){  //this will be called when the duration has elapsed
 
@@ -64,7 +65,12 @@ angular.module('ggcApp')
         }
       },
       16:{  //this keyframe will execute at 5s
-        dur: 5000
+        dur: 5000,
+        enter: function(){  //this will be called at the beginning
+          ggcSounds.wooshSfx.play();
+        },
+        exit: function(){  //this will be called when the duration has elapsed
+        }
       },
       18: {
         dur:1000,
@@ -88,12 +94,17 @@ angular.module('ggcApp')
         }
       },
       22:{
-        dur: 4000
+        dur: 4000,
+        enter: function(){  //this will be called at the beginning
+          ggcSounds.wooshSfx.play();
+        },
+        exit: function(){  //this will be called when the duration has elapsed
+        }
       },
       26:{
         dur: 4000,
         enter: function(){  //this will be called at the beginning
-
+          ggcSounds.wooshSfx.play();
         },
         exit: function(){  //this will be called when the duration has elapsed
           //$state.go("game.play.loop");
@@ -131,4 +142,10 @@ angular.module('ggcApp')
       }
 
     }
+
+
+    $rootScope.$on("cancelTutorial", function() {
+      clearTimers();
+      $state.go("game.play.loop", {}, {reload:true});
+    });
   });
