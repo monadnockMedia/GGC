@@ -8,7 +8,8 @@ angular.module('ggcApp')
     function ended(){
       //dealer.init();
       ggcSounds.introMusic.stop();
-      $state.go("game.play.tutorial", {}, {reload:true});
+      $state.go("game.play.tutorial", {}, {reload:false});
+      ggcGame.setGulfState(1);
       //dealer.prologue = false;
       //dealer.signIn = false;
       ggcMapper.reset();
@@ -36,7 +37,7 @@ angular.module('ggcApp')
         onStart: function () {
 
           ggcSounds.introMusic.play();
-          ggcGame.setGulfState(1);
+
         },
         //TODO(Ray) Remove skip tutorial buttons here
         onEnd: function () {
@@ -51,40 +52,40 @@ angular.module('ggcApp')
           dealer.placeTutIcon(0);
         },
         onEnd: function () {
-          dealer.placeTutIcon(16);
+          dealer.placeTutIcon(1);
         },
       }).code({
         start: 8,
         end: 10,
         onStart: function () {
-          dealer.placeTutIcon(8);
+          dealer.placeTutIcon(2);
 
         },
         onEnd: function () {
-          dealer.placeTutIcon(9);
+          dealer.placeTutIcon(3);
 
         },
       }).code({
         start: 10.5,
         end: 11,
         onStart: function () {
-          dealer.placeTutIcon(15);
+          dealer.placeTutIcon(4);
           ggcGame.setGulfState(1);
 
         },
         onEnd: function () {
-          dealer.placeTutIcon(11);
+          dealer.placeTutIcon(5);
 
         },
       }).code({
         start: 11.5,
         end: 12,
         onStart: function () {
-          dealer.placeTutIcon(25);
+          dealer.placeTutIcon(6);
 
         },
         onEnd: function () {
-          dealer.placeTutIcon(20);
+          dealer.placeTutIcon(7);
         }
       }).code({
         start: 12.5,
