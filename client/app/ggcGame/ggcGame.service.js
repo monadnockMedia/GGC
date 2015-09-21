@@ -40,6 +40,7 @@ angular.module('ggcApp')
     //////////
     function init(){
       var d = $q.defer();
+      playerNames = $rootScope.playerNames;
       eachPlayer(function (k) {
         var init_score = config.initialScores[k];
         game.totalScore += init_score;
@@ -74,9 +75,7 @@ angular.module('ggcApp')
 
     ////////SETTERS////////
 
-    function setPlayerNames(pn){
-      playerNames = pn;
-    }
+
     function setCards(cc){
       cards = cc;
     }
@@ -473,7 +472,6 @@ angular.module('ggcApp')
 
 
     this.init = init;
-    this.setPlayerNames = setPlayerNames;
     this.setCards = setCards;
     this.setPhase = setPhase;
     this.setEndings = setEndings;

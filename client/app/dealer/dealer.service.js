@@ -32,19 +32,22 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, ggcGovern
   });
 
 
-  ggcUtil.getEndings().then(function(d){
-    ggcGame.setEndings ($filter("endObject")(d.data));
-  })
+
 
 
   ggcUtil.getEvents().then(function (r) {
     r.data.map(function(d){return $filter("newsEvent")(d)});
     ggcGame.setEvents(r.data);
+    ggcUtil.getEndings().then(function(d){
+      ggcGame.setEndings ($filter("endObject")(d.data));
+      ggcUtil.getIcons().then(function (r) {
+        tutorialIcons = r.data.filter(function(d){return d.tutorial});
+        init();
+      });
+    })
   });
 
-  ggcUtil.getIcons().then(function (r) {
-    tutorialIcons = r.data.filter(function(d){return d.tutorial});
-  });
+
 
   function placeTutIcon(i) {
     addIcon(tutorialIcons[i]);

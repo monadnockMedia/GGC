@@ -166,6 +166,6 @@ angular.module('ggcApp')
     }
     bindKeys();
     //debugger;
-    dealer.init();
+    //dealer.init();
 
   });
