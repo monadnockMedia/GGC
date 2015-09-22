@@ -15,7 +15,11 @@ angular.module('ggcApp')
     $rootScope.buttons = {lockout:false};
 
 
+    $scope.pregameClass = function(_c){
 
+      var c = (_c === "extend" ) ? "signIn" : _c;
+      return c;
+    }
     $scope.printObject = ggcUtil.printObject;
 
     $scope.dealer = dealer

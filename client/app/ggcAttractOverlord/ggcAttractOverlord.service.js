@@ -14,9 +14,9 @@ angular.module('ggcApp')
         $interval.cancel(t);
         pop.loop(true);
         pop.play();
-        ggcGame.setPanelStates("signIn");
+        ggcGame.dockAll(false);
         ggcGame.setGulfState(0);
-      }, 1);
+      }, 2000);
 
     }
   });
