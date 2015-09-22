@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .service('ggcDeck', function (ggcUtil,ggcGame, $q, $http, $rootScope ) {
+  .service('ggcDeck', function (ggcUtil, ggcGame, $q, $http, $rootScope) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var self = this;
     var shuffle = ggcUtil.shuffle;
@@ -9,21 +9,15 @@ angular.module('ggcApp')
     var decks = {};
     var game = ggcGame.game;
     var freshDecks = {};
-    function init(){1
 
+    function init() {
       var d = $q.defer();
-      var rs = $rootScope.cards;
-      debugger;
-
-
-
-        freshDecks = $rootScope.cards;
-        playerNames = $rootScope.playerNames;
-        playerNames.forEach(function(k){
-          pushDeck(k);
-        });
-
-      d.resolve({playerNames:playerNames});
+      freshDecks = $rootScope.cards;
+      playerNames = $rootScope.playerNames;
+      playerNames.forEach(function (k) {
+        pushDeck(k);
+      });
+      d.resolve({playerNames: playerNames});
       return d.promise;
     };
 
@@ -57,8 +51,7 @@ angular.module('ggcApp')
     };
 
 
-
-    return{
+    return {
       init: init,
       decks: decks,
       drawTwo: drawTwo

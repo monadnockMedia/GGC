@@ -94,7 +94,7 @@ angular.module('ggcApp')
             dealer.init();
             $location.url("/game/play/attract");
             // angular.bootstrap(document, ['ggcApp']);
-            //location.reload();
+            location.reload();
           }
         })
         .add({
@@ -130,25 +130,10 @@ angular.module('ggcApp')
           }
         })
         .add({
-          combo: 'g',
-          description: 'glow true',
-          callback: function(){
-            ggcGame.setGlow(true);
-
-          }
-        })
-        .add({
-          combo: 'G',
-          description: 'glow true',
-          callback: function(){
-            ggcGame.setGlow(false);
-
-          }
-        })
-        .add({
           combo: 'p',
           description: 'pause AI',
           callback: function(){
+            console.log("PAUSE AI COMMAND")
             ggcGovernor.pause();
 
           }
@@ -171,6 +156,6 @@ angular.module('ggcApp')
     }
     bindKeys();
     //debugger;
-    //dealer.init();
+    dealer.init();
 
   });

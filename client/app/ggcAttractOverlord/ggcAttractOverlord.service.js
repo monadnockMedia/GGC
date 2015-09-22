@@ -16,7 +16,7 @@ angular.module('ggcApp')
         pop.play();
         ggcGame.setPanelStates("signIn");
         ggcGame.setGulfState(0);
-      }, 2000);
+      }, 1);
 
     }
   });

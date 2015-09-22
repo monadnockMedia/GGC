@@ -26,9 +26,9 @@ angular.module('ggcApp')
           return scope.game.score[team];
         }, update, true);
 
-        scope.$watch(function() {
-          return scope.game.scoreGlow;
-        }, glow, true);
+        //scope.$watch(function() {
+        //  return scope.game.scoreGlow;
+        //}, glow, true);
 
         //TODO(Ryan/Ray) add second layer group for enter/exit glow.
         function update(newV, oldV) {
@@ -37,8 +37,6 @@ angular.module('ggcApp')
           if (newV.hasOwnProperty("i")) {
             var glyphiconColor = $filter("teamColor")("", team);
             var scoreData = $filter("scoreIconArray")(newV.i, team);
-            var previousPoint = pathEl.getPointAtLength(0);
-            var nextPoint;
             var initialPosition = {environment: {x:575,y: 900}, economy: {x:950, y:1000}, energy: {x:1370, y:900}};
 
             var changed = group.selectAll("g").data(scoreData);
@@ -46,9 +44,9 @@ angular.module('ggcApp')
             var enterGroups = changed.enter().append("g").attr("class","iconGroup");
             var exitGroups = changed.exit()
 
-            enterGroups.append("text").text(function(d){return d}).attr({
-              class: "glowie"
-            }).style("fill", "white")
+            //enterGroups.append("text").text(function(d){return d}).attr({
+            //  class: "glowie"
+            //}).style("fill", "white")
 
             enterGroups.append("text").text(function(d){return d}).attr({
               class: "scoreDupe"
@@ -103,16 +101,16 @@ angular.module('ggcApp')
               .selectAll(".scoreDupe").style("fill","red").style("filter","url("+abs+"#pulse)").style("opacity","1");
           }
         }
-        function glow(n,o){
-          if (n !== o){
-            if(n == true){
-              group.selectAll(".glowie").style("opacity","1").transition().delay(dTime).style("filter","url("+abs+"#pop)");
-            }else{
-              group.selectAll(".glowie").transition().delay(dTime).style("opacity","0").style("filter",null);
-            }
-
-          }
-        }
+        //function glow(n,o){
+        //  if (n !== o){
+        //    if(n == true){
+        //      group.selectAll(".glowie").style("opacity","1").transition().delay(dTime).style("filter","url("+abs+"#pop)");
+        //    }else{
+        //      group.selectAll(".glowie").transition().delay(dTime).style("opacity","0").style("filter",null);
+        //    }
+        //
+        //  }
+        //}
         var interval = 100;
         function dTime(d,i,a){
           return i*interval;

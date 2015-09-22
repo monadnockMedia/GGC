@@ -318,7 +318,7 @@ angular.module('ggcApp')
     var phaseFunctions = {
       ////////SETUP////////
       setup: function () {
-        dockAll(false);
+        dockAll(true);
         dockOne(game.currentPlayer, false);
         votes = {};
         game.totalScore = 0;
