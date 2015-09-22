@@ -26,7 +26,6 @@ angular.module('ggcApp')
     $rootScope.$on("phaseChange", function(scope,arg,cp){
 
       phase = arg;
-      var timedPhase = timedPhases.indexOf(phase);
       if($rootScope.currentState == "game.play.loop" && timedPhases.indexOf(phase) >= 0){
         //we're in the loop, and a phase that needs timing
 

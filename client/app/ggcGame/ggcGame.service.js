@@ -14,6 +14,7 @@ angular.module('ggcApp')
     var events;
     this.votePassed = votePassed;
     var roll = ggcUtil.roll;
+    var isLoop;
     var addIcon = ggcMapper.addPriorityIcon;
     var nextPhase;
     var null_game = {
@@ -297,13 +298,25 @@ angular.module('ggcApp')
       4: function(p){ //strike 4, resistance is futile
         if(!isAI(p)){
           setAI(p,true);
-          aiFunctions[game.phase].call(this,p);
+          (allAIs()) ? $state.go("game.play.attract") : aiFunctions[game.phase].call(this,p);
         }
       }
     };
 
+    //if player is ai, call ai functions
     function checkAI(p){
       if(isAI(p) && aiFunctions[game.phase]) aiFunctions[game.phase].call(this,p);
+    }
+
+    //check if there are no more humans among us
+    function allAIs(){
+      var ret = false;
+      var AIs = 0;
+      eachPlayer(function(p){
+        AIs += (isAI(p)) ? 1 : 0;
+      });
+      if(AIs === 3) ret = true;
+      return ret;
     }
 
     var aiFunctions = {
@@ -318,14 +331,20 @@ angular.module('ggcApp')
     var phaseFunctions = {
       ////////SETUP////////
       setup: function () {
-        dockAll(true);
-        dockOne(game.currentPlayer, false);
+        isLoop = Boolean($rootScope.currentState === "game.play.loop");
+        if(isLoop){
+          dockAll(true);
+        }else{
+          dockAll(false);
+        }
+
         votes = {};
         game.totalScore = 0;
         buildHands();
       },
       ////////CHOICE////////
       choice: function () {
+        if(isLoop) dockOne(game.currentPlayer, false);
         game.main = cards.map(function (c, i) {
           var card = clone(c);
           //sneakily sort out player cards in the loop
@@ -376,7 +395,7 @@ angular.module('ggcApp')
         //calculate outcome for balance warning purposes
         var oc = calculateOutcome(game.score,config.warnThreshold);  //for balance warning, make threshold larger
         //If it's the prologue, don't do this
-        if ($rootScope.currentState == "game.play.loop") {
+        if (isLoop) {
           nextPhase = (isLastPlayer()) ? "endRound" : "setup"; //if we're on the last turn, go to end round, if not, just setup another turn.
           nextPlayer();
           if(oc.balanced || !votePassed) { //score is balanced or vote was not passed
