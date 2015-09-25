@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .service('ggcGame', function ($state, $rootScope, $q, $interval, $filter, ggcMapper, ggcHints, ggcUtil, ggcSounds) {
+  .service('ggcGame', function ($state, $rootScope, $q, $filter, ggcMapper, ggcHints, ggcUtil, ggcSounds) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var config = $rootScope.config.game;
     var playerNames = [];
@@ -17,6 +17,7 @@ angular.module('ggcApp')
     var isLoop;
     var addIcon = ggcMapper.addPriorityIcon;
     var nextPhase;
+    var clone = ggcUtil.clone;
     var null_game = {
       main: {},
       warning:{},
@@ -40,6 +41,7 @@ angular.module('ggcApp')
 
     //////////
     function init(){
+      game.playerIndex = 0;
       var d = $q.defer();
       playerNames = $rootScope.playerNames;
       eachPlayer(function (k) {
@@ -50,7 +52,7 @@ angular.module('ggcApp')
           hand: clone(null_hand),       docked: true,       panelClass: false,    ai: false,
           isCurrentPlayer:false,        hint: ggcHints.playerHints[k],      warning:" "
         };
-      })
+      });
       setCurrentPlayer(game.playerIndex);
 
 
@@ -233,9 +235,7 @@ angular.module('ggcApp')
     this.setGulfState = setGulfState;
     this.eachPlayer = eachPlayer;
 
-    function clone(o){
-      return JSON.parse(JSON.stringify(o));
-    }
+
 
     this.chooseIssue = function(p,i){
       game.players[game.currentPlayer].hand.choices[i].chosen = true;
@@ -260,7 +260,7 @@ angular.module('ggcApp')
       game.players[p].voted = true;
       var keys = Object.keys(votes);
 
-      if (keys.length == 3) { //if all players have voted
+      if (keys.length >= 3) { //if all players have voted
         var i = 3;
         var ct = 0;
         while (i--) {
@@ -274,7 +274,7 @@ angular.module('ggcApp')
         ggcUtil.wait(function(){
           $rootScope.buttons.lockout = false;
           dockAll(true);
-          $rootScope.$emit("votingComplete");
+          //$rootScope.$emit("votingComplete");
           setPhase("scoring");
         }, 2000);
 
@@ -288,20 +288,22 @@ angular.module('ggcApp')
     }
 
     function idleHandler(scope,p,s){
-      if(idleFunctions[s]) idleFunctions[s].call(null,p);
+      if(idleFunctions[s] && isLoop) idleFunctions[s].call(null,p);
     }
 
     var idleFunctions = {
       1:function(p){
-        checkAI(p)
+        checkAI(p);
       },
       4: function(p){ //strike 4, resistance is futile
         if(!isAI(p)){
           setAI(p,true);
-          (allAIs()) ? $state.go("game.play.attract") : aiFunctions[game.phase].call(this,p);
+          (allAIs()) ? AIReset() : aiFunctions[game.phase].call(this,p);
         }
       }
     };
+
+
 
     //if player is ai, call ai functions
     function checkAI(p){
@@ -318,7 +320,12 @@ angular.module('ggcApp')
       if(AIs === 3) ret = true;
       return ret;
     }
-
+    function AIReset(){
+      eachPlayer(function(p){
+        setAI(p,false);
+      });
+      $rootScope.$emit("AIReset");
+    }
     var aiFunctions = {
       choice: function (p) {
         self.chooseIssue(p,~~(Math.random()*2));
@@ -376,9 +383,6 @@ angular.module('ggcApp')
       },
       ////////SCORING////////
       scoring: function () {
-
-
-
         setPanelStates(2);
         //(self.game.phase,self.game);
         eachPlayer(function (k) {
@@ -446,11 +450,11 @@ angular.module('ggcApp')
           game.round++;
           //var timedCb = (roll()) ? phases.event() : phases.setup();
           var callback = (roll(config.eventChance)) ? "event" : "setup";
-          var timer = $interval(function () {
+          //var timer = $interval(function () {
             setPhase(callback);
-            $interval.cancel(timer);
-            //timedCb();
-          }, 0)
+          //  $interval.cancel(timer);
+          //  //timedCb();
+          //}, 0)
 
         }
       },
@@ -494,15 +498,6 @@ angular.module('ggcApp')
       calculatePercentage();
       if (game.phase == "scoring") addIcon(game.action.icon);
     }
-
-
-    function eventTally(){
-      var score = game.score;
-      var ev = event;
-      eachPlayer(function (p){
-      })
-    }
-
 
     this.init = init;
     this.setCards = setCards;

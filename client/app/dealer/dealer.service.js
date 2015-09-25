@@ -31,29 +31,26 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, ggcGovern
 
   });
 
+  $rootScope.$on("AIReset", function(scope,arg,c){
+    reset();
+  });
+
 
 
 
 
   ggcUtil.getEvents().then(function (r) {
-    r.data.map(function(d){return $filter("newsEvent")(d)});
+    r.data.map(function (d) {
+      return $filter("newsEvent")(d)
+    });
     ggcGame.setEvents(r.data);
-    ggcUtil.getEndings().then(function(d){
-      ggcGame.setEndings ($filter("endObject")(d.data));
-      ggcUtil.getIcons().then(function (r) {
-        tutorialIcons = r.data.filter(function(d){return d.tutorial});
-        init();
-      });
+    ggcUtil.getEndings().then(function (d) {
+      ggcGame.setEndings($filter("endObject")(d.data));
+      init();
     })
   });
 
 
-
-  function placeTutIcon(i) {
-    addIcon(tutorialIcons[i]);
-  }
-
-  this.placeTutIcon = placeTutIcon;
 
 
 
@@ -63,17 +60,23 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, ggcGovern
   ///initialize
   function init() {
 
-    deck.init().then(function(_players){
-      ggcGame.init().then(function(){
-
-         ggcGovernor.init();
+    ggcGame.init().then(function(){
+      deck.init().then(function(){
+          ggcGovernor.init();
           ggcGame.setPhase("setup");
       });
-    })
+    });
 
 
   }
   this.init = init;
+
+  function reset(){
+    ggcGovernor.killTimers();
+    ggcUtil.killTimeouts();
+    ggcMapper.reset();
+    $state.go("game.play.attract", {}, {reload: true});
+  }
 
   //TODO(Ray) use ggcMapper.addIcon directly form controller
   function addIcon(icon) {
@@ -100,9 +103,7 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, ggcGovern
     $state.go('game.play.event');
   }
 
-  phases.endRound = function(){
 
-  }
 
   phases.gameOver = function(){
     $state.go('game.play.endgame');
@@ -144,16 +145,7 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, ggcGovern
       $state.go("game.play.loop");
       ggcGame.setPhase("eventScoring");
     } else if ($rootScope.currentState == "game.play.endgame") {
-      ggcMapper.reset();
-      init();
-      //TODO(Ray) Qu'est-ce que c'est?
-      //Where to these get used?  why reload them?
-      ggcUtil.getIcons().then(function (r) {
-        tutorialIcons = r.data;
-        console.log("Tutorial Icons: ", tutorialIcons);
-      });
-      $state.go("game.play.attract", {}, {reload: true});
-
+      reset();
     }
   }
   this.playerChoice = function (p, b) {

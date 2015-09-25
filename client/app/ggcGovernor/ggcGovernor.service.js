@@ -12,17 +12,20 @@ angular.module('ggcApp')
       ggcGame.eachPlayer(function(k){
         players[k] = {strike:0};
       });
-    };
+    }
 
     function clearStrikes(){
       ggcGame.eachPlayer(function(p){
         clearStrike(p);
-      })
+      });
     }
 
     function clearStrike(p){
       players[p].strike = 0;
     }
+    $rootScope.$on("AIReset", function(scope,arg,cp){
+      killTimers();
+    });
     $rootScope.$on("phaseChange", function(scope,arg,cp){
 
       phase = arg;
@@ -66,9 +69,12 @@ angular.module('ggcApp')
       players[p].timer = $timeout(function(){idle(p)}, durs[players[p].strike]);
     }
     function killTimer(p){
-      $timeout.cancel(players[p].timer);
-      players[p].timer = null;
-      //ggcHints.hideHint(p);
+      if(players[p]){
+        if(players[p].timer){
+          $timeout.cancel(players[p].timer);
+          players[p].timer = null;
+        }
+      }
     }
 
     function killTimers(){
@@ -76,7 +82,6 @@ angular.module('ggcApp')
         function(p){
           killTimer(p);
         }
-
       )
     }
     function resetTimers(){
@@ -95,4 +100,5 @@ angular.module('ggcApp')
 
     this.init = init;
     this.active = active;
+    this.killTimers = killTimers;
   });

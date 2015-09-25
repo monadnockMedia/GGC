@@ -1,24 +1,37 @@
 'use strict';
 
 angular.module('ggcApp')
-  .service('ggcPrologueOverlord', function (dealer, $state, $interval, ggcMapper, ggcGame, ggcSounds) {
+  .service('ggcPrologueOverlord', function (ggcUtil, dealer, $state, $interval, ggcMapper, ggcGame, ggcSounds) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var pop;
+    var icons;
+
 
     function ended(){
       //dealer.init();
-      ggcSounds.introMusic.stop();
+      //ggcSounds.introMusic.stop();
       $state.go("game.play.tutorial", {}, {reload:false});
       ggcGame.setGulfState(1);
       //dealer.prologue = false;
       //dealer.signIn = false;
       ggcMapper.reset();
     }
+    function addIcon(i) {
+      //ggcMapper.putIcon(ggcMapper.randomIndex(), icon._id);
 
+      var icon = icons[i];
+      ggcMapper.addPriorityIcon(icon);
+
+    }
     this.ended = ended;
     this.makePop = function (v) {
       pop = Popcorn(v);
 
+      ggcUtil.getIcons().then(function (r) {
+        icons = r.data.filter(function(d){return d.tutorial});
+        pop.play();
+        ggcSounds.introMusic.play();
+      });
 
       //TODO(Ray) try getting the tutorial icons here rather than in dealer
       pop.on("ended", function () {
@@ -36,7 +49,7 @@ angular.module('ggcApp')
         end: 9,
         onStart: function () {
 
-          ggcSounds.introMusic.play();
+
 
         },
         //TODO(Ray) Remove skip tutorial buttons here
@@ -49,43 +62,43 @@ angular.module('ggcApp')
         end: 5,
         //TODO(Ray) simplify, just call ggcMapper.addPriorityIcon();
         onStart: function () {
-          dealer.placeTutIcon(0);
+        addIcon(0);
         },
         onEnd: function () {
-          dealer.placeTutIcon(1);
+          addIcon(1);
         },
       }).code({
         start: 8,
         end: 10,
         onStart: function () {
-          dealer.placeTutIcon(2);
+          addIcon(2);
 
         },
         onEnd: function () {
-          dealer.placeTutIcon(3);
+          addIcon(3);
 
         },
       }).code({
         start: 10.5,
         end: 11,
         onStart: function () {
-          dealer.placeTutIcon(4);
+          addIcon(4);
           ggcGame.setGulfState(1);
 
         },
         onEnd: function () {
-          dealer.placeTutIcon(5);
+          addIcon(5);
 
         },
       }).code({
         start: 11.5,
         end: 12,
         onStart: function () {
-          dealer.placeTutIcon(6);
+          addIcon(6);
 
         },
         onEnd: function () {
-          dealer.placeTutIcon(7);
+          addIcon(7);
         }
       }).code({
         start: 12.5,
@@ -227,12 +240,16 @@ angular.module('ggcApp')
           /*dealer.prologue = false;
            dealer.signIn = false;*/
         },
-      }).load()
-
-      var t = $interval(function () {
-        $interval.cancel(t);
-        pop.play();
-      }, 2000);
+      }).load();
+      //pop.on("loadeddata", function () {
+      //  pop.play();
+      //  ggcSounds.introMusic.play();
+      //});
+      //pop.play();
+      //var t = $interval(function () {
+      //  $interval.cancel(t);
+      //  pop.play();
+      //}, 2000);
 
 
     }

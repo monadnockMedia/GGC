@@ -148,7 +148,7 @@ angular.module('ggcApp')
       if (!$rootScope.buttons.lockout) {
         if ($state.current.name == "game.play.attract") {
           ggcGame.setPanelStates("fullRetract");
-          $state.go("game.play.prologue");
+          $state.go("game.play.prologue",{},true);
         } else if ($state.current.name == "game.play.prologue") {
           ggcPrologueOverlord.ended();
         }else if ($state.current.name == "game.play.tutorial"){
@@ -159,7 +159,6 @@ angular.module('ggcApp')
       }
     }
     bindKeys();
-    //debugger;
     dealer.init();
 
   });

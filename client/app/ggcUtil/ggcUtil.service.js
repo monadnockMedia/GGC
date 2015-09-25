@@ -1,12 +1,22 @@
 'use strict';
 
 angular.module('ggcApp')
-  .service('ggcUtil', function ($http, $sce, $interval) {
+  .service('ggcUtil', function ($http, $sce, $timeout) {
     // AngularJS will instantiate a singleton by calling "new" on this function
+    var timeouts = [];
+
+    this.killTimeouts = function(){
+      while(timeouts.length){
+        $timeout.cancel(timeouts.pop());
+      }
+    };
+
     this.getCards = function () {
       //console.log("Service.getCards");
       return $http.get('/api/cards'); //custom endpoint
     };
+
+
 
     this.getEvents = function () {
       //console.log("Service.getEvents");
@@ -91,16 +101,26 @@ angular.module('ggcApp')
     }
 
     this.wait = function(f,t){
-      var timer = $interval(function () {
-        $interval.cancel(timer);
-        f.call();
-      }, t);
-    }
+      var timer = $timeout(
+        function () {
+          $timeout.cancel(timer);
+          f.call();
+        },
+        t);
+
+      timeouts.push(
+        timer
+      );
+
+    };
 
     this.isArray = function(a) { //testing for single object or array contain
       return Object.prototype.toString.call(a) === "[object Array]";
     }
 
+    this.clone = function(o){
+      return JSON.parse(JSON.stringify(o));
+    }
 
 
   });

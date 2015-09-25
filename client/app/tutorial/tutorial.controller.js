@@ -107,7 +107,6 @@ angular.module('ggcApp')
           ggcSounds.wooshSfx.play();
         },
         exit: function () {  //this will be called when the duration has elapsed
-          debugger;
           //$state.go("game.play.loop");
           $state.go("game.play.loop", {}, {reload: true});
         }
@@ -149,6 +148,7 @@ angular.module('ggcApp')
 
     $rootScope.$on("cancelTutorial", function () {
       clearTimers();
+      ggcSounds.introMusic.stop();
       $state.go("game.play.loop", {}, {reload: true});
     });
   });

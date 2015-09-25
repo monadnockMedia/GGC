@@ -9,10 +9,10 @@ angular.module('ggcApp')
     var decks = {};
     var game = ggcGame.game;
     var freshDecks = {};
-
+    var clone = ggcUtil.clone;
     function init() {
       var d = $q.defer();
-      freshDecks = $rootScope.cards;
+      freshDecks = clone($rootScope.cards);
       playerNames = $rootScope.playerNames;
       playerNames.forEach(function (k) {
         pushDeck(k);
@@ -22,7 +22,7 @@ angular.module('ggcApp')
     };
 
     function pushDeck(team) {
-      var playerDeck = shuffle(freshDecks[team].slice(0)); //sheffle the players deck
+      var playerDeck = shuffle(clone(freshDecks[team].slice(0))); //shuffle the players deck
       //if this deck doesn't exists on dealer deck, add it
       if (!decks[team]) decks[team] = [];
       //concat shuffled deck
