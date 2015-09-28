@@ -1,7 +1,8 @@
 {
-  "kiosk":false,
+  "kiosk":true,
 	"debug":true,
   "resize":false,
+  "hardReset":true,
   "grid" : {
     "rows":15, "cols":20
   },
@@ -15,7 +16,7 @@
   },
   "gameMode":true,
   "game":{
-    "eventChance":1,
+    "eventChance":3,
     "rounds": 3,
     "balanceThreshold":3,
     "warnThreshold":6,
