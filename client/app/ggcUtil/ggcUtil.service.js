@@ -122,5 +122,4 @@ angular.module('ggcApp')
       return JSON.parse(JSON.stringify(o));
     }
 
-
   });
