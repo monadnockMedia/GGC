@@ -1,8 +1,7 @@
 'use strict';
-
-angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, ggcGovernor, $http, $q, $rootScope, ggcUtil, $interval, ggcMapper, $state, $filter, ggcSounds, $location) {
+var app = angular.module('ggcApp');
+app.service('dealer', function (ggcGame, ggcDeck, ggcGovernor, $http, $q, $rootScope, ggcUtil, $interval, ggcMapper, $state, $filter, ggcSounds) {
   // AngularJS will instantiate a singleton by calling "new" on this function
-
   this.decks = {};
 
   //TODO(@cupofnestor) Make game service
@@ -46,7 +45,7 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, ggcGovern
     ggcGame.setEvents(r.data);
     ggcUtil.getEndings().then(function (d) {
       ggcGame.setEndings($filter("endObject")(d.data));
-      init();
+     // init();
     })
   });
 
@@ -59,14 +58,16 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, ggcGovern
 
   ///initialize
   function init() {
-
+    console.log("Dealer Init");
+    var d = $q.defer();
     ggcGame.init().then(function(){
       deck.init().then(function(){
           ggcGovernor.init();
           ggcGame.setPhase("setup");
+          d.resolve("foo");
       });
     });
-
+    return d.promise;
 
   }
   this.init = init;
@@ -76,8 +77,9 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, ggcGovern
     ggcUtil.killTimeouts();
     ggcMapper.reset();
     $state.go("game.play.attract", {}, {reload: true});
+    if($rootScope.config.hardReset) location.reload();
   }
-
+  this.reset = reset;
   //TODO(Ray) use ggcMapper.addIcon directly form controller
   function addIcon(icon) {
     //ggcMapper.putIcon(ggcMapper.randomIndex(), icon._id);
@@ -176,4 +178,6 @@ angular.module('ggcApp').service('dealer', function (ggcGame, ggcDeck, ggcGovern
 
 
 
+
 });
+

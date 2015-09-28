@@ -1,5 +1,5 @@
 'use strict';
-angular.module('ggcApp')
+var app = angular.module('ggcApp')
   .config(function (stateHelperProvider) {
    stateHelperProvider
      .state({
@@ -8,6 +8,11 @@ angular.module('ggcApp')
        abstract:true,
        templateUrl: 'app/game/game.html',
        controller: 'GameCtrl',
+       resolve:{
+         _game: function(dealer){
+           return dealer.init();
+         }
+       },
        children: [
          {
            name: "play",

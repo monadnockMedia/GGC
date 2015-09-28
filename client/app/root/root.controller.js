@@ -4,15 +4,20 @@
 angular.module('ggcApp')
   .controller('AppCtrl', function ($scope, $location, hotkeys, $http, $rootScope, nwkiosk) {
     $scope.config = true;
-    $http.get('/appConfig').then(function (res) {
-      $scope.config = res.data;
-      $rootScope.config = res.data;
-    })
-    $rootScope.$watch(function(){return $scope.config.kiosk }, function(n,o){
+    //$http.get('/appConfig').then(function (res) {
+    //  $scope.config = res.data;
+    //  $rootScope.config = res.data;
+    //})
+    nwkiosk.setKioskMode($rootScope.config.kiosk);
+    $rootScope.$watch(function(){return $rootScope.config.kiosk }, function(n,o){
       if(n !== o )  nwkiosk.setKioskMode(n);
     });
+    $scope.config = $rootScope.config;
 
 
+    $rootScope.$on( '$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
+      console.log( 'State Change Error: ', error.stack);
+    });
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
@@ -34,6 +39,7 @@ angular.module('ggcApp')
 
     $rootScope.$on('$stateChangeStart',
       function(event, toState, toParams, fromState, fromParams){
+        console.log("State Change Start", fromState,toState);
         $rootScope.currentState = toState.name;
         $scope.currentState = toState.name;
 

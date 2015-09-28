@@ -23,6 +23,7 @@ angular.module('ggcApp', [
 
   })
   .run(function($rootScope){
+    $rootScope.config = window.appData.config;
     $rootScope.cards = window.appData.cards;
     $rootScope.playerNames = window.appData.playerNames;
   });
@@ -46,4 +47,14 @@ angular.lazy("ggcApp")
         angular.element('#error').show();
       });
   }])
+  .resolve(['$http', function ($http) {
+    return $http.get('/appConfig')
+      .then(function (resp) {
+        window.appData.config = resp.data;
+
+      }, function (err){
+        angular.element('#error').show();
+      });
+  }])
   .bootstrap();
+

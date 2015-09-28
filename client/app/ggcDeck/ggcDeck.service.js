@@ -7,10 +7,12 @@ angular.module('ggcApp')
     var shuffle = ggcUtil.shuffle;
     var playerNames = [];
     var decks = {};
-    var game = ggcGame.game;
+    var game;
     var freshDecks = {};
     var clone = ggcUtil.clone;
+
     function init() {
+      game  = ggcGame.game;
       var d = $q.defer();
       freshDecks = clone($rootScope.cards);
       playerNames = $rootScope.playerNames;
@@ -20,6 +22,8 @@ angular.module('ggcApp')
       d.resolve({playerNames: playerNames});
       return d.promise;
     };
+
+
 
     function pushDeck(team) {
       var playerDeck = shuffle(clone(freshDecks[team].slice(0))); //shuffle the players deck

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .service('ggcGame', function ($state, $rootScope, $q, $filter, ggcMapper, ggcHints, ggcUtil, ggcSounds) {
+  .factory('ggcGame', function ($state, $rootScope, $q, $filter, ggcMapper, ggcHints, ggcUtil, ggcSounds) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var config = $rootScope.config.game;
     var playerNames = [];
@@ -34,15 +34,17 @@ angular.module('ggcApp')
       scoreGlow : false
     };
     var game = clone(null_game);
-
     this.game = game;
+
     var null_hand = {choices: [], issue: {} };
     var panelClasses = ["fullRetract","retract","signIn","extend"]
 
     //////////
-    function init(){
-      game.playerIndex = 0;
+    this.init = function(){
+
       var d = $q.defer();
+      game.playerIndex = 0;
+
       playerNames = $rootScope.playerNames;
       eachPlayer(function (k) {
         var init_score = config.initialScores[k];
@@ -53,12 +55,12 @@ angular.module('ggcApp')
           isCurrentPlayer:false,        hint: ggcHints.playerHints[k],      warning:" "
         };
       });
-      setCurrentPlayer(game.playerIndex);
+      setCurrentPlayer(game.playerIndex).then(d.resolve(game));
 
-
-      d.resolve("foo");
       return d.promise;
     }
+
+    var init = this.init;
 
     $rootScope.$on("idle", idleHandler);
     ////////
@@ -93,12 +95,15 @@ angular.module('ggcApp')
     }
 
     function setCurrentPlayer(i) {
+      var d = $q.defer();
       //p is current player name
       var p = playerNames[i];
       game.currentPlayer = p;
       eachPlayer(function (pp) {
         game.players[pp].isCurrentPlayer = (pp === p);
       });
+      d.resolve(p);
+      return d.promise;
     }
     function setAI(p,b){
       game.players[p].ai = b;
@@ -499,7 +504,7 @@ angular.module('ggcApp')
       if (game.phase == "scoring") addIcon(game.action.icon);
     }
 
-    this.init = init;
+
     this.setCards = setCards;
     this.setPhase = setPhase;
     this.setEndings = setEndings;
@@ -507,4 +512,6 @@ angular.module('ggcApp')
     this.setGlow = setGlow;
     this.setAI = setAI;
     this.isAI = isAI;
+
+    return this;
   });
