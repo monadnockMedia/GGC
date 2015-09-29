@@ -1,14 +1,19 @@
 'use strict';
 
 angular.module('ggcApp')
-  .service('ggcUtil', function ($http, $sce, $timeout) {
+  .service('ggcUtil', function ($http, $sce, $timeout, $q) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var timeouts = [];
 
     this.killTimeouts = function(){
+      console.log("KILLING TIMERS");
+      var d = $q.defer();
       while(timeouts.length){
+        console.log("kill timer ",timeouts.length);
         $timeout.cancel(timeouts.pop());
       }
+      d.resolve("complete");
+      return $q.promise;
     };
 
     this.getCards = function () {
@@ -111,6 +116,8 @@ angular.module('ggcApp')
       timeouts.push(
         timer
       );
+
+     return timer;
 
     };
 

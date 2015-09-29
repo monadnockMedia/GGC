@@ -9,7 +9,8 @@ var app = angular.module('ggcApp')
        templateUrl: 'app/game/game.html',
        controller: 'GameCtrl',
        resolve:{
-         _game: function(dealer){
+         cleartimers: function(ggcUtil){return ggcUtil.killTimeouts()},
+         _game: function(cleartimers, dealer){
            return dealer.init();
          }
        },

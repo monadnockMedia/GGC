@@ -391,9 +391,13 @@ angular.module('ggcApp')
         setPanelStates(2);
         //(self.game.phase,self.game);
         eachPlayer(function (k) {
-
-          game.players[k].hand.issue.passed = votePassed;
+          try{
+            game.players[k].hand.issue.passed = votePassed;
+          }catch(e){
+            console.error(e)
+          }
         });
+
         game.main[chosenIndex].passed = votePassed;
         game.action.passed = votePassed;
         if (votePassed){

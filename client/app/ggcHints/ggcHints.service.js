@@ -93,7 +93,7 @@ angular.module('ggcApp')
     var setHint = function(p,b){
       playerHints[p].visible = b;
       if(b){
-        playerHints.timer = $timeout(function(){hideHint(p)},hintDur);
+        playerHints.timer = ggcUtil.wait(function(){hideHint(p)},hintDur);
       }
     };
 
@@ -101,11 +101,6 @@ angular.module('ggcApp')
     this.hideHint = hideHint;
     this.setHint = setHint;
 
-    //$interval(function(){
-    //  playerNames.forEach(function(n){
-    //    playerHints[n].visible = !playerHints[n].visible;
-    //  });
-    //},6000)
 
 
   });

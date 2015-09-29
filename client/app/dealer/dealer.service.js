@@ -74,7 +74,7 @@ app.service('dealer', function (ggcGame, ggcDeck, ggcGovernor, $http, $q, $rootS
 
   function reset(){
     ggcGovernor.killTimers();
-    ggcUtil.killTimeouts();
+   // ggcUtil.killTimeouts();
     ggcMapper.reset();
     $state.go("game.play.attract", {}, {reload: true});
     if($rootScope.config.hardReset) location.reload();

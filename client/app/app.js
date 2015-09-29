@@ -23,9 +23,10 @@ angular.module('ggcApp', [
 
   })
   .run(function($rootScope){
-    $rootScope.config = window.appData.config;
-    $rootScope.cards = window.appData.cards;
-    $rootScope.playerNames = window.appData.playerNames;
+    $rootScope.config = angular.copy(window.appData.config);
+    $rootScope.cards = angular.copy(window.appData.cards);
+    $rootScope.playerNames = angular.copy(window.appData.playerNames);
+    delete window.appData;
   });
 
   formsAngular.config(['cssFrameworkServiceProvider', 'routingServiceProvider', function (cssFrameworkService, routingService) {

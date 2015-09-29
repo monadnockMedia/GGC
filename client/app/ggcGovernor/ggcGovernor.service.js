@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ggcApp')
-  .service('ggcGovernor', function (ggcGame, $rootScope, $timeout, ggcHints) {
+  .service('ggcGovernor', function (ggcGame, $rootScope, $timeout) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var players = {};
     var phase;
@@ -23,9 +23,11 @@ angular.module('ggcApp')
     function clearStrike(p){
       players[p].strike = 0;
     }
+
     $rootScope.$on("AIReset", function(scope,arg,cp){
       killTimers();
     });
+
     $rootScope.$on("phaseChange", function(scope,arg,cp){
 
       phase = arg;

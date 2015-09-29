@@ -121,7 +121,7 @@ angular.module('ggcApp')
       Object.keys(timers).forEach(function (d) {
         $interval.cancel(timers[d]);
         delete timers[d];
-      })
+      });
     }
 
     function enterFrame(t) {
