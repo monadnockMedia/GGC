@@ -107,7 +107,8 @@ angular.module('ggcApp')
           ggcSounds.wooshSfx.play();
         },
         exit: function () {  //this will be called when the duration has elapsed
-          //$state.go("game.play.loop");
+          clearTimers();
+          ggcSounds.introMusic.stop();
           $state.go("game.play.loop", {}, {reload: true});
         }
       },
