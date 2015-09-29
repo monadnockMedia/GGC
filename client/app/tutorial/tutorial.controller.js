@@ -6,6 +6,12 @@ angular.module('ggcApp')
     var timers = {};
     // Define an array of Toddler objects
     var tick = 500;
+    function exit(){
+      clearTimers();
+      ggcSounds.introMusic.stop();
+      $state.go("game.play.loop", {}, {reload: true});
+    };
+
     $scope.frames = {
       2: {
         dur: 6000,
@@ -107,9 +113,7 @@ angular.module('ggcApp')
           ggcSounds.wooshSfx.play();
         },
         exit: function () {  //this will be called when the duration has elapsed
-          clearTimers();
-          ggcSounds.introMusic.stop();
-          $state.go("game.play.loop", {}, {reload: true});
+          exit();
         }
       },
       end: 34
@@ -148,8 +152,6 @@ angular.module('ggcApp')
 
 
     $rootScope.$on("cancelTutorial", function () {
-      clearTimers();
-      ggcSounds.introMusic.stop();
-      $state.go("game.play.loop", {}, {reload: true});
+      exit();
     });
   });
