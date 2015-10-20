@@ -21,10 +21,22 @@ angular.module('ggcApp')
         var center = {x:960,y:540};
         var scoreSfx = ngAudio.load("../sound/score_slide.wav");
         var angles = {"environment": -25,"economy" : 0, "energy":25};
+        var changed, enterGroups, exitGroups;
 
         scope.$watch(function() {
           return scope.game.score[team];
         }, update, true);
+
+        element.on('$destroy', function() {
+          group.remove();
+          group = null;
+          changed.remove();
+          changed = null;
+          enterGroups.remove();
+          enterGroups = null;
+          exitGroups.remove();
+          exitGroups = null;
+        });
 
         //scope.$watch(function() {
         //  return scope.game.scoreGlow;
@@ -39,10 +51,10 @@ angular.module('ggcApp')
             var scoreData = $filter("scoreIconArray")(newV.i, team);
             var initialPosition = {environment: {x:575,y: 900}, economy: {x:950, y:1000}, energy: {x:1370, y:900}};
 
-            var changed = group.selectAll("g").data(scoreData);
+            changed = group.selectAll("g").data(scoreData);
             //set the starting point
-            var enterGroups = changed.enter().append("g").attr("class","iconGroup");
-            var exitGroups = changed.exit()
+            enterGroups = changed.enter().append("g").attr("class","iconGroup");
+            exitGroups = changed.exit()
 
             //enterGroups.append("text").text(function(d){return d}).attr({
             //  class: "glowie"
