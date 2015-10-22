@@ -27,6 +27,11 @@ angular.module('ggcApp')
         var svg = d3.selectAll(element).append("svg").attr("grid-index", scope.gridIndex);
         svg.attr("viewBox", "0 0 300 300");
 
+        element.on('$destroy', function() {
+          svg.remove();
+          svg = null;
+        });
+
 
         attrs.$observe('iconId', function (value) {
           //console.log("$OBSERVE", value.length);
