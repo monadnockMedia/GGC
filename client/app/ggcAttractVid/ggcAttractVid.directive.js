@@ -6,14 +6,14 @@ angular.module('ggcApp')
       restrict: 'EA',
       transclude: true,
       link: function (scope, element, attrs, nullCtrl, transclude) {
-
         ggcAttractOverlord.makePop(element[0]);
 
+        element.on("destroy", ggcAttractOverlord.destroy());
 
         transclude(scope, function(clone){
-          $(clone).css("visibility","hidden");
-          $(clone).on("ended",function(a,b,c){ dealer.videoEventEnd();});
-          $(clone).on("playing",function(a){$(this).css("visibility", "visible");});
+          element.css("visibility","hidden");
+          element.on("ended",function(a,b,c){ dealer.videoEventEnd();});
+          element.on("playing",function(a){$(this).css("visibility", "visible");});
           element.html( clone );
         })
       }
