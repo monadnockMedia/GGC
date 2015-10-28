@@ -10,6 +10,7 @@ angular.module('ggcApp')
     function ended(){
       //dealer.init();
       //ggcSounds.introMusic.stop();
+      destroy();
       $state.go("game.play.tutorial", {}, {reload:false});
       ggcGame.setGulfState(1);
       //dealer.prologue = false;
@@ -24,6 +25,13 @@ angular.module('ggcApp')
 
     }
     this.ended = ended;
+
+    function destroy(){
+      Popcorn.destroy(pop);
+    };
+
+    this.destroy = destroy;
+
     this.makePop = function (v) {
       pop = Popcorn(v);
 

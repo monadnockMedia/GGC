@@ -18,5 +18,8 @@ angular.module('ggcApp')
         ggcGame.setGulfState(0);
       }, 2000);
 
+    };
+    this.destroy = function(){
+      Popcorn.destroy(pop);
     }
   });
