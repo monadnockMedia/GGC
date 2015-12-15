@@ -1,6 +1,10 @@
 .thing-form {
   margin: 20px 0;
 }
+body.transform {
+  background-color: black;
+  transform: scale(0.9) translate(0, -6%);
+}
 #banner {
   border-bottom: none;
   margin-top: -20px;

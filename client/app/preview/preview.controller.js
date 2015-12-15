@@ -39,7 +39,7 @@ angular.module('ggcApp')
 	};
 
 	ggcUtil.getCards().then(function(res){
-		console.log("cards",res.data);
+		//console.log("cards",res.data);
 		$scope.preview.cards = res.data;
 	});
 
@@ -57,7 +57,7 @@ angular.module('ggcApp')
 	      combo: 'right',
 	      description: 'Next Card',
 	      callback: function(){
-				console.log("Current card test: ",$scope.preview.currentCard + 1, $scope.preview.cards.length )
+				//console.log("Current card test: ",$scope.preview.currentCard + 1, $scope.preview.cards.length )
 				$scope.preview.currentCard = Math.min($scope.preview.currentCard + 1, $scope.preview.cards.length-1);
 			}
 	    })
@@ -121,7 +121,7 @@ angular.module('ggcApp')
 			combo: 'M',
 			description: "Print Model",
 			callback: function(){
-					console.log("hands:",JSON.stringify($scope.hands,null,3), "game: ",JSON.stringify($scope.game,null,3));
+					//console.log("hands:",JSON.stringify($scope.hands,null,3), "game: ",JSON.stringify($scope.game,null,3));
 				}
 
 		})
@@ -141,8 +141,8 @@ angular.module('ggcApp')
     $scope.hands = dealer.hands;
 
     $scope.enviroDocked = $scope.game;
-    console.log("Test");
-    console.log($scope.enviroDocked);
+    //console.log("Test");
+    //console.log($scope.enviroDocked);
 
 
 
@@ -205,14 +205,14 @@ angular.module('ggcApp')
 			combo: 'M',
 			description: "Print Model",
 			callback: function(){
-				console.log("hands:",JSON.stringify($scope.hands,null,3), "game: ",JSON.stringify($scope.game,null,3));d
+				//console.log("hands:",JSON.stringify($scope.hands,null,3), "game: ",JSON.stringify($scope.game,null,3));d
 			}
 		})
       .add({
         combo: 'm',
         description: "Print Model",
         callback: function () {
-          console.log("game:", $scope.game);
+          //console.log("game:", $scope.game);
         }
 
       })
@@ -253,7 +253,7 @@ angular.module('ggcApp')
     };
 
     ggcUtil.getCards().then(function (res) {
-      console.log("cards", res.data);
+      //console.log("cards", res.data);
       $scope.preview.cards = res.data;
     });
 
@@ -270,7 +270,7 @@ angular.module('ggcApp')
         combo: 'right',
         description: 'Next Card',
         callback: function () {
-          console.log("Current card test: ", $scope.preview.currentCard + 1, $scope.preview.cards.length)
+          //console.log("Current card test: ", $scope.preview.currentCard + 1, $scope.preview.cards.length)
           $scope.preview.currentCard = Math.min($scope.preview.currentCard + 1, $scope.preview.cards.length - 1);
         }
       })
@@ -296,9 +296,9 @@ angular.module('ggcApp')
       $scope.preview.icons = res.data;
         $scope.preview.icon = $scope.preview.icons[$scope.preview.currentIcon];
         $scope.$watch(function(){return  $scope.preview.currentIcon},function(nI,oI){
-          console.log(nI,oI);
+          //console.log(nI,oI);
           $scope.preview.icon = $scope.preview.icons[nI] || $scope.preview.icons[0];
-          console.log($scope.preview.icon);
+          //console.log($scope.preview.icon);
 
         });
       });
@@ -365,7 +365,7 @@ angular.module('ggcApp')
         combo: 'M',
         description: "Print Model JSON",
         callback: function () {
-          console.log("hands:", JSON.stringify($scope.hands, null, 3), "game: ", JSON.stringify($scope.game, null, 3));
+          //console.log("hands:", JSON.stringify($scope.hands, null, 3), "game: ", JSON.stringify($scope.game, null, 3));
         }
 
       })
@@ -373,7 +373,7 @@ angular.module('ggcApp')
         combo: 'm',
         description: "Print Model",
         callback: function () {
-          console.log("game:", $scope.game);
+          //console.log("game:", $scope.game);
         }
 
       })

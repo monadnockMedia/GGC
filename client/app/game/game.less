@@ -15,7 +15,7 @@
   -webkit-align-content: center;
   -webkit-box-align: center;
   -webkit-align-items: center;
-  z-index:20;
+  //z-index:20;
 }
 
 
@@ -74,6 +74,9 @@
     &.environment{
       .bg-environment;
     }
+    &.warning{
+      .bg-warning;
+    }
   }
 
 }
@@ -88,10 +91,13 @@
   padding: .4em .4em;
   letter-spacing: 1px;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.84);
+  margin-left:-10px;
+  margin-top:-12px;
   &:before{
+    font-family: Lucida Sans Unicode, sans-serif;
     position: relative;
     top: -10px;
-    content: "\25F8";
+    content: "◤";
     margin-top: 20px;
   }
   &.leftlabel:before{
@@ -100,7 +106,7 @@
   &.leftlabel:after{
     position: relative;
     top: -10px;
-    content: "\25F9";
+    content: "◥";
     margin-top: 20px;
   }
 }
@@ -108,6 +114,7 @@
 
 #tampa.city { /*background:url(../../svg/citycornerR.svg) 64px -10px /.9em no-repeat; */ }
 img#highways { position: absolute; width: 70.5%; top: 2.5%; left: 18.35%; }
+
 .scenario-card:nth-of-type(1) {
   &.clearTransform{
     transform: perspective(0) rotateY(0) translate(0);
@@ -137,25 +144,15 @@ img#highways { position: absolute; width: 70.5%; top: 2.5%; left: 18.35%; }
     transform: perspective(1000px) rotateY(0deg) translate(-275px);
   }
 }
-
-
-
-
-
-@font-face {
-  font-family: '232MKB';
-  src: url('../../assets/fonts/232MKSD_winTT/232MKB__.TTF') format('truetype');
-
-  /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-  /*src: url('../fonts/232MKSD_winTT/232MKM__.TTF') format('truetype');  Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+.scenario-card:only-of-type{
+  transform: perspective(0) rotateY(0) translate(0);
 }
-@font-face {
-  font-family: '232MKUL';
-  src: url('../../assets/fonts/232MKSD_winTT/232MKUL_.TTF') format('truetype');
 
-  /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-  /*src: url('../fonts/232MKSD_winTT/232MKM__.TTF') format('truetype');  Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
-}
+
+
+
+
+
 body {
   //width: 1920px;
   //height: 1080px;
@@ -179,7 +176,10 @@ div#ui-vid{
   margin:0;
   padding:0;
 }
-div#ui-main{
+
+
+
+div#ui-main,div#ui-tutorial{
   position: absolute;
   height: 33%;
   top: 29%;
@@ -218,12 +218,19 @@ div#ui-main{
 
   }
 }
+
+
+
+div#ui-tutorial{
+ padding: 0 27% 0 27%;
+  color: white;
+}
 div#main {
   position: relative !important;
   top: 0px;
   width: 1920px;
   height: 1200px;
-  background: url("../../bmp/gulfbrown.jpg") no-repeat;
+  //background: url("../../bmp/gulfbrown.jpg") no-repeat;
 
   background-size: 1980px 1300px;
   overflow: hidden;
@@ -241,7 +248,7 @@ div#perspective_plane {
     animation: turnin 5s;*/
   -webkit-transform: rotateX(15deg);
   -webkit-transform-style: preserve-3d;
-  z-index: 0;
+  //z-index: 0;
 }
 @-webkit-keyframes turnin {
   from {
@@ -251,10 +258,12 @@ div#perspective_plane {
     -webkit-transform: rotateX(70deg);
   }
 }
-
+#ui-panels{
+  //z-index:1;
+}
 .hexGrid {
   opacity: 0.1;
-  z-index:-2;
+  //z-index:-2;
 }
 
 .full-height {
@@ -266,31 +275,74 @@ div#perspective_plane {
   #flex.vertical-center;
 }
 
-#mapA, #mapB, #mapC, #foulGulf, #landmarks, #borderscrim {
+#currentMap, #middleMap, #futureMap, #foulGulf, #landmarks, #borderscrim {
   width: 1920px;
   height: 1200px;
   position: absolute;
+  opacity:1;
+  -webkit-transition: 0.5s all;
+
 }
 #foulGulf {
-  /*background: -webkit-linear-gradient(top, #2F2727, #1a82f7);*/
-  background: url(../bmp/gulfbrown.jpg) 50% 0  no-repeat;
+  background: url(../bmp/gulfFuture.png) 50% 0  no-repeat;
   background-size: 1920px 1200px;
 }
-#mapA { background: url(../../bmp/currentpop.png) 50% 0%  no-repeat; }
-#mapB { 	background: url(../../bmp/midpop.png) 50% 0%  no-repeat;
-  background-size:1680px 1200px; }
-#mapC { 	background: url(../../bmp/overpop.png) 50% 0%  no-repeat; }
+.water {
+  width: 1920px;
+  height: 1200px;
+  position: absolute;
+  -webkit-transition: 0.5s all;
+  opacity:1;
+  &.clear {
+    background: url(../../bmp/gulfCurrent.png) 50% 0  no-repeat;
+    background-size: 1980px 1300px;
+  }
+  &.normal {
+    background: url(../../bmp/gulfMid.png) 50% 0  no-repeat;
+    background-size: 1980px 1300px;
+  }
+  &.brown {
+    background: url(../../bmp/gulfFuture.png) 50% 0  no-repeat;
+    background-size: 1980px 1300px;
+  }
+  &.transparent {
+    opacity:0;
+    -webkit-transition: 3s all;
+  }
+}
+#currentMap {
+  background: url(../../bmp/currentPop.png)  no-repeat;
+  &.transparent {
+    -webkit-transition: 2s all;
+    opacity:0;
+  }
+}
+
+#middleMap {
+  background: url(../../bmp/midPop.png)   no-repeat;
+  -webkit-transition: 2s all;
+  &.transparent {
+    opacity:0;
+  }
+}
+
+#futureMap {
+  background: url(../../bmp/futurePop.png)  no-repeat;
+  -webkit-transition: 2s all;
+  &.transparent {
+    opacity:0;
+  }
+}
 
 
 div#borderscrim {
-  //background-image: url('../../bmp/borderandscrim_wrn.png');
   background-image: url('../../bmp/borderandscrim_wrn_1200_tweak.png');
-  z-index: 8;
+  //z-index: 8;
   pointer-events: none;
   top:0;
 }
 score-board {
-  z-index: 20;
+  //z-index: 20;
   position: absolute;
   top:0;
 }

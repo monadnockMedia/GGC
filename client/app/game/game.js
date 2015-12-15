@@ -1,42 +1,5 @@
 'use strict';
-/*
-angular.module('ggcApp')
-  .config(function ($stateProvider) {
-    $stateProvider
-      .state('game', {
-        abstract: true,
-        url: '/game',
-        templateUrl: 'app/game/game.html',
-        controller: 'GameCtrl'
-      })
-      .state('game.play', {
-        url: '/play',
-        views: {
-          "scrim": {templateUrl: 'app/game/scrim.html'},
-          "plane": {templateUrl: 'app/game/plane.html'}
-        }
-      })
-      .state('game.play.loop', {
-        url: '/loop',
-        views: {
-          "main@game": {templateUrl: 'app/game/main_loop.html'}
-        }
-      })
-      .state('game.play.prologue', {
-        url: '/prologue',
-        views: {
-          "main@game": {templateUrl: 'app/game/prologue.html'}
-        }
-      })
-      .state('game.play.event', {
-        url: '/event',
-        views: {
-          "main@game": {templateUrl: 'app/game/event.html'}
-        }
-      });
-  })
-*/
-angular.module('ggcApp')
+var app = angular.module('ggcApp')
   .config(function (stateHelperProvider) {
    stateHelperProvider
      .state({
@@ -45,6 +8,12 @@ angular.module('ggcApp')
        abstract:true,
        templateUrl: 'app/game/game.html',
        controller: 'GameCtrl',
+       resolve:{
+         cleartimers: function(ggcUtil){return ggcUtil.killTimeouts()},
+         _game: function(cleartimers, dealer){
+           return dealer.init();
+         }
+       },
        children: [
          {
            name: "play",
@@ -52,6 +21,7 @@ angular.module('ggcApp')
            views: {
              "scrim": {templateUrl: 'app/game/scrim.html'},
              "plane": {templateUrl: 'app/game/plane.html'},
+             "panels" : {templateUrl: 'app/game/panels.html'},
              "background" : {templateUrl: 'app/game/background.html'}
            },
            children: [
@@ -59,22 +29,32 @@ angular.module('ggcApp')
                name: "attract",
                url: '/attract',
                views: {
-                 "vid@game": {templateUrl: 'app/game/attract.html'}
+                 "vid@game": {templateUrl: 'app/game/attract.html'},
+                 "panels@game": {templateUrl: 'app/game/attractPanels.html'},
                }
              },
              {
                name: "loop",
                url: '/loop',
                views: {
+                 "vid@game": {template: ''},
                  "main@game": {templateUrl: 'app/game/main_loop.html'}
+               }
+             },
+             {
+               name: "warn",
+               url: '/warn',
+               views: {
+                 "main@game": {templateUrl: 'app/game/warn.html'}
                }
              },
              {
                name: "prologue",
                url: '/prologue',
                views: {
+                 "vid@game": {templateUrl: 'app/game/prologue.html'},
+                 "panels@game": {templateUrl: 'app/game/prologuePanels.html'},
 
-                 "vid@game": {templateUrl: 'app/game/prologue.html'}
                },
                children:[
                  {
@@ -82,10 +62,31 @@ angular.module('ggcApp')
                    url: "/cards",
                    views: {
                      "main@game": {templateUrl: 'app/game/main_loop.html'},
+                     "panels@game" : {templateUrl: 'app/game/panels.html'},
                    },
                  }
 
                ]
+             },
+             {
+               name: "tutorial",
+               url: '/tutorial',
+               views: {
+                 "tutorial@game": {templateUrl: 'app/game/tutorial.html', controller:"TutorialCtrl"},
+                 "panels@game": {templateUrl: 'app/game/prologuePanels.html'}
+               },
+               children:[
+                 {
+                   name: "cards",
+                   url: "/cards",
+                   views: {
+                     "main@game": {templateUrl: 'app/game/main_loop.html'},
+                     "panels@game" : {templateUrl: 'app/game/panels.html'},
+                   },
+                 }
+
+               ]
+
              },
              {
                name: "event",

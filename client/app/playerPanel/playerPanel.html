@@ -1,83 +1,114 @@
-
 <div class="arrow environment"></div>
 <div class="arrow economy"></div>
 <div class="arrow energy"></div>
 
-<div class="panelOuter {{name}}" ng-class="{'retract':player.docked, 'fullRetract':currentState != 'game.play.loop'}">
-  <div class="panelInner{{name}}" > <!--ng-class={true: 'extended', false: 'none'}[player.currentPlayer == false]-->
+<div class="panelOuter {{name}} {{player.panelClass}}" >
+  <div class="panelInner{{name}}"> <!--ng-class={true: 'extended', false: 'none'}[player.isCurrentPlayer == false]-->
     <div class="topPlane"></div>
 
     <div class="bottomPlane">
-      <div class="colorbar"><h3>{{name | capitalize}}</h3></div>
+      <div class="bar-wrap">
+        <div class="colorbar" ng-hide="player.hint.visible"><h3>{{name | capitalize}}</h3></div>
+        <div class="colorbar hint-wrap" ng-hide="!player.hint.visible"><h3 class="hint">{{player.hint.text}}</h3></div>
+      </div>
 
-      <div ng-show="game.phase == 'choice' && dealer.introText == false">
-        <div ng-show = "player.currentPlayer">
-          <h3 class = "tab-title text-center">Choose an Action</h3>
+      <div ng-hide="player.ai">
+        <!---->
+        <div ng-show="game.phase == 'choice'">
+          <div ng-show="player.isCurrentPlayer">
+            <h3 class="tab-title text-center">Choose an Action</h3>
+
+            <div class="ggc-btn-wrap">
+              <div class="col-md-6" ng-click="dealer.playerChoice(name,$index)"
+                   ng-repeat="choice in player.hand.choices track by $index">
+                <div class="chosenIcon" ng-hide="!choice.chosen">
+                  <svg    x="0px" y="0px"
+                          width="125px" height="125px" viewBox="0 0 150 150"  >
+                    <polyline fill="#55B949" points="12.389,68.056 43.917,99.583 138.5,5 138.5,52.292 43.917,146.875 12.389,115.348 "/>
+                  </svg>
+                </div>
+                <div class="ggc-btn" ng-hide="choice.chosen" >
+                  <div ggc-icon fill="true" frame="true" icon-id="{{choice.icon._id}}"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!---->
+        <div ng-show="game.phase == 'vote'" class="vote-block">
+          <h5 class="tab-title text-center">Pros and Cons</h5>
+          <!--<h5>{{player.hand.vote.action}}</h5>-->
+
+          <div class="tab-body" ng-repeat="t in player.hand.issue.text">
+            <div style="margin-bottom: 8px" ng-bind-html="t"></div>
+
+          </div>
+        </div>
+
+
+        <div ng-show="game.phase == 'vote'" class="vote-buttons">
           <div class="ggc-btn-wrap">
-            <div class="col-md-6" ng-click="dealer.playerChoice(name,$index)" ng-repeat="choice in player.hand.choices track by $index">
-              <div class = "ggc-btn">
-                <div ggc-icon  fill="true" frame="true" icon-id="{{choice.icon._id}}"></div>
+            <div class="col-md-6">
+              <div class="ggc-btn">
+                <a ng-hide="player.hand.issue.vote == 1" class="btn-icon block {{name}}"
+                   ng-class="{'selected':player.hand.issue.vote == 0}"> NO </a>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="ggc-btn">
+                <a ng-hide="player.hand.issue.vote == 0" class="btn-icon pass {{name}}"
+                   ng-class="{'selected':player.hand.issue.vote == 1}">YES</a>
               </div>
             </div>
           </div>
-
         </div>
-      </div>
+        <!---->
+        <div ng-show="game.phase == 'scoring' || game.phase == 'eventScoring'" class="vote-buttons">
+          <div ng-show="player.hand.issue.passed">
+            <!--TODO() Make this a directive so we can change it in event Scoring-->
+            <h3 ng-show="game.phase == 'scoring'" class="tab-title text-center">Action Passed</h3>
 
-      <div ng-show="game.phase == 'choice' && dealer.introText == true">
-        <div>
-          <h3 class = "tab-title text-center">_______________</h3>
-          <h3 class = "tab-title text-center">You will be playing as the {{name | capitalize}} sector.</h3>
-        </div>
-      </div>
+            <h3 ng-hide="game.phase == 'scoring'" class="tab-title text-center">{{game.warning.action}}</h3>
 
-      <div ng-show = "game.phase == 'vote'" class="vote-block">
-        <h5>{{player.hand.vote.action}}</h5>
+            <h1 class="text-center score {{name}}" ng-bind-html="player.hand.issue.scoreHTML"></h1>
 
-        <div class="tab-body" ng-repeat = "t in player.hand.issue.text">
-          <div ng-bind-html="t"></div>
-          <br />
-        </div>
-      </div>
-
-
-      <div ng-show="game.phase == 'vote'" class="vote-buttons">
-        <div class="ggc-btn-wrap" >
-          <div class="col-md-6">
-            <div class="ggc-btn">
-              <a ng-hide="player.hand.issue.vote == 1" class="btn-icon block {{name}}" ng-class="{'selected':player.hand.issue.vote == 0}">BLOCK</a>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="ggc-btn">
-              <a ng-hide="player.hand.issue.vote == 0" class="btn-icon pass {{name}}" ng-class="{'selected':player.hand.issue.vote == 1}">PASS</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div ng-show="game.phase == 'scoring' && dealer.signIn == false" class="vote-buttons">
-        <div  ng-show = "player.hand.issue.passed">
-          <h3 class = "tab-title text-center">Action Passed </h3>
-          <h1 class="text-center score {{name}}" ng-bind-html="player.hand.issue.scoreHTML"></h1>
-          <div class="tab-body">
-            <span ng-show="(+player.hand.issue.score > 0)">Your sector improved.</span>
-            <span ng-show="(+player.hand.issue.score == 0)">Your sector's score did not change.</span>
+            <div class="tab-body text-center">
+              <span ng-show="(+player.hand.issue.score > 0)">Your sector improved.</span>
+              <span ng-show="(+player.hand.issue.score == 0)">Your sector's score is unchanged.</span>
             <span
               ng-show="(+player.hand.issue.score < 0)">Your sector declined.</span>
+            </div>
+          </div>
+          <div ng-hide="player.hand.issue.passed">
+            <h3 class="tab-title text-center">Action Blocked</h3>
           </div>
         </div>
-        <div ng-hide = "player.hand.issue.passed">
-          <h3 class = "tab-title text-center">Action Blocked</h3>
-        </div>
-      </div>
+        <!---->
+        <div ng-show="game.phase == 'warn'" class="vote-buttons">
+          <div ng-show="player.hand.issue.passed">
+            <h3 ng-hide="game.phase == 'scoring'" class="tab-title text-center">{{game.warning.action}}</h3>
 
-      <div ng-show="dealer.signIn == true">
-          <h3 class = "tab-title text-center col-md-6">Get</h3>
-          <h3 class = "tab-title text-center col-md-6">Ready !</h3>
-          <div class="ggc-btn-wrap">
+            <div class="tab-body text-center">
+              <i class="fa fa-exclamation-triangle"></i>{{" "+player.warning || "Lorem Ipsum Dolor Sit amet"}}
+            </div>
           </div>
+        </div>
+        <!---->
+      </div>
+      <div ng-show="player.ai">
+        <div class="ggc-btn-wrap closed">
+          <div class="col-md-6 text-center">
+            <h2 style="color:white">AI<br><i class="fa fa-cog fa-spin"></i><br>Active</h2>
+          </div>
+          <div class="col-md-6">
+            <div class="ggc-btn attract">
+              <a class="btn-icon pass warnp attract"> Override </a>
+            </div>
+          </div>
+        </div>
+
       </div>
 
+    </div>
   </div>
-</div>

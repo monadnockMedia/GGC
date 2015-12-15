@@ -11,7 +11,7 @@ angular.module('ggcApp')
 
 
 	$http.get('/api/Card').success(function(_cards) {
-    console.log("get('api/Card')");
+    //console.log("get('api/Card')");
 		$scope.cards = _cards;
     $scope.myData = [];
 
@@ -31,7 +31,7 @@ angular.module('ggcApp')
                   EnergySecondary:$scope.cards[j].effects.energy.secondaryScore
                 };
 
-      console.log($scope.cards[j]);
+      //console.log($scope.cards[j]);
 
 
 

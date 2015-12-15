@@ -9,11 +9,15 @@ angular.module('ggcApp')
 
         ggcPrologueOverlord.makePop(element[0]);
 
+       // element.on('destroy', ggcPrologueOverlord.destroy());
 
         transclude(scope, function(clone){
-
+          element.css("visibility","hidden");
+          element.on("ended",function(a,b,c){ dealer.videoEventEnd();});
+          element.on("playing",function(a){$(this).css("visibility", "visible");});
           element.html( clone );
-        })
+        });
+
       }
     };
   });

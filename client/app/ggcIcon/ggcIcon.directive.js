@@ -26,14 +26,19 @@ angular.module('ggcApp')
         var framePath = "M7.768,156.833c-0.835-3.758-0.835-9.908,0-13.667l21.963-98.833c0.835-3.758,4.668-6.833,8.519-6.833h223.5c3.85,0,7.684,3.075,8.519,6.833l21.963,98.833c0.835,3.758,0.835,9.909,0,13.667l-21.963,98.834c-0.835,3.758-4.669,6.833-8.519,6.833H38.25c-3.85,0-7.683-3.075-8.519-6.833L7.768,156.833z"
         var svg = d3.selectAll(element).append("svg").attr("grid-index", scope.gridIndex);
         svg.attr("viewBox", "0 0 300 300");
-        var iconGroup = svg.append("g");
+
+        element.on('$destroy', function() {
+          svg.remove();
+          svg = null;
+        });
+
 
         attrs.$observe('iconId', function (value) {
           //console.log("$OBSERVE", value.length);
           if (value.length > 0) {
 
-            iconGroup.selectAll("*").remove();
-
+            svg.selectAll("*").remove();
+            var iconGroup = svg.append("g");
             scope.trust = ggcUtil.trustSVG;
 
             ggcUtil.getIcons(value).then(function (res) {

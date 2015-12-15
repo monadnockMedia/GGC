@@ -66,9 +66,9 @@ angular.module('ggcApp')
             .attr("stroke-width", "1px")
             .attr("class", buildClass)
 
-         if(scope.config.debug){
+         /*if(scope.config.debug){
            hexes.append("text").text(function(d){return d.i+","+d.j}).attr("stroke","white").attr("text-anchor","middle");
-         }
+         }*/
 
 
         }

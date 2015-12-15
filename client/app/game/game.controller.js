@@ -1,44 +1,51 @@
 'use strict';
 
 angular.module('ggcApp')
-  .controller('GameCtrl', function ($scope, $http, ngAudio, ggcUtil, $rootScope, dealer, hotkeys, $location, $interval, $state) {
+  .controller('GameCtrl', function ($scope, $http, ggcSounds, ggcGovernor, ggcUtil, $rootScope, dealer, ggcGame, hotkeys, $location, $interval, $state, nwkiosk, ggcPrologueOverlord,ggcAttractOverlord, _game) {
+
     $scope.preview = {};
     $scope.preview.hideNavbar = false;
 
-    $scope.preview.previewStates = ["cards", "icons", "test", "game","screen"];
+    $scope.preview.previewStates = ["cards", "icons", "test", "game", "screen"];
 
     $scope.preview.currentCard = 0;
     $scope.getVideoURL = ggcUtil.getVideoURL;
 
     $scope.trust = ggcUtil.trustSVG;
 
-    //TODO(Ray) move loading/playing to service
+    $rootScope.buttons = {lockout: false};
 
 
-    $scope.wooshSfx = ngAudio.load("../sound/digital_woosh.wav");
+    $scope.pregameClass = function (_c) {
 
-
+      var c = (_c === "extend" ) ? "signIn" : _c;
+      return c;
+    }
     $scope.printObject = ggcUtil.printObject;
 
-    $scope.dealer = dealer;
-    $scope.game = dealer.game;
-    $scope.$watch(function(){
+    $scope.dealer = dealer
+    $scope.isArray = ggcUtil.isArray;
+
+    $scope.game = ggcGame.game;
+    $scope.$watch(function () {
       return $scope.game.phase;
-    }, function(val) {
+    }, function (val) {
       if (val == "choice") {
-        $scope.wooshSfx.play();
+        ggcSounds.wooshSfx.play();
       }
       //debugger;
     })
 
-    $scope.$watch(function(){
-      return $scope.dealer.prologue;
-    }, function(val) {
-      if (val == true) {
-        $interval(function() {
-          $scope.dealer.prologue = false;
-          $scope.dealer.signIn = false;
-        }, 20000);
+    $scope.tutorial = false;
+    $scope.$watch(function () {
+      return $state.current.name;
+    }, function (val) {
+      if (val == "game.play.tutorial.cards") {
+        $scope.tutorial = true;
+        //console.log("Tutorial = true");
+      } else {
+        $scope.tutorial = false;
+        //console.log("Tutorial = false");
       }
       //debugger;
     })
@@ -47,122 +54,121 @@ angular.module('ggcApp')
     $scope.hands = dealer.hands;
 
 
-
-    bindKeys();
-
-    function bindKeys(){
+    function bindKeys() {
 
       hotkeys.bindTo($scope)
         .add({
-          combo: '1',
+          combo: '0',
           description: 'Environment Select 1',
-          callback: function(){
-            if ($state.current.name == "game.play.attract") {
-              $state.go("game.play.prologue");
-            } else if ($scope.game.phase == "vote") {
-
-            }
-            dealer.playerChoice("environment",0);
-
-
-            //$scope.confirmSfx.restart();
+          callback: function () {
+            btnHandler("environment", 0)
           }
-
         })
+        .add({
+          combo: '1',
+          description: 'Environment Select 2',
+          callback: function () {
+            btnHandler("environment", 1)
+          }
+        })
+
         .add({
           combo: '2',
-          description: 'Environment Select 2',
-          callback: function(){
-            if ($state.current.name == "game.play.attract") {
-              $state.go("game.play.prologue");
-            } else if ($scope.game.phase == "vote") {
-
-            }
-            dealer.playerChoice("environment",1);
-
+          description: 'Economy Select 1',
+          callback: function () {
+            btnHandler("economy", 0)
           }
         })
-
         .add({
           combo: '3',
-          description: 'Economy Select 1',
-          callback: function(){
-            if ($state.current.name == "game.play.attract") {
-              $state.go("game.play.prologue");
-            } else if ($scope.game.phase == "vote") {
-
-            }
-            dealer.playerChoice("economy",0);
-
+          description: 'Environment Select 2',
+          callback: function () {
+            btnHandler("economy", 1)
           }
         })
+
         .add({
           combo: '4',
-          description: 'Environment Select 2',
-          callback: function(){
-            if ($state.current.name == "game.play.attract") {
-              $state.go("game.play.prologue");
-            } else if ($scope.game.phase == "vote") {
-
-            }
-            dealer.playerChoice("economy",1);
-
+          description: 'Energy Select 1',
+          callback: function () {
+            btnHandler("energy", 0)
           }
         })
-
         .add({
           combo: '5',
-          description: 'Energy Select 1',
-          callback: function(){
-            if ($state.current.name == "game.play.attract") {
-              $state.go("game.play.prologue");
-            } else if ($scope.game.phase == "vote") {
-
-            }
-            dealer.playerChoice("energy",0)
-
-            ;
-
-          }
-        })
-        .add({
-          combo: '6',
           description: 'Energy Select 2',
-          callback: function(){
-            if ($state.current.name == "game.play.attract") {
-              $state.go("game.play.prologue");
-            } else if ($scope.game.phase == "vote") {
-
-            }
-            dealer.playerChoice("energy",1);
-
+          callback: function () {
+            btnHandler("energy", 1)
           }
         })
         .add({
           combo: 'R',
           description: 'reset',
-          callback: function(){
-            dealer.init();
-            $location.url("/game/play/prologue");
-            // angular.bootstrap(document, ['ggcApp']);
-            location.reload();
+          callback: function () {
+            //console.log("RESET");
+            dealer.reset();
           }
         })
         .add({
           combo: 'M',
           description: 'Print Model',
-          callback: function(){
+          callback: function () {
             //console.log($scope.game);
-
           }
         })
         .add({
           combo: 'm',
           description: 'Pretty Print Model',
-          callback: function(){
-            console.log(ggcUtil.printObject($scope.game));
+          callback: function () {
+            //console.log(ggcUtil.printObject($scope.game));
 
           }
         })
+        .add({
+          combo: 'd',
+          description: 'Toggles developer console',
+          callback: function () {
+            nwkiosk.toggleDevTools();
+
+          }
+        })
+        .add({
+          combo: 'k',
+          description: 'Toggles kiosk mode',
+          callback: function () {
+            $rootScope.config.kiosk = !$rootScope.config.kiosk;
+
+          }
+        })
+        .add({
+          combo: 'p',
+          description: 'pause AI',
+          callback: function () {
+            //console.log("PAUSE AI COMMAND")
+            ggcGovernor.pause();
+
+          }
+        })
+
     }
+
+    function btnHandler(t, i) {
+      if (!$rootScope.buttons.lockout) {
+        if ($state.current.name == "game.play.attract") {
+          ggcGame.setPanelStates("fullRetract");
+          //ggcAttractOverlord.destroy();
+          $state.go("game.play.prologue", {}, true);
+        } else if ($state.current.name == "game.play.prologue") {
+          ggcPrologueOverlord.ended();
+        } else if ($state.current.name == "game.play.tutorial") {
+          $rootScope.$emit("cancelTutorial");
+        } else if ($state.current.name == "game.play.loop") {
+          dealer.playerChoice(t, i);
+        }
+      }
+    }
+
+    bindKeys();
+    dealer.init();
+
   });

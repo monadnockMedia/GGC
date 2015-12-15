@@ -13,28 +13,42 @@ angular.module('ggcApp')
     }
 
 
-    if($rootScope.config.kiosk){
-      kioskMode = true;
+    //console.log("Get GUI");
+
+    try {
       var gui=require("nw.gui");
       var win = gui.Window.get();
 
-      win.enterKioskMode();
+      //console.log("GUI");
+      kioskMode = false;
 
+
+      //win.enterKioskMode();
+      //win.showDevTools();
+      this.setKioskMode = function(_kioskMode){
+        //console.log("KIOSK: ",_kioskMode);
+        if (_kioskMode != kioskMode){
+          kioskMode = _kioskMode;
+          (kioskMode) ? win.enterKioskMode() : win.leaveKioskMode() ;
+        }
+      }
       this.toggleKiosk = function(){
-        (kioskMode) ? win.enterKioskMode() : win.leaveKioskMode() ;
+        (!kioskMode) ? win.enterKioskMode() : win.leaveKioskMode() ;
         kioskMode = !kioskMode;
       }
 
       this.toggleDevTools = function(){
-        (devTools) ? gui.Window.get().showDevTools() : gui.Window.get().closeDevTools();
+        (devTools) ? win.showDevTools() : win.closeDevTools();
         devTools=!devTools;
       }
-    }else{
+    }
+    catch(err) {
+      //console.log("Error: ", err);
       kioskMode = false;
-
+      var docElm = document.documentElement;
       this.toggleKiosk = function(){
-        console.log("kioskMode unavailable");
-        var docElm = document.documentElement;
+        //console.log("kioskMode unavailable");
+
         if (docElm.requestFullscreen) {
           docElm.requestFullscreen();
         }
@@ -50,7 +64,14 @@ angular.module('ggcApp')
       }
 
       this.toggleDevTools = function(){
-        console.log("devTools unavailable")
+        //console.log("devTools unavailable")
+      }
+      this.setKioskMode = function (_kioskMode) {
+        //console.log("KIOSK: ", _kioskMode);
+        if (_kioskMode != kioskMode) {
+          kioskMode = _kioskMode;
+          (kioskMode) ? docElm.webkitRequestFullScreen() : document.webkitExitFullscreen();;
+        }
       }
     }
 

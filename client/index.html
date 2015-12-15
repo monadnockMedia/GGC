@@ -16,18 +16,6 @@
       <link rel="stylesheet" href="/bower_components/forms-angular/dist/forms-angular-with-bs3.css" />
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
-      <link rel="stylesheet" href="bower_components/blueimp-file-upload/css/jquery.fileupload.css" />
-      <link rel="stylesheet" href="bower_components/blueimp-file-upload/css/jquery.fileupload-ui.css" />
-      <link rel="stylesheet" href="bower_components/blueimp-file-upload/css/jquery.fileupload-noscript.css" />
-      <link rel="stylesheet" href="bower_components/blueimp-file-upload/css/jquery.fileupload-ui-noscript.css" />
-      <link rel="stylesheet" href="bower_components/blueimp-gallery/css/blueimp-gallery.css" />
-      <link rel="stylesheet" href="bower_components/blueimp-gallery/css/blueimp-gallery-indicator.css" />
-      <link rel="stylesheet" href="bower_components/blueimp-gallery/css/blueimp-gallery-video.css" />
-      <link rel="stylesheet" href="bower_components/fng-jq-upload/css/override-blueimp.css" />
-      <link rel="stylesheet" href="bower_components/ng-grid/ng-grid.min.css" />
-      <link rel="stylesheet" href="bower_components/select2/select2.css" />
-      <link rel="stylesheet" href="bower_components/select2-bootstrap-css/select2-bootstrap.css" />
-      <link rel="stylesheet" href="bower_components/fng-select2/fng-select2.css" />
       <link rel="stylesheet" href="bower_components/angular-hotkeys/build/hotkeys.min.css" />
       <!-- endbower -->
 
@@ -43,17 +31,17 @@
       <link rel="stylesheet" href="app/ggcIconGrid/ggcIconGrid.css">
       <link rel="stylesheet" href="app/ggcPrologueVid/ggcPrologueVid.css">
       <link rel="stylesheet" href="app/ggcSvgFilters/ggcSvgFilters.css">
-      <link rel="stylesheet" href="app/ggcThree/ggcThree.css">
       <link rel="stylesheet" href="app/main/main.css">
       <link rel="stylesheet" href="app/playerPanel/playerPanel.css">
       <link rel="stylesheet" href="app/preview/preview.css">
       <link rel="stylesheet" href="app/sandbox/sandbox.css">
       <link rel="stylesheet" href="app/scoreBoard/scoreBoard.css">
+      <link rel="stylesheet" href="app/vars.css">
       <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
       <!-- endinjector -->
     <!-- endbuild -->
   </head>
-  <body ng-app="ggcApp"  ng-keyup="globalShortcuts($event)" ng-controller="AppCtrl" ng-class = "{'gameBody':config.gameMode}">
+  <body  class="{{body-transform}}" ng-keyup="globalShortcuts($event)" ng-controller="AppCtrl" ng-class = "{'gameBody':config.gameMode, 'transform':config.resize}">
 
 
     <!--[if lt IE 7]>
@@ -64,6 +52,9 @@
     <div ui-view></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+
+    <script src="lib/popcorn-custom.js"></script>
+    <script src="lib/ckeditor.js"></script>
 
 
     <!--[if lt IE 9]>
@@ -84,58 +75,23 @@
       <script src="bower_components/angular-cookies/angular-cookies.js"></script>
       <script src="bower_components/lodash/dist/lodash.compat.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-      <script src="bower_components/blueimp-tmpl/js/tmpl.js"></script>
-      <script src="bower_components/blueimp-load-image/js/load-image.js"></script>
-      <script src="bower_components/blueimp-load-image/js/load-image-ios.js"></script>
-      <script src="bower_components/blueimp-load-image/js/load-image-orientation.js"></script>
-      <script src="bower_components/blueimp-load-image/js/load-image-meta.js"></script>
-      <script src="bower_components/blueimp-load-image/js/load-image-exif.js"></script>
-      <script src="bower_components/blueimp-load-image/js/load-image-exif-map.js"></script>
-      <script src="bower_components/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
-      <script src="bower_components/blueimp-file-upload/js/cors/jquery.postmessage-transport.js"></script>
-      <script src="bower_components/blueimp-file-upload/js/cors/jquery.xdr-transport.js"></script>
-      <script src="bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-      <script src="bower_components/blueimp-file-upload/js/jquery.fileupload.js"></script>
-      <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
-      <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
-      <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
-      <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-audio.js"></script>
-      <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-video.js"></script>
-      <script src="bower_components/blueimp-file-upload/js/jquery.fileupload-angular.js"></script>
-      <script src="bower_components/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
-      <script src="bower_components/blueimp-gallery/js/blueimp-helper.js"></script>
-      <script src="bower_components/blueimp-gallery/js/blueimp-gallery.js"></script>
-      <script src="bower_components/blueimp-gallery/js/blueimp-gallery-fullscreen.js"></script>
-      <script src="bower_components/blueimp-gallery/js/blueimp-gallery-indicator.js"></script>
-      <script src="bower_components/blueimp-gallery/js/blueimp-gallery-video.js"></script>
-      <script src="bower_components/blueimp-gallery/js/blueimp-gallery-vimeo.js"></script>
-      <script src="bower_components/blueimp-gallery/js/blueimp-gallery-youtube.js"></script>
-      <script src="bower_components/fng-jq-upload/dist/fng-jq-upload.js"></script>
-      <script src="bower_components/ng-grid/build/ng-grid.min.js"></script>
-      <script src="bower_components/jspdf/dist/jspdf.min.js"></script>
-      <script src="bower_components/fng-reports/dist/fng-reports.js"></script>
-      <script src="bower_components/ng-ckeditor/ng-ckeditor.js"></script>
-      <script src="bower_components/select2/select2.js"></script>
-      <script src="bower_components/angular-ui-select2/src/select2.js"></script>
       <script src="bower_components/angular-hotkeys/build/hotkeys.min.js"></script>
       <script src="bower_components/angular-animate/angular-animate.js"></script>
       <script src="bower_components/d3/d3.js"></script>
-      <script src="bower_components/threejs/build/three.js"></script>
       <script src="bower_components/angular-audio/app/angular.audio.js"></script>
       <script src="bower_components/angular-ui-router.stateHelper/statehelper.js"></script>
       <!-- endbower -->
 
     <!-- endbuild -->
+    <script src="lib/angular-bootstrap.js"></script>
     <script src="lib/hexbin.js"></script>
-    <script src="lib/popcorn-custom.js"></script>
-    <script src="//cdn.ckeditor.com/4.4.4/standard/ckeditor.js"></script>
+
     <!--TODO() Remove CDNs-->
     <!--<script src="lib/ckeditor.js"></script>-->
 
         <!-- build:js({.tmp,client}) app/app.js -->
         <script src="app/app.js"></script>
           <!-- injector:js -->
-          <script src="app/THREE/THREE.service.js"></script>
           <script src="app/cardList/cardList.directive.js"></script>
           <script src="app/d3/d3.service.js"></script>
           <script src="app/dealer/dealer.service.js"></script>
@@ -147,15 +103,18 @@
           <script src="app/ggc-video/ggc-video.directive.js"></script>
           <script src="app/ggcAttractOverlord/ggcAttractOverlord.service.js"></script>
           <script src="app/ggcAttractVid/ggcAttractVid.directive.js"></script>
+          <script src="app/ggcDeck/ggcDeck.service.js"></script>
+          <script src="app/ggcGame/ggcGame.service.js"></script>
+          <script src="app/ggcGovernor/ggcGovernor.service.js"></script>
           <script src="app/ggcGrid/ggcGrid.directive.js"></script>
+          <script src="app/ggcHints/ggcHints.service.js"></script>
           <script src="app/ggcIcon/ggcIcon.directive.js"></script>
           <script src="app/ggcIconGrid/ggcIconGrid.directive.js"></script>
           <script src="app/ggcPrologueOverlord/ggcPrologueOverlord.service.js"></script>
           <script src="app/ggcPrologueVid/ggcPrologueVid.directive.js"></script>
           <script src="app/ggcScore/ggcScore.directive.js"></script>
+          <script src="app/ggcSounds/ggcSounds.service.js"></script>
           <script src="app/ggcSvgFilters/ggcSvgFilters.directive.js"></script>
-          <script src="app/ggcThree/ggcThree.directive.js"></script>
-          <script src="app/ggcThreeScene/ggcThreeScene.service.js"></script>
           <script src="app/ggcUtil/ggcUtil.service.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
@@ -168,6 +127,7 @@
           <script src="app/sandbox/sandbox.controller.js"></script>
           <script src="app/sandbox/sandbox.js"></script>
           <script src="app/scoreBoard/scoreBoard.directive.js"></script>
+          <script src="app/tutorial/tutorial.controller.js"></script>
           <script src="components/navbar/navbar.controller.js"></script>
           <!-- endinjector -->
         <!-- endbuild -->

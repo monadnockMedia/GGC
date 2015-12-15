@@ -20,7 +20,9 @@ var config = require('./config/environment');
 mongoose.connect(config.mongo.uri, config.mongo.options);
 
 // Populate DB with sample data
-if(config.seedDB) { require('./config/seed'); }
+if (config.seedDB) {
+  require('./config/seed');
+}
 
 // Setup server
 var app = express();
@@ -29,26 +31,26 @@ require('./config/express')(app);
 require('./routes')(app);
 
 var DataFormHandler = new (formsAngular)(app, {
-  urlPrefix: '/api/' , JQMongoFileUploader: {} 
+  urlPrefix: '/api/', JQMongoFileUploader: {}
 });
 
-  var modelsPath = path.join(__dirname, 'forms-angular-models');
+var modelsPath = path.join(__dirname, 'forms-angular-models');
 fs.readdirSync(modelsPath).forEach(function (file) {
   var fname = modelsPath + '/' + file;
   if (fs.statSync(fname).isFile()) {
     DataFormHandler.newResource(require(fname));
-    }
-  });
+  }
+});
 
-  // All undefined asset or api routes should return a 404
-  app.route('/:url(auth|components|app|bower_components|assets)/*')
+// All undefined asset or api routes should return a 404
+app.route('/:url(auth|components|app|bower_components|assets)/*')
   .get(errors[404]);
 
-  // All other routes should redirect to the index.html
-  app.route('/*')
-  .get(function(req, res) {
+// All other routes should redirect to the index.html
+app.route('/*')
+  .get(function (req, res) {
     res.sendfile(app.get('appPath') + '/index.html');
-    });
+  });
 
 
 // Start server

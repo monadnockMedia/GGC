@@ -13,6 +13,52 @@
           <!--<feMergeNode in="glow"/>-->
         </feMerge>
       </filter>
+
+      <filter id="pulse" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur  result="glow">
+          <animate
+
+            attributeName="stdDeviation"
+            values="0;7;6;0"
+            dur="0.6s"
+            fill="freeze"
+            repeatCount="indefinite"
+            />
+        </feGaussianBlur>
+        <feMerge>
+          <feMergeNode in="glow"/>
+          <feMergeNode in="glow"/>
+          <!--<feMergeNode in="glow"/>-->
+        </feMerge>
+
+
+
+      </filter>
+
+      <filter id="pop" x="-30%" y="-30%" width="160%" height="160%">
+        <feGaussianBlur  result="pglow">
+          <animate
+
+            attributeName="stdDeviation"
+            values="0;7;6;0;0"
+            dur="2s"
+            fill="freeze"
+            repeatCount="indefinite"
+            />
+        </feGaussianBlur>
+        <feMerge>
+          <feMergeNode in="pglow"/>
+          <feMergeNode in="pglow"/>
+          <!--<feMergeNode in="glow"/>-->
+        </feMerge>
+
+
+
+      </filter>
+
+
+
+
     </defs>
 
 </svg>

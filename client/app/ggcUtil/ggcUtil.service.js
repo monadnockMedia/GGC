@@ -1,12 +1,27 @@
 'use strict';
 
 angular.module('ggcApp')
-  .service('ggcUtil', function ($http, $sce) {
+  .service('ggcUtil', function ($http, $sce, $timeout, $q) {
     // AngularJS will instantiate a singleton by calling "new" on this function
+    var timeouts = [];
+
+    this.killTimeouts = function(){
+      //console.log("KILLING TIMERS");
+      var d = $q.defer();
+      while(timeouts.length){
+        //console.log("kill timer ",timeouts.length);
+        $timeout.cancel(timeouts.pop());
+      }
+      d.resolve("complete");
+      return $q.promise;
+    };
+
     this.getCards = function () {
       //console.log("Service.getCards");
       return $http.get('/api/cards'); //custom endpoint
     };
+
+
 
     this.getEvents = function () {
       //console.log("Service.getEvents");
@@ -16,6 +31,11 @@ angular.module('ggcApp')
     this.getEndings = function () {
       //console.log("Service.getEvents");
       return $http.get('/api/Ending'); //fng endpoint
+    };
+
+    this.getHints = function () {
+      //console.log("Service.getHints");
+      return $http.get('/api/Hint'); //fng endpoint
     };
 
     this.getIcons = function (_id) {
@@ -39,7 +59,13 @@ angular.module('ggcApp')
     this.trustSVG = this.trustHTML;
 
     this.printObject = function (o) {
-      return JSON.stringify(o, null, 3);
+      return JSON.stringify(o, function(k,v){
+        if (k === "icon"){
+          return "<!-- SVG ICON -->"
+        }else{
+          return v;
+        }
+      }, 3);
     };
 
     this.getEditURL = function (id) {
@@ -71,5 +97,36 @@ angular.module('ggcApp')
       return copy;
     }
 
+    this.roll = function(chance) {
+      var noRoll = (chance == 0);
+
+      return (noRoll) ? false : (~~(Math.random() * chance) == 0);
+
+
+    }
+
+    this.wait = function(f,t){
+      var timer = $timeout(
+        function () {
+          $timeout.cancel(timer);
+          f.call();
+        },
+        t);
+
+      timeouts.push(
+        timer
+      );
+
+     return timer;
+
+    };
+
+    this.isArray = function(a) { //testing for single object or array contain
+      return Object.prototype.toString.call(a) === "[object Array]";
+    }
+
+    this.clone = function(o){
+      return JSON.parse(JSON.stringify(o));
+    }
 
   });
