@@ -16,7 +16,7 @@ angular.module('ggcApp')
 
 
     $rootScope.$on( '$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
-      console.log( 'State Change Error: ', error.stack);
+      //console.log( 'State Change Error: ', error.stack);
     });
     $scope.menu = [{
       'title': 'Home',
@@ -39,7 +39,7 @@ angular.module('ggcApp')
 
     $rootScope.$on('$stateChangeStart',
       function(event, toState, toParams, fromState, fromParams){
-        console.log("State Change Start", fromState,toState);
+        //console.log("State Change Start", fromState,toState);
         $rootScope.currentState = toState.name;
         $scope.currentState = toState.name;
 

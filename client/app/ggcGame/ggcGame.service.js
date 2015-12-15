@@ -116,7 +116,7 @@ angular.module('ggcApp')
     }
 
     function setGlow(g) {
-      console.log("setGlow( ", g, " )");
+      //console.log("setGlow( ", g, " )");
       game.scoreGlow = g;
     }
 
@@ -453,7 +453,7 @@ angular.module('ggcApp')
         dockAll(true)
 
         if (game.round == config.rounds){ ///It's the last round
-          console.log("GameOver");
+          //console.log("GameOver");
           setPhase("gameOver");
         }else{
           game.round++;
@@ -487,7 +487,7 @@ angular.module('ggcApp')
     };
 
     function setPhase(p) {
-      console.log("GamePhase: ",p);
+      //console.log("GamePhase: ",p);
       game.phase = p;
       phaseFunctions[p].call(self);
       $rootScope.$emit("phaseChange", p, game.currentPlayer);

@@ -42,10 +42,10 @@ angular.module('ggcApp')
     }, function (val) {
       if (val == "game.play.tutorial.cards") {
         $scope.tutorial = true;
-        console.log("Tutorial = true");
+        //console.log("Tutorial = true");
       } else {
         $scope.tutorial = false;
-        console.log("Tutorial = false");
+        //console.log("Tutorial = false");
       }
       //debugger;
     })
@@ -105,7 +105,7 @@ angular.module('ggcApp')
           combo: 'R',
           description: 'reset',
           callback: function () {
-            console.log("RESET");
+            //console.log("RESET");
             dealer.reset();
           }
         })
@@ -120,7 +120,7 @@ angular.module('ggcApp')
           combo: 'm',
           description: 'Pretty Print Model',
           callback: function () {
-            console.log(ggcUtil.printObject($scope.game));
+            //console.log(ggcUtil.printObject($scope.game));
 
           }
         })
@@ -144,7 +144,7 @@ angular.module('ggcApp')
           combo: 'p',
           description: 'pause AI',
           callback: function () {
-            console.log("PAUSE AI COMMAND")
+            //console.log("PAUSE AI COMMAND")
             ggcGovernor.pause();
 
           }

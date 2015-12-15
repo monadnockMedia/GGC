@@ -11,9 +11,9 @@ angular.module('ggcApp', [
   'ngResource',
   'ngSanitize',
   'ui.bootstrap',
-  'ngCkeditor',
-  'ui.select2',
-  'uploadModule',
+ // 'ngCkeditor',
+ // 'ui.select2',
+//  'uploadModule',
   'ngAudio',
   'cfp.hotkeys'
 ])

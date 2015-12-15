@@ -58,7 +58,7 @@ app.service('dealer', function (ggcGame, ggcDeck, ggcGovernor, $http, $q, $rootS
 
   ///initialize
   function init() {
-    console.log("Dealer Init");
+    //console.log("Dealer Init");
     var d = $q.defer();
     ggcGame.init().then(function(){
       deck.init().then(function(){
@@ -143,7 +143,7 @@ app.service('dealer', function (ggcGame, ggcDeck, ggcGovernor, $http, $q, $rootS
   //$scope.videoEndEvent = function(){}
   this.videoEventEnd = function (d, i, a) {
     if ($rootScope.currentState == "game.play.event") {
-      console.log("End Video: Loop");
+      //console.log("End Video: Loop");
       $state.go("game.play.loop");
       ggcGame.setPhase("eventScoring");
     } else if ($rootScope.currentState == "game.play.endgame") {

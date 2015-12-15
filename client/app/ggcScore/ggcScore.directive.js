@@ -45,7 +45,7 @@ angular.module('ggcApp')
         //TODO(Ryan/Ray) add second layer group for enter/exit glow.
         function update(newV, oldV) {
           scoreSfx.play();
-          console.log(Boolean(newV));
+          //console.log(Boolean(newV));
           if (newV.hasOwnProperty("i")) {
             var glyphiconColor = $filter("teamColor")("", team);
             var scoreData = $filter("scoreIconArray")(newV.i, team);

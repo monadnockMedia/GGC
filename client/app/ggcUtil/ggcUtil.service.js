@@ -6,10 +6,10 @@ angular.module('ggcApp')
     var timeouts = [];
 
     this.killTimeouts = function(){
-      console.log("KILLING TIMERS");
+      //console.log("KILLING TIMERS");
       var d = $q.defer();
       while(timeouts.length){
-        console.log("kill timer ",timeouts.length);
+        //console.log("kill timer ",timeouts.length);
         $timeout.cancel(timeouts.pop());
       }
       d.resolve("complete");

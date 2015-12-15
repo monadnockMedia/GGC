@@ -13,20 +13,20 @@ angular.module('ggcApp')
     }
 
 
-    console.log("Get GUI");
+    //console.log("Get GUI");
 
     try {
       var gui=require("nw.gui");
       var win = gui.Window.get();
 
-      console.log("GUI");
+      //console.log("GUI");
       kioskMode = false;
 
 
       //win.enterKioskMode();
       //win.showDevTools();
       this.setKioskMode = function(_kioskMode){
-        console.log("KIOSK: ",_kioskMode);
+        //console.log("KIOSK: ",_kioskMode);
         if (_kioskMode != kioskMode){
           kioskMode = _kioskMode;
           (kioskMode) ? win.enterKioskMode() : win.leaveKioskMode() ;
@@ -43,11 +43,11 @@ angular.module('ggcApp')
       }
     }
     catch(err) {
-      console.log("Error: ", err);
+      //console.log("Error: ", err);
       kioskMode = false;
       var docElm = document.documentElement;
       this.toggleKiosk = function(){
-        console.log("kioskMode unavailable");
+        //console.log("kioskMode unavailable");
 
         if (docElm.requestFullscreen) {
           docElm.requestFullscreen();
@@ -64,10 +64,10 @@ angular.module('ggcApp')
       }
 
       this.toggleDevTools = function(){
-        console.log("devTools unavailable")
+        //console.log("devTools unavailable")
       }
       this.setKioskMode = function (_kioskMode) {
-        console.log("KIOSK: ", _kioskMode);
+        //console.log("KIOSK: ", _kioskMode);
         if (_kioskMode != kioskMode) {
           kioskMode = _kioskMode;
           (kioskMode) ? docElm.webkitRequestFullScreen() : document.webkitExitFullscreen();;

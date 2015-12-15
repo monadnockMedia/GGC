@@ -2,7 +2,7 @@
   "kiosk":true,
 	"debug":true,
   "resize":false,
-  "hardReset":true,
+  "hardReset":false,
   "grid" : {
     "rows":15, "cols":20
   },
@@ -16,10 +16,10 @@
   },
   "gameMode":true,
   "game":{
-    "eventChance":3,
-    "rounds": 3,
-    "balanceThreshold":3,
-    "warnThreshold":6,
+    "eventChance":1,
+    "rounds": 2,
+    "balanceThreshold":4,
+    "warnThreshold":8,
     "initialScores":{
       "environment":1,
       "economy":4,
